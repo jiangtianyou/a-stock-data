@@ -90,6 +90,54 @@ def em_get(url: str, params: dict | None = None, headers: dict | None = None, ti
             if attempt == max_retries - 1:
                 raise e
 
+def _get_industry_ranking_from_sina() -> list[dict]:
+    """新浪财经板块行情接口作为容灾备用源"""
+    url = "http://money.finance.sina.com.cn/q/view/newSinaHy.php"
+    try:
+        print("Fetching industry ranking from Sina Finance as fallback...")
+        r = em_get(url, timeout=10)
+        if not r:
+            return []
+        content = r.content.decode('gbk', errors='ignore')
+        start = content.find('{')
+        end = content.rfind('}') + 1
+        if start == -1 or end == 0:
+            return []
+        
+        import json
+        data = json.loads(content[start:end])
+        results = []
+        for key, val in data.items():
+            parts = val.split(',')
+            if len(parts) < 13:
+                continue
+            
+            try:
+                change_pct = float(parts[5])
+                leader_change = float(parts[11])
+            except ValueError:
+                change_pct = 0.0
+                leader_change = 0.0
+                
+            results.append({
+                "name": parts[1],
+                "change_pct": change_pct,
+                "code": parts[0],
+                "up_count": int(parts[2]) if parts[2].isdigit() else 0,
+                "down_count": 0,
+                "leader": parts[8].replace("sh", "").replace("sz", ""),
+                "leader_name": parts[12],
+                "leader_change": leader_change,
+            })
+        
+        results.sort(key=lambda x: x["change_pct"], reverse=True)
+        for i, item in enumerate(results):
+            item["rank"] = i + 1
+        return results
+    except Exception as e:
+        print(f"Fallback to Sina Finance API failed: {e}")
+        return []
+
 def get_industry_ranking(client: EastMoneyPlaywright = None) -> list[dict]:
     """东财全行业板块涨跌幅排名"""
     url = "https://push2.eastmoney.com/api/qt/clist/get"
@@ -110,19 +158,22 @@ def get_industry_ranking(client: EastMoneyPlaywright = None) -> list[dict]:
             print(f"Fallback requests failed too: {e}")
             
     if not res_json or not isinstance(res_json, dict):
-        return []
+        return _get_industry_ranking_from_sina()
         
     try:
         items = res_json.get("data", {}).get("diff", [])
+        if not items:
+            return _get_industry_ranking_from_sina()
         return [{
             "rank": i+1, "name": item.get("f14", ""), "change_pct": item.get("f3", 0),
             "code": item.get("f12", ""), "up_count": item.get("f104", 0),
             "down_count": item.get("f105", 0), "leader": item.get("f140", ""),
+            "leader_name": item.get("f128", ""),
             "leader_change": item.get("f136", 0),
         } for i, item in enumerate(items)]
     except Exception as e:
         print(f"Error parsing industry ranking: {e}")
-        return []
+        return _get_industry_ranking_from_sina()
 
 def get_hot_reasons(client: EastMoneyPlaywright = None, trade_date: str = None) -> pd.DataFrame:
     """同花顺当日强势股 + 题材标签 (从东财补充获取涨幅数据)"""
@@ -241,8 +292,9 @@ def analyze_and_notify():
         md_lines.append(f"## 📊 TOP 10 强势行业板块")
         if top_sectors:
             for s in top_sectors:
-                leader_str = f" | 领涨: **{s['leader']}** (<font color=\"warning\">{s['leader_change']:+.2f}%</font>)" if s.get("leader") else ""
-                md_lines.append(f"- **{s['name']}** (<font color=\"warning\">{s['change_pct']:+.2f}%</font>) 涨{s['up_count']}家/跌{s['down_count']}家{leader_str}")
+                leader_str = f" | 领涨: **{s['leader_name']} ({s['leader']})** (<font color=\"warning\">{s['leader_change']:+.2f}%</font>)" if s.get("leader") else ""
+                stats_str = f"涨{s['up_count']}家/跌{s['down_count']}家" if s['down_count'] > 0 else f"共{s['up_count']}家"
+                md_lines.append(f"- **{s['name']}** (<font color=\"warning\">{s['change_pct']:+.2f}%</font>) {stats_str}{leader_str}")
         else:
             md_lines.append("暂无上涨的行业板块数据")
         md_lines.append("")
