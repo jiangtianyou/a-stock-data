@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快捷工具测试面板</title>
+    <style>
+        /* 基础样式复位 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 24px;
+        }
+
+        /* 头部样式 */
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        h1 {
+            font-size: 22px;
+            color: #1a1a1a;
+        }
+        .subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* 提示框 */
+        .alert-box {
+            background-color: #fff7ed;
+            border-left: 4px solid #f97316;
+            color: #c2410c;
+            padding: 12px;
+            font-size: 13px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        /* 分组样式 */
+        .section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #4b5563;
+            margin: 20px 0 10px 0;
+            padding-left: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        /* 列表与按钮 */
+        .btn-group {
+            display: grid;
+            grid-gap: 12px;
+            margin-bottom: 20px;
+        }
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            text-align: left;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #1e293b;
+            text-decoration: none; /* 兼容 a 标签样式 */
+        }
+        .action-btn:active {
+            background-color: #f1f5f9;
+            transform: scale(0.98);
+        }
+        .btn-hint {
+            display: block;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 4px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>快捷导航与跳转面板</h1>
+        <p class="subtitle">用于移动端/桌面端快捷指令及 App 协议测试</p>
+    </header>
+
+    <div class="alert-box">
+        <strong>💡 运行提示：</strong><br>
+        请确保通过 HTTP/HTTPS 协议（如本地服务器环境）访问此页面，直接双击本地 HTML 文件打开可能会受到浏览器的沙箱安全限制。
+    </div>
+
+    <div class="section-title">行情软件直达 (以贵州茅台为例)</div>
+    <div class="btn-group">
+        <button class="action-btn" onclick="goToUrl('xueqiu://xueqiu.com/page/stock?code=SH600519')">
+            拉起雪球 App
+            <span class="btn-hint">协议：xueqiu://xueqiu.com/page/stock?code=SH600519</span>
+        </button>
+
+        <button class="action-btn" onclick="goToUrl('https://m.10jqka.com.cn/stockpage/index.html#stockCode=600519')">
+            访问同花顺官方 H5 个股页
+            <span class="btn-hint">URL：https://m.10jqka.com.cn/stockpage/index.html...</span>
+        </button>
+    </div>
+
+    <div class="section-title">自用快捷工具</div>
+    <div class="btn-group">
+        <button class="action-btn" onclick="copyText('562500')">
+            复制机器人 ETF 代码 (562500)
+            <span class="btn-hint">点击自动复制到剪贴板，方便去行情软件粘贴</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    // 通用跳转函数
+    function goToUrl(url) {
+        console.log("正在尝试跳转至:", url);
+        window.location.href = url;
+    }
+
+    // 通用复制剪贴板函数
+    function copyText(text) {
+        var tempInput = document.createElement("input");
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        
+        try {
+            var success = document.execCommand("copy");
+            if(success) {
+                alert("已成功复制代码: " + text + "\n现在可以切换到你的交易/行情软件直接粘贴了！");
+            } else {
+                alert("复制失败，请手动复制");
+            }
+        } catch (err) {
+            alert("浏览器不支持自动复制");
+        }
+        
+        document.body.removeChild(tempInput);
+    }
+</script>
+
+</body>
+</html>
