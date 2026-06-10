@@ -48,7 +48,10 @@ class EastMoneyPlaywright:
         context = self.browser.new_context(user_agent=UA)
         self.page = context.new_page()
         # 预加载东财域名生成 cookie
-        self.page.goto("https://data.eastmoney.com/")
+        try:
+            self.page.goto("https://data.eastmoney.com/", timeout=10000)
+        except Exception as e:
+            print(f"Warning: Pre-loading EastMoney domain timed out or failed: {e}")
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -321,23 +324,29 @@ def analyze_and_notify():
             
         content = "\n".join(md_lines)
         
-        # # 企微字数超限截断 (安全阈值 4000 字节)
-        # content_bytes = content.encode('utf-8')
-        # if len(content_bytes) > 4000:
-        #     print(f"Warning: content length {len(content_bytes)} bytes exceeds limit. Truncating...")
-        #     content = content_bytes[:3900].decode('utf-8', 'ignore') + "\n\n*(部分内容因字数超限已截断)*"
+        # 企微字数超限截断 (安全阈值 4000 字节)
+        content_bytes = content.encode('utf-8')
+        if len(content_bytes) > 4000:
+            print(f"Warning: content length {len(content_bytes)} bytes exceeds limit. Truncating...")
+            content = content_bytes[:3900].decode('utf-8', 'ignore') + "\n\n*(部分内容因字数超限已截断)*"
             
-        # # 5. 调用 notify 进行通知
-        # if notify:
-        #     print("Sending notification via notify.py...")
-        #     try:
-        #         res = notify.send_markdown(content)
-        #         print(f"Notification result: {res}")
-        #     except Exception as e:
-        #         print(f"Error sending notification: {e}")
-        # else:
-        #     print("Error: notify module is not available, printing output instead:")
-        #     print(content)
+        # 总是打印到控制台以方便直接查看
+        print(content)
+
+        # 5. 调用 notify 进行通知
+        if notify:
+            print("Sending notification via notify.py...")
+            try:
+                res = notify.send_markdown(content)
+                print(f"Notification result: {res}")
+            except Exception as e:
+                print(f"Error sending notification: {e}")
 
 if __name__ == "__main__":
+    try:
+        import sys
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except AttributeError:
+        pass
     analyze_and_notify()
