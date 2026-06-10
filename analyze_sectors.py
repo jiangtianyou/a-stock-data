@@ -321,23 +321,23 @@ def analyze_and_notify():
             
         content = "\n".join(md_lines)
         
-        # 企微字数超限截断 (安全阈值 4000 字节)
-        content_bytes = content.encode('utf-8')
-        if len(content_bytes) > 4000:
-            print(f"Warning: content length {len(content_bytes)} bytes exceeds limit. Truncating...")
-            content = content_bytes[:3900].decode('utf-8', 'ignore') + "\n\n*(部分内容因字数超限已截断)*"
+        # # 企微字数超限截断 (安全阈值 4000 字节)
+        # content_bytes = content.encode('utf-8')
+        # if len(content_bytes) > 4000:
+        #     print(f"Warning: content length {len(content_bytes)} bytes exceeds limit. Truncating...")
+        #     content = content_bytes[:3900].decode('utf-8', 'ignore') + "\n\n*(部分内容因字数超限已截断)*"
             
-        # 5. 调用 notify 进行通知
-        if notify:
-            print("Sending notification via notify.py...")
-            try:
-                res = notify.send_markdown(content)
-                print(f"Notification result: {res}")
-            except Exception as e:
-                print(f"Error sending notification: {e}")
-        else:
-            print("Error: notify module is not available, printing output instead:")
-            print(content)
+        # # 5. 调用 notify 进行通知
+        # if notify:
+        #     print("Sending notification via notify.py...")
+        #     try:
+        #         res = notify.send_markdown(content)
+        #         print(f"Notification result: {res}")
+        #     except Exception as e:
+        #         print(f"Error sending notification: {e}")
+        # else:
+        #     print("Error: notify module is not available, printing output instead:")
+        #     print(content)
 
 if __name__ == "__main__":
     analyze_and_notify()
