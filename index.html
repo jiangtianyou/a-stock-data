@@ -2,166 +2,635 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>快捷工具测试面板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>强势股策略看板 - 2026-06-03</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* 基础样式复位 */
+        :root {
+            --bg-color: #080b11;
+            --header-bg: rgba(8, 11, 17, 0.85);
+            --card-bg: rgba(18, 24, 38, 0.65);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --stock-up: #ef4444;
+            --stock-down: #10b981;
+            --stock-none: #64748b;
+            --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: calc(30px + var(--safe-area-inset-bottom));
+            line-height: 1.4;
         }
+
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            padding: 24px;
+            position: relative;
         }
 
-        /* 头部样式 */
-        header {
-            text-align: center;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #eaeaea;
-        }
-        h1 {
-            font-size: 22px;
-            color: #1a1a1a;
-        }
-        .subtitle {
-            font-size: 13px;
-            color: #666;
-            margin-top: 4px;
+        /* Sticky Header */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--header-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.85rem 1rem 0.65rem 1rem;
         }
 
-        /* 提示框 */
-        .alert-box {
-            background-color: #fff7ed;
-            border-left: 4px solid #f97316;
-            color: #c2410c;
-            padding: 12px;
-            font-size: 13px;
-            border-radius: 6px;
-            margin-bottom: 20px;
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.65rem;
         }
 
-        /* 分组样式 */
-        .section-title {
-            font-size: 15px;
-            font-weight: bold;
-            color: #4b5563;
-            margin: 20px 0 10px 0;
-            padding-left: 8px;
-            border-left: 4px solid #3b82f6;
+        .title-group h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* 列表与按钮 */
-        .btn-group {
+        .title-group p {
+            font-size: 0.725rem;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .date-pill {
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: #a5b4fc;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Stats Grid */
+        .stats-summary {
             display: grid;
-            grid-gap: 12px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin: 0.75rem 1rem 0.25rem 1rem;
         }
-        .action-btn {
-            display: block;
+
+        .stat-pill {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.25rem;
+            text-align: center;
+        }
+
+        .stat-pill-num {
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .stat-pill-label {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Filter Controls */
+        .search-row {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.55rem;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+        }
+
+        .search-input {
             width: 100%;
-            padding: 14px;
-            font-size: 15px;
-            font-weight: 500;
-            text-align: left;
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0.5rem;
+            padding: 0.45rem 0.75rem 0.45rem 1.85rem;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.65rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            color: var(--text-muted);
+            stroke-width: 2.5;
+        }
+
+        .tabs-row {
+            display: flex;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.15rem;
+            border-radius: 0.5rem;
+        }
+
+        .tab-item {
+            flex: 1;
+            text-align: center;
+            padding: 0.45rem 0;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            border-radius: 0.35rem;
             cursor: pointer;
-            transition: all 0.2s ease;
-            color: #1e293b;
-            text-decoration: none; /* 兼容 a 标签样式 */
+            transition: all 0.2s;
         }
-        .action-btn:active {
-            background-color: #f1f5f9;
+
+        .tab-item.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+        }
+
+        /* Sort Bar */
+        .sort-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.45rem 1rem;
+            font-size: 0.725rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.01);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .sort-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-size: 0.725rem;
+        }
+
+        .sort-btn.active {
+            color: var(--primary);
+        }
+
+        .sort-btn .dir-icon {
+            font-family: monospace;
+            font-size: 0.75rem;
+        }
+
+        /* Stocks Cards Feed */
+        .stocks-list {
+            padding: 0.75rem 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .stock-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 0.75rem;
+            padding: 0.8rem 0.9rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+            transition: transform 0.15s, background-color 0.15s;
+        }
+
+        .stock-card:active {
             transform: scale(0.98);
+            background: rgba(22, 30, 49, 0.95);
         }
-        .btn-hint {
-            display: block;
-            font-size: 11px;
-            color: #94a3b8;
-            margin-top: 4px;
-            font-weight: normal;
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .stock-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .name-and-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .stock-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .trigger-badge {
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 0.05rem 0.35rem;
+            border-radius: 0.25rem;
+        }
+
+        .trigger-badge.left-buy {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+        }
+
+        .trigger-badge.right-buy {
+            background: rgba(236, 72, 153, 0.15);
+            color: #f472b6;
+            border: 1px solid rgba(236, 72, 153, 0.25);
+        }
+
+        .stock-code-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            color: var(--primary);
+            font-family: 'Outfit', monospace;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-decoration: none;
+            padding: 1px 0;
+            align-self: flex-start;
+        }
+
+        .stock-code-badge svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .stock-prices {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .price-info {
+            text-align: right;
+        }
+
+        .latest-price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            font-family: 'Outfit', monospace;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+
+        .latest-price.up {
+            color: var(--stock-up);
+        }
+
+        .latest-price.down {
+            color: var(--stock-down);
+        }
+
+        .latest-price.none {
+            color: var(--text-main);
+        }
+
+        .stop-loss {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .stop-loss span {
+            color: #f87171;
+            font-weight: 600;
+            font-family: 'Outfit', monospace;
+        }
+
+        .change-pill {
+            min-width: 70px;
+            text-align: center;
+            padding: 0.35rem 0.45rem;
+            border-radius: 0.375rem;
+            font-family: 'Outfit', monospace;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #ffffff;
+        }
+
+        .change-pill.up {
+            background: var(--stock-up);
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+        }
+
+        .change-pill.down {
+            background: var(--stock-down);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+        }
+
+        .change-pill.none {
+            background: var(--stock-none);
+        }
+
+        /* Rationale Body */
+        .card-body {
+            background: rgba(0, 0, 0, 0.18);
+            border-radius: 0.4rem;
+            padding: 0.55rem 0.7rem;
+            margin-top: 0.45rem;
+            font-size: 0.775rem;
+            line-height: 1.4;
+            color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .logic-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0.4rem;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state svg {
+            width: 36px;
+            height: 36px;
+            margin-bottom: 0.5rem;
+            opacity: 0.3;
+            stroke: currentColor;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Sticky Header Controls -->
+        <div class="sticky-header">
+            <div class="header-top">
+                <div class="title-group">
+                    <h1>强势股策略看板</h1>
+                    <p>实时条件选股监控平台</p>
+                </div>
+                <div class="date-pill">2026-06-03</div>
+            </div>
 
-<div class="container">
-    <header>
-        <h1>快捷导航与跳转面板</h1>
-        <p class="subtitle">用于移动端/桌面端快捷指令及 App 协议测试</p>
-    </header>
+            <!-- Search and segmented filters -->
+            <div class="search-row">
+                <div class="search-box">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" class="search-input" id="searchInput" placeholder="搜索股票代码或名称...">
+                </div>
+            </div>
 
-    <div class="alert-box">
-        <strong>💡 运行提示：</strong><br>
-        请确保通过 HTTP/HTTPS 协议（如本地服务器环境）访问此页面，直接双击本地 HTML 文件打开可能会受到浏览器的沙箱安全限制。
+            <div class="tabs-row">
+                <button class="tab-item active" data-filter="all">全部 (35)</button>
+                <button class="tab-item" data-filter="左侧支撑低吸">左侧 (32)</button>
+                <button class="tab-item" data-filter="右侧倍量确认">右侧 (3)</button>
+            </div>
+        </div>
+
+        <!-- Stats summary panel -->
+        <section class="stats-summary">
+            <div class="stat-pill">
+                <div class="stat-pill-num">35</div>
+                <div class="stat-pill-label">总标的</div>
+            </div>
+            <div class="stat-pill">
+                <div class="stat-pill-num" style="color: #60a5fa;">91%</div>
+                <div class="stat-pill-label">左侧低吸</div>
+            </div>
+            <div class="stat-pill">
+                <div class="stat-pill-num" style="color: #f472b6;">9%</div>
+                <div class="stat-pill-label">右侧确认</div>
+            </div>
+            <div class="stat-pill">
+                <div class="stat-pill-num" style="color: var(--stock-up);">20<span style="color: var(--text-muted); font-size: 0.7rem; font-weight: normal; margin: 0 1px;">/</span><span style="color: var(--stock-down);">15</span></div>
+                <div class="stat-pill-label">红盘比</div>
+            </div>
+        </section>
+
+        <!-- Sort Bar -->
+        <div class="sort-row">
+            <span>共 <span id="visibleCount">0</span> 只标的</span>
+            <div class="sort-options">
+                <button class="sort-btn active" data-sort="change_percent">涨跌幅 <span class="dir-icon">↓</span></button>
+                <button class="sort-btn" data-sort="latest_price">价格 <span class="dir-icon"></span></button>
+                <button class="sort-btn" data-sort="stop_loss_price">止损 <span class="dir-icon"></span></button>
+            </div>
+        </div>
+
+        <!-- Card Feed List -->
+        <div class="stocks-list" id="listContainer">
+            <!-- Will be populated dynamically by Javascript -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            <p style="font-size: 0.8rem; margin-top: 0.25rem;">未找到符合条件的股票标的</p>
+        </div>
     </div>
 
-    <div class="section-title">行情软件直达 (以贵州茅台为例)</div>
-    <div class="btn-group">
-        <button class="action-btn" onclick="goToUrl('xueqiu://xueqiu.com/page/stock?code=SH600519')">
-            拉起雪球 App
-            <span class="btn-hint">协议：xueqiu://xueqiu.com/page/stock?code=SH600519</span>
-        </button>
+    <!-- Script rendering data -->
+    <script>
+        const initialData = [{"stock_code": "000012", "stock_name": "南 玻Ａ", "trigger_type": "左侧支撑低吸", "stop_loss_price": "4.06", "logic_summary": "T-8日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "4.11", "change_amount": "0.01", "change_percent": "+0.24%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ000012?fullsize=1", "direction": "up"}, {"stock_code": "000518", "stock_name": "四环生物", "trigger_type": "左侧支撑低吸", "stop_loss_price": "3.43", "logic_summary": "T-9日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "3.93", "change_amount": "0.36", "change_percent": "+10.08%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ000518?fullsize=1", "direction": "up"}, {"stock_code": "000530", "stock_name": "冰山冷热", "trigger_type": "左侧支撑低吸", "stop_loss_price": "5.96", "logic_summary": "T-3日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "6.32", "change_amount": "0.07", "change_percent": "+1.12%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ000530?fullsize=1", "direction": "up"}, {"stock_code": "000791", "stock_name": "甘肃能源", "trigger_type": "左侧支撑低吸", "stop_loss_price": "9.35", "logic_summary": "T-3日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "10.45", "change_amount": "0.37", "change_percent": "+3.67%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ000791?fullsize=1", "direction": "up"}, {"stock_code": "002388", "stock_name": "新亚制程", "trigger_type": "左侧支撑低吸", "stop_loss_price": "5.58", "logic_summary": "T-6日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "5.44", "change_amount": "-0.18", "change_percent": "-3.20%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ002388?fullsize=1", "direction": "down"}, {"stock_code": "002745", "stock_name": "木林森", "trigger_type": "左侧支撑低吸", "stop_loss_price": "10.05", "logic_summary": "T-6日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "10.31", "change_amount": "0.05", "change_percent": "+0.49%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ002745?fullsize=1", "direction": "up"}, {"stock_code": "002881", "stock_name": "美格智能", "trigger_type": "左侧支撑低吸", "stop_loss_price": "44.22", "logic_summary": "T-4日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "42.88", "change_amount": "-2.7", "change_percent": "-5.92%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ002881?fullsize=1", "direction": "down"}, {"stock_code": "002896", "stock_name": "中大力德", "trigger_type": "左侧支撑低吸", "stop_loss_price": "79.08", "logic_summary": "T-5日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "78.9", "change_amount": "-2.8", "change_percent": "-3.43%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ002896?fullsize=1", "direction": "down"}, {"stock_code": "300259", "stock_name": "新天科技", "trigger_type": "左侧支撑低吸", "stop_loss_price": "5.89", "logic_summary": "T-14日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "5.57", "change_amount": "-0.34", "change_percent": "-5.75%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ300259?fullsize=1", "direction": "down"}, {"stock_code": "300634", "stock_name": "彩讯股份", "trigger_type": "左侧支撑低吸", "stop_loss_price": "25.77", "logic_summary": "T-10日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "24.58", "change_amount": "-1.24", "change_percent": "-4.80%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ300634?fullsize=1", "direction": "down"}, {"stock_code": "300735", "stock_name": "光弘科技", "trigger_type": "左侧支撑低吸", "stop_loss_price": "21.92", "logic_summary": "T-6日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "21.8", "change_amount": "-0.73", "change_percent": "-3.24%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ300735?fullsize=1", "direction": "down"}, {"stock_code": "300943", "stock_name": "春晖智控", "trigger_type": "左侧支撑低吸", "stop_loss_price": "37.37", "logic_summary": "T-7日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "38.18", "change_amount": "0.46", "change_percent": "+1.22%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ300943?fullsize=1", "direction": "up"}, {"stock_code": "300959", "stock_name": "线上线下", "trigger_type": "右侧倍量确认", "stop_loss_price": "216.16", "logic_summary": "T-5日涨停放量，天量后缩量回踩，今日倍量站上5日线。", "latest_price": "205.86", "change_amount": "-19.14", "change_percent": "-8.51%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ300959?fullsize=1", "direction": "down"}, {"stock_code": "301379", "stock_name": "天山电子", "trigger_type": "左侧支撑低吸", "stop_loss_price": "31.29", "logic_summary": "T-10日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "35.0", "change_amount": "1.28", "change_percent": "+3.80%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ301379?fullsize=1", "direction": "up"}, {"stock_code": "000012", "stock_name": "国债指数", "trigger_type": "左侧支撑低吸", "stop_loss_price": "4.06", "logic_summary": "T-8日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "4.11", "change_amount": "0.01", "change_percent": "+0.24%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SZ000012?fullsize=1", "direction": "up"}, {"stock_code": "600237", "stock_name": "铜峰电子", "trigger_type": "左侧支撑低吸", "stop_loss_price": "9.71", "logic_summary": "T-3日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "11.11", "change_amount": "0.24", "change_percent": "+2.21%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH600237?fullsize=1", "direction": "up"}, {"stock_code": "600563", "stock_name": "法拉电子", "trigger_type": "左侧支撑低吸", "stop_loss_price": "148.35", "logic_summary": "T-10日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "161.0", "change_amount": "-4.88", "change_percent": "-2.94%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH600563?fullsize=1", "direction": "down"}, {"stock_code": "600592", "stock_name": "龙溪股份", "trigger_type": "左侧支撑低吸", "stop_loss_price": "20.1", "logic_summary": "T-6日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "20.35", "change_amount": "0.22", "change_percent": "+1.09%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH600592?fullsize=1", "direction": "up"}, {"stock_code": "600596", "stock_name": "新安股份", "trigger_type": "左侧支撑低吸", "stop_loss_price": "12.44", "logic_summary": "T-7日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "14.4", "change_amount": "1.31", "change_percent": "+10.01%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH600596?fullsize=1", "direction": "up"}, {"stock_code": "600779", "stock_name": "水井坊", "trigger_type": "左侧支撑低吸", "stop_loss_price": "32.32", "logic_summary": "T-4日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "32.67", "change_amount": "0.28", "change_percent": "+0.86%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH600779?fullsize=1", "direction": "up"}, {"stock_code": "600969", "stock_name": "郴电国际", "trigger_type": "左侧支撑低吸", "stop_loss_price": "11.06", "logic_summary": "T-6日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "11.26", "change_amount": "0.07", "change_percent": "+0.63%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH600969?fullsize=1", "direction": "up"}, {"stock_code": "600982", "stock_name": "宁波能源", "trigger_type": "左侧支撑低吸", "stop_loss_price": "6.43", "logic_summary": "T-3日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "7.11", "change_amount": "0.37", "change_percent": "+5.49%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH600982?fullsize=1", "direction": "up"}, {"stock_code": "600992", "stock_name": "贵绳股份", "trigger_type": "左侧支撑低吸", "stop_loss_price": "12.44", "logic_summary": "T-11日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "12.11", "change_amount": "-0.39", "change_percent": "-3.12%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH600992?fullsize=1", "direction": "down"}, {"stock_code": "601222", "stock_name": "林洋能源", "trigger_type": "左侧支撑低吸", "stop_loss_price": "6.39", "logic_summary": "T-10日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "6.25", "change_amount": "-0.22", "change_percent": "-3.40%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH601222?fullsize=1", "direction": "down"}, {"stock_code": "601600", "stock_name": "中国铝业", "trigger_type": "右侧倍量确认", "stop_loss_price": "11.53", "logic_summary": "T-5日涨停放量，天量后缩量回踩，今日倍量站上5日线。", "latest_price": "12.01", "change_amount": "0.2", "change_percent": "+1.69%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH601600?fullsize=1", "direction": "up"}, {"stock_code": "603001", "stock_name": "奥康国际", "trigger_type": "左侧支撑低吸", "stop_loss_price": "9.6", "logic_summary": "T-7日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "10.83", "change_amount": "0.38", "change_percent": "+3.64%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH603001?fullsize=1", "direction": "up"}, {"stock_code": "603032", "stock_name": "德新科技", "trigger_type": "左侧支撑低吸", "stop_loss_price": "24.0", "logic_summary": "T-4日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "25.23", "change_amount": "0.65", "change_percent": "+2.64%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH603032?fullsize=1", "direction": "up"}, {"stock_code": "603223", "stock_name": "恒通股份", "trigger_type": "左侧支撑低吸", "stop_loss_price": "9.84", "logic_summary": "T-7日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "9.77", "change_amount": "-0.11", "change_percent": "-1.11%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH603223?fullsize=1", "direction": "down"}, {"stock_code": "603358", "stock_name": "华达科技", "trigger_type": "左侧支撑低吸", "stop_loss_price": "36.69", "logic_summary": "T-11日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "39.1", "change_amount": "0.32", "change_percent": "+0.83%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH603358?fullsize=1", "direction": "up"}, {"stock_code": "603633", "stock_name": "徕木股份", "trigger_type": "右侧倍量确认", "stop_loss_price": "8.85", "logic_summary": "T-4日涨停放量，天量后缩量回踩，今日倍量站上5日线。", "latest_price": "8.9", "change_amount": "-0.16", "change_percent": "-1.77%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH603633?fullsize=1", "direction": "down"}, {"stock_code": "603661", "stock_name": "恒林股份", "trigger_type": "左侧支撑低吸", "stop_loss_price": "30.63", "logic_summary": "T-8日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "34.09", "change_amount": "0.39", "change_percent": "+1.16%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH603661?fullsize=1", "direction": "up"}, {"stock_code": "603687", "stock_name": "大胜达", "trigger_type": "左侧支撑低吸", "stop_loss_price": "16.49", "logic_summary": "T-9日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "18.9", "change_amount": "1.01", "change_percent": "+5.65%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH603687?fullsize=1", "direction": "up"}, {"stock_code": "603730", "stock_name": "岱美股份", "trigger_type": "左侧支撑低吸", "stop_loss_price": "11.95", "logic_summary": "T-6日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "12.37", "change_amount": "-0.11", "change_percent": "-0.88%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH603730?fullsize=1", "direction": "down"}, {"stock_code": "603861", "stock_name": "白云电器", "trigger_type": "左侧支撑低吸", "stop_loss_price": "16.41", "logic_summary": "T-3日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "16.44", "change_amount": "-0.77", "change_percent": "-4.47%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH603861?fullsize=1", "direction": "down"}, {"stock_code": "603995", "stock_name": "甬金股份", "trigger_type": "左侧支撑低吸", "stop_loss_price": "19.49", "logic_summary": "T-5日涨停放量，天量后缩量回踩，今日回踩20日线企稳。", "latest_price": "19.58", "change_amount": "-0.63", "change_percent": "-3.12%", "update_time": "2026-06-03 16:39", "xueqiu_url": "https://xueqiu.com/S/SH603995?fullsize=1", "direction": "down"}];
 
-        <button class="action-btn" onclick="goToUrl('https://m.10jqka.com.cn/stockpage/index.html#stockCode=600519')">
-            访问同花顺官方 H5 个股页
-            <span class="btn-hint">URL：https://m.10jqka.com.cn/stockpage/index.html...</span>
-        </button>
-    </div>
+        let currentFilter = 'all';
+        let searchQuery = '';
+        let sortColumn = 'change_percent'; // default sort column
+        let sortDirection = 'desc'; // default sort direction
 
-    <div class="section-title">自用快捷工具</div>
-    <div class="btn-group">
-        <button class="action-btn" onclick="copyText('562500')">
-            复制机器人 ETF 代码 (562500)
-            <span class="btn-hint">点击自动复制到剪贴板，方便去行情软件粘贴</span>
-        </button>
-    </div>
-</div>
+        const listContainer = document.getElementById('listContainer');
+        const emptyState = document.getElementById('emptyState');
+        const searchInput = document.getElementById('searchInput');
+        const visibleCount = document.getElementById('visibleCount');
 
-<script>
-    // 通用跳转函数
-    function goToUrl(url) {
-        console.log("正在尝试跳转至:", url);
-        window.location.href = url;
-    }
+        // Initial Render
+        renderList();
 
-    // 通用复制剪贴板函数
-    function copyText(text) {
-        var tempInput = document.createElement("input");
-        tempInput.value = text;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        
-        try {
-            var success = document.execCommand("copy");
-            if(success) {
-                alert("已成功复制代码: " + text + "\n现在可以切换到你的交易/行情软件直接粘贴了！");
-            } else {
-                alert("复制失败，请手动复制");
+        // Search Input handler
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.trim().toLowerCase();
+            renderList();
+        });
+
+        // Tab button handlers
+        document.querySelectorAll('.tab-item').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFilter = e.target.dataset.filter;
+                renderList();
+            });
+        });
+
+        // Sorting handlers
+        document.querySelectorAll('.sort-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const col = btn.dataset.sort;
+                
+                // Clear directions on other buttons
+                document.querySelectorAll('.sort-btn').forEach(b => {
+                    if (b !== btn) {
+                        b.classList.remove('active');
+                        const icon = b.querySelector('.dir-icon');
+                        if (icon) icon.textContent = '';
+                    }
+                });
+
+                btn.classList.add('active');
+                
+                if (sortColumn === col) {
+                    sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+                } else {
+                    sortColumn = col;
+                    sortDirection = 'desc'; // default to desc for stock stats
+                }
+                
+                const icon = btn.querySelector('.dir-icon');
+                if (icon) icon.textContent = sortDirection === 'asc' ? '↑' : '↓';
+                
+                renderList();
+            });
+        });
+
+        function renderList() {
+            // Filter
+            let filtered = initialData.filter(row => {
+                const matchesTab = currentFilter === 'all' || row.trigger_type === currentFilter;
+                const matchesSearch = row.stock_code.includes(searchQuery) || 
+                                      row.stock_name.toLowerCase().includes(searchQuery);
+                return matchesTab && matchesSearch;
+            });
+
+            // Sort
+            if (sortColumn) {
+                filtered.sort((a, b) => {
+                    let valA = a[sortColumn];
+                    let valB = b[sortColumn];
+
+                    if (['latest_price', 'change_amount', 'stop_loss_price'].includes(sortColumn)) {
+                        valA = parseFloat(valA) || 0;
+                        valB = parseFloat(valB) || 0;
+                    } else if (sortColumn === 'change_percent') {
+                        valA = parseFloat(valA.replace('%', '')) || 0;
+                        valB = parseFloat(valB.replace('%', '')) || 0;
+                    }
+
+                    if (valA < valB) return sortDirection === 'asc' ? -1 : 1;
+                    if (valA > valB) return sortDirection === 'asc' ? 1 : -1;
+                    return 0;
+                });
             }
-        } catch (err) {
-            alert("浏览器不支持自动复制");
-        }
-        
-        document.body.removeChild(tempInput);
-    }
-</script>
 
+            visibleCount.textContent = filtered.length;
+
+            // Render cards
+            if (filtered.length === 0) {
+                listContainer.innerHTML = '';
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+                listContainer.innerHTML = filtered.map(row => {
+                    const directionClass = row.direction;
+                    const triggerText = row.trigger_type === '左侧支撑低吸' ? '左侧' : '右侧';
+                    const triggerClass = row.trigger_type === '左侧支撑低吸' ? 'left-buy' : 'right-buy';
+                    
+                    return `
+                        <div class="stock-card">
+                            <div class="card-header">
+                                <div class="stock-meta">
+                                    <div class="name-and-tag">
+                                        <span class="stock-name">${row.stock_name}</span>
+                                        <span class="trigger-badge ${triggerClass}">${triggerText}</span>
+                                    </div>
+                                    <a href="${row.xueqiu_url}" target="_blank" class="stock-code-badge" title="在雪球中查看详情">
+                                        ${row.stock_code}
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                            <polyline points="15 3 21 3 21 9"></polyline>
+                                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="stock-prices">
+                                    <div class="price-info">
+                                        <div class="latest-price ${directionClass}">${row.latest_price}</div>
+                                        <div class="stop-loss">止损 <span>${row.stop_loss_price}</span></div>
+                                    </div>
+                                    <div class="change-pill ${directionClass}">${row.change_percent}</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="logic-label">选股逻辑</div>
+                                <div>${row.logic_summary}</div>
+                            </div>
+                            <div class="card-footer">
+                                更新时间：${row.update_time}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+    </script>
 </body>
 </html>
