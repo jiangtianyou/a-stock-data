@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国产算力三剑客组合 YTD 复盘：中芯国际+寒武纪+海光信息 vs 科创芯片指数</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"PingFang SC","Microsoft YaHei",sans-serif; background:#f7f8fa; color:#2b2f36; line-height:1.65; }
+  .wrap { max-width:1120px; margin:0 auto; padding:28px 20px 60px; }
+  h1 { font-size:26px; margin-bottom:6px; }
+  .sub { color:#8a919c; font-size:13px; margin-bottom:22px; }
+  h2 { font-size:19px; margin:36px 0 14px; padding-left:10px; border-left:4px solid #c0392b; }
+  h3 { font-size:15px; margin:20px 0 8px; color:#3a4048; }
+  .tldr { background:#fff; border:1px solid #e8eaee; border-left:4px solid #c0392b; border-radius:10px; padding:20px 22px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .tldr li { margin:7px 0 7px 18px; font-size:14px; }
+  .cards { display:flex; gap:14px; flex-wrap:wrap; margin:18px 0; }
+  .card { flex:1; min-width:200px; background:#fff; border:1px solid #e8eaee; border-radius:10px; padding:15px 17px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .card .name { font-size:13.5px; color:#5a616c; }
+  .card .big { font-size:28px; font-weight:700; margin:2px 0; }
+  .card.win { border-top:3px solid #d0342c; } .card.lose { border-top:3px solid #1e8e4e; }
+  .card.bench { border-top:3px solid #2c6bd0; background:#fbfcfe; }
+  .up { color:#d0342c; } .down { color:#1e8e4e; }
+  .card .meta { font-size:12px; color:#8a919c; line-height:1.55; }
+  table { width:100%; border-collapse:collapse; background:#fff; font-size:13.5px; border:1px solid #e8eaee; border-radius:8px; overflow:hidden; }
+  th { background:#f0f2f5; padding:9px 11px; text-align:left; font-weight:600; color:#4a505a; white-space:nowrap; }
+  td { padding:8px 11px; border-top:1px solid #eef0f3; }
+  tr:hover td { background:#fafbfc; }
+  td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .chart { width:100%; height:420px; background:#fff; border:1px solid #e8eaee; border-radius:10px; padding:10px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .chart.tall { height:520px; }
+  .toggle { margin:6px 0 10px; }
+  .toggle button { border:1px solid #d5d9e0; background:#fff; color:#5a616c; border-radius:6px; padding:4px 14px; font-size:13px; cursor:pointer; margin-right:8px; }
+  .toggle button.on { background:#c0392b; color:#fff; border-color:#c0392b; }
+  .note { font-size:12px; color:#9aa1ab; margin-top:7px; line-height:1.6; }
+  .src { font-size:12px; color:#9aa1ab; margin-top:7px; line-height:1.6; }
+  .tag { display:inline-block; font-size:11.5px; padding:1px 8px; border-radius:10px; margin-right:5px; }
+  .tag-red { background:#fdeceb; color:#c0392b; } .tag-green { background:#e8f6ee; color:#1e8e4e; }
+  .tag-blue { background:#eaf1fd; color:#2c6bd0; } .tag-gray { background:#f0f2f5; color:#5a616c; }
+  .tag-amber { background:#fff5e0; color:#a07000; }
+  .risk { background:#fff8e6; border:1px solid #f0e0b0; border-radius:10px; padding:14px 18px; margin-top:14px; font-size:13.5px; line-height:1.75; }
+  .risk b { color:#a07000; }
+  .concl { background:#fff; border:1px solid #e8eaee; border-left:4px solid #c0392b; border-radius:8px; padding:16px 20px; margin-top:14px; font-size:14px; }
+  .concl p { margin:9px 0; }
+  .concl p:first-child { margin-top:0; }
+  .fact { background:#f4f8ff; border:1px solid #d8e5fb; border-radius:10px; padding:13px 17px; margin-top:13px; font-size:13px; line-height:1.75; }
+  .fact b { color:#2c6bd0; }
+  .warn { background:#fff2f0; border:1px solid #f5cfca; border-radius:10px; padding:13px 17px; margin-top:13px; font-size:13px; line-height:1.75; }
+  .warn b { color:#c0392b; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:820px){ .grid2 { grid-template-columns:1fr; } }
+  .kv { font-size:13px; }
+  .kv td:first-child { color:#5a616c; width:42%; }
+  .star { background:#fff9e8; }
+  .dis { font-size:12px; color:#9aa1ab; margin-top:30px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>国产算力「三剑客」组合 2026 YTD 复盘</h1>
+<div class="sub">
+组合：中芯国际(688981) + 寒武纪(688256) + 海光信息(688041)，等权各 1/3 |
+基准：科创芯片指数(000685) |
+区间：2025-12-31 收盘 → 2026-09-14 收盘（171 个交易日）|
+行情：通达信日K前复权 + 收盘价快照交叉校验 | 财务：2026 中报
+</div>
+
+<div class="tldr">
+<b>TL;DR 结论先行</b>
+<ul>
+<li><b>组合 YTD +2.37%，科创芯片指数 +37.84%，跑输 35.47pct（几何超额 -26.89%）。</b>这是一次彻底的失败——同期指数年化 58.50%、夏普 1.06，组合年化仅 3.41%、夏普 0.03。</li>
+<li><b>最反直觉的一点：这三只正是科创芯片指数的第 2、3、4 大权重股（合计 24.18%），但 YTD 涨幅排名是前 20 大成分股的倒数第 1、2、3 名</b>——中芯国际 -7.13%（倒数第1）、海光信息 -0.21%（倒数第2）、寒武纪 +14.44%（倒数第3）。</li>
+<li><b>跑输不是加权方式问题，是选股方向问题。</b>指数前 20 大等权 YTD <b>+87.11%</b>，而组合三只等权仅 +2.37%。真正的 alpha 在<b>半导体设备/材料（等权 +92.65%）、光芯片/光通信（+152.87%）、存储芯片（+137.44%）</b>；组合所处的<b>算力芯片设计仅 +25.59%、晶圆制造 +44.11%</b>。</li>
+<li><b>单只源杰科技（权重仅 4.92%）YTD +282.35%</b>；若把组合换成指数其余 17 只前 20 大等权持有，YTD 为 <b>+102.07%</b>，与组合的差额高达 <b>99.70pct</b>。2026 年 A 股半导体的弹性<b>不在龙头，在二线</b>。</li>
+<li><b>风险特征最差：上行捕获 88.6%、下行捕获 100.3%</b>——涨时跟不上、跌时一点不少跌。相关系数 0.891、Beta 0.928、跟踪误差 25.82%，属于「像指数但不是指数」：承担了主动风险，却没换来主动收益。</li>
+<li><b>内部相关性 0.681，分散化几乎无效。</b>三只同属国产算力链，7 月同步深回撤（组合 -34.92% 最大回撤，中芯/寒武/海光分别 -34.06%/-39.27%/-39.59%）。</li>
+<li><b>基本面并不差，是估值和权重属性拖累了股价。</b>中芯 H1 归母净利 +94.16%、Q2 +228.88%；寒武 H1 营收 +108.13%、净利 +122.61%；海光 H1 营收 +66.52%、净利 +49.69%。但中芯 A 股 PE(TTM) 109.4x 且对 H 股溢价 +116.1%，寒武 PE 141.8x、海光 144.7x——<b>业绩兑现早已被年初的高估值透支</b>。</li>
+<li><b>纠一条流传的假消息：海光信息吸收合并中科曙光已于 2025-12-09 由双方董事会公告终止</b>，理由是「交易规模大、涉及相关方多、市场环境变化导致条件尚不成熟」。自媒体所称「2026 年 5 月完成合并、1160 亿换股吸并落地」<b>与官方公告不符，不成立</b>。</li>
+</ul>
+</div>
+
+<h2>一、组合与基准：核心数据</h2>
+<div class="cards">
+  <div class="card lose">
+    <div class="name">等权组合（买入持有）</div>
+    <div class="big up">+2.37%</div>
+    <div class="meta">期初各投 1/3 不调整 | 年化 +3.41% | 年化波动 56.26%<br>最大回撤 <b class="down">-34.92%</b> | 夏普 <b>0.03</b> | 日胜率 50.6%</div>
+  </div>
+  <div class="card bench">
+    <div class="name">科创芯片指数 000685</div>
+    <div class="big up">+37.84%</div>
+    <div class="meta">2613.41 → 3602.31 点 | 年化 +58.50% | 年化波动 54.00%<br>最大回撤 <b class="down">-36.22%</b> | 夏普 <b>1.06</b> | 日胜率 52.9%</div>
+  </div>
+  <div class="card lose">
+    <div class="name">超额收益</div>
+    <div class="big down">-35.47<span style="font-size:16px">pct</span></div>
+    <div class="meta">算术超额（组合 - 指数）| 几何超额 <b class="down">-26.89%</b><br>日超额胜率 48.8%（83/170）| 跟踪误差 25.82%</div>
+  </div>
+</div>
+
+<div class="cards">
+  <div class="card">
+    <div class="name">中芯国际 688981 <span class="tag tag-blue">指数权重第2</span></div>
+    <div class="big down">-7.13%</div>
+    <div class="meta">122.83 → 114.07 元 | 权重 8.444%<br>年内高 176.34（7/10）距高点 -35.31% | 年内低 91.20（4/7）<br>波动 57.95% | 回撤 -34.06% | 夏普 -0.20</div>
+  </div>
+  <div class="card">
+    <div class="name">寒武纪 688256 <span class="tag tag-blue">指数权重第3</span></div>
+    <div class="big up">+14.44%</div>
+    <div class="meta">908.76 → 1040.00 元 | 权重 8.134%<br>年内高 1620.00（6/30）距高点 -35.80% | 年内低 648.66（3/23）<br>波动 69.50% | 回撤 -39.27% | 夏普 0.29</div>
+  </div>
+  <div class="card">
+    <div class="name">海光信息 688041 <span class="tag tag-blue">指数权重第4</span></div>
+    <div class="big down">-0.21%</div>
+    <div class="meta">224.17 → 223.69 元 | 权重 7.602%<br>年内高 395.17（7/10）距高点 -43.39% | 年内低 202.83（3/24）<br>波动 62.11% | 回撤 -39.59% | 夏普 -0.03</div>
+  </div>
+</div>
+<div class="src">
+来源：通达信日K（前复权，180 根，覆盖 2025-12-18→2026-09-14），基准取 2025-12-31 收盘价；末根已用 2026-09-14 收盘价（腾讯行情快照 15:00 后）覆盖盘中值。
+YTD 为价格涨幅口径，未含分红再投——三只股息率均 ≤0.1%，指数为价格指数，口径可比。
+一致性校验通过：等权分解 (1/3)Σ个股YTD = +2.37% = 组合实际；月度收益连乘 = 累计收益；月度表与窗口计算 0 处偏差。
+</div>
+
+<div class="fact">
+<b>组合口径说明（两种构建方式的差异）：</b><br>
+① <b>等权买入持有</b>（期初各投 1/3，之后不调整）：YTD <b>+2.37%</b>，最大回撤 -34.92%，夏普 0.03。这是「买了就不动」的真实体验。<br>
+② <b>等权每日再平衡</b>（每天拉回 1/3）：YTD <b>+4.91%</b>，最大回撤 -34.67%，夏普 0.10。再平衡多出 2.54pct，来自高波动下的「再平衡溢价」，但仍远不及指数。<br>
+③ 期末权重已漂移至：中芯 30.2% / 寒武 37.3% / 海光 32.5%——<b>涨得最多的寒武纪被动加仓到 37.3%</b>，这是买入持有策略的隐性问题。本报告除特别说明外均以口径 ① 为准。
+</div>

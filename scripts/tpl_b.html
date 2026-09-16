@@ -1,0 +1,121 @@
+
+<h2>二、YTD 走势对比（归一化 = 0%）</h2>
+<div class="toggle" id="tg1">
+  <button class="on" onclick="sw('tg1','c_walk','t_walk',0)">走势图</button><button onclick="sw('tg1','c_walk','t_walk',1)">月度明细表</button>
+</div>
+<div id="c_walk" class="chart"></div>
+<div id="t_walk" style="display:none">
+<table>
+<tr><th>月份</th><th class="n">组合(等权)</th><th class="n">科创芯片指数</th><th class="n">超额</th><th class="n">中芯国际</th><th class="n">寒武纪</th><th class="n">海光信息</th><th>阶段特征</th></tr>
+<tr><td>2026-01</td><td class="n up">+3.62%</td><td class="n up">+18.19%</td><td class="n down">-14.57</td><td class="n up">+0.11%</td><td class="n down">-7.14%</td><td class="n up">+17.90%</td><td>指数由设备/光芯片领涨启动，组合原地踏步</td></tr>
+<tr><td>2026-02</td><td class="n down">-4.49%</td><td class="n down">-1.76%</td><td class="n down">-2.73</td><td class="n down">-6.48%</td><td class="n down">-6.43%</td><td class="n down">-1.26%</td><td>节前缩量调整</td></tr>
+<tr><td>2026-03</td><td class="n down">-18.23%</td><td class="n down">-15.58%</td><td class="n down">-2.65</td><td class="n down">-18.22%</td><td class="n down">-16.58%</td><td class="n down">-19.48%</td><td>全板块深蹲：指数收盘最低 2561.38（3/31），寒武 648.66（3/23）、海光 202.83（3/24）、中芯 91.20（4/7）</td></tr>
+<tr class="star"><td>2026-04</td><td class="n up">+45.89%</td><td class="n up">+34.72%</td><td class="n up">+11.17</td><td class="n up">+26.24%</td><td class="n up">+73.05%</td><td class="n up">+40.93%</td><td><b>唯一大幅跑赢的月份</b>：超跌反弹中三只同步暴动，寒武单月 +73%</td></tr>
+<tr><td>2026-05</td><td class="n up">+9.86%</td><td class="n up">+16.44%</td><td class="n down">-6.58</td><td class="n up">+17.84%</td><td class="n up">+14.92%</td><td class="n down">-0.79%</td><td>海光掉队（5/26 合并预案停牌博弈后不确定性上升）</td></tr>
+<tr><td>2026-06</td><td class="n up">+20.81%</td><td class="n up">+36.75%</td><td class="n down">-15.94</td><td class="n up">+13.52%</td><td class="n up">+21.80%</td><td class="n up">+26.06%</td><td>指数 6/30 见收盘峰值 5494.37（+110.24%），组合仅 +56.69%</td></tr>
+<tr><td>2026-07</td><td class="n down">-26.35%</td><td class="n down">-31.71%</td><td class="n up">+5.36</td><td class="n down">-21.93%</td><td class="n down">-30.68%</td><td class="n down">-25.20%</td><td>全球科技去杠杆：韩国杠杆新政、英伟达 7500 亿美元 AI 投资引发循环融资担忧、长鑫上市次日回调</td></tr>
+<tr><td>2026-08</td><td class="n down">-1.67%</td><td class="n up">+7.10%</td><td class="n down">-8.77</td><td class="n up">+3.80%</td><td class="n up">+0.56%</td><td class="n down">-8.34%</td><td>中报密集披露，设备/存储/光模块业绩兑现带动指数修复，组合未跟上</td></tr>
+<tr><td>2026-09*</td><td class="n down">-9.79%</td><td class="n down">-10.36%</td><td class="n up">+0.57</td><td class="n down">-11.37%</td><td class="n down">-6.49%</td><td class="n down">-11.90%</td><td>继续缩量下探；*截至 9/14 收盘</td></tr>
+</table>
+<div class="note">月度涨幅按各月首末交易日收盘环比计算（前复权），「超额」列为算术口径。组合仅在 9 个月中的 3 个月跑赢指数（4月、7月、9月），且 7月/9月跑赢是因为「跌得稍少」而非「涨得多」——唯一一次真正的主动超额来自 4 月超跌反弹。来源：通达信日K，自行计算。</div>
+</div>
+
+<h2>三、回撤结构：同步深蹲，分散化失效</h2>
+<div id="c_dd" class="chart"></div>
+<div class="note">
+收盘价距 YTD 滚动峰值的回撤。指数最大回撤 <b class="down">-36.22%</b>（6/30 峰值 → 8/3 谷底），组合 <b class="down">-34.92%</b>（7/9 峰值 → 9/14，且尚未修复）。
+个股回撤均深于组合与指数：中芯 -34.06%、寒武 -39.27%、海光 -39.59%。
+<b>组合回撤（-34.92%）仅比指数（-36.22%）浅 1.3pct</b>——三只同属国产算力链，内部日收益相关性 0.681，等权配置几乎没带来任何分散化收益。
+来源：通达信日K前复权，自行计算。
+</div>
+
+<div class="grid2">
+<div>
+<h3>日收益相关性矩阵</h3>
+<table class="kv">
+<tr><th></th><th class="n">中芯</th><th class="n">寒武</th><th class="n">海光</th><th class="n">指数</th></tr>
+<tr><td>中芯国际</td><td class="n">1.000</td><td class="n">0.687</td><td class="n">0.665</td><td class="n">0.842</td></tr>
+<tr><td>寒武纪</td><td class="n">0.687</td><td class="n">1.000</td><td class="n">0.690</td><td class="n">0.782</td></tr>
+<tr><td>海光信息</td><td class="n">0.665</td><td class="n">0.690</td><td class="n">1.000</td><td class="n">0.759</td></tr>
+<tr><td><b>科创芯片指数</b></td><td class="n">0.842</td><td class="n">0.782</td><td class="n">0.759</td><td class="n">1.000</td></tr>
+</table>
+<div class="note">内部平均相关 0.681。三只对指数的相关分别为 0.842/0.782/0.759，均高，说明「三只同赛道龙头」的组合本质上就是一个高 Beta 的行业因子暴露，不是真正的多标的组合。</div>
+</div>
+<div>
+<h3>捕获率与尾部表现</h3>
+<table class="kv">
+<tr><th>指标</th><th class="n">数值</th><th>解读</th></tr>
+<tr><td>上行捕获率</td><td class="n"><b>88.6%</b></td><td>指数上涨日只吃到 88.6% 的涨幅</td></tr>
+<tr><td>下行捕获率</td><td class="n"><b>100.3%</b></td><td>指数下跌日一分不少全跌</td></tr>
+<tr><td>捕获率差</td><td class="n down"><b>-11.6pct</b></td><td>结构性不利，最差的组合形态</td></tr>
+<tr><td>指数涨日（90天）日均</td><td class="n">指数 +2.773% / 组合 +2.456%</td><td>—</td></tr>
+<tr><td>指数跌日（80天）日均</td><td class="n">指数 -2.590% / 组合 -2.596%</td><td>—</td></tr>
+<tr><td>指数单日&gt;+3%（30天）</td><td class="n">指数 +360.31% / 组合 +346.26%</td><td>大涨日跑输 14.14pct</td></tr>
+<tr><td>指数单日&lt;-3%（24天）</td><td class="n">指数 -73.92% / 组合 -70.72%</td><td>大跌日略好 3.20pct</td></tr>
+<tr><td>Beta / 相关系数</td><td class="n">0.928 / 0.891</td><td>方向像指数</td></tr>
+<tr><td>跟踪误差（年化）</td><td class="n"><b>25.82%</b></td><td>但偏离幅度极大</td></tr>
+</table>
+<div class="note">「Beta≈0.93 + 跟踪误差 25.82%」= 典型的<b>假主动</b>：承担了远高于指数的个体风险，却没换来超额收益。来源：日收益序列自行计算。</div>
+</div>
+</div>
+
+<h2>四、为什么跑输？—— 指数成分归因</h2>
+<div class="fact">
+<b>这是本次复盘最关键的一张表。</b>组合的三只股票，恰好是科创芯片指数<b>第 2、3、4 大权重股</b>（中微公司 8.738% 居首，中芯国际 8.444% 第二，寒武纪 8.134% 第三，海光信息 7.602% 第四），合计占指数 <b>24.18%</b>。
+但在指数前 20 大成分股的 <b>YTD 涨幅排名中，这三只是倒数第 1、2、3 名</b>：中芯国际第 20（-7.13%）、海光信息第 19（-0.21%）、寒武纪第 18（+14.44%）。
+换句话说：<b>组合精准地重仓了指数里最弱的三只票</b>。指数 +37.84% 的涨幅，几乎全部由另外 47 只成分股创造。
+</div>
+<div class="toggle" id="tg2">
+  <button class="on" onclick="sw('tg2','c_rank','t_rank',0)">前20大 YTD 排行</button><button onclick="sw('tg2','c_rank','t_rank',1)">子板块归因</button><button onclick="sw('tg2','c_rank','t_rank',2)">明细表</button>
+</div>
+<div id="c_rank" class="chart tall"></div>
+<div id="t_rank" style="display:none">
+<h3>子板块等权 YTD（前 20 大成分股分组）</h3>
+<table>
+<tr><th>子板块</th><th class="n">只数</th><th class="n">指数权重合计</th><th class="n">等权 YTD</th><th>代表标的</th></tr>
+<tr class="star"><td><b>光芯片/光通信</b></td><td class="n">3</td><td class="n">8.07%</td><td class="n up"><b>+152.87%</b></td><td>源杰科技 +282.35% / 盛科通信 +112.35% / 仕佳光子 +63.91%</td></tr>
+<tr class="star"><td><b>存储芯片</b></td><td class="n">2</td><td class="n">4.25%</td><td class="n up"><b>+137.44%</b></td><td>普冉股份 +194.12% / 佰维存储 +80.76%</td></tr>
+<tr class="star"><td><b>半导体设备/材料</b></td><td class="n">8</td><td class="n">25.79%</td><td class="n up"><b>+92.65%</b></td><td>华峰测控 +171.27% / 华海清科 +119.79% / 芯源微 +108.37% / 中科飞测 +98.71% / 拓荆科技 +82.30% / 中微公司 +77.59%</td></tr>
+<tr><td>军工电子</td><td class="n">1</td><td class="n">2.24%</td><td class="n up">+76.99%</td><td>睿创微纳 +76.99%（距高点仅 -5.57%，全场最抗跌）</td></tr>
+<tr><td><b>晶圆制造</b> ←含组合</td><td class="n">2</td><td class="n">11.81%</td><td class="n up">+44.11%</td><td>华虹宏力 +95.35% / <b class="down">中芯国际 -7.13%</b></td></tr>
+<tr><td><b>算力芯片设计</b> ←含组合</td><td class="n">4</td><td class="n">26.02%</td><td class="n up">+25.59%</td><td>澜起科技 +57.27% / 芯原股份 +30.86% / <b>寒武纪 +14.44%</b> / <b class="down">海光信息 -0.21%</b></td></tr>
+<tr><td>前20大整体</td><td class="n">20</td><td class="n">78.17%</td><td class="n up">+87.11%</td><td>—</td></tr>
+<tr><td><b>★本组合三只</b></td><td class="n">3</td><td class="n">24.18%</td><td class="n up"><b>+2.37%</b></td><td>等权口径</td></tr>
+<tr><td>其余 17 只前 20 大</td><td class="n">17</td><td class="n">53.99%</td><td class="n up"><b>+102.07%</b></td><td>反事实：若持有它们，超额 <b class="up">+99.70pct</b></td></tr>
+</table>
+<div class="note">
+等权口径消除了权重漂移干扰，可精确比较。子板块按通达信三级行业人工归组。
+注意一个残酷的对照：<b>同为晶圆制造的华虹宏力 +95.35%，中芯国际 -7.13%，相差 102.48pct</b>——说明跑输不是「晶圆制造」这个环节的问题，而是中芯国际自身的问题（详见第六节）。
+</div>
+</div>
+<div id="t_rank2" style="display:none">
+<h3>科创芯片指数前 20 大成分股 YTD 明细（2026-09-14 收盘）</h3>
+<table>
+<tr><th class="n">YTD排名</th><th>证券简称</th><th>代码</th><th class="n">指数权重</th><th class="n">权重排名</th><th class="n">YTD</th><th class="n">距年内高点</th><th>子板块</th></tr>
+<tr><td class="n">1</td><td>源杰科技</td><td>688498</td><td class="n">4.917%</td><td class="n">6</td><td class="n up">+282.35%</td><td class="n down">-14.00%</td><td>光芯片/光通信</td></tr>
+<tr><td class="n">2</td><td>普冉股份</td><td>688766</td><td class="n">1.385%</td><td class="n">20</td><td class="n up">+194.12%</td><td class="n down">-58.91%</td><td>存储芯片</td></tr>
+<tr><td class="n">3</td><td>华峰测控</td><td>688200</td><td class="n">1.791%</td><td class="n">15</td><td class="n up">+171.27%</td><td class="n down">-39.21%</td><td>半导体设备</td></tr>
+<tr><td class="n">4</td><td>华海清科</td><td>688120</td><td class="n">3.322%</td><td class="n">9</td><td class="n up">+119.79%</td><td class="n down">-37.26%</td><td>半导体设备</td></tr>
+<tr><td class="n">5</td><td>盛科通信</td><td>688702</td><td class="n">1.545%</td><td class="n">17</td><td class="n up">+112.35%</td><td class="n down">-34.43%</td><td>光芯片/光通信</td></tr>
+<tr><td class="n">6</td><td>芯源微</td><td>688037</td><td class="n">1.922%</td><td class="n">14</td><td class="n up">+108.37%</td><td class="n down">-32.72%</td><td>半导体设备</td></tr>
+<tr><td class="n">7</td><td>中科飞测</td><td>688361</td><td class="n">2.889%</td><td class="n">10</td><td class="n up">+98.71%</td><td class="n down">-33.77%</td><td>半导体设备</td></tr>
+<tr><td class="n">8</td><td>华虹宏力</td><td>688347</td><td class="n">3.361%</td><td class="n">8</td><td class="n up">+95.35%</td><td class="n down">-48.99%</td><td>晶圆制造</td></tr>
+<tr><td class="n">9</td><td>拓荆科技</td><td>688072</td><td class="n">4.320%</td><td class="n">7</td><td class="n up">+82.30%</td><td class="n down">-36.40%</td><td>半导体设备</td></tr>
+<tr><td class="n">10</td><td>佰维存储</td><td>688525</td><td class="n">2.862%</td><td class="n">11</td><td class="n up">+80.76%</td><td class="n down">-59.94%</td><td>存储芯片</td></tr>
+<tr><td class="n">11</td><td>中微公司</td><td>688012</td><td class="n">8.738%</td><td class="n">1</td><td class="n up">+77.59%</td><td class="n down">-35.07%</td><td>半导体设备</td></tr>
+<tr><td class="n">12</td><td>睿创微纳</td><td>688002</td><td class="n">2.240%</td><td class="n">13</td><td class="n up">+76.99%</td><td class="n down">-5.57%</td><td>军工电子</td></tr>
+<tr><td class="n">13</td><td>仕佳光子</td><td>688313</td><td class="n">1.609%</td><td class="n">16</td><td class="n up">+63.91%</td><td class="n down">-29.83%</td><td>光芯片/光通信</td></tr>
+<tr><td class="n">14</td><td>澜起科技</td><td>688008</td><td class="n">7.566%</td><td class="n">5</td><td class="n up">+57.27%</td><td class="n down">-44.47%</td><td>算力芯片设计</td></tr>
+<tr><td class="n">15</td><td>盛美上海</td><td>688082</td><td class="n">1.407%</td><td class="n">18</td><td class="n up">+54.16%</td><td class="n down">-41.13%</td><td>半导体设备</td></tr>
+<tr><td class="n">16</td><td>芯原股份</td><td>688521</td><td class="n">2.713%</td><td class="n">12</td><td class="n up">+30.86%</td><td class="n down">-52.29%</td><td>算力芯片设计</td></tr>
+<tr><td class="n">17</td><td>安集科技</td><td>688019</td><td class="n">1.401%</td><td class="n">19</td><td class="n up">+29.03%</td><td class="n down">-41.04%</td><td>半导体材料</td></tr>
+<tr class="star"><td class="n"><b>18</b></td><td><b>寒武纪 ★</b></td><td>688256</td><td class="n">8.134%</td><td class="n"><b>3</b></td><td class="n up"><b>+14.44%</b></td><td class="n down">-35.80%</td><td>算力芯片设计</td></tr>
+<tr class="star"><td class="n"><b>19</b></td><td><b>海光信息 ★</b></td><td>688041</td><td class="n">7.602%</td><td class="n"><b>4</b></td><td class="n down"><b>-0.21%</b></td><td class="n down">-43.39%</td><td>算力芯片设计</td></tr>
+<tr class="star"><td class="n"><b>20</b></td><td><b>中芯国际 ★</b></td><td>688981</td><td class="n">8.444%</td><td class="n"><b>2</b></td><td class="n down"><b>-7.13%</b></td><td class="n down">-35.31%</td><td>晶圆制造</td></tr>
+</table>
+<div class="note">
+权重为通达信 F9 成分股权重（2026-09-14）；YTD 以 2025-12-31 前复权收盘为基准、2026-09-14 收盘为终点。
+前 20 大合计权重 78.17%，其余 30 只占 21.83%。
+<b>方法学提示：</b>若用「当前权重 × YTD」加权求和得 +55.79pct，明显高于指数实际 +37.84pct——这是因为涨幅大的股票权重随之膨胀（权重漂移），叠加指数每半年（6月/12月）调仓，事后权重不等于期初权重。因此本节一律采用<b>等权口径</b>做结构归因，当前权重口径仅用于观察相对强弱，其绝对值不可用于解释指数涨幅。
+</div>
+</div>

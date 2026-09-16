@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国产算力三剑客组合 2025 全年复盘：中芯国际+寒武纪+海光信息 vs 科创芯片指数</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"PingFang SC","Microsoft YaHei",sans-serif; background:#f7f8fa; color:#2b2f36; line-height:1.65; }
+  .wrap { max-width:1120px; margin:0 auto; padding:28px 20px 60px; }
+  h1 { font-size:26px; margin-bottom:6px; }
+  .sub { color:#8a919c; font-size:13px; margin-bottom:22px; }
+  h2 { font-size:19px; margin:36px 0 14px; padding-left:10px; border-left:4px solid #c0392b; }
+  h3 { font-size:15px; margin:20px 0 8px; color:#3a4048; }
+  .tldr { background:#fff; border:1px solid #e8eaee; border-left:4px solid #c0392b; border-radius:10px; padding:20px 22px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .tldr li { margin:7px 0 7px 18px; font-size:14px; }
+  .cards { display:flex; gap:14px; flex-wrap:wrap; margin:18px 0; }
+  .card { flex:1; min-width:200px; background:#fff; border:1px solid #e8eaee; border-radius:10px; padding:15px 17px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .card .name { font-size:13.5px; color:#5a616c; }
+  .card .big { font-size:28px; font-weight:700; margin:2px 0; }
+  .card.win { border-top:3px solid #d0342c; } .card.lose { border-top:3px solid #1e8e4e; }
+  .card.bench { border-top:3px solid #2c6bd0; background:#fbfcfe; }
+  .up { color:#d0342c; } .down { color:#1e8e4e; }
+  .card .meta { font-size:12px; color:#8a919c; line-height:1.55; }
+  table { width:100%; border-collapse:collapse; background:#fff; font-size:13.5px; border:1px solid #e8eaee; border-radius:8px; overflow:hidden; }
+  th { background:#f0f2f5; padding:9px 11px; text-align:left; font-weight:600; color:#4a505a; white-space:nowrap; }
+  td { padding:8px 11px; border-top:1px solid #eef0f3; }
+  tr:hover td { background:#fafbfc; }
+  td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .chart { width:100%; height:420px; background:#fff; border:1px solid #e8eaee; border-radius:10px; padding:10px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .chart.tall { height:520px; }
+  .toggle { margin:6px 0 10px; }
+  .toggle button { border:1px solid #d5d9e0; background:#fff; color:#5a616c; border-radius:6px; padding:4px 14px; font-size:13px; cursor:pointer; margin-right:8px; }
+  .toggle button.on { background:#c0392b; color:#fff; border-color:#c0392b; }
+  .note { font-size:12px; color:#9aa1ab; margin-top:7px; line-height:1.6; }
+  .src { font-size:12px; color:#9aa1ab; margin-top:7px; line-height:1.6; }
+  .tag { display:inline-block; font-size:11.5px; padding:1px 8px; border-radius:10px; margin-right:5px; }
+  .tag-red { background:#fdeceb; color:#c0392b; } .tag-green { background:#e8f6ee; color:#1e8e4e; }
+  .tag-blue { background:#eaf1fd; color:#2c6bd0; } .tag-gray { background:#f0f2f5; color:#5a616c; }
+  .tag-amber { background:#fff5e0; color:#a07000; }
+  .risk { background:#fff8e6; border:1px solid #f0e0b0; border-radius:10px; padding:14px 18px; margin-top:14px; font-size:13.5px; line-height:1.75; }
+  .risk b { color:#a07000; }
+  .concl { background:#fff; border:1px solid #e8eaee; border-left:4px solid #c0392b; border-radius:8px; padding:16px 20px; margin-top:14px; font-size:14px; }
+  .concl p { margin:9px 0; }
+  .concl p:first-child { margin-top:0; }
+  .fact { background:#f4f8ff; border:1px solid #d8e5fb; border-radius:10px; padding:13px 17px; margin-top:13px; font-size:13px; line-height:1.75; }
+  .fact b { color:#2c6bd0; }
+  .warn { background:#fff2f0; border:1px solid #f5cfca; border-radius:10px; padding:13px 17px; margin-top:13px; font-size:13px; line-height:1.75; }
+  .warn b { color:#c0392b; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:820px){ .grid2 { grid-template-columns:1fr; } }
+  .kv { font-size:13px; }
+  .kv td:first-child { color:#5a616c; width:42%; }
+  .star { background:#fff9e8; }
+  .dis { font-size:12px; color:#9aa1ab; margin-top:30px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>国产算力「三剑客」组合 2025 全年复盘</h1>
+<div class="sub">
+组合：中芯国际(688981) + 寒武纪(688256) + 海光信息(688041)，等权各 1/3 |
+基准：科创芯片指数(000685) |
+区间：2024-12-31 收盘 → 2025-12-31 收盘（244 个交易日）|
+行情：腾讯日K前复权（与通达信锚点交叉校验一致）| 本报告为 2026 YTD 复盘的前传
+</div>
+
+<div class="tldr">
+<b>TL;DR 结论先行 —— 2025 是「赢」的一年，但赢得侥幸且埋雷</b>
+<ul>
+<li><b>组合 2025 全年 +62.04%，科创芯片指数 +61.33%，微幅跑赢 0.71pct（几何超额 +3.43%）。</b>这与 2026 YTD 跑输 35.47pct 形成 180° 反转——同样三只票、同一个指数，去年险胜、今年惨败。</li>
+<li><b>「赢」完全靠 8 月单月。</b>8 月组合 +61.94%、指数 +35.24%，单月超额 +26.69pct；剔除 8 月后，组合全年仅 <b>+0.07%</b>，指数 <b>+19.29%</b>，反而跑输 19.22pct。<b>一个月的暴力拉升撑起了全年的「胜利」。</b></li>
+<li><b>「赢」也完全靠寒武纪一只。</b>寒武纪 +106.25%（超额 +44.92pct）以一己之力拉动组合；中芯 +29.81%（跑输指数 -31.52pct）、海光 +50.07%（-11.26pct）都是拖累。若寒武纪不爆发，组合 2025 大幅跑输。</li>
+<li><b>风险调整后其实更差。</b>组合夏普 <b>1.19</b> &lt; 指数 1.67，Calmar 2.59 &lt; 3.19，最大回撤 -24.06% &gt; 指数 -19.30%，年化波动 51.01% 远高于指数 36.11%。<b>Beta 高达 1.25</b>——这不是「选股 alpha」，是「加杠杆式的高 Beta 暴露」在牛市里的自然结果。</li>
+<li><b>上行捕获 117.1% / 下行捕获 118.7%</b>：涨得多也跌得多，典型高 Beta 放大器。2025 是单边上行的大牛市（指数 +61%），放大器自然输出正超额；<b>2026 风向一变，同一个放大器立刻反噬</b>——两年的结果是同一枚硬币的两面。</li>
+<li><b>2025 年真正的 alpha 也不在组合身上。</b>前 20 大等权 YTD <b>+117.61%</b>，组合三只等权仅 +62.04%，其余 17 只等权 <b>+127.42%</b>，差距 -65.37pct。涨幅王是光芯片（仕佳光子 +451.93%、源杰科技 +382.16%）、晶圆代工（华虹 +132.13%）、设备（睿创 +115.87%、拓荆 +115.37%）。</li>
+<li><b>跨年铁证：2025 的强势二线，2026 继续强势；组合三只从「权重龙头」沦为「掉队者」。</b>源杰 2025 第2→2026 第1、华峰测控 2025 第10→第3、华海清科 2025 第19→第4、盛科通信 2025 第16→第5；而寒武纪 2025 第7→2026 第18、中芯国际连续两年倒数第1。<b>市场奖励的从来不是「龙头地位」，是「业绩变化率与预期差」。</b></li>
+</ul>
+</div>
+
+<h2>一、组合与基准：2025 全年核心数据</h2>
+<div class="cards">
+  <div class="card win">
+    <div class="name">等权组合（买入持有）</div>
+    <div class="big up">+62.04%</div>
+    <div class="meta">期初各投 1/3 不调整 | 年化 +62.37% | 年化波动 51.01%<br>最大回撤 <b class="down">-24.06%</b>（07-10）| 夏普 <b>1.19</b> | Calmar 2.59 | 日胜率 51.0%</div>
+  </div>
+  <div class="card bench">
+    <div class="name">科创芯片指数 000685</div>
+    <div class="big up">+61.33%</div>
+    <div class="meta">1619.93 → 2613.41 点 | 年化 +61.65% | 年化波动 36.11%<br>最大回撤 <b class="down">-19.30%</b>（04-07）| 夏普 <b>1.67</b> | Calmar 3.19 | 日胜率 53.5%</div>
+  </div>
+  <div class="card win">
+    <div class="name">超额收益</div>
+    <div class="big up">+0.71<span style="font-size:16px">pct</span></div>
+    <div class="meta">算术超额（组合 - 指数）| 几何超额 <b class="up">+3.43%</b><br>日超额胜率 44.9% | 跟踪误差 25.44% | Beta 1.25</div>
+  </div>
+</div>
+
+<div class="cards">
+  <div class="card lose">
+    <div class="name">中芯国际 688981 <span class="tag tag-blue">指数权重第2</span></div>
+    <div class="big up">+29.81%</div>
+    <div class="meta">94.62 → 122.83 元 | 权重 8.444%<br>年内高 153.00（10/09）距高 -19.72% | 年内低 77.80（4/7）<br>波动 44.18% | 回撤 -22.17% | 夏普 0.64 | 跑输指数 <b class="down">-31.52pct</b></div>
+  </div>
+  <div class="card win">
+    <div class="name">寒武纪 688256 <span class="tag tag-blue">指数权重第3</span></div>
+    <div class="big up">+106.25%</div>
+    <div class="meta">440.60 → 908.76 元 | 权重 8.134%<br>年内高 1070.05（8/28）距高 -15.07% | 年内低 348.44（7/10）<br>波动 70.43% | 回撤 -34.30% | 夏普 1.50 | 跑赢指数 <b class="up">+44.92pct</b></div>
+  </div>
+  <div class="card win">
+    <div class="name">海光信息 688041 <span class="tag tag-blue">指数权重第4</span></div>
+    <div class="big up">+50.07%</div>
+    <div class="meta">149.38 → 224.17 元 | 权重 7.602%<br>年内高 277.74（9/25）距高 -19.29% | 年内低 125.60（1/27）<br>波动 58.15% | 回撤 -26.21% | 夏普 0.84 | 跑输指数 <b class="down">-11.26pct</b></div>
+  </div>
+</div>
+<div class="src">
+来源：腾讯日K（前复权 qfq，覆盖 2024-11-01→2026-01-20），基准取 2024-12-31 收盘、终点取 2025-12-31 收盘，共 244 个交易日。
+口径已与通达信交叉校验：2025-12-31 中芯收盘 122.83、指数收盘 2613.41，两源完全一致。
+个股停牌日按「沿用前一交易日收盘」映射到指数主日历，符合买入持有的真实持有体验。
+YTD 为价格涨幅口径，未含分红再投——三只股息率均极低，指数为价格指数，口径可比。
+一致性校验全部通过：月度收益连乘 = 累计收益；等权分解 (1/3)Σ个股 = 组合实际 +62.04%；相关性矩阵对角线 = 1.000。
+</div>
+
+<div class="fact">
+<b>组合口径说明（两种构建方式）：</b><br>
+① <b>等权买入持有</b>（期初各投 1/3，之后不调整）：全年 <b>+62.04%</b>，最大回撤 -24.06%，夏普 1.19。这是「买了就不动」的真实体验。<br>
+② <b>等权每日再平衡</b>（每天拉回 1/3）：全年 <b>+66.13%</b>，最大回撤 -23.50%，夏普 1.30。再平衡多出 4.09pct，来自高波动下的「再平衡溢价」。<br>
+③ 期末权重已漂移至：中芯 26.7% / 寒武 <b>42.4%</b> / 海光 30.9%——<b>涨最多的寒武纪被动加仓到 42.4%</b>，组合的命运因此被单只票深度绑定。本报告除特别说明外均以口径 ① 为准。
+</div>
+
+<h2>二、2025 全年走势对比（归一化 = 0%）</h2>
+<div class="toggle" id="tg1">
+  <button class="on" onclick="sw('tg1','c_walk','t_walk',0)">走势图</button><button onclick="sw('tg1','c_walk','t_walk',1)">月度明细表</button>
+</div>
+<div id="c_walk" class="chart"></div>
+<div id="t_walk" style="display:none">
+<table>
+<tr><th>月份</th><th class="n">组合(等权)</th><th class="n">科创芯片指数</th><th class="n">超额</th><th class="n">中芯国际</th><th class="n">寒武纪</th><th class="n">海光信息</th><th>阶段特征</th></tr><tr><td>2025-01</td><td class="n down">-9.47%</td><td class="n down">-2.61%</td><td class="n down">-6.86</td><td class="n down">-0.72%</td><td class="n down">-13.10%</td><td class="n down">-14.59%</td><td>开年急跌，组合（高Beta）跌幅远超指数，超额 -6.86pct</td></tr><tr><td>2025-02</td><td class="n up">+18.55%</td><td class="n up">+14.49%</td><td class="n up">+4.06</td><td class="n up">+4.10%</td><td class="n up">+28.65%</td><td class="n up">+25.08%</td><td>DeepSeek 行情点燃国产算力，寒武 +28.65%、海光 +25.08% 领涨</td></tr><tr><td>2025-03</td><td class="n down">-11.98%</td><td class="n down">-4.65%</td><td class="n down">-7.33</td><td class="n down">-8.65%</td><td class="n down">-15.32%</td><td class="n down">-11.72%</td><td>全板块回调，组合再次放大下跌</td></tr><tr><td>2025-04</td><td class="n up">+5.95%</td><td class="n up">+1.00%</td><td class="n up">+4.95</td><td class="n down">-0.31%</td><td class="n up">+12.97%</td><td class="n up">+5.18%</td><td>关税冲击后深蹲反弹，4/7 见年内最低（指数 1463.70）</td></tr><tr><td>2025-05</td><td class="n down">-10.26%</td><td class="n down">-6.17%</td><td class="n down">-4.09</td><td class="n down">-7.82%</td><td class="n down">-14.23%</td><td class="n down">-8.30%</td><td>缩量调整，组合继续跑输</td></tr><tr><td>2025-06</td><td class="n up">+3.54%</td><td class="n up">+5.43%</td><td class="n down">-1.89</td><td class="n up">+7.41%</td><td class="n down">-0.36%</td><td class="n up">+3.80%</td><td>指数小胜，组合微幅落后</td></tr><tr><td>2025-07</td><td class="n up">+5.90%</td><td class="n up">+4.36%</td><td class="n up">+1.54</td><td class="n up">+1.51%</td><td class="n up">+18.00%</td><td class="n down">-1.48%</td><td>全球科技去杠杆前夜，7/10 组合触及年内最大回撤 -24.06%</td></tr><tr class="star"><td>2025-08</td><td class="n up">+61.94%</td><td class="n up">+35.24%</td><td class="n up">+26.70</td><td class="n up">+28.22%</td><td class="n up">+110.59%</td><td class="n up">+39.81%</td><td><b>全年胜负手</b>：寒武单月 +110.59%、组合 +61.94% vs 指数 +35.24%，单月超额 +26.70pct，几乎贡献全年全部超额</td></tr><tr><td>2025-09</td><td class="n up">+8.40%</td><td class="n up">+17.75%</td><td class="n down">-9.35</td><td class="n up">+22.11%</td><td class="n down">-11.23%</td><td class="n up">+29.89%</td><td>指数续涨 +17.75%，组合仅 +8.40%（寒武 -11.23% 高位回调），超额 -9.35pct</td></tr><tr><td>2025-10</td><td class="n down">-4.79%</td><td class="n down">-7.40%</td><td class="n up">+2.61</td><td class="n down">-11.38%</td><td class="n up">+3.78%</td><td class="n down">-9.22%</td><td>10/9 指数见收盘峰值 3071.05，组合 10/27 见峰值 +80.99%</td></tr><tr><td>2025-11</td><td class="n down">-5.25%</td><td class="n down">-5.15%</td><td class="n down">-0.10</td><td class="n down">-8.52%</td><td class="n down">-3.20%</td><td class="n down">-5.25%</td><td>高位震荡回落，组合微跌</td></tr><tr><td>2025-12</td><td class="n up">+3.90%</td><td class="n up">+4.06%</td><td class="n down">-0.16</td><td class="n up">+8.13%</td><td class="n up">+1.85%</td><td class="n up">+3.28%</td><td>年末小幅修复，组合 +3.90% 略输指数 +4.06%</td></tr></table>
+<div class="note">月度涨幅按各月首末交易日收盘环比计算（前复权），「超额」为算术口径。组合 12 个月中仅 <b>5 个月</b>跑赢指数（2/4/7/8/10 月），且其中 4 个月是「跌得稍少」或小幅领先——<b>唯一一次决定性的主动超额来自 8 月（+26.70pct）</b>。其余 11 个月超额合计 <b class="down">-16.62pct</b>。来源：腾讯日K，自行计算。</div>
+</div>
+
+<h2>三、回撤结构与风险特征：高 Beta 的双刃剑</h2>
+<div id="c_dd" class="chart"></div>
+<div class="note">
+收盘价距滚动峰值的回撤。组合最大回撤 <b class="down">-24.06%</b>（年初→7/10 谷底），指数 <b class="down">-19.30%</b>（年初→4/7 谷底）。
+<b>组合回撤比指数深 4.76pct</b>，且谷底出现在 7/10（晚于指数的 4/7），说明组合在年中那波全球科技去杠杆中受伤更重。
+个股回撤：中芯 -22.17%、寒武 -34.30%、海光 -26.21%——寒武纪波动最剧烈（年化波动 70.43%）。
+组合内部日收益相关性均值 <b>0.616</b>，三只同属国产算力链，等权配置几乎没有分散化效果。
+来源：腾讯日K前复权，自行计算。
+</div>
+
+<div class="grid2">
+<div>
+<h3>日收益相关性矩阵</h3>
+<table class="kv">
+<tr><th></th><th class="n">中芯</th><th class="n">寒武</th><th class="n">海光</th><th class="n">指数</th></tr><tr><td>中芯国际</td><td class="n">1.000</td><td class="n">0.519</td><td class="n">0.611</td><td class="n">0.810</td></tr><tr><td>寒武纪</td><td class="n">0.519</td><td class="n">1.000</td><td class="n">0.719</td><td class="n">0.741</td></tr><tr><td>海光信息</td><td class="n">0.611</td><td class="n">0.719</td><td class="n">1.000</td><td class="n">0.785</td></tr><tr style="font-weight:700"><td>科创芯片指数</td><td class="n">0.810</td><td class="n">0.741</td><td class="n">0.785</td><td class="n">1.000</td></tr></table>
+<div class="note">内部平均相关 0.616（中芯-寒武 0.595、中芯-海光 0.591、寒武-海光 0.762）。三只对指数相关 0.810/0.741/0.785。本质仍是<b>单一高 Beta 行业因子暴露</b>，不是真正的多标的分散组合。</div>
+</div>
+<div>
+<h3>捕获率与风险收益结构</h3>
+<table class="kv">
+<tr><th>指标</th><th class="n">数值</th><th>解读</th></tr>
+<tr><td>上行捕获率</td><td class="n up"><b>117.1%</b></td><td>指数上涨日组合涨得更多（高Beta放大）</td></tr>
+<tr><td>下行捕获率</td><td class="n down"><b>118.7%</b></td><td>指数下跌日组合也跌得更多</td></tr>
+<tr><td>Beta</td><td class="n"><b>1.25</b></td><td>典型高Beta，指数1%→组合约1.25%</td></tr>
+<tr><td>相关系数</td><td class="n">0.885</td><td>方向高度贴合指数</td></tr>
+<tr><td>跟踪误差(年化)</td><td class="n"><b>25.44%</b></td><td>偏离幅度极大（与2026的25.82%几乎相同）</td></tr>
+<tr><td>夏普比率</td><td class="n down"><b>1.19</b> &lt; 指数1.67</td><td>单位风险收益不如指数</td></tr>
+<tr><td>指数涨日(130天)日均</td><td class="n">组合放大上涨</td><td>—</td></tr>
+<tr><td>指数&gt;+3%(20天)</td><td class="n">指数+161.75% / 组合+271.99%</td><td class="up">大涨日跑赢 +110.24pct</td></tr>
+<tr><td>指数&lt;-3%(15天)</td><td class="n">指数-51.62% / 组合-54.73%</td><td class="down">大跌日多跌 -3.11pct</td></tr>
+</table>
+<div class="note"><b>「Beta 1.25 + 上下行捕获都 &gt;117%」= 高 Beta 放大器</b>。在 2025 单边牛市中它放大收益、贡献正超额；但放大器不分方向，2026 年市场转弱时它同样放大亏损——这正是 2026 跑输 35pct 的结构根源。来源：日收益序列自行计算。</div>
+</div>
+</div>

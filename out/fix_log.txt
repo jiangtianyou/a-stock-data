@@ -1,0 +1,38 @@
+=== 688012 中微公司 2025-12 K线完整性诊断 ===
+   FAIL 1.688012 Remote end closed connection without response
+   12月交易日数: 0 | 2025-12-31收盘: None
+
+=== 补齐缺失成分股 ===
+  688347   华虹宏力     w=3.361% base=20251231@107.87 -> 211.30 YTD=  +95.88% 贡献= +3.223pct
+  688120   华海清科     w=3.322% base=20251231@107.00 -> 234.92 YTD= +119.55% 贡献= +3.971pct
+   FAIL 1.688361 Remote end closed connection without response
+   FAIL 1.688525 Remote end closed connection without response
+   FAIL 1.688002 Remote end closed connection without response
+   FAIL 1.688037 Remote end closed connection without response
+   FAIL 1.688313 Remote end closed connection without response
+   FAIL 1.688702 Remote end closed connection without response
+   FAIL 1.688766 Remote end closed connection without response
+
+=== 归因汇总（前13大成分，权重合计63.72%）===
+指数 YTD 实际涨幅: +38.04%（通达信口径, 20251231->20260914盘中）
+组合三只 权重24.18% 贡献+0.592pct  加权YTD+2.45%
+其余10只 权重39.54% 贡献+40.855pct  加权YTD+103.34%
+
+--- 全部成分 YTD 排行 ---
+  源杰科技     w=4.917% YTD= +282.55% 贡献=+13.893pct 
+  华峰测控     w=1.791% YTD= +170.59% 贡献= +3.055pct 
+  华海清科     w=3.322% YTD= +119.55% 贡献= +3.971pct 
+  华虹宏力     w=3.361% YTD=  +95.88% 贡献= +3.223pct 
+  拓荆科技     w=4.320% YTD=  +82.76% 贡献= +3.575pct 
+  中微公司     w=8.738% YTD=  +77.70% 贡献= +6.789pct 
+  澜起科技     w=7.566% YTD=  +57.38% 贡献= +4.341pct 
+  盛美上海     w=1.407% YTD=  +54.19% 贡献= +0.762pct 
+  芯原股份     w=2.713% YTD=  +31.05% 贡献= +0.842pct 
+  安集科技     w=1.401% YTD=  +28.84% 贡献= +0.404pct 
+  寒武纪      w=8.134% YTD=  +14.66% 贡献= +1.193pct ★本组合
+  海光信息     w=7.602% YTD=   -0.10% 贡献= -0.008pct ★本组合
+  中芯国际     w=8.444% YTD=   -7.02% 贡献= -0.593pct ★本组合
+  半导体设备+材料           权重20.98% 平均YTD +88.94%
+  光芯片/光模块            权重4.92% 平均YTD+282.55%
+  设计(算力CPU/GPU)      权重26.02% 平均YTD +25.75%
+  晶圆制造               权重11.81% 平均YTD +44.43%

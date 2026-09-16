@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股国庆长假效应复盘：缩量、节前避险与"红十月"的失效</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"PingFang SC","Microsoft YaHei",sans-serif; background:#f7f8fa; color:#2b2f36; line-height:1.65; }
+  .wrap { max-width:1180px; margin:0 auto; padding:28px 20px 60px; }
+  h1 { font-size:25px; margin-bottom:6px; }
+  .sub { color:#8a919c; font-size:13px; margin-bottom:22px; }
+  h2 { font-size:19px; margin:40px 0 14px; padding-left:10px; border-left:4px solid #c0392b; }
+  h3 { font-size:15px; margin:22px 0 8px; color:#3a4048; }
+  p { font-size:14px; margin:9px 0; }
+  .tldr { background:#fff; border:1px solid #e8eaee; border-left:4px solid #c0392b; border-radius:10px; padding:20px 22px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .tldr li { margin:10px 0 10px 18px; font-size:14.5px; }
+  .tldr b { color:#c0392b; }
+  .cards { display:flex; gap:14px; flex-wrap:wrap; margin:18px 0; }
+  .card { flex:1; min-width:178px; background:#fff; border:1px solid #e8eaee; border-radius:10px; padding:14px 16px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .card .name { font-size:12.5px; color:#5a616c; }
+  .card .big { font-size:25px; font-weight:700; margin:3px 0; font-variant-numeric:tabular-nums; }
+  .card .meta { font-size:11.5px; color:#8a919c; line-height:1.6; }
+  .card.win { border-top:3px solid #d0342c; } .card.lose { border-top:3px solid #1e8e4e; }
+  .card.neu { border-top:3px solid #8a919c; } .card.amb { border-top:3px solid #d9a300; }
+  .up { color:#d0342c; font-weight:600; } .down { color:#1e8e4e; font-weight:600; } .flat { color:#8a919c; }
+  table { width:100%; border-collapse:collapse; background:#fff; font-size:12.8px; border:1px solid #e8eaee; border-radius:8px; overflow:hidden; }
+  th { background:#f0f2f5; padding:8px 9px; text-align:left; font-weight:600; color:#4a505a; white-space:nowrap; }
+  td { padding:6px 9px; border-top:1px solid #eef0f3; }
+  tr:hover td { background:#fafbfc; }
+  td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; }
+  td.c, th.c { text-align:center; }
+  .chart { width:100%; height:430px; background:#fff; border:1px solid #e8eaee; border-radius:10px; padding:8px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .chart.tall { height:500px; }
+  .note { font-size:12px; color:#9aa1ab; margin-top:8px; line-height:1.7; }
+  .tag { display:inline-block; font-size:11.5px; padding:1px 8px; border-radius:10px; margin-right:5px; }
+  .tag-red { background:#fdeceb; color:#c0392b; } .tag-green { background:#e8f6ee; color:#1e8e4e; }
+  .tag-gray { background:#f0f2f5; color:#5a616c; } .tag-amber { background:#fff5e0; color:#a07000; }
+  .tag-blue { background:#eaf1fd; color:#2c6bd0; }
+  .risk { background:#fff8e6; border:1px solid #f0e0b0; border-radius:10px; padding:14px 18px; margin-top:14px; font-size:13.5px; line-height:1.85; }
+  .risk b { color:#a07000; }
+  .method { background:#f4f8ff; border:1px solid #d8e5fb; border-radius:10px; padding:14px 18px; margin-top:14px; font-size:13px; line-height:1.85; }
+  .method b { color:#2c6bd0; }
+  .dis { font-size:12px; color:#9aa1ab; margin-top:34px; line-height:1.75; border-top:1px solid #e8eaee; padding-top:14px; }
+  .hl { background:#fff9e8; }
+  .two { display:flex; gap:16px; flex-wrap:wrap; }
+  .two > div { flex:1; min-width:320px; }
+  code { background:#f0f2f5; padding:1px 5px; border-radius:4px; font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>A股国庆长假效应复盘：缩量、节前避险与"红十月"的失效</h1>
+<div class="sub">标的：上证指数为主，另用 8 个宽基 / 风格指数做横向校验 ｜ 数据：腾讯财经日线（前复权）｜ 样本区间 1990-12-19 ~ 2026-09-15 ｜ 生成 2026-09-15 17:45:43</div>
+
+<div class="tldr">
+  <ul>
+    <li><b>一句话：国庆长假效应是真的，但它是一个「节奏」现象，不是「方向」现象。</b>价格上最确定的东西——节前两周跌多涨少、节前最后一天偏红、节后首日跳空——全部集中在 <b>1~5 个交易日</b>的短窗口里；一旦拉长到月度口径，9 月（均值 +0.01%）与 10 月（-0.15%）在 12 个月里都排在中下游，<b>谈不上"金九"，也谈不上"红十月"</b>。</li>
+    <li><b>唯一稳健的特征是缩量。</b>节前 5 日均量只有当年日均量的 <b>-15.8%</b>（2000 年起 26 年），全历史 -14.2%。这条在 9 个指数上方向完全一致，是整份复盘里最干净的结论。而节后并没有补偿性放量（-1.9%），<b>"节后资金回流"在量能上找不到证据</b>。</li>
+    <li><b>节前两周"跌多涨少"，但均值会骗人。</b>节前 10 日：<b>中位数 -1.89%、胜率仅 34.6%</b>（2000 起），均值却只有 -0.05%——因为 2024 年节前 5 日 <b>+21.37%</b>、2008 年 +10.54% 这类右尾把均值拉平了。看均值会得出"节前无所谓"，看中位数才知道节前是偏弱的。</li>
+    <li><b>节后"红包"存在，但统计上不显著，且几乎全在开市第一天。</b>2000 起节后 1 日均值 <b>+0.51%</b>、胜率 65.4%，但 <b>t 值只有 1.14（p=0.26）</b>。剔除首日跳空后，节后 5 日从 +0.60% 塌到 <b>+0.06%</b>，节后 10 日变成 <b>-0.65%</b>。<b>"持股过节"赚的是首日的情绪溢价，"节后再买"基本赚不到。</b></li>
+    <li><b>真正有交易价值的是反向信号：节前越弱，节后越强。</b>节前 5 日下跌的年份（n=14），节后 5 日平均 <b>+1.52%</b>、胜率 <b>71.4%</b>；节前 5 日上涨的年份（n=12），节后 5 日平均 <b>-0.46%</b>、胜率 50%。相关系数 <b>-0.336</b>。这是全文唯一同时具备方向、幅度与胜率的可操作特征。</li>
+    <li><b>"红十月"失效的真正原因不是时间，是「环境」——年内位置才是决定 10 月的关键变量。</b>按当年 1-8 月涨幅分档：<b>强势档（&gt;+10%）10 月均值 +3.20%、胜率 88.9%；震荡档 10 月均值 -0.15%、胜率仅 30.8%；弱势档（&lt;-10%）10 月均值 -4.44%、胜率 28.6%</b>。单调递进，比"哪一年"有解释力得多。<b>2026 年上证 1-8 月只涨 +0.44%，落在震荡档——该档 13 年里 10 月只有 4 次上涨。</b></li>
+    <li><b>尾部风险厚且不对称。</b>10 月单月极值从 2008 年的 <b>-24.6%</b> 到 2010 年的 <b>+12.2%</b>（跨度 36.8 个百分点）；而 A 股休市 8~11 天，这期间外盘要交易 6~7 个交易日，政策与地缘事件全部落在无法调仓的持仓敞口上。<b>节前减仓的成本是确定的，不减仓的风险是不确定的。</b></li>
+  </ul>
+</div>
+
+<h2>一、样本与方法</h2>
+<div class="method">
+  <b>窗口定义</b>：<code>T-1</code> = 节前最后一个交易日；<code>T+1</code> = 节后第一个交易日。<b>节前 N 日</b> = <code>close(T-1)/close(T-1-N)-1</code>；<b>节后 N 日</b> = <code>close(T+N)/close(T-1)-1</code>（含跳空缺口）。另有"基准 = 节后首日收盘"的 postNb 版本，用于剥离首日跳空。<br>
+  <b>长假识别</b>：相邻交易日间隔 ≥ 5 个自然日、且跨 10 月 1 日的，判定为国庆长假，共识别到 <b>32 次</b>（1991–2025）。<br>
+  <b>样本口径</b>：<span class="tag tag-gray">全历史 1991 起 n=32</span> 含 1996-12-16 涨跌停制度实施前的极端期（1991–1992 单月可涨 177%），仅作参考；<span class="tag tag-red">主口径 2000 起 n=26</span> 用于多数结论；<span class="tag tag-blue">近年 2010 起 n=16</span> 作对照。2026 年 10 月尚未发生，不计入统计。<br>
+  <b>显著性</b>：单样本 t 检验（H₀：收益均值 = 0）。本报告对 p &gt; 0.05 的结果一律标注"不显著"，不做因果化表述。
+</div>
+
+<h2>二、结论一：缩量是唯一稳健的特征</h2>
+<div class="cards">
+  <div class="card lose"><div class="name">节前 5 日均量 / 当年日均量</div><div class="big down">-15.8%</div><div class="meta">2000 起 · 26 年 · 9 个指数方向一致</div></div>
+  <div class="card lose"><div class="name">节前 5 日均量 / 当年日均量（全历史）</div><div class="big down">-14.2%</div><div class="meta">1991 起 · 32 年</div></div>
+  <div class="card neu"><div class="name">节后 5 日均量 / 当年日均量</div><div class="big flat">-1.9%</div><div class="meta">量能回归常态，无放量</div></div>
+  <div class="card neu"><div class="name">节后 6~25 日均量 / 当年日均量</div><div class="big flat">-1.5%</div><div class="meta">未见"资金大举回流"</div></div>
+</div>
+<p>节前缩量的幅度（-15.8%）远大于价格波动的幅度（节前 5 日中位数 -0.53%），说明<b>长假前主导市场的是"降低敞口"的行为，而不是"看空"的判断</b>——资金在降低仓位以规避休市期间的不确定性，而不是在定价一个下跌预期。这也解释了为什么价格上没有干净的下跌：卖压被同样不敢做多的买盘对冲掉了，最终表现为<b>缩量震荡</b>。而节后量能并未反弹（-1.9%），说明所谓"节后资金回流"更多是叙事而非事实。</p>
+
+<h2>三、结论二：节前两周跌多涨少，但均值会骗人</h2>
+<table>
+  <thead><tr>
+    <th>窗口</th>
+    <th class="n">均值%<br><span style="font-weight:400;color:#8a919c">2000起</span></th>
+    <th class="n">中位数%<br><span style="font-weight:400;color:#8a919c">2000起</span></th>
+    <th class="n">胜率%<br><span style="font-weight:400;color:#8a919c">2000起</span></th>
+    <th class="n">t 值</th><th class="n">p 值</th>
+    <th class="n">均值%<br><span style="font-weight:400;color:#8a919c">全历史</span></th>
+    <th class="n">中位数%<br><span style="font-weight:400;color:#8a919c">全历史</span></th>
+    <th class="n">胜率%<br><span style="font-weight:400;color:#8a919c">全历史</span></th>
+  </tr></thead>
+  <tbody><tr><td>节前10日</td><td class="n down">-0.05</td><td class="n down">-1.89</td><td class="n">34.6</td><td class="n">-0.05</td><td class="n">0.964</td><td class="n down">-0.80</td><td class="n down">-2.29</td><td class="n">31.2</td></tr>
+<tr><td>节前5日</td><td class="n up">+0.82</td><td class="n down">-0.53</td><td class="n">46.2</td><td class="n">0.81</td><td class="n">0.426</td><td class="n up">+0.76</td><td class="n down">-0.53</td><td class="n">46.9</td></tr>
+<tr style="font-weight:600;background:#fffdf5"><td>节前3日</td><td class="n up">+0.68</td><td class="n up">+0.06</td><td class="n">50.0</td><td class="n">1.01</td><td class="n">0.320</td><td class="n up">+0.28</td><td class="n down">-0.10</td><td class="n">46.9</td></tr>
+<tr style="font-weight:600;background:#fffdf5"><td>节前1日</td><td class="n up">+0.69</td><td class="n up">+0.38</td><td class="n">69.2</td><td class="n">2.04</td><td class="n">0.052</td><td class="n up">+0.55</td><td class="n up">+0.50</td><td class="n">68.8</td></tr>
+<tr style="font-weight:600;background:#fffdf5"><td>节后1日</td><td class="n up">+0.51</td><td class="n up">+0.72</td><td class="n">65.4</td><td class="n">1.14</td><td class="n">0.264</td><td class="n down">-0.06</td><td class="n up">+0.28</td><td class="n">56.2</td></tr>
+<tr style="font-weight:600;background:#fffdf5"><td>节后3日</td><td class="n up">+0.84</td><td class="n up">+0.96</td><td class="n">69.2</td><td class="n">1.23</td><td class="n">0.232</td><td class="n up">+0.40</td><td class="n up">+0.50</td><td class="n">59.4</td></tr>
+<tr><td>节后5日</td><td class="n up">+0.60</td><td class="n up">+1.07</td><td class="n">61.5</td><td class="n">0.67</td><td class="n">0.511</td><td class="n up">+0.04</td><td class="n up">+0.59</td><td class="n">53.1</td></tr>
+<tr><td>节后10日</td><td class="n down">-0.09</td><td class="n up">+0.77</td><td class="n">57.7</td><td class="n">-0.07</td><td class="n">0.943</td><td class="n down">-0.58</td><td class="n up">+0.72</td><td class="n">56.2</td></tr>
+<tr><td>节后20日</td><td class="n up">+1.17</td><td class="n up">+1.59</td><td class="n">61.5</td><td class="n">0.77</td><td class="n">0.449</td><td class="n up">+0.72</td><td class="n up">+1.51</td><td class="n">56.2</td></tr></tbody>
+</table>
+<div class="note">口径：上证指数。加粗行 = |t| ≥ 1.0 的窗口。全部窗口 p &gt; 0.05，即<b>无一显著</b>。</div>
+
+<div class="chart" id="c_win"></div>
+<div class="note">柱 = 均值收益（左轴）；折线 = 上涨概率（右轴）。注意"节前 10 日"的柱与折线严重背离——均值近 0 而胜率仅 34.6%，是典型的右偏分布。</div>
+
+<h3>为什么说均值会骗人</h3>
+<p>把 26 年的节前 5 日收益排一下：中位数 <b>-0.53%</b>、上涨年份 12/26（46.2%），但均值却是 <b>+0.82%</b>。差额几乎全部来自三个年份——<b>2024 年 +21.37%</b>（9/24 政策组合拳）、<b>2008 年 +10.54%</b>（9/19 印花税单边征收 + 汇金增持）、<b>2010 年 +2.59%</b>。换句话说：<b>节前行情有 46% 的概率下跌，但一旦上涨，幅度可以极大——政策底往往砸在长假前后。</b>这才是"节前避险"在数据上的真实形态：不是稳定下跌，而是<b>上涨靠事件、下跌靠惯性</b>的非对称分布。</p>
+
+<h2>四、结论三：节后红包只在开市第一天</h2>
+<p>节后窗口最容易被误读。用"基准 = 节前收盘"计算，节后 1/3/5 日看起来都不错；换一个基准就能看出问题：</p>
+<table>
+  <thead><tr>
+    <th rowspan="2">窗口</th>
+    <th colspan="4" class="c">基准 = 节前收盘（含跳空）</th>
+    <th colspan="4" class="c">基准 = 节后首日收盘（剔除首日）</th>
+  </tr><tr>
+    <th class="n">均值%</th><th class="n">中位%</th><th class="n">胜率%</th><th class="n">t</th>
+    <th class="n">均值%</th><th class="n">中位%</th><th class="n">胜率%</th><th class="n">t</th>
+  </tr></thead>
+  <tbody><tr><td>节后1日</td><td class="n up">+0.51</td><td class="n">+0.72</td><td class="n">65.4</td><td class="n">1.14</td><td class="n flat">+0.00</td><td class="n">+0.00</td><td class="n">0.0</td><td class="n">0.00</td></tr>
+<tr><td>节后3日</td><td class="n up">+0.84</td><td class="n">+0.96</td><td class="n">69.2</td><td class="n">1.23</td><td class="n up">+0.32</td><td class="n">+0.38</td><td class="n">61.5</td><td class="n">0.70</td></tr>
+<tr><td>节后5日</td><td class="n up">+0.60</td><td class="n">+1.07</td><td class="n">61.5</td><td class="n">0.67</td><td class="n up">+0.06</td><td class="n">+0.31</td><td class="n">57.7</td><td class="n">0.10</td></tr>
+<tr><td>节后10日</td><td class="n down">-0.09</td><td class="n">+0.77</td><td class="n">57.7</td><td class="n">-0.07</td><td class="n down">-0.65</td><td class="n">+0.17</td><td class="n">57.7</td><td class="n">-0.73</td></tr>
+<tr><td>节后20日</td><td class="n up">+1.17</td><td class="n">+1.59</td><td class="n">61.5</td><td class="n">0.77</td><td class="n up">+0.58</td><td class="n">+1.39</td><td class="n">57.7</td><td class="n">0.46</td></tr></tbody>
+</table>
+<div class="note">口径：上证指数，2000 年起 26 年。右半区的窗口自节后首日收盘起算，衡量<b>首日之后</b>的续涨能力。</div>
+
+<div class="two">
+  <div>
+    <h3>首日跳空贡献了多少</h3>
+    <p>节后 5 日累计 <b>+0.60%</b>，其中节后首日贡献 <b>+0.51%</b>——<b>约 85% 的涨幅集中在开市第一天</b>。剔除首日后，节后 5 日只剩 <b>+0.06%</b>，节后 10 日更是 <b>-0.65%</b>。</p>
+    <p>意味着：<b>想吃这个红包，就必须承担休市 8~11 天的全部不确定性</b>。而首日跳空本身并不便宜——2008 年节后首日 <b>-5.23%</b>、2018 年 <b>-3.72%</b>，一次就能吞掉 5~7 年的红包期望。</p>
+  </div>
+  <div>
+    <h3>为什么首日之后会走弱</h3>
+    <p>A 股收假后第 5~10 个交易日，正好落在 <b>三季报预告密集披露 + 9 月宏观数据落地</b>的窗口。节前被压制的利空在这时集中释放，而"假期情绪"已经消化完毕。数据上，10 月呈现<b>前强后弱</b>的月内结构：上半月（含节后首周）均值 <b>+0.16%</b>、胜率 57.7%；下半月均值 <b>-0.58%</b>、胜率 46.2%。</p>
+  </div>
+</div>
+
+<h2>五、结论四：真正的信号是"节前弱 → 节后强"</h2>
+<p>把所有窗口两两做相关性检验后，只有一组关系稳定且可用：<b>节前 5 日与节后 5 日负相关，系数 -0.336</b>。分组看更直观：</p>
+<div class="cards">
+  <div class="card win"><div class="name">节前 5 日下跌的年份 → 节后 5 日</div><div class="big up">+1.52%</div><div class="meta">胜率 71.4%（n=14）｜ 2000 起</div></div>
+  <div class="card lose"><div class="name">节前 5 日上涨的年份 → 节后 5 日</div><div class="big down">-0.46%</div><div class="meta">胜率 50.0%（n=12）｜ 2000 起</div></div>
+  <div class="card amb"><div class="name">9 月涨跌 → 10 月涨跌 相关系数</div><div class="big flat">0.03</div><div class="meta">≈ 零相关，9 月不预测 10 月</div></div>
+</div>
+<div class="chart tall" id="c_scatter"></div>
+<div class="note">横轴 = 节前 5 日收益，纵轴 = 节后 5 日收益（均为 %，2000 年起 26 年）。虚线为最小二乘拟合线，斜率向下即负相关。左上角（节前大跌、节后大涨）的样本密度明显高于右下角。</div>
+
+<p>这个负相关有两层解释。第一层是<b>均值回归</b>：节前的下跌如果由避险行为驱动（而非基本面恶化），那么假期结束、避险需求消退，价格自然回补。第二层是<b>政策时点</b>：历史上多次政策底都出现在长假前后（2008/9、2024/9），<b>节前杀跌本身可能是政策干预的前兆</b>。</p>
+<p>反过来看，<b>"9 月跌则 10 月红"这个流传很广的说法，相关系数只有 0.03，等于没有</b>：9 月涨的年份 10 月均值 +1.23%（胜率 50.0%，n=14），9 月跌的年份 10 月均值 -1.44%（胜率 46.7%，n=15）——方向甚至是一致的（9 月跌则 10 月也偏弱），只是弱到不可用。</p>
+
+<h2>六、结论五："红十月"失效的真正原因——环境，而不是年份</h2>
+<p class="hl" style="padding:10px 12px;border-radius:8px;font-size:14px">这是本复盘里最有价值的一节。<b>"红十月"作为一个时间标签是无解释力的：它在 1997–2009 年不成立（均值 -1.69%、胜率 38.5%），只在 2010–2019 年成立（+2.52%、胜率 70%），2020 年后又反转（-1.25%、胜率 33.3%）。但如果我们换一个分类变量——把年份按<b>「当年 1-8 月的累计涨幅」</b>分成强势 / 震荡 / 弱势三档，10 月的表现立刻变得单调且有序：</p>
+<table>
+  <thead><tr>
+    <th>环境档（按当年 1-8 月涨幅）</th><th class="n">n</th>
+    <th class="n">9月均值%</th><th class="n">9月中位%</th><th class="n">9月胜率%</th>
+    <th class="n">10月均值%</th><th class="n">10月中位%</th><th class="n">10月胜率%</th>
+    <th class="n">9+10均值%</th><th class="n">9+10胜率%</th>
+  </tr></thead>
+  <tbody><tr><td>强势(1-8月>+10%)</td><td class="n">9</td><td class="n down">-0.75</td><td class="n up">+0.64</td><td class="n">55.6</td><td class="n up">+3.20</td><td class="n up">+2.68</td><td class="n">88.9</td><td class="n up">+2.45</td><td class="n">55.6</td></tr>
+<tr style="font-weight:600;background:#fffdf5"><td>震荡(-10%~+10%) <span class="tag tag-red">← 2026 落此档</span></td><td class="n">13</td><td class="n up">+1.17</td><td class="n down">-0.30</td><td class="n">46.2</td><td class="n down">-0.15</td><td class="n down">-1.38</td><td class="n">30.8</td><td class="n up">+1.01</td><td class="n">61.5</td></tr>
+<tr><td>弱势(1-8月<-10%)</td><td class="n">7</td><td class="n down">-1.15</td><td class="n down">-2.62</td><td class="n">42.9</td><td class="n down">-4.44</td><td class="n down">-4.33</td><td class="n">28.6</td><td class="n down">-5.59</td><td class="n">28.6</td></tr></tbody>
+</table>
+<div class="note">口径：上证指数，1997–2025 共 29 年。<b>强势</b> = 1-8 月累涨 &gt; +10%；<b>震荡</b> = -10% ~ +10%；<b>弱势</b> = &lt; -10%。</div>
+
+<div class="chart" id="c_env"></div>
+<div class="note">同一批年份、同一个 10 月，只是换了一个分类变量，10 月胜率就从 88.9% 单调降到 28.6%。<b>决定 10 月的不是"十月"这两个字，而是市场在 9 月底处于什么位置。</b></div>
+
+<p>读法是清晰的：<b>年内已经走强的市场，10 月延续的概率极高（9 年里 8 次上涨）；年内走弱的市场，10 月继续下跌（7 年里 5 次下跌，均值 -4.44%，含 2008 年 -24.63%、2018 年 -7.75% 这样的加速下跌）。</b>机制上说得通——10 月是三季报验证期叠加年末流动性预期开始定价的时点，强势市场有盈利与资金的双重支撑，弱势市场则面临"业绩不及预期 + 机构年末保收益"的双杀。</p>
+<p>而"红十月"在 2010 年代成立、在 2020 年代失效，恰好对应的是<b>环境档位分布的变化</b>：2010 年代后半段（2014/2015/2019）多次落入强势或高位震荡档；2020 年以来（2021 震荡、2022 弱势、2023 震荡、2024 震荡、2025 强势）则分散在震荡与弱势档，其中震荡档的 10 月胜率只有 30.8%。<b>用一个固定日历标签去套不同的市场环境，是季节性研究最典型的刻舟求剑。</b></p>
+
+<h3>对照：9 / 10 月在 12 个月里的真实位置</h3>
+<div class="chart" id="c_month"></div>
+<div class="note">上证指数 1997 年起各月平均涨跌（%）。<b>真正强的月份是 2 月（+2.46%、胜率 73.3%、t=2.89，全表唯一统计显著）、4 月（+2.27%）、12 月（+1.79%）、3 月（+1.42%）、11 月（+1.08%）</b>；弱的月份是 8 月（-1.11%）、6 月（-0.41%）、10 月（-0.15%）。9 月均值 +0.01%、中位数 -0.30%、胜率 48.3%，基本"无色"。</div>
+<p>换言之：<b>9-10 月既不是季节性的高地，也不是洼地，而是一段"过渡带"。</b>这也与年内高低点的分布吻合——34 个完整年度里，9 月只出现过 1 次年内最高点和 1 次最低点，10 月是 2 次和 3 次；年内低点最集中的月份是 <b>1 月（8 次）</b>、12 月与 2 月（各 4 次）。把长假当作方向性拐点的依据，在数据上找不到支持。</p>
+
+<h2>七、横向校验：9 个指数的一致性与分歧</h2>
+<table>
+  <thead><tr><th>指数</th><th class="n">9 月均值%</th><th class="n">9 月中位%</th><th class="n">9 月胜率%</th><th class="n">10 月均值%</th><th class="n">10 月中位%</th><th class="n">10 月胜率%</th><th class="n">n</th></tr></thead>
+  <tbody><tr><td>上证指数</td><td class="n up">+0.23</td><td class="n">+0.17</td><td class="n">50.0</td><td class="n down">-0.21</td><td class="n">-0.19</td><td class="n">50.0</td><td class="n">26</td></tr>
+<tr><td>上证50</td><td class="n up">+1.01</td><td class="n">+0.65</td><td class="n">54.5</td><td class="n up">+0.11</td><td class="n">+1.73</td><td class="n">59.1</td><td class="n">22</td></tr>
+<tr><td>沪深300</td><td class="n up">+1.07</td><td class="n">+1.12</td><td class="n">61.9</td><td class="n up">+0.19</td><td class="n">+1.89</td><td class="n">57.1</td><td class="n">21</td></tr>
+<tr><td>中证500</td><td class="n up">+0.71</td><td class="n">+1.11</td><td class="n">52.6</td><td class="n down">-0.67</td><td class="n">-0.65</td><td class="n">42.1</td><td class="n">19</td></tr>
+<tr><td>中证1000</td><td class="n down">-0.02</td><td class="n">-1.40</td><td class="n">36.4</td><td class="n up">+1.19</td><td class="n">-0.27</td><td class="n">45.5</td><td class="n">11</td></tr>
+<tr><td>中证全指</td><td class="n up">+1.87</td><td class="n">+1.10</td><td class="n">61.5</td><td class="n up">+0.22</td><td class="n">+0.29</td><td class="n">53.8</td><td class="n">13</td></tr>
+<tr><td>创业板指</td><td class="n up">+1.94</td><td class="n">-0.36</td><td class="n">50.0</td><td class="n up">+1.49</td><td class="n">+0.22</td><td class="n">56.2</td><td class="n">16</td></tr>
+<tr><td>深证成指</td><td class="n up">+0.20</td><td class="n">-0.45</td><td class="n">46.2</td><td class="n up">+0.13</td><td class="n">+1.05</td><td class="n">57.7</td><td class="n">26</td></tr>
+<tr><td>中证红利</td><td class="n up">+0.59</td><td class="n">+0.00</td><td class="n">50.0</td><td class="n down">-0.35</td><td class="n">+0.75</td><td class="n">55.6</td><td class="n">18</td></tr></tbody>
+</table>
+<div class="note">口径：各指数 2000 年起、至 2026-08 的月度收益。中证1000 / 中证全指 / 中证500 可用样本不足 20 年，仅作方向参考。</div>
+<p>跨指数看下来，<b>没有干净的"节后小盘更强"结论</b>：10 月创业板指 +1.49%（胜率 56.2%）、中证1000 +1.19%（但胜率仅 45.5%）、中证500 却是 -0.67%（胜率 42.1%）；大盘侧上证50 +0.11%（胜率 59.1%）、沪深300 +0.19%（胜率 57.1%）。看中位数则沪深300（+1.89%）与上证50（+1.73%）明显好于创业板指（+0.22%）。<b>样本小 + 方向分歧大，这个维度上不应下结论</b>——它的价值在于说明：长假效应是<b>全市场层面的风险偏好现象</b>，而不是某一类市值风格的特征。</p>
+
+<h2>八、逐年明细：26 次长假的完整记录</h2>
+<table>
+  <thead><tr>
+    <th class="c">年份</th><th class="c">节前最后交易日</th><th class="c">节后首日</th><th class="n">休市天</th>
+    <th class="n">节前5日%</th><th class="n">节前1日%</th>
+    <th class="n">节后1日%</th><th class="n">节后5日%</th><th class="n">节后10日%</th><th class="n">节后20日%</th>
+  </tr></thead>
+  <tbody><tr><td class="c">2000</td><td class="c">2000-09-29</td><td class="c">2000-10-09</td><td class="n">10</td><td class="n up">+0.96</td><td class="n up">+1.10</td><td class="n up">+0.27</td><td class="n up">+0.42</td><td class="n up">+1.95</td><td class="n up">+3.74</td></tr>
+<tr><td class="c">2001</td><td class="c">2001-09-28</td><td class="c">2001-10-08</td><td class="n">10</td><td class="n down">-2.33</td><td class="n flat">-0.00</td><td class="n down">-2.17</td><td class="n down">-4.17</td><td class="n down">-10.90</td><td class="n down">-4.17</td></tr>
+<tr><td class="c">2002</td><td class="c">2002-09-27</td><td class="c">2002-10-08</td><td class="n">11</td><td class="n down">-1.45</td><td class="n down">-0.38</td><td class="n down">-1.18</td><td class="n down">-3.16</td><td class="n down">-3.58</td><td class="n down">-3.15</td></tr>
+<tr><td class="c">2003</td><td class="c">2003-09-30</td><td class="c">2003-10-08</td><td class="n">8</td><td class="n down">-1.66</td><td class="n up">+0.87</td><td class="n up">+0.33</td><td class="n up">+1.54</td><td class="n down">-0.21</td><td class="n up">+1.64</td></tr>
+<tr class="hl"><td class="c">2004</td><td class="c">2004-09-30</td><td class="c">2004-10-08</td><td class="n">8</td><td class="n down">-4.65</td><td class="n down">-1.64</td><td class="n up">+1.88</td><td class="n down">-4.57</td><td class="n down">-6.17</td><td class="n down">-6.58</td></tr>
+<tr><td class="c">2005</td><td class="c">2005-09-30</td><td class="c">2005-10-10</td><td class="n">10</td><td class="n up">+0.32</td><td class="n up">+0.01</td><td class="n down">-1.44</td><td class="n down">-1.39</td><td class="n down">-1.24</td><td class="n down">-4.81</td></tr>
+<tr><td class="c">2006</td><td class="c">2006-09-29</td><td class="c">2006-10-09</td><td class="n">10</td><td class="n up">+1.57</td><td class="n up">+0.89</td><td class="n up">+1.88</td><td class="n up">+1.84</td><td class="n up">+2.17</td><td class="n up">+6.50</td></tr>
+<tr><td class="c">2007</td><td class="c">2007-09-28</td><td class="c">2007-10-08</td><td class="n">10</td><td class="n up">+1.79</td><td class="n up">+2.64</td><td class="n up">+2.53</td><td class="n up">+6.32</td><td class="n up">+4.79</td><td class="n up">+4.06</td></tr>
+<tr class="hl"><td class="c">2008</td><td class="c">2008-09-26</td><td class="c">2008-10-06</td><td class="n">10</td><td class="n up">+10.54</td><td class="n down">-0.16</td><td class="n down">-5.23</td><td class="n down">-12.78</td><td class="n down">-15.83</td><td class="n down">-24.63</td></tr>
+<tr><td class="c">2009</td><td class="c">2009-09-30</td><td class="c">2009-10-09</td><td class="n">9</td><td class="n down">-2.23</td><td class="n up">+0.90</td><td class="n up">+4.76</td><td class="n up">+7.21</td><td class="n up">+9.79</td><td class="n up">+13.51</td></tr>
+<tr><td class="c">2010</td><td class="c">2010-09-30</td><td class="c">2010-10-08</td><td class="n">8</td><td class="n up">+2.59</td><td class="n up">+1.72</td><td class="n up">+3.13</td><td class="n up">+8.43</td><td class="n up">+12.35</td><td class="n up">+16.24</td></tr>
+<tr><td class="c">2011</td><td class="c">2011-09-30</td><td class="c">2011-10-10</td><td class="n">10</td><td class="n down">-3.04</td><td class="n down">-0.26</td><td class="n down">-0.61</td><td class="n up">+3.06</td><td class="n down">-1.78</td><td class="n up">+7.17</td></tr>
+<tr><td class="c">2012</td><td class="c">2012-09-28</td><td class="c">2012-10-08</td><td class="n">10</td><td class="n up">+2.93</td><td class="n up">+1.45</td><td class="n down">-0.56</td><td class="n up">+0.90</td><td class="n up">+2.02</td><td class="n up">+1.48</td></tr>
+<tr><td class="c">2013</td><td class="c">2013-09-30</td><td class="c">2013-10-08</td><td class="n">8</td><td class="n down">-2.09</td><td class="n up">+0.68</td><td class="n up">+1.08</td><td class="n up">+2.90</td><td class="n up">+2.51</td><td class="n down">-1.15</td></tr>
+<tr><td class="c">2014</td><td class="c">2014-09-30</td><td class="c">2014-10-08</td><td class="n">8</td><td class="n up">+2.34</td><td class="n up">+0.26</td><td class="n up">+0.80</td><td class="n down">-0.19</td><td class="n down">-1.02</td><td class="n up">+2.83</td></tr>
+<tr><td class="c">2015</td><td class="c">2015-09-30</td><td class="c">2015-10-08</td><td class="n">8</td><td class="n down">-2.03</td><td class="n up">+0.48</td><td class="n up">+2.97</td><td class="n up">+6.87</td><td class="n up">+8.78</td><td class="n up">+13.33</td></tr>
+<tr><td class="c">2016</td><td class="c">2016-09-30</td><td class="c">2016-10-10</td><td class="n">10</td><td class="n down">-0.96</td><td class="n up">+0.21</td><td class="n up">+1.45</td><td class="n up">+1.97</td><td class="n up">+2.87</td><td class="n up">+4.01</td></tr>
+<tr><td class="c">2017</td><td class="c">2017-09-29</td><td class="c">2017-10-09</td><td class="n">10</td><td class="n down">-0.11</td><td class="n up">+0.28</td><td class="n up">+0.76</td><td class="n up">+1.24</td><td class="n up">+0.89</td><td class="n up">+0.68</td></tr>
+<tr class="hl"><td class="c">2018</td><td class="c">2018-09-28</td><td class="c">2018-10-08</td><td class="n">10</td><td class="n up">+3.37</td><td class="n up">+1.06</td><td class="n down">-3.72</td><td class="n down">-7.60</td><td class="n down">-9.60</td><td class="n down">-5.13</td></tr>
+<tr><td class="c">2019</td><td class="c">2019-09-30</td><td class="c">2019-10-08</td><td class="n">8</td><td class="n down">-2.41</td><td class="n down">-0.92</td><td class="n up">+0.29</td><td class="n up">+3.53</td><td class="n up">+1.19</td><td class="n up">+2.42</td></tr>
+<tr><td class="c">2020</td><td class="c">2020-09-30</td><td class="c">2020-10-09</td><td class="n">9</td><td class="n down">-1.88</td><td class="n down">-0.20</td><td class="n up">+1.68</td><td class="n up">+3.55</td><td class="n up">+2.94</td><td class="n up">+3.17</td></tr>
+<tr><td class="c">2021</td><td class="c">2021-09-30</td><td class="c">2021-10-08</td><td class="n">8</td><td class="n down">-2.03</td><td class="n up">+0.90</td><td class="n up">+0.67</td><td class="n down">-0.28</td><td class="n up">+0.75</td><td class="n down">-1.16</td></tr>
+<tr><td class="c">2022</td><td class="c">2022-09-30</td><td class="c">2022-10-10</td><td class="n">10</td><td class="n down">-2.07</td><td class="n down">-0.55</td><td class="n down">-1.66</td><td class="n up">+1.57</td><td class="n up">+0.48</td><td class="n up">+1.53</td></tr>
+<tr><td class="c">2023</td><td class="c">2023-09-28</td><td class="c">2023-10-09</td><td class="n">11</td><td class="n up">+0.84</td><td class="n up">+0.10</td><td class="n down">-0.44</td><td class="n down">-0.72</td><td class="n down">-4.10</td><td class="n down">-2.56</td></tr>
+<tr><td class="c">2024</td><td class="c">2024-09-30</td><td class="c">2024-10-08</td><td class="n">8</td><td class="n up">+21.37</td><td class="n up">+8.06</td><td class="n up">+4.59</td><td class="n down">-1.56</td><td class="n down">-2.05</td><td class="n down">-0.79</td></tr>
+<tr><td class="c">2025</td><td class="c">2025-09-30</td><td class="c">2025-10-09</td><td class="n">9</td><td class="n up">+1.59</td><td class="n up">+0.52</td><td class="n up">+1.32</td><td class="n up">+0.76</td><td class="n up">+0.80</td><td class="n up">+2.23</td></tr></tbody>
+</table>
+<div class="note">口径：上证指数，2000 年起 26 次。<span class="hl">黄底</span> = 节后 20 日跌幅超过 5%。<b>2008 年（-24.63%）与 2018 年（-5.13%）是两次典型的"假期利空"</b>——前者撞上全球金融危机，后者撞上中美贸易摩擦升级与美股大跌。另可注意节后 5 日为负的 9 个年份里，有 6 个的节前 5 日是上涨的。</div>
+
+<h2>九、2026 年当下：位置与时间表</h2>
+<div class="cards">
+  <div class="card amb"><div class="name">最新收盘（2026-09-15）</div><div class="big">3864.28</div><div class="meta">上证指数</div></div>
+  <div class="card lose"><div class="name">9 月至今</div><div class="big down">-3.06%</div><div class="meta">相对 8/31 收盘</div></div>
+  <div class="card amb"><div class="name">1-8 月累计涨幅 → 环境档</div><div class="big">+0.44%</div><div class="meta">环境档：震荡(-10%~+10%)</div></div>
+  <div class="card neu"><div class="name">节前 5 日均量 / 前 20 日均量</div><div class="big flat">0.97</div><div class="meta">缩量尚未出现（历史节前为 -15.8%）</div></div>
+</div>
+
+<h3>2026 年中秋 + 国庆放假安排（依据：国办发明电〔2025〕7 号，2025-11-04）</h3>
+<table>
+  <thead><tr><th class="c">日期</th><th class="c">星期</th><th class="c">A 股</th><th>说明</th></tr></thead>
+  <tbody>
+    <tr><td class="c">2026-09-25 ~ 09-27</td><td class="c">五 ~ 日</td><td class="c"><span class="tag tag-red">休市</span></td><td>中秋节放假 3 天（<b>9/25 周五单独休市</b>，与国庆不连休）</td></tr>
+    <tr><td class="c">2026-09-28 ~ 09-30</td><td class="c">一 ~ 三</td><td class="c"><span class="tag tag-green">交易</span></td><td><b>9/30（周三）为节前最后一个交易日</b>；节前 10 日窗口 = 9/16 ~ 9/30</td></tr>
+    <tr><td class="c">2026-10-01 ~ 10-07</td><td class="c">四 ~ 三</td><td class="c"><span class="tag tag-red">休市</span></td><td>国庆节放假调休 7 天</td></tr>
+    <tr><td class="c">2026-10-08</td><td class="c">四</td><td class="c"><span class="tag tag-green">交易</span></td><td><b>节后首个交易日</b>；本周仅 10/8、10/9 两个交易日</td></tr>
+    <tr><td class="c">2026-10-10</td><td class="c">六</td><td class="c"><span class="tag tag-gray">非交易日</span></td><td>调休上班日，但周六不交易</td></tr>
+  </tbody>
+</table>
+<div class="note">休市期间（10/1–10/7）外盘约有 <b>6 个交易日</b>（美股 5 个、港股 4 个，港股通同步关闭），事件风险全部落在无法调仓的持仓敞口上。9/20（周日）虽为调休上班日，但不影响 A 股交易。</div>
+
+<h3>2026 年 9 月各指数表现（截至 2026-09-15）</h3>
+<table>
+  <thead><tr><th>指数</th><th class="n">8/31 收盘</th><th class="n">最新收盘</th><th class="n">9 月至今%</th></tr></thead>
+  <tbody><tr><td>创业板指</td><td class="n">3438.68</td><td class="n">3247.92</td><td class="n down">-5.55</td></tr>
+<tr><td>深证成指</td><td class="n">14015.00</td><td class="n">13287.97</td><td class="n down">-5.19</td></tr>
+<tr><td>中证500</td><td class="n">7952.10</td><td class="n">7561.59</td><td class="n down">-4.91</td></tr>
+<tr><td>中证1000</td><td class="n">7770.42</td><td class="n">7437.70</td><td class="n down">-4.28</td></tr>
+<tr><td>中证全指</td><td class="n">5969.33</td><td class="n">5723.69</td><td class="n down">-4.12</td></tr>
+<tr><td>沪深300</td><td class="n">4625.09</td><td class="n">4450.04</td><td class="n down">-3.78</td></tr>
+<tr><td>中证红利</td><td class="n">5718.42</td><td class="n">5534.25</td><td class="n down">-3.22</td></tr>
+<tr><td>上证50</td><td class="n">2936.88</td><td class="n">2846.31</td><td class="n down">-3.08</td></tr>
+<tr><td>上证指数</td><td class="n">3986.30</td><td class="n">3864.28</td><td class="n down">-3.06</td></tr></tbody>
+</table>
+<div class="note">9 月呈现<b>小盘 / 成长跌幅大于大盘</b>的格局：创业板指 -5.55%、中证500 -4.91%，而上证50 -3.08%、沪深300 -3.78%。这与"节前避险先杀高波动资产"的行为模式一致。</div>
+
+<div class="chart" id="c_recent"></div>
+<div class="note">上证指数近 60 个交易日收盘（截至 2026-09-15）。</div>
+
+<h3>把统计套到 2026 上的推演（仅作参考，不构成任何建议）</h3>
+<p><b>匹配之处</b>：9 月已跌 -3.06%，处于"节前 20 日"窗口的后半段，方向上与历史上"节前偏弱"的样本一致。若剩余窗口继续走弱至节前 5 日收跌，则进入"节后 5 日 +1.52%、胜率 71.4%"的经验区间。<br>
+<b>不匹配之处有三</b>：
+① <b>缩量尚未出现</b>——节前 5 日量能 / 前 20 日量能 = 0.97，而历史节前 5 日相对当年日均量为 -15.8%，说明避险行为还没发生或尚未体现到量能；
+② <b>环境档位不利</b>——2026 年上证 1-8 月仅 +0.44%，落在震荡档，该档 10 月胜率只有 30.8%（13 年仅 4 次上涨）、中位数为负。<b>这是与"持股过节等红包"最冲突的一条证据</b>；
+③ <b>单年样本噪声极大</b>——26 年样本里节后 5 日的标准差约 3.5%，用 ±1.5% 的均值预测单一年份，信噪比极低；而历史 10 月极值跨度是 +12.2% 到 -24.6%。</p>
+
+<h2>十、风险提示与局限</h2>
+<div class="risk">
+  <b>1. 样本量根本不足。</b>国庆长假一年只有一次，26 年样本对"节后 5 日 +0.60%"这种量级的效应来说过于稀薄——<b>本文所有窗口的 p 值都大于 0.05</b>，因此所有结论都不能称为"统计显著"，只能称为"经验倾向"。<br>
+  <b>2. 均值受极端年份污染严重。</b>2024 年（节前 5 日 +21.37%）、2008 年（+10.54%）、2010 年（10 月 +12.17%）三个样本足以改变任何窗口的均值符号。本文关键结论均以<b>中位数 + 胜率</b>交叉验证，但不排除仍有未被识别的杠杆点。<br>
+  <b>3. 环境分档是事后分类，存在前视偏差风险。</b>"1-8 月涨幅"在 9 月底是已知的，用于当期判断不构成前视；但用 29 年样本得到的档位胜率（如强势档 88.9%）本身是<b>样本内拟合</b>，且强势档只有 9 个样本。<b>它解释历史的能力，强于预测未来的能力。</b><br>
+  <b>4. 制度的断层未处理。</b>1996-12-16 涨跌停制度、2005 年股权分置改革、2010 年股指期货、2016 年熔断与注册制、2019 年科创板、2023 年全面注册制——市场结构在 30 年里多次断裂。分年代 / 分环境拆解只能部分缓解，不能消除。<br>
+  <b>5. 数据口径。</b>指数为价格指数、前复权，<b>不含分红再投资收益</b>，会系统性低估长期收益（对单月窗口影响很小，对年度口径的对比有影响）。成交量单位在不同指数间不统一，量能分析已按各指数自身的当年日均量做归一化。<br>
+  <b>6. 这是统计描述，不是交易建议。</b>本报告不预测 2026 年 10 月涨跌。任何基于"历史胜率"的仓位决策都需要额外纳入：当前估值分位、盈利周期位置、政策周期、筹码结构、外盘状态、汇率与流动性——这些都不在本文的变量集内。<br>
+  <b>7. 季节性规律会自我消解。</b>如果足够多的资金认同"节前跌、节后涨"，节前抛压会提前（削弱节前跌幅），节后买盘也会提前（削弱节后涨幅）。<b>季节性本身就是被套利掉的规律</b>——这可能是 2020 年后 10 月收益转负的原因之一，也意味着 2010 年代的经验不能线性外推。
+</div>
+
+<div class="dis">
+  数据来源：腾讯财经日线接口（<code>web.ifzq.gtimg.cn</code>，前复权），抓取时间 2026-09-15 17:45:43，样本区间 1990-12-19 ~ 2026-09-15。<br>
+  节假日安排依据：国务院办公厅《关于 2026 年部分节假日安排的通知》（国办发明电〔2025〕7 号，2025-11-04 发布）。交易所具体休市安排以沪深交易所公告为准。<br>
+  统计方法：单样本 t 检验；窗口收益按交易日计数；相关性为 Pearson 系数；环境分档按当年 1-8 月累计涨幅。<br>
+  本报告为历史数据统计描述，不构成任何投资建议。历史规律不代表未来表现。
+</div>
+
+</div>
+<script>
+var D = {"fetched_at": "2026-09-15 17:45:43", "win_lbl": {"pre10": "节前10日", "pre5": "节前5日", "pre3": "节前3日", "pre1": "节前1日", "post1": "节后1日", "post3": "节后3日", "post5": "节后5日", "post10": "节后10日", "post20": "节后20日"}, "win_order": ["pre10", "pre5", "pre3", "pre1", "post1", "post3", "post5", "post10", "post20"], "scopes": {"all": {"pre1": {"name": "节前1日", "n": 32, "mean": 0.55, "median": 0.5, "std": 1.99, "win": 68.8, "min": -5.7, "max": 8.1, "t": 1.56, "p": 0.1292}, "pre3": {"name": "节前3日", "n": 32, "mean": 0.28, "median": -0.1, "std": 3.62, "win": 46.9, "min": -9.1, "max": 15.2, "t": 0.43, "p": 0.6698}, "pre5": {"name": "节前5日", "n": 32, "mean": 0.76, "median": -0.53, "std": 5.24, "win": 46.9, "min": -8.8, "max": 21.4, "t": 0.82, "p": 0.417}, "pre10": {"name": "节前10日", "n": 32, "mean": -0.8, "median": -2.29, "std": 6.93, "win": 31.2, "min": -19.2, "max": 22.8, "t": -0.65, "p": 0.5204}, "pre20": {"name": "节前20日", "n": 32, "mean": 0.12, "median": -0.42, "std": 5.84, "win": 46.9, "min": -10.5, "max": 18.2, "t": 0.12, "p": 0.906}, "post1": {"name": "节后1日(基准=节前收盘)", "n": 32, "mean": -0.06, "median": 0.28, "std": 2.9, "win": 56.2, "min": -10.7, "max": 4.8, "t": -0.12, "p": 0.9065}, "post1b": {"name": "节后1日(基准=节后首日)", "n": 32, "mean": 0.0, "median": 0.0, "std": 0.0, "win": 0.0, "min": 0.0, "max": 0.0, "t": 0.0, "p": 1.0}, "post3": {"name": "节后3日(基准=节前收盘)", "n": 32, "mean": 0.4, "median": 0.5, "std": 3.55, "win": 59.4, "min": -8.8, "max": 7.7, "t": 0.63, "p": 0.5335}, "post3b": {"name": "节后3日(基准=节后首日)", "n": 32, "mean": 0.46, "median": 0.34, "std": 2.31, "win": 62.5, "min": -5.4, "max": 4.6, "t": 1.13, "p": 0.2661}, "post5": {"name": "节后5日(基准=节前收盘)", "n": 32, "mean": 0.04, "median": 0.59, "std": 4.72, "win": 53.1, "min": -12.8, "max": 8.4, "t": 0.05, "p": 0.9599}, "post5b": {"name": "节后5日(基准=节后首日)", "n": 32, "mean": 0.08, "median": 0.16, "std": 3.03, "win": 56.2, "min": -8.0, "max": 5.1, "t": 0.15, "p": 0.8828}, "post10": {"name": "节后10日(基准=节前收盘)", "n": 32, "mean": -0.58, "median": 0.72, "std": 6.99, "win": 56.2, "min": -21.1, "max": 12.3, "t": -0.47, "p": 0.6406}, "post10b": {"name": "节后10日(基准=节后首日)", "n": 32, "mean": -0.6, "median": 0.17, "std": 5.07, "win": 56.2, "min": -11.6, "max": 8.9, "t": -0.67, "p": 0.5051}, "post20": {"name": "节后20日(基准=节前收盘)", "n": 32, "mean": 0.72, "median": 1.51, "std": 7.91, "win": 56.2, "min": -24.6, "max": 16.2, "t": 0.52, "p": 0.6082}, "post20b": {"name": "节后20日(基准=节后首日)", "n": 32, "mean": 0.71, "median": 1.1, "std": 6.25, "win": 53.1, "min": -20.5, "max": 12.7, "t": 0.64, "p": 0.5279}}, "y2000": {"pre1": {"name": "节前1日", "n": 26, "mean": 0.69, "median": 0.38, "std": 1.74, "win": 69.2, "min": -1.6, "max": 8.1, "t": 2.04, "p": 0.0523}, "pre3": {"name": "节前3日", "n": 26, "mean": 0.68, "median": 0.06, "std": 3.43, "win": 50.0, "min": -2.3, "max": 15.2, "t": 1.01, "p": 0.3203}, "pre5": {"name": "节前5日", "n": 26, "mean": 0.82, "median": -0.53, "std": 5.16, "win": 46.2, "min": -4.6, "max": 21.4, "t": 0.81, "p": 0.4263}, "pre10": {"name": "节前10日", "n": 26, "mean": -0.05, "median": -1.89, "std": 5.97, "win": 34.6, "min": -7.3, "max": 22.8, "t": -0.05, "p": 0.9636}, "pre20": {"name": "节前20日", "n": 26, "mean": 0.2, "median": -0.09, "std": 5.52, "win": 50.0, "min": -7.7, "max": 18.2, "t": 0.18, "p": 0.8561}, "post1": {"name": "节后1日(基准=节前收盘)", "n": 26, "mean": 0.51, "median": 0.72, "std": 2.3, "win": 65.4, "min": -5.2, "max": 4.8, "t": 1.14, "p": 0.264}, "post1b": {"name": "节后1日(基准=节后首日)", "n": 26, "mean": 0.0, "median": 0.0, "std": 0.0, "win": 0.0, "min": 0.0, "max": 0.0, "t": 0.0, "p": 1.0}, "post3": {"name": "节后3日(基准=节前收盘)", "n": 26, "mean": 0.84, "median": 0.96, "std": 3.51, "win": 69.2, "min": -8.8, "max": 7.7, "t": 1.23, "p": 0.2318}, "post3b": {"name": "节后3日(基准=节后首日)", "n": 26, "mean": 0.32, "median": 0.38, "std": 2.33, "win": 61.5, "min": -5.4, "max": 4.6, "t": 0.7, "p": 0.4895}, "post5": {"name": "节后5日(基准=节前收盘)", "n": 26, "mean": 0.6, "median": 1.07, "std": 4.62, "win": 61.5, "min": -12.8, "max": 8.4, "t": 0.67, "p": 0.5111}, "post5b": {"name": "节后5日(基准=节后首日)", "n": 26, "mean": 0.06, "median": 0.31, "std": 3.29, "win": 57.7, "min": -8.0, "max": 5.1, "t": 0.1, "p": 0.9232}, "post10": {"name": "节后10日(基准=节前收盘)", "n": 26, "mean": -0.09, "median": 0.77, "std": 6.09, "win": 57.7, "min": -15.8, "max": 12.3, "t": -0.07, "p": 0.943}, "post10b": {"name": "节后10日(基准=节后首日)", "n": 26, "mean": -0.65, "median": 0.17, "std": 4.55, "win": 57.7, "min": -11.2, "max": 8.9, "t": -0.73, "p": 0.4721}, "post20": {"name": "节后20日(基准=节前收盘)", "n": 26, "mean": 1.17, "median": 1.59, "std": 7.75, "win": 61.5, "min": -24.6, "max": 16.2, "t": 0.77, "p": 0.4487}, "post20b": {"name": "节后20日(基准=节后首日)", "n": 26, "mean": 0.58, "median": 1.39, "std": 6.34, "win": 57.7, "min": -20.5, "max": 12.7, "t": 0.46, "p": 0.6463}}, "y2010": {"pre1": {"name": "节前1日", "n": 16, "mean": 0.86, "median": 0.38, "std": 2.04, "win": 75.0, "min": -0.9, "max": 8.1, "t": 1.69, "p": 0.1117}, "pre3": {"name": "节前3日", "n": 16, "mean": 0.83, "median": 0.06, "std": 4.07, "win": 50.0, "min": -2.3, "max": 15.2, "t": 0.81, "p": 0.4301}, "pre5": {"name": "节前5日", "n": 16, "mean": 1.15, "median": -0.53, "std": 5.82, "win": 43.8, "min": -3.0, "max": 21.4, "t": 0.79, "p": 0.4408}, "pre10": {"name": "节前10日", "n": 16, "mean": 0.25, "median": -1.49, "std": 6.55, "win": 31.2, "min": -5.0, "max": 22.8, "t": 0.15, "p": 0.8804}, "pre20": {"name": "节前20日", "n": 16, "mean": 0.51, "median": 0.38, "std": 5.96, "win": 56.2, "min": -7.7, "max": 18.2, "t": 0.34, "p": 0.7359}, "post1": {"name": "节后1日(基准=节前收盘)", "n": 16, "mean": 0.73, "median": 0.78, "std": 1.97, "win": 68.8, "min": -3.7, "max": 4.6, "t": 1.49, "p": 0.1563}, "post1b": {"name": "节后1日(基准=节后首日)", "n": 16, "mean": 0.0, "median": 0.0, "std": 0.0, "win": 0.0, "min": 0.0, "max": 0.0, "t": 0.0, "p": 1.0}, "post3": {"name": "节后3日(基准=节前收盘)", "n": 16, "mean": 1.44, "median": 0.96, "std": 2.89, "win": 75.0, "min": -3.4, "max": 7.7, "t": 2.0, "p": 0.0638}, "post3b": {"name": "节后3日(基准=节后首日)", "n": 16, "mean": 0.71, "median": 0.38, "std": 2.4, "win": 62.5, "min": -5.4, "max": 4.6, "t": 1.19, "p": 0.2543}, "post5": {"name": "节后5日(基准=节前收盘)", "n": 16, "mean": 1.53, "median": 1.41, "std": 3.6, "win": 68.8, "min": -7.6, "max": 8.4, "t": 1.7, "p": 0.11}, "post5b": {"name": "节后5日(基准=节后首日)", "n": 16, "mean": 0.79, "median": 0.99, "std": 2.92, "win": 62.5, "min": -5.9, "max": 5.1, "t": 1.07, "p": 0.2996}, "post10": {"name": "节后10日(基准=节前收盘)", "n": 16, "mean": 1.06, "median": 0.84, "std": 4.9, "win": 68.8, "min": -9.6, "max": 12.3, "t": 0.87, "p": 0.399}, "post10b": {"name": "节后10日(基准=节后首日)", "n": 16, "mean": 0.3, "median": 0.51, "std": 3.87, "win": 62.5, "min": -6.4, "max": 8.9, "t": 0.31, "p": 0.7576}, "post20": {"name": "节后20日(基准=节前收盘)", "n": 16, "mean": 2.77, "median": 1.88, "std": 5.52, "win": 68.8, "min": -5.1, "max": 16.2, "t": 2.01, "p": 0.063}, "post20b": {"name": "节后20日(基准=节后首日)", "n": 16, "mean": 2.0, "median": 1.74, "std": 4.72, "win": 62.5, "min": -5.1, "max": 12.7, "t": 1.7, "p": 0.1098}}}, "detail": [{"year": 2000, "last_day": "2000-09-29", "first_day": "2000-10-09", "gap_days": 10, "pre1": 1.1, "pre3": 1.18, "pre5": 0.96, "pre10": -3.45, "pre20": -4.49, "post1": 0.27, "post1b": 0.0, "post3": 1.23, "post3b": 0.96, "post5": 0.42, "post5b": 0.15, "post10": 1.95, "post10b": 1.68, "post20": 3.74, "post20b": 3.46}, {"year": 2001, "last_day": "2001-09-28", "first_day": "2001-10-08", "gap_days": 10, "pre1": -0.0, "pre3": -1.62, "pre5": -2.33, "pre10": -2.94, "pre20": -3.78, "post1": -2.17, "post1b": 0.0, "post3": -4.43, "post3b": -2.31, "post5": -4.17, "post5b": -2.04, "post10": -10.9, "post10b": -8.92, "post20": -4.17, "post20b": -2.04}, {"year": 2002, "last_day": "2002-09-27", "first_day": "2002-10-08", "gap_days": 11, "pre1": -0.38, "pre3": -0.95, "pre5": -1.45, "pre10": -2.72, "pre20": -5.1, "post1": -1.18, "post1b": 0.0, "post3": -3.24, "post3b": -2.08, "post5": -3.16, "post5b": -2.0, "post10": -3.58, "post10b": -2.44, "post20": -3.15, "post20b": -1.99}, {"year": 2003, "last_day": "2003-09-30", "first_day": "2003-10-08", "gap_days": 8, "pre1": 0.87, "pre3": -0.66, "pre5": -1.66, "pre10": -2.77, "pre20": -5.49, "post1": 0.33, "post1b": 0.0, "post3": 2.7, "post3b": 2.36, "post5": 1.54, "post5b": 1.2, "post10": -0.21, "post10b": -0.54, "post20": 1.64, "post20b": 1.3}, {"year": 2004, "last_day": "2004-09-30", "first_day": "2004-10-08", "gap_days": 8, "pre1": -1.64, "pre3": -2.15, "pre5": -4.65, "pre10": 1.86, "pre20": 5.18, "post1": 1.88, "post1b": 0.0, "post3": -0.88, "post3b": -2.7, "post5": -4.57, "post5b": -6.32, "post10": -6.17, "post10b": -7.9, "post20": -6.58, "post20b": -8.3}, {"year": 2005, "last_day": "2005-09-30", "first_day": "2005-10-10", "gap_days": 10, "pre1": 0.01, "pre3": 1.97, "pre5": 0.32, "pre10": -4.73, "pre20": -2.8, "post1": -1.44, "post1b": 0.0, "post3": 0.54, "post3b": 2.01, "post5": -1.39, "post5b": 0.05, "post10": -1.24, "post10b": 0.21, "post20": -4.81, "post20b": -3.42}, {"year": 2006, "last_day": "2006-09-29", "first_day": "2006-10-09", "gap_days": 10, "pre1": 0.89, "pre3": 2.32, "pre5": 1.57, "pre10": 1.82, "pre20": 7.07, "post1": 1.88, "post1b": 0.0, "post3": 2.15, "post3b": 0.26, "post5": 1.84, "post5b": -0.04, "post10": 2.17, "post10b": 0.28, "post20": 6.5, "post20b": 4.54}, {"year": 2007, "last_day": "2007-09-28", "first_day": "2007-10-08", "gap_days": 10, "pre1": 2.64, "pre3": 2.33, "pre5": 1.79, "pre10": 4.52, "pre20": 6.39, "post1": 2.53, "post1b": 0.0, "post3": 3.95, "post3b": 1.38, "post5": 6.32, "post5b": 3.7, "post10": 4.79, "post10b": 2.2, "post20": 4.06, "post20b": 1.49}, {"year": 2008, "last_day": "2008-09-26", "first_day": "2008-10-06", "gap_days": 10, "pre1": -0.16, "pre3": 4.19, "pre5": 10.54, "pre10": 10.33, "pre20": -2.4, "post1": -5.23, "post1b": 0.0, "post3": -8.79, "post3b": -3.75, "post5": -12.78, "post5b": -7.97, "post10": -15.83, "post10b": -11.18, "post20": -24.63, "post20b": -20.47}, {"year": 2009, "last_day": "2009-09-30", "first_day": "2009-10-09", "gap_days": 9, "pre1": 0.9, "pre3": -2.09, "pre5": -2.23, "pre10": -7.34, "pre20": 2.37, "post1": 4.76, "post1b": 0.0, "post3": 5.64, "post3b": 0.84, "post5": 7.21, "post5b": 2.34, "post10": 9.79, "post10b": 4.8, "post20": 13.51, "post20b": 8.36}, {"year": 2010, "last_day": "2010-09-30", "first_day": "2010-10-08", "gap_days": 8, "pre1": 1.72, "pre3": 1.05, "pre5": 2.59, "pre10": -1.21, "pre20": 0.11, "post1": 3.13, "post1b": 0.0, "post3": 6.99, "post3b": 3.75, "post5": 8.43, "post5b": 5.14, "post10": 12.35, "post10b": 8.94, "post20": 16.24, "post20b": 12.71}, {"year": 2011, "last_day": "2011-09-30", "first_day": "2011-10-10", "gap_days": 10, "pre1": -0.26, "pre3": -2.31, "pre5": -3.04, "pre10": -4.96, "pre20": -7.7, "post1": -0.61, "post1b": 0.0, "post3": 2.58, "post3b": 3.21, "post5": 3.06, "post5b": 3.69, "post10": -1.78, "post10b": -1.17, "post20": 7.17, "post20b": 7.83}, {"year": 2012, "last_day": "2012-09-28", "first_day": "2012-10-08", "gap_days": 10, "pre1": 1.45, "pre3": 2.8, "pre5": 2.93, "pre10": -1.77, "pre20": 1.89, "post1": -0.56, "post1b": 0.0, "post3": 1.62, "post3b": 2.19, "post5": 0.9, "post5b": 1.47, "post10": 2.02, "post10b": 2.6, "post20": 1.48, "post20b": 2.06}, {"year": 2013, "last_day": "2013-09-30", "first_day": "2013-10-08", "gap_days": 8, "pre1": 0.68, "pre3": -1.08, "pre5": -2.09, "pre10": -3.59, "pre20": 3.69, "post1": 1.08, "post1b": 0.0, "post3": 0.75, "post3b": -0.33, "post5": 2.9, "post5b": 1.8, "post10": 2.51, "post10b": 1.41, "post20": -1.15, "post20b": -2.21}, {"year": 2014, "last_day": "2014-09-30", "first_day": "2014-10-08", "gap_days": 8, "pre1": 0.26, "pre3": 0.8, "pre5": 2.34, "pre10": 2.93, "pre20": 5.74, "post1": 0.8, "post1b": 0.0, "post3": 0.45, "post3b": -0.35, "post5": -0.19, "post5b": -0.98, "post10": -1.02, "post10b": -1.81, "post20": 2.83, "post20b": 2.01}, {"year": 2015, "last_day": "2015-09-30", "first_day": "2015-10-08", "gap_days": 8, "pre1": 0.48, "pre3": -1.28, "pre5": -2.03, "pre10": -3.16, "pre20": -4.78, "post1": 2.97, "post1b": 0.0, "post3": 7.69, "post3b": 4.59, "post5": 6.87, "post5b": 3.79, "post10": 8.78, "post10b": 5.64, "post20": 13.33, "post20b": 10.06}, {"year": 2016, "last_day": "2016-09-30", "first_day": "2016-10-10", "gap_days": 10, "pre1": 0.21, "pre3": 0.22, "pre5": -0.96, "pre10": 0.06, "pre20": -2.62, "post1": 1.45, "post1b": 0.0, "post3": 1.79, "post3b": 0.34, "post5": 1.97, "post5b": 0.51, "post10": 2.87, "post10b": 1.4, "post20": 4.01, "post20b": 2.53}, {"year": 2017, "last_day": "2017-09-29", "first_day": "2017-10-09", "gap_days": 10, "pre1": 0.28, "pre3": 0.16, "pre5": -0.11, "pre10": -0.14, "pre20": -0.54, "post1": 0.76, "post1b": 0.0, "post3": 1.17, "post3b": 0.41, "post5": 1.24, "post5b": 0.48, "post10": 0.89, "post10b": 0.13, "post20": 0.68, "post20b": -0.08}, {"year": 2018, "last_day": "2018-09-28", "first_day": "2018-10-08", "gap_days": 10, "pre1": 1.06, "pre3": 1.45, "pre5": 3.37, "pre10": 5.02, "pre20": 3.05, "post1": -3.72, "post1b": 0.0, "post3": -3.39, "post3b": 0.34, "post5": -7.6, "post5b": -4.03, "post10": -9.6, "post10b": -6.11, "post20": -5.13, "post20b": -1.47}, {"year": 2019, "last_day": "2019-09-30", "first_day": "2019-10-08", "gap_days": 8, "pre1": -0.92, "pre3": -1.7, "pre5": -2.41, "pre10": -4.14, "pre20": 0.66, "post1": 0.29, "post1b": 0.0, "post3": 1.46, "post3b": 1.17, "post5": 3.53, "post5b": 3.24, "post10": 1.19, "post10b": 0.89, "post20": 2.42, "post20b": 2.13}, {"year": 2020, "last_day": "2020-09-30", "first_day": "2020-10-09", "gap_days": 9, "pre1": -0.2, "pre3": -0.04, "pre5": -1.88, "pre10": -2.01, "pre20": -5.48, "post1": 1.68, "post1b": 0.0, "post3": 4.4, "post3b": 2.68, "post5": 3.55, "post5b": 1.84, "post10": 2.94, "post10b": 1.24, "post20": 3.17, "post20b": 1.47}, {"year": 2021, "last_day": "2021-09-30", "first_day": "2021-10-08", "gap_days": 8, "pre1": 0.9, "pre3": -0.41, "pre5": -2.03, "pre10": -2.58, "pre20": 0.68, "post1": 0.67, "post1b": 0.0, "post3": -0.59, "post3b": -1.26, "post5": -0.28, "post5b": -0.94, "post10": 0.75, "post10b": 0.07, "post20": -1.16, "post20b": -1.82}, {"year": 2022, "last_day": "2022-09-30", "first_day": "2022-10-10", "gap_days": 10, "pre1": -0.55, "pre3": -2.25, "pre5": -2.07, "pre10": -3.26, "pre20": -5.04, "post1": -1.66, "post1b": 0.0, "post3": 0.04, "post3b": 1.73, "post5": 1.57, "post5b": 3.29, "post10": 0.48, "post10b": 2.18, "post20": 1.53, "post20b": 3.25}, {"year": 2023, "last_day": "2023-09-28", "first_day": "2023-10-09", "gap_days": 11, "pre1": 0.1, "pre3": -0.16, "pre5": 0.84, "pre10": -0.51, "pre20": -0.3, "post1": -0.44, "post1b": 0.0, "post3": -1.01, "post3b": -0.58, "post5": -0.72, "post5b": -0.28, "post10": -4.1, "post10b": -3.68, "post20": -2.56, "post20b": -2.14}, {"year": 2024, "last_day": "2024-09-30", "first_day": "2024-10-08", "gap_days": 8, "pre1": 8.06, "pre3": 15.2, "pre5": 21.37, "pre10": 22.8, "pre20": 18.19, "post1": 4.59, "post1b": 0.0, "post3": -1.04, "post3b": -5.38, "post5": -1.56, "post5b": -5.89, "post10": -2.05, "post10b": -6.35, "post20": -0.79, "post20b": -5.15}, {"year": 2025, "last_day": "2025-09-30", "first_day": "2025-10-09", "gap_days": 9, "pre1": 0.52, "pre3": 0.77, "pre5": 1.59, "pre10": 0.54, "pre20": 0.64, "post1": 1.32, "post1b": 0.0, "post3": 0.17, "post3b": -1.13, "post5": 0.76, "post5b": -0.55, "post10": 0.8, "post10b": -0.51, "post20": 2.23, "post20b": 0.9}], "yearly": [{"year": 1997, "sep": -10.13, "oct": 7.56, "sum": -2.56}, {"year": 1998, "sep": 8.06, "oct": -2.06, "sum": 6.0}, {"year": 1999, "sep": -3.47, "oct": -4.21, "sum": -7.68}, {"year": 2000, "sep": -5.49, "oct": 2.68, "sum": -2.82}, {"year": 2001, "sep": -3.78, "oct": -4.29, "sum": -8.07}, {"year": 2002, "sep": -5.1, "oct": -4.69, "sum": -9.79}, {"year": 2003, "sep": -3.86, "oct": -1.38, "sum": -5.23}, {"year": 2004, "sep": 4.07, "oct": -5.45, "sum": -1.38}, {"year": 2005, "sep": -0.62, "oct": -5.43, "sum": -6.05}, {"year": 2006, "sep": 5.65, "oct": 4.88, "sum": 10.54}, {"year": 2007, "sep": 6.39, "oct": 7.25, "sum": 13.64}, {"year": 2008, "sep": -4.32, "oct": -24.63, "sum": -28.95}, {"year": 2009, "sep": 4.19, "oct": 7.79, "sum": 11.97}, {"year": 2010, "sep": 0.64, "oct": 12.17, "sum": 12.81}, {"year": 2011, "sep": -8.11, "oct": 4.62, "sum": -3.49}, {"year": 2012, "sep": 1.89, "oct": -0.83, "sum": 1.06}, {"year": 2013, "sep": 3.64, "oct": -1.52, "sum": 2.12}, {"year": 2014, "sep": 6.62, "oct": 2.38, "sum": 9.0}, {"year": 2015, "sep": -4.78, "oct": 10.8, "sum": 6.02}, {"year": 2016, "sep": -2.62, "oct": 3.19, "sum": 0.57}, {"year": 2017, "sep": -0.35, "oct": 1.33, "sum": 0.97}, {"year": 2018, "sep": 3.53, "oct": -7.75, "sum": -4.22}, {"year": 2019, "sep": 0.66, "oct": 0.82, "sum": 1.48}, {"year": 2020, "sep": -5.23, "oct": 0.2, "sum": -5.03}, {"year": 2021, "sep": 0.68, "oct": -0.58, "sum": 0.1}, {"year": 2022, "sep": -5.55, "oct": -4.33, "sum": -9.88}, {"year": 2023, "sep": -0.3, "oct": -2.95, "sum": -3.25}, {"year": 2024, "sep": 17.39, "oct": -1.7, "sum": 15.69}, {"year": 2025, "sep": 0.64, "oct": 1.85, "sum": 2.5}], "months": {"1": {"name": "1月", "n": 30, "mean": -0.05, "median": 1.04, "std": 7.79, "win": 53.3, "min": -22.6, "max": 12.3, "t": -0.03, "p": 0.9724, "mean_dm": -0.71, "t_dm": -0.5758, "p_dm": 0.5692, "years": ["1997:+5.2", "1998:+2.4", "1999:-1.0", "2000:+12.3", "2001:-0.4", "2002:-9.4", "2003:+10.5", "2004:+6.3", "2005:-5.9", "2006:+8.4", "2007:+4.1", "2008:-16.7", "2009:+9.3", "2010:-8.8", "2011:-0.6", "2012:+4.2", "2013:+5.1", "2014:-3.9", "2015:-0.8", "2016:-22.6", "2017:+1.8", "2018:+5.3", "2019:+3.6", "2020:-2.4", "2021:+0.3", "2022:-7.6", "2023:+5.4", "2024:-6.3", "2025:-3.0", "2026:+3.8"]}, "2": {"name": "2月", "n": 30, "mean": 2.46, "median": 2.19, "std": 4.66, "win": 73.3, "min": -6.4, "max": 13.8, "t": 2.89, "p": 0.0072, "mean_dm": 1.81, "t_dm": 2.1418, "p_dm": 0.0407, "years": ["1997:+7.8", "1998:-1.3", "1999:-3.9", "2000:+11.7", "2001:-5.2", "2002:+2.2", "2003:+0.8", "2004:+5.3", "2005:+9.6", "2006:+3.3", "2007:+3.4", "2008:-0.8", "2009:+4.6", "2010:+2.1", "2011:+4.1", "2012:+5.9", "2013:-0.8", "2014:+1.1", "2015:+3.1", "2016:-1.8", "2017:+2.6", "2018:-6.4", "2019:+13.8", "2020:-3.2", "2021:+0.7", "2022:+3.0", "2023:+0.7", "2024:+8.1", "2025:+2.2", "2026:+1.1"]}, "3": {"name": "3月", "n": 30, "mean": 1.42, "median": 0.62, "std": 7.88, "win": 53.3, "min": -20.1, "max": 18.7, "t": 0.99, "p": 0.3314, "mean_dm": 0.76, "t_dm": 0.6129, "p_dm": 0.5447, "years": ["1997:+18.7", "1998:+3.0", "1999:+6.2", "2000:+5.0", "2001:+7.8", "2002:+5.2", "2003:-0.1", "2004:+4.0", "2005:-9.6", "2006:-0.1", "2007:+10.5", "2008:-20.1", "2009:+13.9", "2010:+1.9", "2011:+0.8", "2012:-6.8", "2013:-5.5", "2014:-1.1", "2015:+13.2", "2016:+11.8", "2017:-0.6", "2018:-2.8", "2019:+5.1", "2020:-4.5", "2021:-1.9", "2022:-6.1", "2023:-0.2", "2024:+0.9", "2025:+0.4", "2026:-6.5"]}, "4": {"name": "4月", "n": 30, "mean": 2.27, "median": 0.51, "std": 6.81, "win": 56.7, "min": -8.4, "max": 20.6, "t": 1.82, "p": 0.0785, "mean_dm": 1.61, "t_dm": 1.4194, "p_dm": 0.1664, "years": ["1997:+12.9", "1998:+8.1", "1999:-3.2", "2000:+2.0", "2001:+0.3", "2002:+4.0", "2003:+0.7", "2004:-8.4", "2005:-1.9", "2006:+10.9", "2007:+20.6", "2008:+6.3", "2009:+4.4", "2010:-7.7", "2011:-0.6", "2012:+5.9", "2013:-2.6", "2014:-0.3", "2015:+18.5", "2016:-2.2", "2017:-2.1", "2018:-2.7", "2019:-0.4", "2020:+4.0", "2021:+0.1", "2022:-6.3", "2023:+1.5", "2024:+2.1", "2025:-1.7", "2026:+5.7"]}, "5": {"name": "5月", "n": 30, "mean": 0.5, "median": 0.08, "std": 6.13, "win": 50.0, "min": -9.7, "max": 14.1, "t": 0.45, "p": 0.6564, "mean_dm": -0.15, "t_dm": -0.1619, "p_dm": 0.8725, "years": ["1997:-7.8", "1998:+5.0", "1999:+14.1", "2000:+3.2", "2001:+4.5", "2002:-9.1", "2003:+3.6", "2004:-2.5", "2005:-8.5", "2006:+14.0", "2007:+7.0", "2008:-7.0", "2009:+6.3", "2010:-9.7", "2011:-5.8", "2012:-1.0", "2013:+5.6", "2014:+0.6", "2015:+3.8", "2016:-0.7", "2017:-1.2", "2018:+0.4", "2019:-5.8", "2020:-0.3", "2021:+4.9", "2022:+4.6", "2023:-3.6", "2024:-0.6", "2025:+2.1", "2026:-1.1"]}, "6": {"name": "6月", "n": 30, "mean": -0.41, "median": 0.31, "std": 9.34, "win": 53.3, "min": -20.3, "max": 32.1, "t": -0.24, "p": 0.8103, "mean_dm": -1.07, "t_dm": -0.6699, "p_dm": 0.5082, "years": ["1997:-2.7", "1998:-5.1", "1999:+32.1", "2000:+1.8", "2001:+0.2", "2002:+14.3", "2003:-5.7", "2004:-10.1", "2005:+1.9", "2006:+1.9", "2007:-7.0", "2008:-20.3", "2009:+12.4", "2010:-7.5", "2011:+0.7", "2012:-6.2", "2013:-14.0", "2014:+0.4", "2015:-7.3", "2016:+0.4", "2017:+2.4", "2018:-8.0", "2019:+2.8", "2020:+4.6", "2021:-0.7", "2022:+6.7", "2023:-0.1", "2024:-3.9", "2025:+2.9", "2026:+0.6"]}, "7": {"name": "7月", "n": 30, "mean": 0.14, "median": -0.78, "std": 7.09, "win": 46.7, "min": -14.3, "max": 17.0, "t": 0.11, "p": 0.914, "mean_dm": -0.52, "t_dm": -0.4192, "p_dm": 0.6782, "years": ["1997:-4.8", "1998:-1.7", "1999:-5.2", "2000:+4.9", "2001:-13.4", "2002:-4.7", "2003:-0.6", "2004:-0.9", "2005:+0.2", "2006:-3.6", "2007:+17.0", "2008:+1.4", "2009:+15.3", "2010:+10.0", "2011:-2.2", "2012:-5.5", "2013:+0.7", "2014:+7.5", "2015:-14.3", "2016:+1.7", "2017:+2.5", "2018:+1.0", "2019:-1.6", "2020:+10.9", "2021:-5.4", "2022:-4.3", "2023:+2.8", "2024:-1.0", "2025:+3.7", "2026:-6.4"]}, "8": {"name": "8月", "n": 30, "mean": -1.11, "median": -0.03, "std": 7.41, "win": 50.0, "min": -21.8, "max": 16.7, "t": -0.82, "p": 0.4172, "mean_dm": -1.77, "t_dm": -1.3496, "p_dm": 0.1876, "years": ["1997:+2.6", "1998:-12.7", "1999:+1.6", "2000:-0.1", "2001:-4.5", "2002:+0.9", "2003:-3.7", "2004:-3.2", "2005:+7.4", "2006:+2.8", "2007:+16.7", "2008:-13.6", "2009:-21.8", "2010:+0.0", "2011:-5.0", "2012:-2.7", "2013:+5.2", "2014:+0.7", "2015:-12.5", "2016:+3.6", "2017:+2.7", "2018:-5.3", "2019:-1.6", "2020:+2.6", "2021:+4.3", "2022:-1.6", "2023:-5.2", "2024:-3.3", "2025:+8.0", "2026:+4.0"]}, "9": {"name": "9月", "n": 29, "mean": 0.01, "median": -0.3, "std": 5.74, "win": 48.3, "min": -10.1, "max": 17.4, "t": 0.01, "p": 0.9914, "mean_dm": -0.66, "t_dm": -0.6361, "p_dm": 0.5299, "years": ["1997:-10.1", "1998:+8.1", "1999:-3.5", "2000:-5.5", "2001:-3.8", "2002:-5.1", "2003:-3.9", "2004:+4.1", "2005:-0.6", "2006:+5.7", "2007:+6.4", "2008:-4.3", "2009:+4.2", "2010:+0.6", "2011:-8.1", "2012:+1.9", "2013:+3.6", "2014:+6.6", "2015:-4.8", "2016:-2.6", "2017:-0.4", "2018:+3.5", "2019:+0.7", "2020:-5.2", "2021:+0.7", "2022:-5.6", "2023:-0.3", "2024:+17.4", "2025:+0.6"]}, "10": {"name": "10月", "n": 29, "mean": -0.15, "median": -0.58, "std": 6.9, "win": 48.3, "min": -24.6, "max": 12.2, "t": -0.11, "p": 0.9093, "mean_dm": -0.82, "t_dm": -0.8294, "p_dm": 0.4139, "years": ["1997:+7.6", "1998:-2.1", "1999:-4.2", "2000:+2.7", "2001:-4.3", "2002:-4.7", "2003:-1.4", "2004:-5.5", "2005:-5.4", "2006:+4.9", "2007:+7.2", "2008:-24.6", "2009:+7.8", "2010:+12.2", "2011:+4.6", "2012:-0.8", "2013:-1.5", "2014:+2.4", "2015:+10.8", "2016:+3.2", "2017:+1.3", "2018:-7.7", "2019:+0.8", "2020:+0.2", "2021:-0.6", "2022:-4.3", "2023:-2.9", "2024:-1.7", "2025:+1.9"]}, "11": {"name": "11月", "n": 29, "mean": 1.08, "median": 1.42, "std": 6.24, "win": 62.1, "min": -18.2, "max": 14.2, "t": 0.93, "p": 0.359, "mean_dm": 0.41, "t_dm": 0.3145, "p_dm": 0.7555, "years": ["1997:-3.5", "1998:+2.5", "1999:-4.6", "2000:+5.6", "2001:+3.5", "2002:-4.9", "2003:+3.6", "2004:+1.5", "2005:+0.6", "2006:+14.2", "2007:-18.2", "2008:+8.2", "2009:+6.7", "2010:-5.3", "2011:-5.5", "2012:-4.3", "2013:+3.7", "2014:+10.9", "2015:+1.9", "2016:+4.8", "2017:-2.2", "2018:-0.6", "2019:-1.9", "2020:+5.2", "2021:+0.5", "2022:+8.9", "2023:+0.4", "2024:+1.4", "2025:-1.7"]}, "12": {"name": "12月", "n": 29, "mean": 1.79, "median": 0.14, "std": 8.06, "win": 51.7, "min": -8.1, "max": 27.4, "t": 1.19, "p": 0.2428, "mean_dm": 1.11, "t_dm": 0.9087, "p_dm": 0.3712, "years": ["1997:+4.8", "1998:-8.1", "1999:-4.8", "2000:+0.1", "2001:-5.8", "2002:-5.3", "2003:+7.1", "2004:-5.5", "2005:+5.6", "2006:+27.4", "2007:+8.0", "2008:-2.7", "2009:+2.6", "2010:-0.4", "2011:-5.7", "2012:+14.6", "2013:-4.7", "2014:+20.6", "2015:+2.7", "2016:-4.5", "2017:-0.3", "2018:-3.6", "2019:+6.2", "2020:+2.4", "2021:+2.1", "2022:-2.0", "2023:-1.8", "2024:+0.8", "2025:+2.1"]}}, "volume": {"pre5_vs_year": -15.8, "post5_vs_year": -1.9, "post5to25_vs_year": -1.5, "n": 26}, "volume_all": {"pre5_vs_year": -14.2, "post5_vs_year": -4.2, "post5to25_vs_year": 2.6, "n": 32}, "half": {"9月": {"上半月(1-15)": {"name": "上半月(1-15)", "n": 27, "mean": 0.18, "median": -0.39, "std": 4.44, "win": 44.4, "min": -10.6, "max": 13.0, "t": 0.21, "p": 0.8374}, "下半月(16-末)": {"name": "下半月(16-末)", "n": 26, "mean": 0.54, "median": -0.89, "std": 6.26, "win": 38.5, "min": -7.3, "max": 22.8, "t": 0.44, "p": 0.6664}}, "10月": {"上半月(1-15)": {"name": "上半月(1-15)", "n": 26, "mean": 0.16, "median": 0.31, "std": 4.05, "win": 57.7, "min": -8.3, "max": 8.5, "t": 0.2, "p": 0.8397}, "下半月(16-末)": {"name": "下半月(16-末)", "n": 26, "mean": -0.58, "median": -0.42, "std": 2.98, "win": 46.2, "min": -9.5, "max": 3.8, "t": -0.99, "p": 0.3333}}}, "cond": {"n_pairs": 29, "sep_up": {"n": 14, "oct_mean": 1.23, "oct_win": 50.0}, "sep_down": {"n": 15, "oct_mean": -1.44, "oct_win": 46.7}, "corr_sep_oct": 0.03, "pre5_down": {"n": 14, "post5_mean": 1.52, "post5_win": 71.4}, "pre5_up": {"n": 12, "post5_mean": -0.46, "post5_win": 50.0}, "corr_pre5_post5": -0.336}, "env": {"强势(1-8月>+10%)": {"n": 9, "sep": {"n": 9, "mean": -0.75, "median": 0.64, "win": 55.6}, "oct": {"n": 9, "mean": 3.2, "median": 2.68, "win": 88.9}, "sum": {"n": 9, "mean": 2.45, "median": 1.48, "win": 55.6}}, "震荡(-10%~+10%)": {"n": 13, "sep": {"n": 13, "mean": 1.17, "median": -0.3, "win": 46.2}, "oct": {"n": 13, "mean": -0.15, "median": -1.38, "win": 30.8}, "sum": {"n": 13, "mean": 1.01, "median": 0.97, "win": 61.5}}, "弱势(1-8月<-10%)": {"n": 7, "sep": {"n": 7, "mean": -1.15, "median": -2.62, "win": 42.9}, "oct": {"n": 7, "mean": -4.44, "median": -4.33, "win": 28.6}, "sum": {"n": 7, "mean": -5.59, "median": -4.22, "win": 28.6}}}, "env_order": ["强势(1-8月>+10%)", "震荡(-10%~+10%)", "弱势(1-8月<-10%)"], "env_rows": [{"year": 1997, "ytd8": 33.16, "sep": -10.13, "oct": 7.56, "sum": -2.56, "env": "强势(1-8月>+10%)"}, {"year": 1998, "ytd8": -3.67, "sep": 8.06, "oct": -2.06, "sum": 6.0, "env": "震荡(-10%~+10%)"}, {"year": 1999, "ytd8": 41.9, "sep": -3.47, "oct": -4.21, "sum": -7.68, "env": "强势(1-8月>+10%)"}, {"year": 2000, "ytd8": 47.9, "sep": -5.49, "oct": 2.68, "sum": -2.82, "env": "强势(1-8月>+10%)"}, {"year": 2001, "ytd8": -11.54, "sep": -3.78, "oct": -4.29, "sum": -8.07, "env": "弱势(1-8月<-10%)"}, {"year": 2002, "ytd8": 1.25, "sep": -5.1, "oct": -4.69, "sum": -9.79, "env": "震荡(-10%~+10%)"}, {"year": 2003, "ytd8": 4.74, "sep": -3.86, "oct": -1.38, "sum": -5.23, "env": "震荡(-10%~+10%)"}, {"year": 2004, "ytd8": -10.35, "sep": 4.07, "oct": -5.45, "sum": -1.38, "env": "弱势(1-8月<-10%)"}, {"year": 2005, "ytd8": -8.19, "sep": -0.62, "oct": -5.43, "sum": -6.05, "env": "震荡(-10%~+10%)"}, {"year": 2006, "ytd8": 42.86, "sep": 5.65, "oct": 4.88, "sum": 10.54, "env": "强势(1-8月>+10%)"}, {"year": 2007, "ytd8": 95.06, "sep": 6.39, "oct": 7.25, "sum": 13.64, "env": "强势(1-8月>+10%)"}, {"year": 2008, "ytd8": -54.44, "sep": -4.32, "oct": -24.63, "sum": -28.95, "env": "弱势(1-8月<-10%)"}, {"year": 2009, "ytd8": 46.51, "sep": 4.19, "oct": 7.79, "sum": 11.97, "env": "强势(1-8月>+10%)"}, {"year": 2010, "ytd8": -19.48, "sep": 0.64, "oct": 12.17, "sum": 12.81, "env": "弱势(1-8月<-10%)"}, {"year": 2011, "ytd8": -8.57, "sep": -8.11, "oct": 4.62, "sum": -3.49, "env": "震荡(-10%~+10%)"}, {"year": 2012, "ytd8": -6.91, "sep": 1.89, "oct": -0.83, "sum": 1.06, "env": "震荡(-10%~+10%)"}, {"year": 2013, "ytd8": -7.52, "sep": 3.64, "oct": -1.52, "sum": 2.12, "env": "震荡(-10%~+10%)"}, {"year": 2014, "ytd8": 4.78, "sep": 6.62, "oct": 2.38, "sum": 9.0, "env": "震荡(-10%~+10%)"}, {"year": 2015, "ytd8": -0.89, "sep": -4.78, "oct": 10.8, "sum": 6.02, "env": "震荡(-10%~+10%)"}, {"year": 2016, "ytd8": -12.82, "sep": -2.62, "oct": 3.19, "sum": 0.57, "env": "弱势(1-8月<-10%)"}, {"year": 2017, "ytd8": 8.29, "sep": -0.35, "oct": 1.33, "sum": 0.97, "env": "震荡(-10%~+10%)"}, {"year": 2018, "ytd8": -17.6, "sep": 3.53, "oct": -7.75, "sum": -4.22, "env": "弱势(1-8月<-10%)"}, {"year": 2019, "ytd8": 15.73, "sep": 0.66, "oct": 0.82, "sum": 1.48, "env": "强势(1-8月>+10%)"}, {"year": 2020, "ytd8": 11.33, "sep": -5.23, "oct": 0.2, "sum": -5.03, "env": "强势(1-8月>+10%)"}, {"year": 2021, "ytd8": 2.04, "sep": 0.68, "oct": -0.58, "sum": 0.1, "env": "震荡(-10%~+10%)"}, {"year": 2022, "ytd8": -12.02, "sep": -5.55, "oct": -4.33, "sum": -9.88, "env": "弱势(1-8月<-10%)"}, {"year": 2023, "ytd8": 0.99, "sep": -0.3, "oct": -2.95, "sum": -3.25, "env": "震荡(-10%~+10%)"}, {"year": 2024, "ytd8": -4.46, "sep": 17.39, "oct": -1.7, "sum": 15.69, "env": "震荡(-10%~+10%)"}, {"year": 2025, "ytd8": 15.1, "sep": 0.64, "oct": 1.85, "sum": 2.5, "env": "强势(1-8月>+10%)"}], "env_26": "震荡(-10%~+10%)", "ytd8_26": 0.44, "m2026": [{"name": "创业板指", "last_d": "2026-09-15", "last": 3247.92, "aug31": 3438.68, "sep_mtd": -5.55}, {"name": "深证成指", "last_d": "2026-09-15", "last": 13287.97, "aug31": 14015.0, "sep_mtd": -5.19}, {"name": "中证500", "last_d": "2026-09-15", "last": 7561.59, "aug31": 7952.1, "sep_mtd": -4.91}, {"name": "中证1000", "last_d": "2026-09-15", "last": 7437.7, "aug31": 7770.42, "sep_mtd": -4.28}, {"name": "中证全指", "last_d": "2026-09-15", "last": 5723.69, "aug31": 5969.33, "sep_mtd": -4.12}, {"name": "沪深300", "last_d": "2026-09-15", "last": 4450.04, "aug31": 4625.09, "sep_mtd": -3.78}, {"name": "中证红利", "last_d": "2026-09-15", "last": 5534.25, "aug31": 5718.42, "sep_mtd": -3.22}, {"name": "上证50", "last_d": "2026-09-15", "last": 2846.31, "aug31": 2936.88, "sep_mtd": -3.08}, {"name": "上证指数", "last_d": "2026-09-15", "last": 3864.28, "aug31": 3986.3, "sep_mtd": -3.06}], "pos": {"today": "2026-09-15", "close": 3864.28, "sep_mtd": -3.06, "v_ratio": 0.97, "v5": 496219850, "v20": 513931958}, "recent": {"dates": ["2026-06-24", "2026-06-25", "2026-06-26", "2026-06-29", "2026-06-30", "2026-07-01", "2026-07-02", "2026-07-03", "2026-07-06", "2026-07-07", "2026-07-08", "2026-07-09", "2026-07-10", "2026-07-13", "2026-07-14", "2026-07-15", "2026-07-16", "2026-07-17", "2026-07-20", "2026-07-21", "2026-07-22", "2026-07-23", "2026-07-24", "2026-07-27", "2026-07-28", "2026-07-29", "2026-07-30", "2026-07-31", "2026-08-03", "2026-08-04", "2026-08-05", "2026-08-06", "2026-08-07", "2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-17", "2026-08-18", "2026-08-19", "2026-08-20", "2026-08-21", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-14", "2026-09-15"], "close": [4110.81, 4120.28, 4027.26, 4073.9, 4094.4, 4112.45, 4028.9, 4043.64, 4041.24, 3990.24, 3970.88, 4036.59, 3996.16, 3913.79, 3967.13, 3955.58, 3882.41, 3764.15, 3796.28, 3864.37, 3867.03, 3876.78, 3814.2, 3858.25, 3813.31, 3828.47, 3804.69, 3832.26, 3809.66, 3822.28, 3878.43, 3900.35, 3940.04, 3966.59, 3934.09, 3946.68, 3926.96, 3927.18, 3982.65, 3990.3, 3894.42, 3903.72, 3905.2, 3882.01, 3889.44, 3912.52, 3956.57, 3952.18, 3986.3, 3979.89, 3941.39, 3942.09, 3930.12, 3932.7, 3940.55, 3951.51, 3934.4, 3888.11, 3885.33, 3864.28]}};
+var RED = '#d0342c', GREEN = '#1e8e4e', GRAY = '#8a919c', AMBER = '#d9a300';
+
+function fmt(v) { return (v > 0 ? '+' : '') + v.toFixed(2); }
+function colorOf(v) { return v > 0 ? RED : (v < 0 ? GREEN : GRAY); }
+function chart(id) {
+  var c = echarts.init(document.getElementById(id));
+  window.addEventListener('resize', function () { c.resize(); });
+  return c;
+}
+
+/* 1. 窗口收益全景 */
+(function () {
+  var order = D.win_order, s2 = D.scopes.y2000, sA = D.scopes.all;
+  var labs = order.map(function (k) { return D.win_lbl[k]; });
+  var mean2 = order.map(function (k) { return s2[k] ? s2[k].mean : null; });
+  var win2 = order.map(function (k) { return s2[k] ? s2[k].win : null; });
+  var med2 = order.map(function (k) { return s2[k] ? s2[k].median : null; });
+  var meanA = order.map(function (k) { return sA[k] ? sA[k].mean : null; });
+  chart('c_win').setOption({
+    title: { text: '节前 / 节后各窗口收益（上证指数，2000 年起）', left: 'center', top: 6, textStyle: { fontSize: 14 } },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+      formatter: function (ps) {
+        var i = ps[0].dataIndex, s = s2[order[i]];
+        return labs[i] + '<br>均值 ' + fmt(s.mean) + '%　中位数 ' + fmt(s.median) + '%<br>胜率 ' + s.win + '%　t = ' + s.t + '　p = ' + s.p + '<br>n = ' + s.n;
+      } },
+    legend: { top: 32, data: ['均值(2000起)', '中位数(2000起)', '均值(全历史)', '胜率(2000起)'] },
+    grid: { left: 64, right: 64, top: 78, bottom: 46 },
+    xAxis: { type: 'category', data: labs, axisLabel: { fontSize: 11.5 } },
+    yAxis: [
+      { type: 'value', name: '收益 %', axisLabel: { formatter: '{value}%' }, splitLine: { lineStyle: { color: '#eef0f3' } } },
+      { type: 'value', name: '胜率 %', min: 0, max: 100, axisLabel: { formatter: '{value}%' }, splitLine: { show: false } }
+    ],
+    series: [
+      { name: '均值(2000起)', type: 'bar', barWidth: 26, data: mean2,
+        itemStyle: { color: function (p) { return colorOf(p.value); } },
+        label: { show: true, position: 'top', fontSize: 10.5, formatter: function (p) { return fmt(p.value) + '%'; } } },
+      { name: '中位数(2000起)', type: 'bar', barWidth: 26, data: med2,
+        itemStyle: { color: 'rgba(140,150,165,.35)' } },
+      { name: '均值(全历史)', type: 'scatter', symbolSize: 9, data: meanA, itemStyle: { color: '#2c6bd0' } },
+      { name: '胜率(2000起)', type: 'line', yAxisIndex: 1, data: win2, smooth: true,
+        lineStyle: { width: 2, color: AMBER }, itemStyle: { color: AMBER }, symbolSize: 7 }
+    ]
+  });
+})();
+
+/* 2. 散点 节前5 vs 节后5 */
+(function () {
+  var pts = D.detail.map(function (h) { return [h.pre5, h.post5, h.year]; });
+  var xs = pts.map(function (p) { return p[0]; }), ys = pts.map(function (p) { return p[1]; });
+  var n = xs.length, mx = 0, my = 0, i, num = 0, den = 0;
+  for (i = 0; i < n; i++) { mx += xs[i]; my += ys[i]; }
+  mx /= n; my /= n;
+  for (i = 0; i < n; i++) { num += (xs[i] - mx) * (ys[i] - my); den += (xs[i] - mx) * (xs[i] - mx); }
+  var b = num / den, a = my - b * mx;
+  var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
+  chart('c_scatter').setOption({
+    title: { text: '节前 5 日 vs 节后 5 日（2000 年起 26 年，Pearson 相关系数 -0.336）', left: 'center', top: 6, textStyle: { fontSize: 14 } },
+    tooltip: { formatter: function (p) { return p.data[2] + ' 年<br>节前 5 日 ' + fmt(p.data[0]) + '%<br>节后 5 日 ' + fmt(p.data[1]) + '%'; } },
+    grid: { left: 68, right: 46, top: 58, bottom: 54 },
+    xAxis: { type: 'value', name: '节前 5 日 %', nameLocation: 'middle', nameGap: 30,
+      axisLabel: { formatter: '{value}%' }, splitLine: { lineStyle: { color: '#eef0f3' } } },
+    yAxis: { type: 'value', name: '节后 5 日 %', nameGap: 22, axisLabel: { formatter: '{value}%' }, splitLine: { lineStyle: { color: '#eef0f3' } } },
+    series: [{
+      type: 'scatter', data: pts, symbolSize: 12,
+      itemStyle: { color: function (p) { return colorOf(p.data[1]); }, opacity: .82 },
+      label: { show: true, position: 'right', fontSize: 10, color: '#8a919c', formatter: function (p) { return p.data[2]; } },
+      markLine: { silent: true, symbol: 'none', lineStyle: { color: '#c8cdd6', type: 'solid', width: 1 },
+        data: [{ xAxis: 0 }, { yAxis: 0 }], label: { show: false } }
+    }, {
+      type: 'line', data: [[x0, a + b * x0], [x1, a + b * x1]], showSymbol: false,
+      lineStyle: { color: '#2c6bd0', width: 2, type: 'dashed' }, silent: true
+    }]
+  });
+})();
+
+/* 3. 环境分档 */
+(function () {
+  var tags = D.env_order;
+  var n9 = tags.map(function (t) { return D.env[t].sep.mean; });
+  var n10 = tags.map(function (t) { return D.env[t].oct.mean; });
+  var w10 = tags.map(function (t) { return D.env[t].oct.win; });
+  var m10 = tags.map(function (t) { return D.env[t].oct.median; });
+  var nn = tags.map(function (t) { return D.env[t].n; });
+  chart('c_env').setOption({
+    title: { text: '按「当年 1-8 月涨幅」分档后的 9 / 10 月表现（上证指数，1997–2025）', left: 'center', top: 6, textStyle: { fontSize: 13.5 } },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+      formatter: function (ps) {
+        var i = ps[0].dataIndex;
+        return tags[i] + '　n=' + nn[i] +
+          '<br>9 月 均值 ' + fmt(n9[i]) + '%' +
+          '<br>10 月 均值 ' + fmt(n10[i]) + '%　中位数 ' + fmt(m10[i]) + '%　胜率 ' + w10[i] + '%';
+      } },
+    legend: { top: 32, data: ['9 月均值', '10 月均值', '10 月中位数', '10 月胜率'] },
+    grid: { left: 70, right: 70, top: 82, bottom: 66 },
+    xAxis: { type: 'category', data: tags, axisLabel: { fontSize: 11.5, lineHeight: 16,
+      formatter: function (v, i) { return v + '\n10月胜率 ' + w10[i] + '%'; } } },
+    yAxis: [
+      { type: 'value', name: '均值 %', axisLabel: { formatter: '{value}%' }, splitLine: { lineStyle: { color: '#eef0f3' } } },
+      { type: 'value', name: '胜率 %', min: 0, max: 100, axisLabel: { formatter: '{value}%' }, splitLine: { show: false } }
+    ],
+    series: [
+      { name: '9 月均值', type: 'bar', barWidth: 26, data: n9,
+        itemStyle: { color: 'rgba(44,107,208,.55)' },
+        label: { show: true, position: 'top', offset: [-21, 0], fontSize: 10.5, formatter: function (p) { return fmt(p.value) + '%'; } } },
+      { name: '10 月均值', type: 'bar', barWidth: 26, data: n10,
+        itemStyle: { color: function (p) { return colorOf(p.value); } },
+        label: { show: true, position: 'top', offset: [21, 0], fontSize: 11, fontWeight: 'bold', formatter: function (p) { return fmt(p.value) + '%'; } } },
+      { name: '10 月中位数', type: 'scatter', symbolSize: 11, data: m10, itemStyle: { color: '#3a4048' } },
+      { name: '10 月胜率', type: 'line', yAxisIndex: 1, data: w10, smooth: true,
+        lineStyle: { width: 2, color: AMBER }, itemStyle: { color: AMBER }, symbolSize: 8,
+        label: { show: false },
+        endLabel: { show: false } }
+    ]
+  });
+})();
+
+/* 4. 12 个月季节性 */
+(function () {
+  var labs = [], vs = [], med = [], win = [];
+  for (var m = 1; m <= 12; m++) {
+    var c = D.months[String(m)];
+    labs.push(m + '月'); vs.push(c.mean); med.push(c.median); win.push(c.win);
+  }
+  chart('c_month').setOption({
+    title: { text: '上证指数 12 个月平均涨跌（1997 年起，%）', left: 'center', top: 6, textStyle: { fontSize: 14 } },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+      formatter: function (ps) {
+        var i = ps[0].dataIndex, c = D.months[String(i + 1)];
+        return labs[i] + '<br>均值 ' + fmt(c.mean) + '%　中位数 ' + fmt(c.median) + '%<br>胜率 ' + c.win + '%　t = ' + c.t + '　n = ' + c.n;
+      } },
+    legend: { top: 32, data: ['均值', '中位数', '胜率'] },
+    grid: { left: 62, right: 62, top: 78, bottom: 44 },
+    xAxis: { type: 'category', data: labs, axisLabel: { fontSize: 11.5 } },
+    yAxis: [
+      { type: 'value', name: '收益 %', axisLabel: { formatter: '{value}%' }, splitLine: { lineStyle: { color: '#eef0f3' } } },
+      { type: 'value', name: '胜率 %', min: 0, max: 100, axisLabel: { formatter: '{value}%' }, splitLine: { show: false } }
+    ],
+    series: [
+      { name: '均值', type: 'bar', barWidth: 22, data: vs,
+        itemStyle: { color: function (p) { return (p.dataIndex === 8 || p.dataIndex === 9) ? colorOf(p.value) : 'rgba(150,160,175,.45)'; } },
+        label: { show: true, position: 'top', fontSize: 10, formatter: function (p) { return fmt(p.value); } } },
+      { name: '中位数', type: 'scatter', symbolSize: 8, data: med, itemStyle: { color: '#3a4048' } },
+      { name: '胜率', type: 'line', yAxisIndex: 1, data: win, smooth: true,
+        lineStyle: { width: 1.8, color: AMBER }, itemStyle: { color: AMBER }, symbolSize: 5 }
+    ]
+  });
+})();
+
+/* 5. 近 60 日 */
+(function () {
+  chart('c_recent').setOption({
+    title: { text: '上证指数近 60 个交易日（截至 ' + D.pos.today + '）', left: 'center', top: 6, textStyle: { fontSize: 14 } },
+    tooltip: { trigger: 'axis', formatter: function (ps) { return ps[0].axisValue + '<br>收盘 ' + ps[0].data; } },
+    grid: { left: 66, right: 40, top: 46, bottom: 46 },
+    xAxis: { type: 'category', data: D.recent.dates, axisLabel: { fontSize: 10, interval: 9 } },
+    yAxis: { type: 'value', scale: true, splitLine: { lineStyle: { color: '#eef0f3' } } },
+    series: [{ type: 'line', data: D.recent.close, showSymbol: false, smooth: true,
+      lineStyle: { color: '#2c6bd0', width: 2 }, areaStyle: { color: 'rgba(44,107,208,.08)' } }]
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,571 @@
+{
+ "rank": [
+  {
+   "rank": 1,
+   "name": "源杰科技",
+   "code": "688498",
+   "weight": 4.917,
+   "rank_w": 6,
+   "ytd": 282.35,
+   "off_hi": -14.0,
+   "hi": 1968.14,
+   "lo": 427.52,
+   "contrib": 13.883,
+   "in_portfolio": false,
+   "group": "光芯片/光通信"
+  },
+  {
+   "rank": 2,
+   "name": "普冉股份",
+   "code": "688766",
+   "weight": 1.385,
+   "rank_w": 20,
+   "ytd": 194.12,
+   "off_hi": -58.91,
+   "hi": 909.8,
+   "lo": 131.83,
+   "contrib": 2.689,
+   "in_portfolio": false,
+   "group": "存储芯片"
+  },
+  {
+   "rank": 3,
+   "name": "华峰测控",
+   "code": "688200",
+   "weight": 1.791,
+   "rank_w": 15,
+   "ytd": 171.27,
+   "off_hi": -39.21,
+   "hi": 570.0,
+   "lo": 126.93,
+   "contrib": 3.067,
+   "in_portfolio": false,
+   "group": "半导体设备/材料"
+  },
+  {
+   "rank": 4,
+   "name": "华海清科",
+   "code": "688120",
+   "weight": 3.322,
+   "rank_w": 9,
+   "ytd": 119.79,
+   "off_hi": -37.26,
+   "hi": 374.85,
+   "lo": 107.72,
+   "contrib": 3.979,
+   "in_portfolio": false,
+   "group": "半导体设备/材料"
+  },
+  {
+   "rank": 5,
+   "name": "盛科通信",
+   "code": "688702",
+   "weight": 1.545,
+   "rank_w": 17,
+   "ytd": 112.35,
+   "off_hi": -34.43,
+   "hi": 458.88,
+   "lo": 126.0,
+   "contrib": 1.736,
+   "in_portfolio": false,
+   "group": "光芯片/光通信"
+  },
+  {
+   "rank": 6,
+   "name": "芯源微",
+   "code": "688037",
+   "weight": 1.922,
+   "rank_w": 14,
+   "ytd": 108.37,
+   "off_hi": -32.72,
+   "hi": 459.844,
+   "lo": 148.974,
+   "contrib": 2.083,
+   "in_portfolio": false,
+   "group": "半导体设备/材料"
+  },
+  {
+   "rank": 7,
+   "name": "中科飞测",
+   "code": "688361",
+   "weight": 2.889,
+   "rank_w": 10,
+   "ytd": 98.71,
+   "off_hi": -33.77,
+   "hi": 458.98,
+   "lo": 147.98,
+   "contrib": 2.852,
+   "in_portfolio": false,
+   "group": "半导体设备/材料"
+  },
+  {
+   "rank": 8,
+   "name": "华虹宏力",
+   "code": "688347",
+   "weight": 3.361,
+   "rank_w": 8,
+   "ytd": 95.35,
+   "off_hi": -48.99,
+   "hi": 413.13,
+   "lo": 105.55,
+   "contrib": 3.205,
+   "in_portfolio": false,
+   "group": "晶圆制造"
+  },
+  {
+   "rank": 9,
+   "name": "拓荆科技",
+   "code": "688072",
+   "weight": 4.32,
+   "rank_w": 7,
+   "ytd": 82.3,
+   "off_hi": -36.4,
+   "hi": 945.0,
+   "lo": 314.67,
+   "contrib": 3.555,
+   "in_portfolio": false,
+   "group": "半导体设备/材料"
+  },
+  {
+   "rank": 10,
+   "name": "佰维存储",
+   "code": "688525",
+   "weight": 2.862,
+   "rank_w": 11,
+   "ytd": 80.76,
+   "off_hi": -59.94,
+   "hi": 517.0,
+   "lo": 118.786,
+   "contrib": 2.311,
+   "in_portfolio": false,
+   "group": "存储芯片"
+  },
+  {
+   "rank": 11,
+   "name": "中微公司",
+   "code": "688012",
+   "weight": 8.738,
+   "rank_w": 1,
+   "ytd": 77.59,
+   "off_hi": -35.07,
+   "hi": 500.0,
+   "lo": 186.34,
+   "contrib": 6.78,
+   "in_portfolio": false,
+   "group": "半导体设备/材料"
+  },
+  {
+   "rank": 12,
+   "name": "睿创微纳",
+   "code": "688002",
+   "weight": 2.24,
+   "rank_w": 13,
+   "ytd": 76.99,
+   "off_hi": -5.57,
+   "hi": 188.39,
+   "lo": 96.21,
+   "contrib": 1.725,
+   "in_portfolio": false,
+   "group": "军工电子"
+  },
+  {
+   "rank": 13,
+   "name": "仕佳光子",
+   "code": "688313",
+   "weight": 1.609,
+   "rank_w": 16,
+   "ytd": 63.91,
+   "off_hi": -29.83,
+   "hi": 206.67,
+   "lo": 73.7,
+   "contrib": 1.028,
+   "in_portfolio": false,
+   "group": "光芯片/光通信"
+  },
+  {
+   "rank": 14,
+   "name": "澜起科技",
+   "code": "688008",
+   "weight": 7.566,
+   "rank_w": 5,
+   "ytd": 57.27,
+   "off_hi": -44.47,
+   "hi": 332.51,
+   "lo": 119.11,
+   "contrib": 4.333,
+   "in_portfolio": false,
+   "group": "算力芯片设计"
+  },
+  {
+   "rank": 15,
+   "name": "盛美上海",
+   "code": "688082",
+   "weight": 1.407,
+   "rank_w": 18,
+   "ytd": 54.16,
+   "off_hi": -41.13,
+   "hi": 459.37,
+   "lo": 137.94,
+   "contrib": 0.762,
+   "in_portfolio": false,
+   "group": "半导体设备/材料"
+  },
+  {
+   "rank": 16,
+   "name": "芯原股份",
+   "code": "688521",
+   "weight": 2.713,
+   "rank_w": 12,
+   "ytd": 30.86,
+   "off_hi": -52.29,
+   "hi": 375.67,
+   "lo": 136.8,
+   "contrib": 0.837,
+   "in_portfolio": false,
+   "group": "算力芯片设计"
+  },
+  {
+   "rank": 17,
+   "name": "安集科技",
+   "code": "688019",
+   "weight": 1.401,
+   "rank_w": 19,
+   "ytd": 29.03,
+   "off_hi": -41.04,
+   "hi": 366.0,
+   "lo": 167.85,
+   "contrib": 0.407,
+   "in_portfolio": false,
+   "group": "半导体设备/材料"
+  },
+  {
+   "rank": 18,
+   "name": "寒武纪",
+   "code": "688256",
+   "weight": 8.134,
+   "rank_w": 3,
+   "ytd": 14.44,
+   "off_hi": -35.8,
+   "hi": 1620.0,
+   "lo": 648.66,
+   "contrib": 1.175,
+   "in_portfolio": true,
+   "group": "算力芯片设计"
+  },
+  {
+   "rank": 19,
+   "name": "海光信息",
+   "code": "688041",
+   "weight": 7.602,
+   "rank_w": 4,
+   "ytd": -0.21,
+   "off_hi": -43.39,
+   "hi": 395.17,
+   "lo": 202.83,
+   "contrib": -0.016,
+   "in_portfolio": true,
+   "group": "算力芯片设计"
+  },
+  {
+   "rank": 20,
+   "name": "中芯国际",
+   "code": "688981",
+   "weight": 8.444,
+   "rank_w": 2,
+   "ytd": -7.13,
+   "off_hi": -35.31,
+   "hi": 176.34,
+   "lo": 91.2,
+   "contrib": -0.602,
+   "in_portfolio": true,
+   "group": "晶圆制造"
+  }
+ ],
+ "groups": [
+  {
+   "name": "半导体设备/材料",
+   "n": 8,
+   "w_now": 25.79,
+   "eq_ytd": 92.65,
+   "in_port": false,
+   "members": [
+    {
+     "name": "华峰测控",
+     "code": "688200",
+     "ytd": 171.27,
+     "w": 1.791,
+     "off_hi": -39.21,
+     "contrib": 3.067
+    },
+    {
+     "name": "华海清科",
+     "code": "688120",
+     "ytd": 119.79,
+     "w": 3.322,
+     "off_hi": -37.26,
+     "contrib": 3.979
+    },
+    {
+     "name": "芯源微",
+     "code": "688037",
+     "ytd": 108.37,
+     "w": 1.922,
+     "off_hi": -32.72,
+     "contrib": 2.083
+    },
+    {
+     "name": "中科飞测",
+     "code": "688361",
+     "ytd": 98.71,
+     "w": 2.889,
+     "off_hi": -33.77,
+     "contrib": 2.852
+    },
+    {
+     "name": "拓荆科技",
+     "code": "688072",
+     "ytd": 82.3,
+     "w": 4.32,
+     "off_hi": -36.4,
+     "contrib": 3.555
+    },
+    {
+     "name": "中微公司",
+     "code": "688012",
+     "ytd": 77.59,
+     "w": 8.738,
+     "off_hi": -35.07,
+     "contrib": 6.78
+    },
+    {
+     "name": "盛美上海",
+     "code": "688082",
+     "ytd": 54.16,
+     "w": 1.407,
+     "off_hi": -41.13,
+     "contrib": 0.762
+    },
+    {
+     "name": "安集科技",
+     "code": "688019",
+     "ytd": 29.03,
+     "w": 1.401,
+     "off_hi": -41.04,
+     "contrib": 0.407
+    }
+   ]
+  },
+  {
+   "name": "光芯片/光通信",
+   "n": 3,
+   "w_now": 8.071,
+   "eq_ytd": 152.87,
+   "in_port": false,
+   "members": [
+    {
+     "name": "源杰科技",
+     "code": "688498",
+     "ytd": 282.35,
+     "w": 4.917,
+     "off_hi": -14.0,
+     "contrib": 13.883
+    },
+    {
+     "name": "盛科通信",
+     "code": "688702",
+     "ytd": 112.35,
+     "w": 1.545,
+     "off_hi": -34.43,
+     "contrib": 1.736
+    },
+    {
+     "name": "仕佳光子",
+     "code": "688313",
+     "ytd": 63.91,
+     "w": 1.609,
+     "off_hi": -29.83,
+     "contrib": 1.028
+    }
+   ]
+  },
+  {
+   "name": "存储芯片",
+   "n": 2,
+   "w_now": 4.247,
+   "eq_ytd": 137.44,
+   "in_port": false,
+   "members": [
+    {
+     "name": "普冉股份",
+     "code": "688766",
+     "ytd": 194.12,
+     "w": 1.385,
+     "off_hi": -58.91,
+     "contrib": 2.689
+    },
+    {
+     "name": "佰维存储",
+     "code": "688525",
+     "ytd": 80.76,
+     "w": 2.862,
+     "off_hi": -59.94,
+     "contrib": 2.311
+    }
+   ]
+  },
+  {
+   "name": "算力芯片设计",
+   "n": 4,
+   "w_now": 26.015,
+   "eq_ytd": 25.59,
+   "in_port": true,
+   "members": [
+    {
+     "name": "澜起科技",
+     "code": "688008",
+     "ytd": 57.27,
+     "w": 7.566,
+     "off_hi": -44.47,
+     "contrib": 4.333
+    },
+    {
+     "name": "芯原股份",
+     "code": "688521",
+     "ytd": 30.86,
+     "w": 2.713,
+     "off_hi": -52.29,
+     "contrib": 0.837
+    },
+    {
+     "name": "寒武纪",
+     "code": "688256",
+     "ytd": 14.44,
+     "w": 8.134,
+     "off_hi": -35.8,
+     "contrib": 1.175
+    },
+    {
+     "name": "海光信息",
+     "code": "688041",
+     "ytd": -0.21,
+     "w": 7.602,
+     "off_hi": -43.39,
+     "contrib": -0.016
+    }
+   ]
+  },
+  {
+   "name": "晶圆制造",
+   "n": 2,
+   "w_now": 11.805,
+   "eq_ytd": 44.11,
+   "in_port": true,
+   "members": [
+    {
+     "name": "华虹宏力",
+     "code": "688347",
+     "ytd": 95.35,
+     "w": 3.361,
+     "off_hi": -48.99,
+     "contrib": 3.205
+    },
+    {
+     "name": "中芯国际",
+     "code": "688981",
+     "ytd": -7.13,
+     "w": 8.444,
+     "off_hi": -35.31,
+     "contrib": -0.602
+    }
+   ]
+  },
+  {
+   "name": "军工电子",
+   "n": 1,
+   "w_now": 2.24,
+   "eq_ytd": 76.99,
+   "in_port": false,
+   "members": [
+    {
+     "name": "睿创微纳",
+     "code": "688002",
+     "ytd": 76.99,
+     "w": 2.24,
+     "off_hi": -5.57,
+     "contrib": 1.725
+    }
+   ]
+  }
+ ],
+ "portfolio": [
+  {
+   "name": "中芯国际",
+   "code": "688981",
+   "weight": 8.444,
+   "rank_w": 2,
+   "ytd": -7.13,
+   "off_hi": -35.31,
+   "hi": 176.34,
+   "lo": 91.2,
+   "hi_date": "20260710",
+   "lo_date": "20260407",
+   "base_close": 122.83,
+   "cur_close": 114.07,
+   "pct_today": -2.84,
+   "eq_contrib": -2.38
+  },
+  {
+   "name": "寒武纪",
+   "code": "688256",
+   "weight": 8.134,
+   "rank_w": 3,
+   "ytd": 14.44,
+   "off_hi": -35.8,
+   "hi": 1620.0,
+   "lo": 648.66,
+   "hi_date": "20260630",
+   "lo_date": "20260323",
+   "base_close": 908.76,
+   "cur_close": 1040.0,
+   "pct_today": 0.0,
+   "eq_contrib": 4.81
+  },
+  {
+   "name": "海光信息",
+   "code": "688041",
+   "weight": 7.602,
+   "rank_w": 4,
+   "ytd": -0.21,
+   "off_hi": -43.39,
+   "hi": 395.17,
+   "lo": 202.83,
+   "hi_date": "20260710",
+   "lo_date": "20260324",
+   "base_close": 224.17,
+   "cur_close": 223.69,
+   "pct_today": -3.12,
+   "eq_contrib": -0.07
+  }
+ ],
+ "idx": {
+  "base": 2613.409912,
+  "close": 3602.31,
+  "ytd": 37.84,
+  "pct_today": -1.77,
+  "hi": 5660.68,
+  "lo52": 2200.89
+ },
+ "summary": {
+  "idx_ytd": 37.84,
+  "eq_all20": 87.11,
+  "eq_top3": 2.37,
+  "eq_rest17": 102.07,
+  "gap": -99.7,
+  "cw_all20": 55.79,
+  "cw_top3": 0.56,
+  "cw_rest": 55.23,
+  "top3_w": 24.18,
+  "top3_share_cw": 1.0,
+  "w20": 78.17
+ }
+}
