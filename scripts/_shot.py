@@ -23,7 +23,7 @@ with sync_playwright() as p:
         pg.wait_for_timeout(1400)
         pg.screenshot(path=os.path.join(BASE, "out", f"_shot_{tag}_{i}.png"))
         print("shot:", f"out/_shot_{tag}_{i}.png  @scroll={y}")
-    info = pg.evaluate("""() => Array.from(document.querySelectorAll('div.chart')).map(
+    info = pg.evaluate("""() => Array.from(document.querySelectorAll('div[id^="c_"]')).map(
         d => ({id:d.id, w:d.clientWidth, h:d.clientHeight, canvas:d.querySelectorAll('canvas').length}))""")
     print("图表容器:", info)
     print("控制台错误:", errs[:8] if errs else "无")

@@ -1,54 +1,86 @@
 
-var SCAT={"E": {"color": "#8a5bd0", "data": [[128.51, 142.0, 7.1, "威尔高"], [476.4, 133.9, 9.27, "科翔股份"], [91.67, 124.5, 22.57, "满坤科技"], [80.5, 98.8, 10.09, "迅捷兴"], [88.15, 98.1, 10.07, "金禄电子"], [267.32, 94.3, 14.48, "崇达技术"], [239.77, 91.6, 4.43, "奥士康"], [142.19, 89.7, 40.42, "超声电子"], [143.01, 79.4, 18.94, "博敏电子"], [103.89, 76.8, 11.11, "四会富仕"], [57.6, 72.2, 13.08, "澳弘电子"], [113.95, 71.4, 35.24, "中京电子"], [92.03, 68.0, 16.86, "强达电路"], [621.4, 58.2, 4.41, "方正科技"], [34.92, 55.5, 13.29, "金百泽"], [31.72, 51.5, 13.12, "协和电子"], [694.49, 48.5, 9.31, "兴森科技"], [1047.05, 43.8, 3.99, "景旺电子"], [102.52, 40.8, 10.62, "明阳电路"], [266.09, 38.8, 2.91, "中富电路"], [129.9, 37.5, 6.69, "依顿电子"], [305.89, 34.7, 6.05, "世运电路"], [60.29, 32.2, 10.27, "天津普林"]]}, "B": {"color": "#e08a2e", "data": [[394.44, 133.0, 6.35, "华正新材"], [611.45, 65.2, 11.58, "金安国纪"], [809.73, 57.9, 3.14, "南亚新材"], [98.9, 53.2, 12.14, "逸豪新材"], [3649.58, 42.2, 3.37, "生益科技"]]}, "C": {"color": "#2c6bd0", "data": [[145.4, 39.2, 5.17, "天承科技"], [604.73, 26.9, 2.53, "芯碁微装"], [1706.36, 14.9, 2.92, "鼎泰高科"], [1263.6, 10.9, 0.58, "大族数控"]]}, "A": {"color": "#d0342c", "data": [[1054.44, 33.2, 2.25, "生益电子"], [2654.64, 26.5, 1.14, "深南电路"], [2421.23, 21.3, 2.13, "沪电股份"], [807.93, 20.5, 4.2, "广合科技"], [2221.68, 18.7, 2.42, "胜宏科技"]]}, "D": {"color": "#1e8e4e", "data": [[178.72, 16.0, 6.42, "弘信电子"], [2058.44, 9.0, 0.7, "鹏鼎控股"], [3348.54, 6.6, 3.44, "东山精密"]]}};
-var TURN=[[7.1, 142.0, "威尔高"], [9.27, 133.9, "科翔股份"], [6.35, 133.0, "华正新材"], [22.57, 124.5, "满坤科技"], [10.09, 98.8, "迅捷兴"], [10.07, 98.1, "金禄电子"], [14.48, 94.3, "崇达技术"], [4.43, 91.6, "奥士康"], [40.42, 89.7, "超声电子"], [18.94, 79.4, "博敏电子"], [11.11, 76.8, "四会富仕"], [13.08, 72.2, "澳弘电子"], [35.24, 71.4, "中京电子"], [16.86, 68.0, "强达电路"], [11.58, 65.2, "金安国纪"], [4.41, 58.2, "方正科技"], [3.14, 57.9, "南亚新材"], [13.29, 55.5, "金百泽"], [12.14, 53.2, "逸豪新材"], [13.12, 51.5, "协和电子"], [9.31, 48.5, "兴森科技"], [3.99, 43.8, "景旺电子"], [3.37, 42.2, "生益科技"], [10.62, 40.8, "明阳电路"], [5.17, 39.2, "天承科技"], [2.91, 38.8, "中富电路"], [6.69, 37.5, "依顿电子"], [6.05, 34.7, "世运电路"], [2.25, 33.2, "生益电子"], [10.27, 32.2, "天津普林"], [2.53, 26.9, "芯碁微装"], [1.14, 26.5, "深南电路"], [2.13, 21.3, "沪电股份"], [4.2, 20.5, "广合科技"], [2.42, 18.7, "胜宏科技"], [6.42, 16.0, "弘信电子"], [2.92, 14.9, "鼎泰高科"], [0.58, 10.9, "大族数控"], [0.7, 9.0, "鹏鼎控股"], [3.44, 6.6, "东山精密"], [13.88, -5.9, "嘉立创"]];
-var SEP=[{"n": "满坤科技", "a": 42.3, "s": 57.7}, {"n": "超声电子", "a": 25.6, "s": 51.1}, {"n": "崇达技术", "a": 32.3, "s": 46.8}, {"n": "澳弘电子", "a": 21.4, "s": 41.9}, {"n": "迅捷兴", "a": 43.0, "s": 39.1}, {"n": "华正新材", "a": 69.0, "s": 37.8}, {"n": "四会富仕", "a": 29.5, "s": 36.6}, {"n": "中京电子", "a": 35.3, "s": 26.7}, {"n": "威尔高", "a": 97.4, "s": 22.6}, {"n": "博敏电子", "a": 48.5, "s": 20.8}, {"n": "逸豪新材", "a": 27.2, "s": 20.4}, {"n": "强达电路", "a": 41.3, "s": 19.0}, {"n": "奥士康", "a": 62.4, "s": 18.0}, {"n": "科翔股份", "a": 99.2, "s": 17.4}, {"n": "协和电子", "a": 29.2, "s": 17.2}, {"n": "明阳电路", "a": 20.6, "s": 16.7}, {"n": "依顿电子", "a": 18.3, "s": 16.3}, {"n": "金禄电子", "a": 73.4, "s": 14.2}, {"n": "方正科技", "a": 39.2, "s": 13.7}, {"n": "兴森科技", "a": 30.9, "s": 13.5}, {"n": "金百泽", "a": 40.0, "s": 11.1}, {"n": "金安国纪", "a": 49.0, "s": 10.9}, {"n": "世运电路", "a": 22.6, "s": 9.8}, {"n": "南亚新材", "a": 45.7, "s": 8.4}, {"n": "景旺电子", "a": 32.7, "s": 8.4}, {"n": "深南电路", "a": 19.8, "s": 5.6}, {"n": "天津普林", "a": 25.3, "s": 5.5}, {"n": "广合科技", "a": 14.7, "s": 5.0}, {"n": "中富电路", "a": 36.6, "s": 1.6}, {"n": "沪电股份", "a": 20.4, "s": 0.7}, {"n": "弘信电子", "a": 16.7, "s": -0.6}, {"n": "芯碁微装", "a": 28.8, "s": -1.4}, {"n": "生益科技", "a": 45.2, "s": -2.1}, {"n": "天承科技", "a": 42.3, "s": -2.2}, {"n": "生益电子", "a": 36.4, "s": -2.3}, {"n": "鼎泰高科", "a": 19.9, "s": -4.2}, {"n": "鹏鼎控股", "a": 14.5, "s": -4.8}, {"n": "胜宏科技", "a": 27.7, "s": -7.0}, {"n": "东山精密", "a": 15.5, "s": -7.7}, {"n": "大族数控", "a": 20.2, "s": -7.7}];
+var C_RED='#d93025', C_GRN='#12805c', C_BLU='#2563eb';
+var AX={axisLine:{lineStyle:{color:'#d1d5db'}},axisLabel:{color:'#6b7280'},splitLine:{lineStyle:{color:'#f1f3f5'}}};
+function mk(id,opt){var e=echarts.init(document.getElementById(id));e.setOption(opt);window.addEventListener('resize',function(){e.resize()});}
 
-var c1=echarts.init(document.getElementById('c_scat'));
-var sers=[];
-Object.keys(SCAT).forEach(function(k){
-  sers.push({name:k,type:'scatter',
-    data:SCAT[k].data.map(function(p){return [p[0],p[1],p[2],p[3]];}),
-    symbolSize:function(v){return Math.max(8,Math.min(30,4+Math.sqrt(v[2])*3));},
-    itemStyle:{color:SCAT[k].color,opacity:0.82},
-    label:{show:true,fontSize:9,color:'#5a616c',position:'top',
-      formatter:function(p){return (p.value[0]<700||p.value[1]>70)?p.value[3]:'';}},
-    labelLayout:{hideOverlap:true}
-  });
-});
-c1.setOption({
-  tooltip:{formatter:function(p){return p.value[3]+'<br>市值 '+p.value[0]+' 亿<br>8月以来 '+(p.value[1]>0?'+':'')+p.value[1]+'%<br>换手 '+p.value[2]+'%';}},
-  legend:{data:Object.keys(SCAT),top:6,itemWidth:10,itemHeight:10},
-  grid:{left:64,right:30,top:52,bottom:52},
-  xAxis:{type:'log',name:'总市值(亿,对数)',min:20,max:5000},
-  yAxis:{type:'value',name:'8月以来涨幅(%)',axisLabel:{formatter:'{value}%'}},
-  series:sers
-});
-
-var c2=echarts.init(document.getElementById('c_turn'));
-c2.setOption({
-  tooltip:{trigger:'item',formatter:function(p){return p.value[2]+'<br>换手 '+p.value[0]+'%<br>8月以来 '+(p.value[1]>0?'+':'')+p.value[1]+'%';}},
-  grid:{left:64,right:30,top:34,bottom:52},
-  xAxis:{type:'value',name:'9/15 换手率(%)',axisLabel:{formatter:'{value}%'}},
-  yAxis:{type:'value',name:'8月以来涨幅(%)',axisLabel:{formatter:'{value}%'}},
-  series:[{type:'scatter',data:TURN,symbolSize:11,
-    itemStyle:{color:function(p){return p.value[1]>50?'#d0342c':(p.value[1]>25?'#e08a2e':'#8a919c');},opacity:0.85},
-    label:{show:true,fontSize:9.5,color:'#5a616c',position:'right',
-      formatter:function(p){return p.value[0]>6?p.value[2]:'';}},
-    labelLayout:{hideOverlap:true}}]
-});
-
-var c3=echarts.init(document.getElementById('c_sep'));
-c3.setOption({
-  tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-  legend:{data:['8月','9月'],top:6},
-  grid:{left:56,right:26,top:48,bottom:110},
-  xAxis:{type:'category',data:SEP.map(function(x){return x.n;}),axisLabel:{rotate:60,fontSize:10,interval:0}},
-  yAxis:{type:'value',name:'月度涨幅(%)',axisLabel:{formatter:'{value}%'}},
+mk('c_senti',{
+  tooltip:{trigger:'axis'},legend:{top:3,left:'center',textStyle:{color:'#6b7280'}},
+  grid:{left:56,right:66,top:52,bottom:32},
+  xAxis:Object.assign({type:'category',data:["9/14", "9/15", "9/16"]},AX),
+  yAxis:[Object.assign({type:'value',name:'家数'},AX),
+         Object.assign({type:'value',name:'封板率%',min:0,max:100},AX)],
   series:[
-    {name:'8月',type:'bar',data:SEP.map(function(x){return x.a;}),itemStyle:{color:'#c9cdd4'}},
-    {name:'9月',type:'bar',data:SEP.map(function(x){return x.s;}),
-      itemStyle:{color:function(p){return p.value>=0?'#d0342c':'#1e8e4e';}}}
+    {name:'涨停家数',type:'bar',data:[55, 32, 89],itemStyle:{color:C_RED},barWidth:26,
+     label:{show:true,position:'top',color:C_RED,fontWeight:600}},
+    {name:'炸板家数',type:'bar',data:[30, 24, 11],itemStyle:{color:'#f0a04b'},barWidth:26,
+     label:{show:true,position:'top',color:'#b26a1e'}},
+    {name:'跌停家数',type:'bar',data:[16, 27, 4],itemStyle:{color:C_GRN},barWidth:26,
+     label:{show:true,position:'top',color:C_GRN}},
+    {name:'封板率',type:'line',yAxisIndex:1,smooth:true,symbolSize:8,data:[64.7, 57.1, 89.0],
+     itemStyle:{color:C_BLU},lineStyle:{width:3},label:{show:true,position:'bottom',color:C_BLU,formatter:'{c}%'}}
   ]
 });
 
-window.addEventListener('resize',function(){c1.resize();c2.resize();c3.resize();});
+mk('c_idx',{
+  tooltip:{trigger:'axis',valueFormatter:function(v){return v+'%'}},
+  grid:{left:76,right:52,top:16,bottom:24},
+  xAxis:Object.assign({type:'value',axisLabel:{formatter:'{value}%'}},AX),
+  yAxis:Object.assign({type:'category',data:["上证50", "北证50", "沪深300", "中证500", "国证2000", "中证1000", "科创50", "创业板指", "深证成指", "上证指数"]},AX),
+  series:[{type:'bar',data:[0.67, 1.15, 0.68, 1.61, 2.04, 2.01, 4.14, 1.96, 1.26, 0.71],barWidth:14,
+    itemStyle:{color:function(p){return p.value>=0?C_RED:C_GRN}},
+    label:{show:true,position:'right',color:'#6b7280',fontSize:11,formatter:'{c}%'}}]
+});
+
+mk('c_lad',{
+  tooltip:{trigger:'axis'},legend:{top:3,left:'center',textStyle:{color:'#6b7280'}},
+  grid:{left:46,right:20,top:52,bottom:28},
+  xAxis:Object.assign({type:'category',data:["1板", "2板", "3板", "4板", "5板", "6板"]},AX),
+  yAxis:Object.assign({type:'value'},AX),
+  series:[
+    {name:'9/15',type:'bar',data:[25, 3, 2, 1, 1, 0],itemStyle:{color:'#cbd5e1'},barWidth:18},
+    {name:'9/16',type:'bar',data:[77, 9, 1, 1, 0, 1],itemStyle:{color:C_RED},barWidth:18,
+     label:{show:true,position:'top',color:'#9ca3af',fontSize:11}}
+  ]
+});
+
+mk('c_theme',{
+  tooltip:{trigger:'axis'},
+  grid:{left:124,right:70,top:16,bottom:24},
+  xAxis:Object.assign({type:'value'},AX),
+  yAxis:Object.assign({type:'category',data:["电力 / 电网", "风电 / 海洋能源", "机器人 / 具身智能", "固态电池 / 锂电", "液冷 / 散热", "PCB / 覆铜板", "消费 / 家居食品", "国资 / 区域主题", "半导体 / 存储", "AI算力 / 光通信"]},AX),
+  series:[{type:'bar',data:[2, 3, 4, 4, 4, 9, 10, 10, 16, 27],itemStyle:{color:C_BLU},barWidth:15,
+    label:{show:true,position:'right',color:'#374151',fontWeight:600,formatter:'{c} 家'}}]
+});
+
+mk('c_hy',{
+  tooltip:{trigger:'axis'},legend:{top:3,left:'center',textStyle:{color:'#6b7280'}},
+  grid:{left:100,right:56,top:52,bottom:24},
+  xAxis:Object.assign({type:'value'},AX),
+  yAxis:Object.assign({type:'category',data:["照明设备", "电网设备", "风电设备", "自动化设", "消费电子", "专用设备", "通用设备", "非白酒", "汽车零部", "其他电子", "家居用品", "电力", "包装印刷", "化学制品", "元件", "塑料", "半导体", "通信设备"]},AX),
+  series:[
+    {name:'9/15',type:'bar',data:[0, 1, 4, 2, 0, 0, 1, 1, 1, 0, 2, 3, 1, 0, 2, 2, 2, 1],itemStyle:{color:'#cbd5e1'},barWidth:11},
+    {name:'9/16',type:'bar',data:[2, 2, 1, 2, 3, 3, 3, 3, 3, 4, 3, 3, 4, 5, 4, 4, 5, 6],itemStyle:{color:C_RED},barWidth:11}
+  ]
+});
+
+mk('c_perf',{
+  tooltip:{trigger:'axis',valueFormatter:function(v){return v+'%'}},
+  grid:{left:100,right:56,top:16,bottom:28},
+  xAxis:Object.assign({type:'value',axisLabel:{formatter:'{value}%'}},AX),
+  yAxis:Object.assign({type:'category',data:["中新赛克", "启明信息", "新中港", "汉王科技", "宏盛股份", "欧克科技", "大金重工", "天龙股份", "中闽能源", "天顺风能", "国邦医药", "大为股份", "诺德股份", "吉鑫科技", "双星新材", "华正新材", "金龙羽", "上海洗霸", "浙江众成", "和顺石油", "华瓷股份", "德尔未来", "通鼎互联", "澳弘电子", "闽东电力", "英联股份", "北自科技", "中晶科技", "会稽山", "西陇科学", "锡华科技", "博汇科技"],axisLabel:{color:'#6b7280',fontSize:10,interval:0}},AX),
+  series:[{type:'bar',data:[-9.98, -5.12, -3.98, -3.31, -1.27, -1.02, -0.71, -0.36, -0.16, 0.13, 0.17, 0.31, 0.49, 0.77, 0.91, 0.96, 1.15, 1.78, 2.41, 3.72, 9.98, 9.99, 9.99, 10.0, 10.0, 10.01, 10.01, 10.01, 10.02, 10.02, 10.02, 20.01],barWidth:9,
+    itemStyle:{color:function(p){return p.value>=0?C_RED:C_GRN}},
+    label:{show:true,position:'right',fontSize:10,color:'#9ca3af',
+      formatter:function(p){return p.value.toFixed(1)}}}]
+});
+
+mk('c_ts',{
+  tooltip:{trigger:'axis'},legend:{top:3,left:'center',textStyle:{color:'#6b7280'}},
+  grid:{left:50,right:20,top:52,bottom:28},
+  xAxis:Object.assign({type:'category',data:["竞价/秒板", "开盘半小时", "上午盘中", "午后盘中", "尾盘"]},AX),
+  yAxis:Object.assign({type:'value'},AX),
+  series:[
+    {name:'9/15',type:'bar',data:[1, 17, 11, 2, 1],itemStyle:{color:'#cbd5e1'},barWidth:24},
+    {name:'9/16',type:'bar',data:[2, 28, 34, 24, 1],itemStyle:{color:C_RED},barWidth:24}
+  ]
+});
