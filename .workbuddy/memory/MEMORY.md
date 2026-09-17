@@ -14,6 +14,8 @@
 | 代码/名称核验 | `qt.gtimg.cn/q=sh000001,...` | **GBK**，`~` 分隔，f2=名称 |
 | 板块列表（仅名称） | 新浪 `money.finance.sina.com.cn/q/view/newFLJK.php?param=class\|industry` | 概念 175 / 行业 84；**`CN_MarketData.getKLineData` 对板块返回 null，拿不到历史** |
 
+| 板块/个股行情·财务·资金（**板块分析首选**） | westock CLI `C:/Users/Administrator/.local/bin/westock.exe` | 板块定位 `search <kw> --type sector` → 成分股 `sector constituent pt02231435`；K线 `kline <sym> --limit 300`（覆盖一年+）；财务 `finance <sym> --type income\|balance\|cashflow`；资金 `fund flow a,b,c`（支持批量）。**字段坑见「脚本与工程约定」** |
+
 ### 失效 / 限流
 - 东财 `push2his`（历史 K 线）与 `push2`（clist）**IP 级限流，全域名同时封**（含 1./7./82. 数字前缀镜像），表现为连接被 RST、0.06s 即失败。
 - 被限后 `push2delay` 的 clist 仍可用，但 **f24/f25 不是可靠涨跌幅字段**（实测与 K 线严重不符），**不可用于排序**；clist 每页上限 100，`fid=f3` 只返回"当日涨幅前 N"，会漏弱势板块。
@@ -35,6 +37,10 @@
 - **同一文件的多个 Edit 不要在同一条消息里并行提交**（会相互覆盖，实测 4 个只生效 1 个）；批量改配置类脚本用「一次性补丁脚本 + `assert a in s`」。
 - 本机 Git Bash 下 grep/sed 处理 UTF-8 中文常失效 → 改用 Read 工具或 python 读文件。
 - **依赖归属**：`pandas/numpy` 在 managed venv（`~/.workbuddy/binaries/python/envs/default/Scripts/python.exe`）；**`playwright` 只在系统 python 3.11**（`C:/Users/Administrator/AppData/Local/Programs/Python/Python311/python.exe`），venv 里跑 `_shot.py` 会 ModuleNotFoundError。
+- **westock 字段坑**：`finance --type income` 中所有 `_Q` 后缀字段（`NPParentCompanyCutYOY_Q`、`NPParentCompanyYOY_Q`、`TORGrowRate_Q`、`OperatingRevenueGrowRate_Q`）都是**单季**同比；累计口径只有 `NPParentCompanyYOY`（归母）/`TORGrowRate`（营收）可直接用，**扣非累计同比必须自算**（本期 vs 去年同期 `NPDeductNonRecurringPL`）——力量钻石 2026H1 扣非累计 +1249.33%，而 `_Q` 字段给 +12839%（Q2 单季），差 10 倍。另外**亏损公司 `NPParentCompanyYOY` 为正 = 亏损收窄**，渲染成红色「+25.7%」会被误读为增长。
+- **同花顺板块指数 `bk_885xxx` 日期格式为 `YYYYMMDD`**（8 位无横线），与 westock 的 `YYYY-MM-DD` 混入同一套指标计算前必须归一化。
+- 早期落盘的板块 JSON（`out/ths_concept_all.json`）`name` 字段是**双重转义字面量**（`'\u57f9\u80b2\u94bb\u77f3'`），用中文做 `in` 匹配会全部失败；改用 `chr()` 码点构造关键词或 `unicode_escape` 还原。
+- **同名 key 的残留赋值会静默覆盖正确值**（`K["ZBJ_FLOW20"]` 被后面一行旧的 `*0` 赋值覆盖成 0）。改生成脚本后必须重新截图核对关键数字，不能只看占位符无残留。
 
 ## 报告规范
 
@@ -56,6 +62,7 @@
 - 小样本 + 极端值必看**中位数**（如 2024 年节前 10 日 +22.8% 会把均值拉偏）。
 - **双基准分解（剥离首日跳空）**：算「事件后 N 日」同时给 `close(T+N)/close(T-1)`（含跳空）与 `close(T+N)/close(T+1)`（剔除首日），差额 = 首日贡献。A 股国庆节后 5 日中首日贡献 ≈85%。
 - **用「环境档」替代「日历标签」**：季节性按**市场状态**切分才有解释力，已验证变量=**当年 1-8 月累计涨幅**（强势 >+10% / 震荡 ±10% / 弱势 <-10%）；10 月胜率随档位单调下降（88.9%/30.8%/28.6%）。
+- **培育钻石（2026「叙事重构」标本，2026-09-17）**：市场从「珠宝周期股」重定价为「AI 算力散热材料股」。核心 TOP3 = 力量钻石(301071) / 黄河旋风(600172) / 四方达(300179)。**核心结论：涨的是预期，赚的是现状**——2026H1 板块利润改善来自工业金刚石涨价 + 培育钻石价格企稳，散热业务公司自述「尚未对主营业务及收入产生影响」（方正证券口径 2026 年 AI 芯片渗透率仅 1%）。结构是「上半年主升 +161%~+301% → 7-8 月深调 -14%~-37%（YTD 最大回撤 49%~54%）→ 9 月二波」，**只看 YTD 涨幅会严重误判当前位置**。板块内分层残酷：材料端普涨，消费/渠道端（潮宏基 -27%、豫园 -11%、中国黄金 -6%）YTD 下跌、9 月仍在跌。中兵红箭反差最大：市值最大、YTD -16.6% 垫底、20 日主力净流出 3 亿，且公司自述「业绩回暖与散热概念关联不大」。
 
 ## 自建等权指数（板块复盘）— 模板见 PCB 板块 8 月复盘
 
@@ -70,6 +77,7 @@
 - 季节性（81 品种月线）：`seasonality_fetch_tx2.py` → `seasonality_analyze.py` → `seasonality_report.py`
 - 日历效应（9 指数日线）：`oct_fetch_daily.py` → `oct_analyze.py` / `oct_extra.py` → `oct_report.py`
 - 渲染自检：`scripts/_shot.py <html相对路径> [滚动位置...]`、`scripts/_check_js.py <html>`
+- **板块核心标的分析（泛化模板）**：`dia_fetch.py`（westock kline/quote + 同花顺板块指数 + 基准）→ `dia_fin.py`（利润表 6 期 + 资金流）→ `dia_analyze.py`（YTD / 分阶段 / 最大回撤 / 量能比）→ `dia_report.py` + `_dia_tpl.html`（占位符替换出 HTML）。换板块只需改 `POOL` 名单与板块指数代码。已在培育钻石板块跑通（2026-09-17）。
 
 ## 已封装 skill
 

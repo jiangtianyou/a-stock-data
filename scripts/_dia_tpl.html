@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>培育钻石板块核心 TOP3 分析（截至 __ASOF__）</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; background:#f7f8fa; color:#2b2f36; line-height:1.65; }
+  .wrap { max-width:1140px; margin:0 auto; padding:28px 20px 60px; }
+  h1 { font-size:26px; margin-bottom:6px; color:#1e242c; }
+  .sub { color:#8a919c; font-size:13px; margin-bottom:24px; }
+  h2 { font-size:19px; margin:38px 0 14px; padding-left:10px; border-left:4px solid #3b82f6; color:#1f2937; }
+  h3 { font-size:15px; margin:22px 0 8px; color:#374151; }
+  p { font-size:14px; margin:10px 0; }
+  .tldr { background:#fff; border:1px solid #e8eaee; border-radius:10px; padding:20px 22px; margin-bottom:12px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .tldr li { margin:9px 0 9px 18px; font-size:14px; }
+  .cards { display:flex; gap:14px; flex-wrap:wrap; margin:18px 0; }
+  .card { flex:1; min-width:290px; background:#fff; border:1px solid #e8eaee; border-radius:10px; padding:16px 18px; box-shadow:0 1px 3px rgba(0,0,0,.04); }
+  .card .name { font-size:14px; color:#6b7280; font-weight:600; }
+  .card .big { font-size:30px; font-weight:700; margin:6px 0 8px; }
+  .up { color:#dc2626; } .down { color:#16a34a; } .muted { color:#9ca3af; font-size:12.5px; }
+  .card .meta { font-size:12.8px; color:#4b5563; line-height:1.75; }
+  table { width:100%; border-collapse:collapse; background:#fff; font-size:13.2px; border:1px solid #e8eaee; border-radius:8px; overflow:hidden; margin:14px 0; }
+  th { background:#f3f4f6; padding:10px 9px; text-align:left; font-weight:600; color:#374151; white-space:nowrap; font-size:12.6px; }
+  td { padding:9px; border-top:1px solid #f3f4f6; }
+  tr:hover td { background:#f9fafb; }
+  .chart { width:100%; background:#fff; border:1px solid #e8eaee; border-radius:10px; padding:12px; box-shadow:0 1px 3px rgba(0,0,0,.04); margin-bottom:16px; }
+  .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:12px; margin-right:4px; vertical-align:1px; font-weight:500; }
+  .tag-blue { background:#eff6ff; color:#2563eb; }
+  .tag-purple { background:#f5f3ff; color:#7c3aed; }
+  .tag-red { background:#fef2f2; color:#dc2626; }
+  .tag-gray { background:#f3f4f6; color:#4b5563; }
+  .tag-green { background:#f0fdf4; color:#16a34a; }
+  .box { background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:18px 20px; margin:16px 0; }
+  .box h4 { font-size:15px; margin-bottom:8px; color:#111827; }
+  .box ul { margin-left:20px; font-size:13.6px; line-height:1.8; }
+  .fact { border-left:4px solid #16a34a; background:#f0fdf4; padding:12px 16px; border-radius:0 8px 8px 0; margin:12px 0; font-size:13.6px; }
+  .spec { border-left:4px solid #dc2626; background:#fef2f2; padding:12px 16px; border-radius:0 8px 8px 0; margin:12px 0; font-size:13.6px; }
+  .warn { border-left:4px solid #f59e0b; background:#fffbeb; padding:12px 16px; border-radius:0 8px 8px 0; margin:12px 0; font-size:13.6px; }
+  .hl { color:#2563eb; font-weight:600; }
+  .g { color:#16a34a; font-weight:600; }
+  .r { color:#dc2626; font-weight:600; }
+  .tl { position:relative; margin:18px 0 8px 6px; padding-left:26px; border-left:2px solid #e5e7eb; }
+  .tl .ev { position:relative; margin-bottom:16px; font-size:13.6px; }
+  .tl .ev::before { content:''; position:absolute; left:-33px; top:6px; width:9px; height:9px; border-radius:50%; background:#3b82f6; border:2px solid #fff; box-shadow:0 0 0 2px #dbeafe; }
+  .tl .ev b { color:#1f2937; }
+  .tl .ev .dt { display:inline-block; min-width:74px; color:#2563eb; font-weight:600; }
+  .foot { margin-top:40px; padding-top:16px; border-top:1px solid #e8eaee; color:#8a919c; font-size:12.2px; line-height:1.9; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>培育钻石板块核心 TOP3 分析</h1>
+  <div class="sub">
+    数据时点：__ASOF__（盘中） | 标的池：培育钻石概念全样本 __N_STOCK__ 只 | 基准：沪深300 / 创业板指 / 同花顺培育钻石指数(bk_885937)<br>
+    数据来源：westock（行情 / 财务 / 资金流）+ 公司公告 + 权威财经媒体（中国证券报、上海证券报、财联社、证券市场周刊）
+  </div>
+
+  <div class="tldr">
+    <b>TL;DR 核心结论</b>
+    <ul>
+      <li><b>一场身份切换，不是一次业绩行情。</b>板块正在被市场从「珠宝周期股」重新定价为「AI 算力散热材料股」。但 <span class="r">2026H1 板块业绩回暖的真实驱动是工业金刚石涨价 + 培育钻石价格企稳，金刚石散热尚未贡献实质营收</span>——涨的是预期，赚的是现状。</li>
+      <li><b>「YTD 涨幅」具有欺骗性。</b>三家核心标的 YTD 分别 <span class="r">__LD_YTD__% / __HH_YTD__% / __SF_YTD__%</span>，但全部在 7-8 月经历深调（__JUL_AUG_WORST__% ~ __JUL_AUG_BEST__%），YTD 最大回撤 __MDD_MIN__% ~ __MDD_MAX__%，当前距 YTD 高点仍有 <span class="g">__LD_FROMHI__% / __HH_FROMHI__% / __SF_FROMHI__%</span>。这是<b>两波行情</b>，不是单边上涨。</li>
+      <li><b>三家定位完全不同。</b><b>力量钻石</b>是唯一业绩兑现者（扣非 +__LD_CUT_G__%），估值最便宜但股价涨得最少、距高点最远；<b>黄河旋风</b>产业化标签最硬（国内首条 8 英寸 CVD 热沉线）但财务最危险（资产负债率 __HH_BAL__%、PB __HH_PB__ 倍）；<b>四方达</b>弹性最强、散热片已小批量供货，但估值最贵（PE __SF_PE__ 倍）。</li>
+      <li><b>板块内部分层极其残酷。</b>材料端普涨，消费/渠道端（潮宏基 __CONS_LOSS__%、豫园股份、中国黄金）YTD 下跌且 9 月仍在跌。同一「板块」，涨与不涨是两件完全不同的事。</li>
+      <li><b>超额收益巨大但波动是同量级的。</b>同期沪深300 YTD __HS300_YTD__%、9月 __HS300_SEP__%，板块整体大幅跑赢；但个股回撤 -50% 级别，创业板指同期最大回撤仅 __CYB_MDD__%。</li>
+    </ul>
+  </div>
+
+  <h2>一、核心 TOP3 速览（2026-09-17）</h2>
+  <div class="cards">
+__CARDS__
+  </div>
+
+  <h2>二、TOP3 是怎么选出来的：筛选口径与全样本分层</h2>
+  <p>培育钻石并非单一赛道。把概念池 <b>__N_STOCK__ 只</b>按「产业链位置 + 业务纯度 + 产业化进度 + 业绩兑现 + 资金关注度」五维拆开后，板块内部裂成四层，这是理解本轮行情的第一前提：</p>
+  <table>
+    <thead>
+      <tr><th>层级</th><th>代表标的</th><th>本轮表现</th><th>市场定价逻辑</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>① 材料/制造端</b><span class="tag tag-red">核心</span></td>
+          <td>力量钻石、黄河旋风、四方达、中兵红箭、国机精工、惠丰钻石、沃尔德</td>
+          <td class="up">普涨，YTD +48% ~ +202%</td>
+          <td>AI 芯片散热材料，按「半导体材料」重估</td></tr>
+      <tr><td><b>② 设备/加工端</b></td>
+          <td>晶盛机电、英诺激光、国力电子</td>
+          <td>分化（英诺激光 +91%，晶盛机电 +11%）</td>
+          <td>跟随放量，但主体业务不在金刚石，纯度稀释</td></tr>
+      <tr><td><b>③ 消费/渠道端</b></td>
+          <td>潮宏基、豫园股份、中国黄金</td>
+          <td class="down">YTD 下跌（__CONS_LOSS__% ~ -6%）</td>
+          <td>仍按珠宝零售定价，消费复苏不及预期</td></tr>
+      <tr><td><b>④ 跨界概念</b></td>
+          <td>恒盛能源、恒林股份、亚振家居</td>
+          <td>基本没涨（-2% ~ +6%）</td>
+          <td>题材跟随，无业务支撑</td></tr>
+    </tbody>
+  </table>
+  <p><b>筛选结论：</b>真正的「核心」必须同时满足 ①材料/制造端 ②业务纯度足够 ③有可追溯的散热产能或客户验证动作。据此得到 <b>力量钻石、黄河旋风、四方达</b>——三家也是卖方与权威媒体口径中最集中的「具备技术储备、产能布局和客户验证进展」的主体。</p>
+  <div class="warn">
+    <b>为什么不是中兵红箭？</b>论体量它是板块内最大（市值约 211 亿、中南钻石拥有全球最大工业金刚石产能），但 YTD <span class="down">__ZBJ_YTD__%</span> 位列板块倒数第三，主力资金近 20 日净流出 <span class="g">__ZBJ_FLOW20__ 亿</span>。关键原因是<b>公司自己明确表示「2026 上半年超硬材料板块业绩回暖，与金刚石散热概念关联并不大」</b>，且军工业务占其营收约 65%，散热纯度被严重稀释。
+  </div>
+
+  <h2>三、TOP3 核心指标对比</h2>
+  <table>
+    <thead>
+      <tr><th>指标</th><th>代码</th><th>YTD 涨幅</th><th>1-6月</th><th>7-8月</th><th>9月以来</th>
+          <th>最新价</th><th>市值(亿)</th><th>PE(TTM)</th><th>PB</th><th>YTD高点</th><th>距高点</th>
+          <th>YTD最大回撤</th><th>日均额(近5日/YTD,亿)</th><th>换手率</th></tr>
+    </thead>
+    <tbody>
+__ROWS_CORE__
+    </tbody>
+  </table>
+  <div class="warn">
+    <b>三个必须看清的背离：</b><br>
+    ① <b>涨幅 vs 业绩背离</b>：力量钻石业绩最好（扣非 +__LD_CUT_G__%），YTD 涨幅却最低（__LD_YTD__%）；四方达业绩增速最慢（归母 +__SF_NP_G__%），YTD 涨幅最高（__SF_YTD__%）。市场买的是<b>散热的「纯度」与「想象空间」</b>，不是当期利润。<br>
+    ② <b>距高点 vs 抗跌背离</b>：黄河旋风距高点仅 __HH_FROMHI__%（最抗跌），但它的基本面是三家中最差的——这恰恰是「低价股 + 硬标签」在题材行情中的典型表现。<br>
+    ③ <b>量能 vs 涨幅背离</b>：黄河旋风近 5 日日均成交额达 <b>__HH_AMT__ 亿</b>，为三家中最高，换手 13%+，说明主导资金是<b>高换手情绪资金</b>而非配置资金。
+  </div>
+
+  <h2>四、走势结构：两波行情，一轮腰斩</h2>
+  <p>把 2026 年切开看，板块的走势是「<b>上半年主升 → 7-8 月深调 → 9 月二波启动</b>」，而不是一条上升曲线。这一点直接决定了当前的风险收益比。</p>
+  <div id="chart-norm" class="chart" style="height:470px;"></div>
+  <p class="muted">归一化基准 2025-12-31 = 100。同花顺培育钻石指数自 2026-02-27 起有数据（此前留空）。</p>
+  <div id="chart-stage" class="chart" style="height:400px;"></div>
+
+  <div class="box">
+    <h4>三阶段节奏还原</h4>
+    <ul>
+      <li><b>阶段一（1-6 月）｜逻辑点火与主升</b>：CES 2026 上英伟达官宣 Vera Rubin 采用「金刚石铜复合散热盖 + 45℃ 温水直液冷」，板块从珠宝消费逻辑切换到 AI 散热逻辑，三家区间涨幅 <span class="r">+161% ~ +301%</span>，6 月 25 日前后同步见顶。</li>
+      <li><b>阶段二（7-8 月）｜预期落空式深调</b>：中报披露期，市场发现散热<b>并没有贡献营收</b>，叠加科技板块整体调整，三家回撤 <span class="g">__JUL_AUG_BEST__% ~ __JUL_AUG_WORST__%</span>，最大回撤达 __MDD_MIN__% ~ __MDD_MAX__%。黄河旋风因盘子大、低价股属性，回撤最浅（-13.9%）。</li>
+      <li><b>阶段三（9 月至今）｜产业催化二次点火</b>：8 月英伟达财报电话会确认 Vera Rubin 全面投产、2026 年秋季规模出货，9 月国产 8 英寸热沉量产线、金刚石铜在郑州超算规模化应用等消息密集落地，板块重启。9 月板块指数 <span class="r">__SEC_SEP__%</span>，领涨的是 <b>__SEP_LEAD_NM__（+__SEP_LEAD__%）</b>等高纯度小市值标的。</li>
+    </ul>
+  </div>
+
+  <h2>五、叙事重构：从「种钻石」到「种退烧贴」</h2>
+  <p>本轮行情的定价锚不是利润，而是一条产业时间线。理解它，才能判断行情处在哪个位置。</p>
+  <div class="tl">
+    <div class="ev"><span class="dt">2026-01</span><b>CES 2026：英伟达官宣 Vera Rubin 采用「金刚石铜复合散热 + 45℃ 温水直液冷」</b>，黄仁勋称「风冷时代已结束」。行业预期破冰，金刚石被写入下一代算力硬件标准。</div>
+    <div class="ev"><span class="dt">2026-02</span><b>国内首条 8 英寸 CVD 金刚石热沉量产线投产</b>（黄河旋风子公司风优创，一期 50 台 MPCVD、良率 85%+、热导率 2000-2200 W/(m·K)）；海外 Akash Systems 交付首批金刚石冷却 H200 服务器。</div>
+    <div class="ev"><span class="dt">2026-04</span><b>中科院宁波材料所金刚石铜散热模组在郑州国家超算中心规模化部署</b>，传热能力提升 80%、芯片性能提升 10%；四方达 CVD 散热片通过海外客户测试。</div>
+    <div class="ev"><span class="dt">2026-05</span><b>纬颖科技确认金刚石复合冷板将成 Vera Rubin NVL72 标配</b>；央视财经 9 分钟专题报道「金刚石散热进入商用元年」。黄河旋风发布金刚石-碳化硅复合材料（热膨胀系数 2.6ppm/℃）。</div>
+    <div class="ev"><span class="dt">2026-06</span><b>力量钻石将 10.28 亿元培育钻石扩产募资变更投向「金刚石功能材料项目」</b>——头部企业战略重心正式从珠宝毛坯切向 AI 散热，被视为行业标志性事件。</div>
+    <div class="ev"><span class="dt">2026-08</span><b>英伟达财报电话会确认 Vera Rubin 全面投产、秋季规模出货</b>，板块预期二次点火。</div>
+    <div class="ev"><span class="dt">2026-09</span>板块连续异动，9/3、9/9、9/14 多日集体拉升，成交显著放大。</div>
+  </div>
+
+  <h2>六、基本面：业绩兑现 vs 预期演绎</h2>
+  <p>这一节是全文最重要的一节。板块的「故事」在散热，「利润」在传统业务，两者之间存在明显时滞。</p>
+  <table>
+    <thead>
+      <tr><th>标的</th><th>2026H1 营收(亿)</th><th>营收同比</th><th>归母净利(亿)</th><th>净利同比</th>
+          <th>毛利率</th><th>资产负债率</th><th>经营现金流(亿)</th><th>加权ROE</th></tr>
+    </thead>
+    <tbody>
+__ROWS_FIN__
+    </tbody>
+  </table>
+
+  <div class="fact">
+    <b>事实依据（一手来源）：</b>
+    <ul>
+      <li><b>行业回暖 = 工业金刚石涨价</b>。2026 年 3 月起上游石墨、金属触媒成本上涨，全行业发布工业金刚石调价函；惠丰钻石 5 月 1 日起对工业金刚石系列提价 8%-12%。东吴证券明确指出：「<b>短期业绩修复主要由工业金刚石涨价驱动，而非散热业务放量</b>」。</li>
+      <li><b>散热业务尚未贡献实质营收</b>。力量钻石在股票异动公告中明确表示：「目前金刚石散热应用场景尚未达到大规模市场化应用阶段，<b>未对公司主营业务及收入产生影响</b>」。黄河旋风半年报亦称功能性金刚石业务「<b>暂未对公司生产经营情况造成重大影响</b>」。</li>
+      <li><b>渗透率极低</b>。方正证券预测 2026 年金刚石散热在 AI 芯片领域的渗透率<b>仅为 1%</b>，行业整体处于客户验证到小批量导入阶段。</li>
+    </ul>
+  </div>
+  <div class="spec">
+    <b>市场预期演绎（需谨慎对待）：</b>
+    <ul>
+      <li>券商对 2030 年金刚石散热市场规模的测算跨度极大：华西证券中性 188 亿 / 乐观 312 亿；中泰证券 592 亿；国泰海通中性 516 亿 / 乐观超 1000 亿。差异源于对渗透率的假设不同，<b>不构成对当前股价的支撑依据</b>。</li>
+      <li>个别媒体出现「力量钻石已进入英伟达 GPU 散热正式认证体系并稳定批量供货」的表述，<b>与公司「尚未产生收入」的公告口径存在冲突</b>，建议以公司公告为准。</li>
+      <li>黄河旋风「产品已通过华为、中芯国际、比亚迪等验证并进入量产」的说法见于第三方研报汇编，未见公司正式公告逐项确认。</li>
+    </ul>
+  </div>
+
+  <h2>七、TOP3 逐一剖析</h2>
+
+  <div class="box">
+    <h4>力量钻石（301071）<span class="tag tag-blue">唯一业绩兑现者</span></h4>
+    <ul>
+      <li><b>基本面</b>：2026H1 营收 <b>__LD_REV__ 亿</b>（+__LD_REV_G__%）、归母净利 0.90 亿（+__LD_NP_G__%）、<b>扣非净利 +__LD_CUT_G__%</b>，毛利率 __LD_GM__%。大颗粒金刚石收入 2.97 亿、占比 67.83%、同比 +141.93%。资产负债率仅 <b>__LD_BAL__%</b>，账上现金 12.3 亿，财务三家中最干净。</li>
+      <li><b>技术</b>：培育出 247.82 克拉全球最大人工培育钻石单晶，HPHT 大颗粒技术全球领先。</li>
+      <li><b>散热布局</b>：6 月将 10.28 亿元募资变更投向「金刚石功能材料生产研发建设项目」，聚焦散热材料、光学材料、声学振膜；已与多家国内半导体、科技企业推进送样测试。</li>
+      <li><b>盘面</b>：YTD __LD_YTD__%，是三家中涨幅最低、距高点最远（__LD_FROMHI__%）的；PE(TTM) __LD_PE__ 倍、PB __LD_PB__ 倍，估值三家中最合理。</li>
+      <li><b>利润质量瑕疵</b>：上半年投资收益 2801.78 万元，占利润总额 <b>24.28%</b>；19.31 亿元闲置募集资金用于理财。<span class="muted">剔除理财收益后，主业利润成色需打折看待。</span></li>
+      <li><b>市场认知落差</b>：它的技术路线以 HPHT 为主，CVD 热沉片布局在三家中最晚，因此被视为「散热纯度不足」——<b>业绩最好，反而涨得最少</b>。这是本板块最典型的定价错位。</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h4>黄河旋风（600172）<span class="tag tag-red">产业化标签最硬 · 财务风险最高</span></h4>
+    <ul>
+      <li><b>产业化进度第一</b>：子公司风优创 2026 年 2 月投产<b>国内首条 8 英寸金刚石热沉量产线</b>，一期 50 台 MPCVD、良率 85%+；规划 3 年投资 20 亿元、配置 300 台 MPCVD、年产 15 万片热沉片，目标把热管理做成第一大主业。国内唯一同时掌握 HPHT 与 CVD 双量产路线的企业。</li>
+      <li><b>财务是最硬的约束</b>：2026H1 营收 __HH_REV__ 亿（+__HH_REV_G__%），但归母净利 <span class="g">__HH_LOSS__ 亿</span>；<b>2023-2025 连续三年亏损，累计超 27 亿元</b>；资产负债率 __HH_BAL__%，产权比率约 1767%，每股净资产仅 0.23 元 → <b>PB 高达 __HH_PB__ 倍</b>。</li>
+      <li><b>亏损主因</b>系历史包袱（收购上海明匠智能系统遗留的财务问题），并非主业——超硬材料毛利率 11.54%、公司整体毛利率 16.02%（同比 +10.12pp），主业确在改善。</li>
+      <li><b>盘面</b>：YTD __HH_YTD__%，距高点仅 __HH_FROMHI__%（最抗跌），近 5 日日均成交额 <b>__HH_AMT__ 亿</b>（三家最高），换手 13%+，是典型的<b>高换手情绪资金主导</b>标的。</li>
+      <li><b>核心矛盾</b>：股价定价的是「8 英寸热沉 + 三年 15 万片」的产能故事，而公司自身净资产已近乎耗尽。<span class="r">一旦题材退潮，缺乏基本面承接。</span></li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h4>四方达（300179）<span class="tag tag-purple">弹性第一 · 估值最贵</span></h4>
+    <ul>
+      <li><b>业务</b>：CVD 金刚石热沉片领域走得最快——子公司天璇半导体 CVD 散热片热导率 2000 W/(m·K) 以上，<b>已通过海外客户测试并进入小批量供货</b>；新疆沙雅年产 2.5 万片 CVD 金刚石散热晶圆基地推进中（预计 2027Q1 投产）。</li>
+      <li><b>业绩</b>：2026H1 营收 __SF_REV__ 亿（+__SF_REV_G__%）、归母净利 __SF_NP__ 亿（+__SF_NP_G__%），毛利率 __SF_GM__%（三家中最高）。</li>
+      <li><b>第二成长曲线</b>：6 月 30 日发布定增预案，拟募资不超 20 亿元，其中 18.46 亿元投向「金刚石钻针产业化项目」——瞄准 AI 服务器高端 PCB（M9 覆铜板）钻孔耗材替代。</li>
+      <li><b>盘面</b>：YTD <b>__SF_YTD__%</b>（板块第一），上半年一度 +__SF_H1__%，随后回撤 -37.4%。9 月以来 +20.2%，弹性最强。</li>
+      <li><b>风险</b>：PE(TTM) <b>__SF_PE__ 倍</b>、PB __SF_PB__ 倍，为三家中最贵；20 亿定增若落地存在摊薄；散热片目前仍是「小批量供货」，收入占比有限。</li>
+    </ul>
+  </div>
+
+  <h2>八、板块分层证据：谁在真涨，谁在陪跑</h2>
+  <p>把 17 只样本按 YTD 涨幅排序，分层清晰得几乎不需要解释。下图条越长代表涨幅越大（<span class="r">红 = 涨</span>，<span class="g">绿 = 跌</span>）：</p>
+  <div id="chart-rank" class="chart" style="height:460px;"></div>
+  <div id="chart-amt" class="chart" style="height:400px;"></div>
+  <div class="box">
+    <h4>量能说明什么</h4>
+    <ul>
+      <li><b>材料端普遍放量</b>：力量钻石、黄河旋风、四方达、惠丰钻石近 5 日日均成交额均高于 YTD 均值（量能比 &gt;1.3），说明 9 月这波是有增量资金参与的，不只是存量博弈。</li>
+      <li><b>消费端被彻底抛弃</b>：潮宏基量能比仅 0.38、中国黄金 0.42、晶盛机电 0.19——资金不仅不买，还在持续撤离。</li>
+      <li><b>资金流向印证分层</b>（近 20 日主力净额）：国机精工 +7.4 亿、力量钻石 +6.0 亿、四方达 +4.7 亿、沃尔德 +4.4 亿；而中兵红箭 <span class="g">-3.0 亿</span>、晶盛机电 -2.2 亿。</li>
+    </ul>
+  </div>
+
+  <h2>九、估值坐标：预期打到了哪一年</h2>
+  <table>
+    <thead>
+      <tr><th>标的</th><th>PE(TTM)</th><th>PB</th><th>2026E 一致预期净利增速</th><th>对应 2026E PE</th><th>散热业务当前状态</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>力量钻石</b></td><td>__LD_PE__</td><td>__LD_PB__</td><td>约 +117%</td><td>约 66 倍</td><td>送样/研发阶段，未产生收入</td></tr>
+      <tr><td><b>四方达</b></td><td>__SF_PE__</td><td>__SF_PB__</td><td>约 +81%</td><td>约 111 倍</td><td>已通过海外客户测试，小批量供货</td></tr>
+      <tr><td><b>黄河旋风</b></td><td class="down">亏损</td><td>__HH_PB__</td><td>无一致预测</td><td>--</td><td>8 英寸热沉线已投产，公司称尚无重大影响</td></tr>
+      <tr><td>中兵红箭</td><td>176.4</td><td>2.03</td><td>约 +991%（低基数）</td><td>约 48 倍</td><td>热沉材料向服务器芯片送样，Q4 计划小批量</td></tr>
+      <tr><td>沃尔德</td><td>171.9</td><td>9.19</td><td>约 +50%</td><td>约 110 倍</td><td>12 英寸 CVD 热沉片测试中，台系客户已下单</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">一致预期数据来源：方正证券（2026-09-07 收盘口径），转引自第三方研报汇编；黄河旋风、惠丰钻石暂无一致盈利预测。<b>高 PE 对应的是功能材料放量的「如果」，兑现节奏取决于客户认证与订单，这正是风险所在。</b></p>
+
+  <h2>十、风险提示</h2>
+  <div class="warn">
+    <ul>
+      <li><b>产业化进度不及预期</b>：金刚石散热整体处于客户认证 → 小批量导入早期，方正证券口径 2026 年渗透率仅约 1%。MPCVD 规模化落地 8 英寸晶圆仍受大腔体等离子均匀性、连续生长速率等物理约束（中信建投）。</li>
+      <li><b>估值已透支多年业绩</b>：四方达 PE(TTM) __SF_PE__ 倍、黄河旋风 PB __HH_PB__ 倍，均建立在「散热业务放量」的假设之上，而该业务当前尚未产生收入。</li>
+      <li><b>业绩驱动力错配</b>：上半年利润改善来自工业金刚石涨价，属于周期变量；一旦原材料价格回落或行业扩产，毛利率修复可能逆转。</li>
+      <li><b>波动极大</b>：三家 YTD 最大回撤 __MDD_MIN__% ~ __MDD_MAX__%，同期创业板指最大回撤仅 __CYB_MDD__%。7-8 月已完整演示过一轮「预期落空 → 腰斩式回踩」。</li>
+      <li><b>个股财务风险</b>：黄河旋风资产负债率 __HH_BAL__%、连续三年亏损、每股净资产仅 0.23 元，需重点跟踪其偿债与再融资进展。</li>
+      <li><b>利润质量</b>：力量钻石投资收益占利润总额 24.28%，剔除理财收益后主业盈利水平需重新评估。</li>
+      <li><b>概念纯度参差</b>：板块内多只标的金刚石业务占比极低，题材退潮时缺乏支撑。</li>
+    </ul>
+  </div>
+
+  <div class="foot">
+    <b>数据与口径说明</b><br>
+    1. 行情数据来自 westock（行情接口），数据时点 __ASOF__ 盘中，非最终收盘价，可能与收盘数据存在小幅差异。<br>
+    2. 板块指数为同花顺培育钻石概念指数（bk_885937），区间起点 2026-02-27。<br>
+    3. YTD 涨幅以 2025-12-31 收盘为基准；最大回撤为 2026 年内收盘价口径（非盘中最高/最低）。<br>
+    4. 财务数据为 2026 年半年报口径（EndDate=2026-06-30），资产负债率取自 westock 资产负债表 DebtAssetsRatio 字段。<br>
+    5. 文中「事实依据」均来自公司公告或权威财经媒体（中国证券报、上海证券报、财联社、证券市场周刊）；「市场预期演绎」来自券商研报或第三方汇编，已单独标注，<b>不构成投资建议</b>。<br>
+    6. 本报告仅为数据整理与逻辑梳理，<b>不构成任何买卖建议</b>。市场有风险，决策需独立判断。
+  </div>
+</div>
+
+<script>
+  function lineChart(dom, axis, series, h) {
+    var chart = echarts.init(document.getElementById(dom));
+    chart.setOption({
+      title: { text: '2026 年以来归一化净值走势（2025-12-31 = 100）', left: 'center', top: 6,
+               textStyle: { fontSize: 14, color: '#374151' } },
+      tooltip: { trigger: 'axis' },
+      legend: { data: series.map(function (s) { return s.name; }), top: 32, left: 'center' },
+      grid: { left: '4%', right: '5%', bottom: '10%', top: 82, containLabel: true },
+      xAxis: { type: 'category', data: axis,
+               axisLabel: { formatter: function (v) { return v.substring(5); }, interval: 12 } },
+      yAxis: { type: 'value', scale: true, name: '净值',
+               splitLine: { lineStyle: { color: '#f3f4f6', type: 'dashed' } } },
+      series: series
+    });
+    window.addEventListener('resize', function () { chart.resize(); });
+    return chart;
+  }
+
+  lineChart('chart-norm', __AXIS__, [
+    { name: '力量钻石', type: 'line', data: __S_LD__, smooth: true, connectNulls: false,
+      lineStyle: { width: 2.6, color: '#2563eb' }, itemStyle: { color: '#2563eb' }, symbol: 'none' },
+    { name: '黄河旋风', type: 'line', data: __S_HH__, smooth: true, connectNulls: false,
+      lineStyle: { width: 2.6, color: '#dc2626' }, itemStyle: { color: '#dc2626' }, symbol: 'none' },
+    { name: '四方达', type: 'line', data: __S_SF__, smooth: true, connectNulls: false,
+      lineStyle: { width: 2.6, color: '#7c3aed' }, itemStyle: { color: '#7c3aed' }, symbol: 'none' },
+    { name: '培育钻石指数', type: 'line', data: __S_SEC__, smooth: true, connectNulls: false,
+      lineStyle: { width: 1.8, color: '#f59e0b' }, itemStyle: { color: '#f59e0b' }, symbol: 'none' },
+    { name: '沪深300', type: 'line', data: __S_HS__, smooth: true, connectNulls: false,
+      lineStyle: { width: 1.5, type: 'dashed', color: '#9ca3af' }, itemStyle: { color: '#9ca3af' }, symbol: 'none' }
+  ]);
+
+  (function () {
+    var chart = echarts.init(document.getElementById('chart-stage'));
+    var raw = __STAGE_SERIES__;
+    chart.setOption({
+      title: { text: 'TOP3 分阶段涨跌幅：上半年主升 → 7-8月深调 → 9月二次启动', left: 'center', top: 6,
+               textStyle: { fontSize: 14, color: '#374151' } },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+                 valueFormatter: function (v) { return v + '%'; } },
+      legend: { top: 32, left: 'center', data: raw.map(function (s) { return s.name; }) },
+      grid: { left: '4%', right: '5%', bottom: '8%', top: 82, containLabel: true },
+      xAxis: { type: 'category', data: __STAGE_NAMES__,
+               axisLabel: { fontSize: 12.5 } },
+      yAxis: { type: 'value', name: '涨跌幅 %',
+               splitLine: { lineStyle: { color: '#f3f4f6', type: 'dashed' } } },
+      series: raw.map(function (s) {
+        return { name: s.name, type: 'bar', data: s.data, barGap: '12%',
+                 itemStyle: { color: s.color, borderRadius: [3, 3, 0, 0] },
+                 label: { show: true, position: 'top', fontSize: 11.5,
+                          formatter: function (p) { return p.value + '%'; } } };
+      })
+    });
+    window.addEventListener('resize', function () { chart.resize(); });
+  })();
+
+  (function () {
+    var chart = echarts.init(document.getElementById('chart-rank'));
+    var raw = __BAR__;
+    var names = raw.map(function (x) { return x[0]; });
+    var vals = raw.map(function (x) { return x[1]; });
+    chart.setOption({
+      title: { text: '培育钻石概念全样本 YTD 涨跌幅排名（%）', left: 'center', top: 6,
+               textStyle: { fontSize: 14, color: '#374151' } },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+                 valueFormatter: function (v) { return v + '%'; } },
+      grid: { left: '4%', right: '10%', bottom: '4%', top: 50, containLabel: true },
+      xAxis: { type: 'value', name: 'YTD %',
+               splitLine: { lineStyle: { color: '#f3f4f6', type: 'dashed' } } },
+      yAxis: { type: 'category', data: names.slice().reverse(), axisLabel: { fontSize: 12, interval: 0 } },
+      series: [{
+        type: 'bar', data: vals.slice().reverse().map(function (v) {
+          return { value: v, itemStyle: { color: v >= 0 ? '#dc2626' : '#16a34a', borderRadius: [0, 3, 3, 0] } };
+        }),
+        label: { show: true, position: 'right', fontSize: 11.5,
+                 formatter: function (p) { return p.value + '%'; } }
+      }]
+    });
+    window.addEventListener('resize', function () { chart.resize(); });
+  })();
+
+  (function () {
+    var chart = echarts.init(document.getElementById('chart-amt'));
+    chart.setOption({
+      title: { text: '成交额：近5日日均 vs 年内日均（亿元）', left: 'center', top: 6,
+               textStyle: { fontSize: 14, color: '#374151' } },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      legend: { top: 32, left: 'center' },
+      grid: { left: '4%', right: '5%', bottom: '8%', top: 82, containLabel: true },
+      xAxis: { type: 'category', data: __AMT_NAMES__, axisLabel: { fontSize: 12 } },
+      yAxis: { type: 'value', name: '亿元',
+               splitLine: { lineStyle: { color: '#f3f4f6', type: 'dashed' } } },
+      series: [
+        { name: '近5日日均', type: 'bar', data: __AMT_A__,
+          itemStyle: { color: '#dc2626', borderRadius: [3, 3, 0, 0] },
+          label: { show: true, position: 'top', fontSize: 11 } },
+        { name: '年内日均', type: 'bar', data: __AMT_B__,
+          itemStyle: { color: '#cbd5e1', borderRadius: [3, 3, 0, 0] },
+          label: { show: true, position: 'top', fontSize: 11 } }
+      ]
+    });
+    window.addEventListener('resize', function () { chart.resize(); });
+  })();
+</script>
+</body>
+</html>
