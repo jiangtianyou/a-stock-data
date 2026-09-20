@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>涨停周报 · 9/14(一) ~ 9/18(五)</title>
+<script src="../assets/echarts.min.js"></script>
+<script>if(typeof echarts==='undefined'){document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"><\/script>');}</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:#1b1f24;font:14px/1.65 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.3px}
+.sub{color:#6b7280;font-size:13px;margin-bottom:22px}
+.card{background:#fff;border:1px solid #e6e8eb;border-radius:12px;padding:20px 22px;margin-bottom:18px}
+h2{font-size:17px;margin:0 0 14px;padding-left:10px;border-left:4px solid #2563eb}
+h3{font-size:14px;margin:18px 0 8px;color:#374151}
+.lead{background:#fff;border:1px solid #e6e8eb;border-left:5px solid #2563eb;border-radius:10px;padding:18px 22px;margin-bottom:18px}
+.lead p{margin:0 0 8px}.lead p:last-child{margin-bottom:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin:16px 0 4px}
+.kpi{background:#fff;border:1px solid #e6e8eb;border-radius:10px;padding:14px 16px}
+.kpi .lbl{font-size:12px;color:#6b7280;margin-bottom:6px}
+.kpi .val{font-size:23px;font-weight:650;letter-spacing:-.5px}
+.kpi .dt{font-size:12px;margin-top:4px}
+.up{color:#d93025}.down{color:#12805c}.mut{color:#9ca3af}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:7px 9px;border-bottom:1px solid #eef0f2;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{background:#fafbfc;color:#4b5563;font-weight:600;font-size:12px}
+tr:hover td{background:#fafbfc}
+.chart{width:100%;height:340px}.chart-lg{width:100%;height:420px}.chart-sm{width:100%;height:280px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+.tag{display:inline-block;background:#eef2ff;color:#3730a3;border-radius:5px;padding:1px 7px;font-size:11px;margin:1px 3px 1px 0}
+.note{font-size:12px;color:#6b7280;line-height:1.75}
+.warn{background:#fff8f1;border:1px solid #f5d9be;border-radius:10px;padding:14px 18px;font-size:13px;color:#7c4a12}
+ul{margin:6px 0 0;padding-left:20px}li{margin:6px 0}
+.hl{font-weight:600;color:#111827}
+.stage{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:6px}
+@media(max-width:820px){.stage{grid-template-columns:1fr}}
+.stg{background:#fafbfc;border:1px solid #e6e8eb;border-radius:10px;padding:12px 13px}
+.stg .d{font-size:12px;color:#6b7280}
+.stg .t{font-size:14px;font-weight:650;margin:3px 0 5px}
+.stg .m{font-size:11.5px;color:#6b7280;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>涨停复盘 · 本周（9/14(一) ~ 9/18(五)）</h1>
+<div class="sub">共 5 个交易日｜口径：沪深两市（不含北交所）｜数据源：同花顺涨停/炸板/跌停池 + 东方财富涨停池 + 腾讯行情快照｜生成 2026-09-20 15:44</div>
+
+<div class="lead">
+<p class="hl">一句话结论：本周走完「缩量分歧 → 地量杀跌 → V 型反转 → 收敛去伪 → 放量二波」五段。
+资金没有离场，只是换了口袋——涨停家数从 9/15 的 32 家杀跌低点，到 9/16 的 89 家极端扩张，
+再到周五 77 家的稳定扩张；周五两市成交额 20,771 亿，创周内新高，较周一 +27.5%。</p>
+<p>质量最好的是周五：<span class="hl">跌停 0 家（全周唯一）、放量、早盘封板占比回到 55.8%、昨涨停股晋级率 25.5%、溢价中位转正 +1.23%</span>。
+但高度在退——最高连板路径为 4→5→6→5→4 板，周内最高标 闽东电力（电力，3→4→5→6 板）断板后无新龙头接棒。
+<span class="hl">这是「宽度驱动」而非「高度驱动」的行情，成败取决于次日承接而非连板效应。</span></p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="lbl">本周涨停合计</div><div class="val up">300</div>
+    <div class="dt mut">日均 60.0 家｜区间 32（9/15）~ 89（9/16）</div></div>
+  <div class="kpi"><div class="lbl">封板率均值</div><div class="val">71.3%</div>
+    <div class="dt mut">区间 57.1%（9/17）~ 89.0%（9/16）</div></div>
+  <div class="kpi"><div class="lbl">周五跌停家数</div><div class="val down">0</div>
+    <div class="dt mut">全周合计 48 家，其中 56.2% 集中在 9/15</div></div>
+  <div class="kpi"><div class="lbl">周五两市成交额</div><div class="val">20,771亿</div>
+    <div class="dt mut">周一 16,292亿 <span class="up">+27.5%</span>｜周均 17,962亿</div></div>
+  <div class="kpi"><div class="lbl">最高连板</div><div class="val">6 板</div>
+    <div class="dt mut">周五回落至 4 板</div></div>
+  <div class="kpi"><div class="lbl">晋级率均值</div><div class="val">22.7%</div>
+    <div class="dt mut">区间 10.1%（9/17）~ 37.5%（9/16）</div></div>
+</div>
+
+<div class="card">
+<h2>一、一周五段：情绪与资金的时间轴</h2>
+<div class="stage">
+  <div class="stg"><div class="d">9/14 周一</div><div class="t">缩量分歧</div>
+    <div class="m">涨停 55 / 炸板 30 / 跌停 16<br>成交 16,292亿<br>封板率 64.7%｜晋级率 27.5%</div></div>
+  <div class="stg"><div class="d">9/15 周二</div><div class="t">地量杀跌</div>
+    <div class="m">涨停 32 / 炸板 24 / 跌停 27<br>成交 16,127亿（全周地量）<br>封板率 57.1%（周内最低）</div></div>
+  <div class="stg"><div class="d">9/16 周三</div><div class="t">V 型反转</div>
+    <div class="m">涨停 89（周内最高）/ 跌停 4<br>成交 18,391亿 +14.0%<br>封板率 89.0%｜溢价均值 +3.65%</div></div>
+  <div class="stg"><div class="d">9/17 周四</div><div class="t">收敛去伪</div>
+    <div class="m">涨停 47 / 跌停 1<br>成交 18,231亿 -0.9%（横住）<br>晋级率 10.1%（周内最低）</div></div>
+  <div class="stg"><div class="d">9/18 周五</div><div class="t">放量二波</div>
+    <div class="m">涨停 77 / 跌停 0<br>成交 20,771亿 +13.9%<br>封板率 75.5%｜早盘封板 55.8%</div></div>
+</div>
+<div class="note" style="margin-top:14px">
+关键读数：<b>9/15 的地量 16,127 亿是本周唯一的「卖压衰竭」信号</b>——当日跌停 27 家为周内最多，
+但成交额同时见底，随后 9/16 即以 2.8 倍的涨停家数回应。周五则相反：
+<b>成交额创周内新高（20,771 亿）而涨停家数（89 家以下）未创新高</b>，属于典型的「量先于价」。
+</div>
+<div id="c_senti" class="chart" style="margin-top:16px"></div>
+<div class="note">柱：涨停/炸板/跌停家数（左轴）；线：封板率（右轴）。9/15（周二）三柱同时走坏、9/16（周三）三柱同时转好，是本周最重要的拐点。</div>
+</div>
+
+<div class="card">
+<h2>二、逐日核心指标</h2>
+<table>
+<tr><th>交易日</th><th>涨停</th><th>炸板</th><th>封板率</th><th>跌停</th><th>最高板</th><th>连板</th><th>首板</th><th>两市成交</th><th>涨停股成交占比</th><th>晋级率</th><th>溢价中位</th><th>早盘封板占比</th></tr>
+<tr><td>9/11(五)</td><td class='hl up'>40</td><td>18</td><td>69.0%</td><td class='down'>21</td><td>4</td><td>7</td><td>33</td><td>19,719亿</td><td>2.1%</td><td>—</td><td>—</td><td>45.0%</td></tr><tr><td>9/14(一)</td><td class='hl up'>55</td><td>30</td><td>64.7%</td><td class='down'>16</td><td>4</td><td>11</td><td>44</td><td>16,292亿</td><td>3.0%</td><td>27.5%</td><td>+0.40%</td><td>52.7%</td></tr><tr><td>9/15(二)</td><td class='hl up'>32</td><td>24</td><td>57.1%</td><td class='down'>27</td><td>5</td><td>7</td><td>25</td><td>16,127亿</td><td>1.9%</td><td>12.7%</td><td>—</td><td>56.2%</td></tr><tr><td>9/16(三)</td><td class='hl up'>89</td><td>11</td><td>89.0%</td><td class='down'>4</td><td>6</td><td>12</td><td>77</td><td>18,391亿</td><td>4.3%</td><td>37.5%</td><td>+1.05%</td><td>33.7%</td></tr><tr><td>9/17(四)</td><td class='hl up'>47</td><td>20</td><td>70.1%</td><td class='down'>1</td><td>5</td><td>9</td><td>38</td><td>18,231亿</td><td>2.0%</td><td>10.1%</td><td>-0.99%</td><td>34.0%</td></tr><tr><td>9/18(五)</td><td class='hl up'>77</td><td>25</td><td>75.5%</td><td class='down'>0</td><td>4</td><td>12</td><td>65</td><td>20,771亿</td><td>2.4%</td><td>25.5%</td><td>+1.23%</td><td>55.8%</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+「晋级率」= 前一交易日涨停股中再度涨停的比例；「溢价中位」= 前一交易日涨停股在当日的涨跌幅中位数；
+「早盘封板占比」= 首次封板时间 ≤ 10:00 的涨停股占比。
+表中缺失的「溢价中位」出现在 9/11(五)、9/15(二)，原因是该交易日未采集前一交易日涨停股的行情快照（数据边界，非数据异常）。
+</div>
+</div>
+
+<div class="card">
+<h2>三、连板梯队与高度：宽度在扩，高度在削</h2>
+<div id="c_lad" class="chart"></div>
+<div class="note">堆叠柱为每日连板梯队构成（左轴），折线为当日最高连板（右轴）。
+周三（9/16）是唯一出现 6 板的一天；周五涨停回到 77 家，但最高板已降至 4 板。
+周五新增资金几乎全在首板——首板 65 家，占 84%，连板股仅 12 家。</div>
+<div class="note" style="margin-top:8px">
+周五仍在连板、且为本周新面孔的标的：华瓷股份(4板)、锡华科技(4板)、世联行(3板)、内蒙新华(3板)。<b>本周「老龙头」闽东电力（000993，3→4→5→6 板）已于周三后断板</b>，
+其所在的 电力 方向的资金去向，是下周最需要盯的线索。
+</div>
+</div>
+
+<div class="card">
+<h2>四、量能与成交结构：资金确实在加仓</h2>
+<div class="two">
+<div><div id="c_amt" class="chart-sm"></div></div>
+<div><div id="c_fund" class="chart-sm"></div></div>
+</div>
+<div class="note" style="margin-top:12px">
+<b>量能：</b>两市成交额从周一 16,292 亿升至周五 20,771 亿（+27.5%），周均 17,962 亿，
+较上周五 19,719 亿高出 +5.3%。地量出现在 9/15（16,127 亿），高点出现在 9/18（20,771 亿）。<br>
+<b>封单：</b>全周封单合计从周一 49.5 亿升至周五 52.7 亿，最低 20.1 亿（9/15，即洗盘日）。
+封单与涨停家数同向变动，说明周三是「主动扫货」而非「被动涨停」。<br>
+<b>口径自检：</b>涨停股成交额占两市比重周均 2.72%，高于经验区间 3%~8% 的下沿仅 9/16 一天（4.33%）。
+该比值与涨停家数强相关，本周家数多次在 50 家以下，跌破下沿属正常范围；用「单只中位成交额」二次校验（周内最高 5.53 亿、周五 3.72 亿），字段源无误。
+</div>
+</div>
+
+<div class="card">
+<h2>五、赚钱效应：晋级率极不稳定，追高成本高</h2>
+<div id="c_perf" class="chart"></div>
+<div class="note">
+晋级率全周在 10.1%（9/17）~ 37.5%（9/16）之间摆动，均值 22.7%。
+最痛的是周四：周三 89 家涨停股在周四只有 10.1% 续板、溢价中位 -0.99%、翻绿比例高达 58.4%。
+周五的修复更健康——溢价中位 +1.23%，晋级率回到 25.5%（12/47）。
+<b>本周的实操结论是：周三式的普涨日后不宜追高，周五式的「放量 + 跌停归零 + 早盘封板前移」组合才是可跟随的形态。</b>
+</div>
+</div>
+
+<div class="card">
+<h2>六、行业迁移：钱从「元件」流出，去了哪</h2>
+<div id="c_hy" class="chart-lg"></div>
+<div class="note" style="margin-top:12px">
+最重要的单一线索：<b>行业口径「元件」（PCB/覆铜板/被动元件聚集地）从上周五的 9 家一路衰减到周五的 1 家</b>。
+这与题材标签「PCB/算力硬件」的走势形成背离——该题材周三仍有 35 家命中、周四骤降至 6 家、周五回到 18 家，
+说明<b>退潮的是「上游元件」，回归的是「下游算力应用」</b>，不是同一条钱。<br>
+接棒方向：电网设备 2（周三）→ 6（周五）、半导体 5（周三）→ 5（周五），
+周五另有家居用品 / 服装家纺 / 一般零售等低位消费补涨，以及房地产服务（世联行 3 板）。<br>
+反例：汽车零部件周四单日冲到 8 家、周五回落到 2 家——<b>典型一日游，不是主线</b>。
+</div>
+</div>
+
+<div class="card">
+<h2>七、题材标签迁移（关键词命中口径）</h2>
+<div id="c_theme" class="chart"></div>
+<table style="margin-top:14px">
+<tr><th>题材</th><th>本周合计</th><th>本周（不含上周五）</th><th>逐日（9/11 起）</th></tr>
+<tr><td class='hl'>PCB/算力硬件</td><td>104</td><td>+88</td><td>16 / 18 / 11 / 35 / 6 / 18</td></tr><tr><td class='hl'>半导体</td><td>49</td><td>+46</td><td>3 / 5 / 7 / 16 / 5 / 13</td></tr><tr><td class='hl'>电力/风电储能</td><td>46</td><td>+38</td><td>8 / 7 / 8 / 8 / 6 / 9</td></tr><tr><td class='hl'>机器人/汽车</td><td>42</td><td>+38</td><td>4 / 8 / 3 / 5 / 12 / 10</td></tr><tr><td class='hl'>消费/地产/传媒</td><td>42</td><td>+40</td><td>2 / 4 / 1 / 12 / 9 / 14</td></tr><tr><td class='hl'>国资重组</td><td>40</td><td>+34</td><td>6 / 5 / 3 / 10 / 7 / 9</td></tr><tr><td class='hl'>有色化工/资源</td><td>27</td><td>+24</td><td>3 / 3 / 3 / 5 / 8 / 5</td></tr><tr><td class='hl'>军工/安全</td><td>20</td><td>+15</td><td>5 / 3 / 3 / 3 / 0 / 6</td></tr>
+</table>
+<div class="note" style="margin-top:12px">
+「PCB/算力硬件」以 104 次命中占全周全部命中的 27%，是绝对主线；
+「电力/风电储能」是唯一全周零衰减的方向，属底仓型板块。
+注：题材为关键词命中口径，同一只股票可命中多条，各题材家数之和（384）大于涨停总数。
+</div>
+</div>
+
+<div class="card">
+<h2>八、本周连板股（上榜 ≥2 日）</h2>
+<table>
+<tr><th>最高高度</th><th>代码</th><th>名称</th><th>上榜日数</th><th>连板路径</th><th>行业</th><th>涨停原因</th></tr>
+<tr><td>6板</td><td>000993</td><td>闽东电力</td><td>4</td><td>3 → 4 → 5 → 6</td><td>电力</td><td style='text-align:left;color:#4b5563'>海上风电+清洁能源+福建国资</td></tr><tr><td>5板</td><td>605058</td><td>澳弘电子</td><td>4</td><td>2 → 3 → 4 → 5</td><td>元件</td><td style='text-align:left;color:#4b5563'>PCB+HDI板+服务器电源</td></tr><tr><td>4板</td><td>001216</td><td>华瓷股份</td><td>3</td><td>2 → 3 → 4</td><td>家居用品</td><td style='text-align:left;color:#4b5563'>氧化锆粉体+MLCC验证+越南基地</td></tr><tr><td>4板</td><td>002912</td><td>中新赛克</td><td>3</td><td>2 → 3 → 4</td><td>计算机设</td><td style='text-align:left;color:#4b5563'>AI安全+网络安全+深圳国资</td></tr><tr><td>4板</td><td>603248</td><td>锡华科技</td><td>3</td><td>2 → 3 → 4</td><td>风电设备</td><td style='text-align:left;color:#4b5563'>次新股+风电齿轮箱+高端部件+全球客户</td></tr><tr><td>3板</td><td>000823</td><td>超声电子</td><td>2</td><td>2 → 3</td><td>元件</td><td style='text-align:left;color:#4b5563'>PCB+高阶HDI+覆铜板</td></tr><tr><td>3板</td><td>002285</td><td>世联行</td><td>2</td><td>2 → 3</td><td>房地产服</td><td style='text-align:left;color:#4b5563'>房地产服务+大资管+珠海国资</td></tr><tr><td>3板</td><td>002585</td><td>双星新材</td><td>2</td><td>2 → 3</td><td>塑料</td><td style='text-align:left;color:#4b5563'>MLCC离型膜+复合铜箔+聚酯薄膜</td></tr><tr><td>3板</td><td>003026</td><td>中晶科技</td><td>2</td><td>2 → 3</td><td>半导体</td><td style='text-align:left;color:#4b5563'>半导体硅片+订单充足+股权激励</td></tr><tr><td>3板</td><td>600876</td><td>凯盛新能</td><td>2</td><td>2 → 3</td><td>玻璃玻纤</td><td style='text-align:left;color:#4b5563'>光伏玻璃+产能出清+成本压降</td></tr><tr><td>3板</td><td>603230</td><td>内蒙新华</td><td>2</td><td>2 → 3</td><td>出版</td><td style='text-align:left;color:#4b5563'>出版发行+教育服务+文化消费</td></tr><tr><td>3板</td><td>688004</td><td>博汇科技</td><td>2</td><td>2 → 3</td><td>IT服务Ⅱ</td><td style='text-align:left;color:#4b5563'>协议转让+AI内容安全+视听大数据</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+共 12 只标的在本周出现 2 日及以上连板。路径最完整的是 闽东电力（3→4→5→6 板），
+它同时也是本周唯一触及 6 板的标的。
+</div>
+</div>
+
+<div class="card">
+<h2>九、资金运动总结</h2>
+<ul>
+<li><b>量能路径：</b>16,127 亿（周二地量）→ 18,391 亿（周三 +14.0%）→ 18,231 亿（周四横住）→ 20,771 亿（周五 +13.9%）。
+<b>周四周五「横一天再加一天」是本周最健康的量能结构</b>——增量资金是分批进场的，不是一次性脉冲。</li>
+<li><b>情绪路径：</b>跌停家数 16 → 27 → 4 → 1 → <span class="hl">0</span>，单调收敛；
+同时涨停家数在 32~89 之间剧烈摆动。<b>「跌停归零」比「涨停变多」更能说明抛压消散。</b></li>
+<li><b>资金搬家方向：</b>上游元件与 PCB 制造（持续衰减）→ 下游算力应用 + 半导体材料 + 电网设备 + 低位消费。
+主线的「宽度」在扩散，但<b>没有形成新的高标共识</b>（周五最高板仅 4 板）。</li>
+<li><b>结构与风险：</b>周五首板占 84%，晋级率均值仅 22.7% 且波动区间达 10.1%~37.5%。
+	<b>本轮的赚钱效应高度依赖次日承接，一旦首板批量炸板（如周四翻绿 58.4%），回撤速度会同样快。</b></li>
+</ul>
+</div>
+
+<div class="warn">
+<b>口径与数据可信度说明</b>
+<ul>
+<li>涨停/炸板/跌停家数取<b>同花顺 limit_up_count / limit_down_count 汇总字段</b>（沪深口径，不含北交所）；
+东财涨停池条数含北交所标的（如 9/18 东财 78 家 vs 同花顺 77 家，差额为 920298），本报告统一按沪深口径。</li>
+<li>成交额、换手率、市值、封单一律取<b>东方财富</b>（同花顺 currency_value 字段实测与成交额差约 10 倍，不可用）。</li>
+<li>「晋级率」由「前一日涨停池代码集合 ∩ 当日涨停池代码集合」计算，与逐日报告中基于行情快照的口径结果一致
+（9/16 = 37.5%、9/17 = 10.1%、9/18 = 25.5%，与逐日报告已核对相同）。</li>
+<li>9/14（周一）与 9/15（周二）的「溢价中位」缺失，原因是当日未采集前一日涨停股的行情快照，属数据边界。</li>
+<li>9/14 及之前的历史涨停池由 9/14 收盘后接口回补，字段结构与 9/16~9/18 一致。</li>
+</ul>
+<b>风险提示</b>：本报告为盘后数据复盘，所有结论基于已发生的公开行情与涨停池字段，
+不构成任何投资建议。涨停股样本存在明显的样本选择偏差（涨得好的才在池子里），
+「溢价中位」「晋级率」等指标在样本量小于 50 只时波动极大，不宜外推。
+</div>
+
+<div class="note" style="margin-top:16px;text-align:center">Generated by a-stock-data · 涨停复盘 pipeline｜数据截止 2026-09-20 15:44</div>
+</div>
+
+<script>
+var DAYS=["9/11(五)", "9/14(一)", "9/15(二)", "9/16(三)", "9/17(四)", "9/18(五)"], ZT=[40, 55, 32, 89, 47, 77], ZB=[18, 30, 24, 11, 20, 25], DT=[21, 16, 27, 4, 1, 0], SEAL=[69.0, 64.7, 57.1, 89.0, 70.1, 75.5];
+var AMT=[19719, 16292, 16127, 18391, 18231, 20771], SHARE=[2.11, 3.03, 1.89, 4.33, 1.96, 2.39], PROMO=[null, 27.5, 12.7, 37.5, 10.1, 25.5], PREM=[null, 0.4, null, 1.05, -0.99, 1.23];
+var LV=["1", "2", "3", "4", "5", "6"], LAD=[[33, 4, 2, 1, 0, 0], [44, 7, 3, 1, 0, 0], [25, 3, 2, 1, 1, 0], [77, 9, 1, 1, 0, 1], [38, 5, 3, 0, 1, 0], [65, 8, 2, 2, 0, 0]], MAXB=[4, 4, 5, 6, 5, 4], FUND=[35.9, 49.5, 20.1, 71.4, 26.5, 52.7], ZTAMT=[416, 493, 305, 797, 358, 497];
+var RED='#d93025', GRN='#12805c', ORG='#f59e0b', BLU='#2563eb';
+
+function mk(id,opt){var el=document.getElementById(id);if(!el)return;var c=echarts.init(el);c.setOption(opt);window.addEventListener('resize',function(){c.resize()});}
+
+mk('c_senti',{
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+  legend:{top:3,left:'center',data:['涨停家数','炸板家数','跌停家数','封板率']},
+  grid:{left:56,right:60,top:52,bottom:34},
+  xAxis:{type:'category',data:DAYS,axisLabel:{fontSize:11}},
+  yAxis:[{type:'value',name:'家数',nameTextStyle:{fontSize:11}},
+         {type:'value',name:'封板率%',min:40,max:100,axisLabel:{formatter:'{value}%'},nameTextStyle:{fontSize:11}}],
+  series:[
+    {name:'涨停家数',type:'bar',data:ZT,itemStyle:{color:RED},barGap:'0%'},
+    {name:'炸板家数',type:'bar',data:ZB,itemStyle:{color:ORG}},
+    {name:'跌停家数',type:'bar',data:DT,itemStyle:{color:GRN}},
+    {name:'封板率',type:'line',yAxisIndex:1,data:SEAL,smooth:true,symbolSize:7,
+     lineStyle:{width:2.4,color:BLU},itemStyle:{color:BLU},
+     label:{show:true,formatter:'{c}%',fontSize:10,color:BLU,position:'top'}}
+  ]
+});
+
+mk('c_lad',{
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+  legend:{top:3,left:'center'},
+  grid:{left:56,right:60,top:52,bottom:34},
+  xAxis:{type:'category',data:DAYS,axisLabel:{fontSize:11}},
+  yAxis:[{type:'value',name:'家数',nameTextStyle:{fontSize:11}},
+         {type:'value',name:'最高板',min:0,max:8,nameTextStyle:{fontSize:11}}],
+  series:LV.map(function(k,i){
+    return {name:k+'板',type:'bar',stack:'t',data:LAD.map(function(r){return r[i]}),
+      emphasis:{focus:'series'}};
+  }).concat([
+    {name:'最高连板',type:'line',yAxisIndex:1,data:MAXB,smooth:true,symbolSize:7,
+     lineStyle:{width:2.2,color:'#7c3aed',type:'dashed'},itemStyle:{color:'#7c3aed'},
+     label:{show:true,fontSize:10,color:'#7c3aed'}}
+  ])
+});
+
+mk('c_amt',{
+  tooltip:{trigger:'axis'},
+  legend:{top:3,left:'center',data:['两市成交额','涨停股成交占比']},
+  grid:{left:64,right:56,top:52,bottom:34},
+  xAxis:{type:'category',data:DAYS,axisLabel:{fontSize:11}},
+  yAxis:[{type:'value',name:'亿元',nameTextStyle:{fontSize:11}},
+         {type:'value',name:'占比%',axisLabel:{formatter:'{value}%'},nameTextStyle:{fontSize:11}}],
+  series:[
+    {name:'两市成交额',type:'bar',data:AMT,itemStyle:{color:'#93c5fd'},barWidth:'46%',
+     label:{show:true,formatter:function(p){return (p.value/10000).toFixed(2)+'万亿'},fontSize:10,color:'#4b5563',position:'top'}},
+    {name:'涨停股成交占比',type:'line',yAxisIndex:1,data:SHARE,smooth:true,symbolSize:7,
+     lineStyle:{width:2.2,color:ORG},itemStyle:{color:ORG},
+     label:{show:true,formatter:'{c}%',fontSize:10,color:ORG,position:'bottom'}}
+  ]
+});
+
+mk('c_fund',{
+  tooltip:{trigger:'axis'},
+  legend:{top:3,left:'center',data:['封单合计','涨停股成交额合计']},
+  grid:{left:60,right:56,top:52,bottom:34},
+  xAxis:{type:'category',data:DAYS,axisLabel:{fontSize:11}},
+  yAxis:[{type:'value',name:'亿元',nameTextStyle:{fontSize:11}},
+         {type:'value',name:'亿元',nameTextStyle:{fontSize:11}}],
+  series:[
+    {name:'封单合计',type:'bar',data:FUND,itemStyle:{color:RED},barWidth:'42%'},
+    {name:'涨停股成交额合计',type:'line',yAxisIndex:1,data:ZTAMT,smooth:true,symbolSize:6,
+     lineStyle:{width:2,color:'#0f766e'},itemStyle:{color:'#0f766e'}}
+  ]
+});
+
+mk('c_perf',{
+  tooltip:{trigger:'axis'},
+  legend:{top:3,left:'center',data:['晋级率','溢价中位数']},
+  grid:{left:56,right:60,top:52,bottom:34},
+  xAxis:{type:'category',data:DAYS,axisLabel:{fontSize:11}},
+  yAxis:[{type:'value',name:'晋级率%',axisLabel:{formatter:'{value}%'},nameTextStyle:{fontSize:11}},
+         {type:'value',name:'溢价%',axisLabel:{formatter:'{value}%'},nameTextStyle:{fontSize:11}}],
+  series:[
+    {name:'晋级率',type:'line',data:PROMO,smooth:true,symbolSize:8,connectNulls:true,
+     lineStyle:{width:2.4,color:RED},itemStyle:{color:RED},
+     label:{show:true,formatter:function(p){return p.value==null?'':p.value+'%'},fontSize:10,color:RED,position:'top'}},
+    {name:'溢价中位数',type:'line',yAxisIndex:1,data:PREM,smooth:true,symbolSize:8,connectNulls:true,
+     lineStyle:{width:2.4,color:BLU},itemStyle:{color:BLU},
+     markLine:{silent:true,symbol:'none',data:[{yAxis:0,lineStyle:{color:'#9ca3af',type:'dashed'}}]},
+     label:{show:true,formatter:function(p){return p.value==null?'':p.value+'%'},fontSize:10,color:BLU,position:'bottom'}}
+  ]
+});
+
+mk('c_hy',{
+  tooltip:{position:'top',formatter:function(p){return ["消费电子", "服装家纺", "医疗服务", "IT服务Ⅱ", "包装印刷", "风电设备", "塑料", "通用设备", "家居用品", "通信设备", "化学制品", "电网设备", "半导体", "电力", "汽车零部", "元件"][p.value[1]]+'<br>'+DAYS[p.value[0]]+'：<b>'+p.value[2]+'</b> 家'}},
+  grid:{left:110,right:70,top:16,bottom:46},
+  xAxis:{type:'category',data:DAYS,splitArea:{show:true},axisLabel:{fontSize:11}},
+  yAxis:{type:'category',data:["消费电子", "服装家纺", "医疗服务", "IT服务Ⅱ", "包装印刷", "风电设备", "塑料", "通用设备", "家居用品", "通信设备", "化学制品", "电网设备", "半导体", "电力", "汽车零部", "元件"],splitArea:{show:true},axisLabel:{fontSize:11}},
+  visualMap:{min:0,max:9,calculable:true,orient:'vertical',right:6,top:'center',
+    inRange:{color:['#f7f8fa','#fde2e0','#f6b0a8','#e8685c','#c62828']},
+    textStyle:{fontSize:10}},
+  series:[{name:'行业涨停家数',type:'heatmap',data:[[0, 0, 0], [1, 0, 1], [2, 0, 0], [3, 0, 3], [4, 0, 2], [5, 0, 1], [0, 1, 0], [1, 1, 0], [2, 1, 0], [3, 1, 2], [4, 1, 1], [5, 1, 4], [0, 2, 0], [1, 2, 2], [2, 2, 0], [3, 2, 1], [4, 2, 2], [5, 2, 2], [0, 3, 1], [1, 3, 2], [2, 3, 2], [3, 3, 1], [4, 3, 0], [5, 3, 1], [0, 4, 0], [1, 4, 1], [2, 4, 1], [3, 4, 4], [4, 4, 1], [5, 4, 1], [0, 5, 0], [1, 5, 0], [2, 5, 4], [3, 5, 1], [4, 5, 2], [5, 5, 2], [0, 6, 1], [1, 6, 1], [2, 6, 2], [3, 6, 4], [4, 6, 1], [5, 6, 0], [0, 7, 0], [1, 7, 3], [2, 7, 1], [3, 7, 3], [4, 7, 0], [5, 7, 4], [0, 8, 1], [1, 8, 1], [2, 8, 2], [3, 8, 3], [4, 8, 1], [5, 8, 4], [0, 9, 3], [1, 9, 1], [2, 9, 1], [3, 9, 6], [4, 9, 1], [5, 9, 1], [0, 10, 0], [1, 10, 3], [2, 10, 0], [3, 10, 5], [4, 10, 2], [5, 10, 3], [0, 11, 1], [1, 11, 3], [2, 11, 1], [3, 11, 2], [4, 11, 1], [5, 11, 6], [0, 12, 0], [1, 12, 0], [2, 12, 2], [3, 12, 5], [4, 12, 2], [5, 12, 5], [0, 13, 4], [1, 13, 3], [2, 13, 3], [3, 13, 3], [4, 13, 1], [5, 13, 2], [0, 14, 2], [1, 14, 3], [2, 14, 1], [3, 14, 3], [4, 14, 8], [5, 14, 2], [0, 15, 9], [1, 15, 6], [2, 15, 2], [3, 15, 4], [4, 15, 1], [5, 15, 1]],
+    label:{show:true,fontSize:10},
+    emphasis:{itemStyle:{shadowBlur:6,shadowColor:'rgba(0,0,0,.25)'}}}]
+});
+
+mk('c_theme',{
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+  legend:{top:3,left:'center'},
+  grid:{left:56,right:30,top:56,bottom:34},
+  xAxis:{type:'category',data:["9/11(五)", "9/14(一)", "9/15(二)", "9/16(三)", "9/17(四)", "9/18(五)"],axisLabel:{fontSize:11}},
+  yAxis:{type:'value',name:'命中家数',nameTextStyle:{fontSize:11}},
+  series:[{"name": "PCB/算力硬件", "type": "bar", "stack": "t", "emphasis": {"focus": "series"}, "data": [16, 18, 11, 35, 6, 18]}, {"name": "半导体", "type": "bar", "stack": "t", "emphasis": {"focus": "series"}, "data": [3, 5, 7, 16, 5, 13]}, {"name": "电力/风电储能", "type": "bar", "stack": "t", "emphasis": {"focus": "series"}, "data": [8, 7, 8, 8, 6, 9]}, {"name": "机器人/汽车", "type": "bar", "stack": "t", "emphasis": {"focus": "series"}, "data": [4, 8, 3, 5, 12, 10]}, {"name": "消费/地产/传媒", "type": "bar", "stack": "t", "emphasis": {"focus": "series"}, "data": [2, 4, 1, 12, 9, 14]}, {"name": "国资重组", "type": "bar", "stack": "t", "emphasis": {"focus": "series"}, "data": [6, 5, 3, 10, 7, 9]}, {"name": "有色化工/资源", "type": "bar", "stack": "t", "emphasis": {"focus": "series"}, "data": [3, 3, 3, 5, 8, 5]}, {"name": "军工/安全", "type": "bar", "stack": "t", "emphasis": {"focus": "series"}, "data": [5, 3, 3, 3, 0, 6]}]
+});
+</script>
+</body>
+</html>

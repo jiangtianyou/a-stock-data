@@ -39,6 +39,8 @@
 - **依赖归属**：`pandas/numpy` 在 managed venv（`~/.workbuddy/binaries/python/envs/default/Scripts/python.exe`）；**`playwright` 只在系统 python 3.11**（`C:/Users/Administrator/AppData/Local/Programs/Python/Python311/python.exe`），venv 里跑 `_shot.py` 会 ModuleNotFoundError。
 - **westock 字段坑**：`finance --type income` 中所有 `_Q` 后缀字段（`NPParentCompanyCutYOY_Q`、`NPParentCompanyYOY_Q`、`TORGrowRate_Q`、`OperatingRevenueGrowRate_Q`）都是**单季**同比；累计口径只有 `NPParentCompanyYOY`（归母）/`TORGrowRate`（营收）可直接用，**扣非累计同比必须自算**（本期 vs 去年同期 `NPDeductNonRecurringPL`）——力量钻石 2026H1 扣非累计 +1249.33%，而 `_Q` 字段给 +12839%（Q2 单季），差 10 倍。另外**亏损公司 `NPParentCompanyYOY` 为正 = 亏损收窄**，渲染成红色「+25.7%」会被误读为增长。
 - **同花顺板块指数 `bk_885xxx` 日期格式为 `YYYYMMDD`**（8 位无横线），与 westock 的 `YYYY-MM-DD` 混入同一套指标计算前必须归一化。
+- **同名不同型的字段最易埋 bug**：东财涨停/炸板池的 `fbt` 是 **HHMMSS 整数**（`92500`=09:25:00），切分前必须 `zfill(6)`，否则 10:00 前渲染成 `92:50`；而 `r0`（同花顺来源）的 `fbt` 已是 `"09:30:09"` 字符串。**字段名相同不等于类型/格式相同，跨源拼接前先 `type()` 确认。**
+- **东财涨停池含北交所**：`em_ZT.tc` 会多出 `920xxx` 标的（09-18 东财 78 vs 同花顺 77），报告须显式声明「已按沪深口径」取数，不要静默取其一。
 - 早期落盘的板块 JSON（`out/ths_concept_all.json`）`name` 字段是**双重转义字面量**（`'\u57f9\u80b2\u94bb\u77f3'`），用中文做 `in` 匹配会全部失败；改用 `chr()` 码点构造关键词或 `unicode_escape` 还原。
 - **同名 key 的残留赋值会静默覆盖正确值**（`K["ZBJ_FLOW20"]` 被后面一行旧的 `*0` 赋值覆盖成 0）。改生成脚本后必须重新截图核对关键数字，不能只看占位符无残留。
 
@@ -51,6 +53,12 @@
 - 双 Y 轴图图例用 `top:3,left:'center'`，**不要 `right:8`**（会与右侧轴名重叠，渲染成"胜率%率"）；`grid.top≥52` 做垂直分离。
 - 瀑布图不能用 `data:[[起,止]]`，须「透明占位 stack + 数值 stack」。
 - 交付前：`_check_js.py <html>`（`node --check` 提取的内联 JS）+ `_shot.py <html> <scrollY...>`（Playwright 截图自检，用系统 3.11）。
+- **ECharts 本地托管 + CDN 兜底**（2026-09-20 起）：`assets/echarts.min.js`（1.0MB，来自 jsdelivr）；页面写
+  `<script src="../assets/echarts.min.js"></script>` + `if(typeof echarts==='undefined'){document.write(CDN)}`。
+  起因：jsdelivr 在 Playwright 侧频繁 `ERR_CONNECTION_RESET`，导致自检时 7 个图表容器 `canvas=0` + `PAGEERROR: echarts is not defined`，
+  而 `curl` 同一时刻能通 —— **「截图自检报 canvas=0」先怀疑 CDN，不要先改图表配置**。
+- **ECharts 类目轴首项在底部**：排名类热力图 / 条形图的数组**必须先反转**再喂给 `yAxis.data`，
+  否则「合计最大的行业」会渲染在最下方（用户从上往下读会先看到最弱的）。
 
 ## 结论沉淀
 
@@ -78,6 +86,10 @@
 - 日历效应（9 指数日线）：`oct_fetch_daily.py` → `oct_analyze.py` / `oct_extra.py` → `oct_report.py`
 - 渲染自检：`scripts/_shot.py <html相对路径> [滚动位置...]`、`scripts/_check_js.py <html>`
 - **板块核心标的分析（泛化模板）**：`dia_fetch.py`（westock kline/quote + 同花顺板块指数 + 基准）→ `dia_fin.py`（利润表 6 期 + 资金流）→ `dia_analyze.py`（YTD / 分阶段 / 最大回撤 / 量能比）→ `dia_report.py` + `_dia_tpl.html`（占位符替换出 HTML）。换板块只需改 `POOL` 名单与板块指数代码。已在培育钻石板块跑通（2026-09-17）。
+- **涨停周报（周末/非交易日替代交付）**：`zt_week_analyze.py <start> <end>` → `zt_week_report.py <start> <end>` → `reports/涨停周报-{start}至{end}.html`。
+  输入是**多份** `out/zt_review_D0.json`，按日期自动合并（同日多份优先 D0 份），所以只要历史上跑过 zt_fetch 的日期都能进周报；
+  缺口日期补跑一次 zt_fetch 即可。**晋级率用「前一日涨停池代码集合 ∩ 当日涨停池集合」计算，不依赖行情快照**，
+  实测与逐日报告的快照口径完全一致（9/16=37.5%、9/17=10.1%、9/18=25.5%）——这是唯一能跨历史日期批量复算晋级率的方法。
 
 ## 已封装 skill
 
