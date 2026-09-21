@@ -116,6 +116,46 @@ assert all(c.startswith("92") for c in diff), f"非北交所差额: {diff}"
 
 ---
 
+### 10. 同花顺封单字段（`order_amount`）收盘 30 分钟内仍在刷新 ⚠️
+
+**同一交易日的两次抓取，同花顺 `order_amount` / `order_volume` 会变**：
+
+| 个股 | 15:31 抓取 | 16:11 抓取 | 倍数 |
+|---|---|---|---|
+| 我爱我家 000560 | 327 万 | 5,916 万 | 18× |
+| 百通能源 001376 | 220 万 | 11,980 万 | 54× |
+| 华森制药 002907 | 106 万 | 3,550 万 | 33× |
+| 奥赛康 002755 | 13.3 万 | 271 万 | 20× |
+
+同一时段内**家数、涨跌幅、封板时间、成交额都没变**，只有封单字段在变 →
+说明同花顺封单是**延迟结算字段**，15:30 抓到的不是终值。
+
+**处理规范**：
+1. 封单口径**一律取东财 `fund`**（本流程已如此），不受此影响；
+2. 若将来改用同花顺 `order_amount` 出「封单结构性结论」，
+   **必须等 16:00 之后再抓**，否则会把「某只票封单只有几百万」当成事实写进报告；
+3. 盘中/早于 16:00 的补跑，报告中「封单合计」类数字应标注时点。
+
+**幂等自检（判断数据是否已稳定，可复用）**：
+
+```python
+def canon(o):                       # 排序归一化：列表按 code/c 排序后再比
+    if isinstance(o, dict): return {k: canon(v) for k, v in sorted(o.items())}
+    if isinstance(o, list):
+        if o and isinstance(o[0], dict):
+            key = "code" if "code" in o[0] else ("c" if "c" in o[0] else None)
+            if key: return sorted((canon(x) for x in o), key=lambda x: str(x.get(key)))
+        return [canon(x) for x in o]
+    return o
+# 两次抓取后：json.dumps(canon(a), sort_keys=True) == json.dumps(canon(b), sort_keys=True)
+```
+
+> **必须归一化后再比**：同一份数据两次抓取的**列表顺序本身不稳定**
+> （`em_ZB` / `ths_block` 的首项会互换），直接 diff 会看到几十处「差异」，
+> 全是排序抖动，容易误判成数据变化。
+
+---
+
 ## 工程类
 
 ### 落盘：全部成功才覆盖

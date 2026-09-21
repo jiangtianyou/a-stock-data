@@ -77,6 +77,11 @@ PYTHONIOENCODING=utf-8 C:/Users/Administrator/AppData/Local/Programs/Python/Pyth
       差额解释得通时，在「数据口径」里写明「已按沪深口径取 N 家」并列出北交所代码，不要静默取其一。
 - [ ] 同花顺跌停池明细接口 `dataapi/limit_up/limit_down_pool` **会 404**（09-21 实测，`ths_dt` 为 None）：
       此时跌停家数只能用汇总字段 `limit_down_count`，报告须声明「明细池不可用、未列名单」，不要写成 0 家。
+- [ ] **同一交易日重复触发（自动化重跑）先做幂等比对**：重新抓取后按 `code` 排序归一化再比 JSON，
+      若仅「生成时间」一行不同 → 数据已稳定，直接复用已有报告（不必产生新提交）；
+      若封单等字段有变 → 重跑 `zt_analyze` + `zt_report_{D0}.py`。
+      注意同花顺封单 `order_amount` 在**收盘后 30 分钟内仍会刷新**（09-21 实测 4 只差 18~54 倍），
+      而报告统一取东财 `fund`，故不受影响——但不要据此认为「收盘即稳定」。详见 `references/pitfalls.md` 第 10 条。
 - [ ] `_check_js.py` 输出 `OK`；`_shot.py` 报告的图表容器 `canvas` 数 >0 且无控制台错误
 
 **回归基线**（2026-09-16 vs 2026-09-15，用于验证管道未被改坏）：
