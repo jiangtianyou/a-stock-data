@@ -154,6 +154,35 @@ def canon(o):                       # 排序归一化：列表按 code/c 排序�
 > （`em_ZB` / `ths_block` 的首项会互换），直接 diff 会看到几十处「差异」，
 > 全是排序抖动，容易误判成数据变化。
 
+### 11. 指数日线（`index_hist`）盘后会把「当日行」移出返回窗口 ⚠️
+
+**现象**：同一交易日盘后多次抓取，`index_hist[code].rows` 的**最后一行会变**。
+2026-09-21 实测（`zs_1B0688` 科创50）：
+
+| 抓取时刻 | rows 末两行 |
+|---|---|
+| 16:11 | … `20260918`, **`20260921`** ← 含当日 |
+| 16:34 / 16:36 | … `20260917`, `20260918` ← **当日消失** |
+
+16:11 之后当日行被移出窗口、稳定为「不含当日」，与代码无关，是接口侧行为。
+
+**为什么不会污染报告**：本流程的当日成交额取自**实时快照** `indexes[sym].amount_wan`，
+历史行只按**显式日期**查 D1/D2（`hist_row(hcode, D1)`），所以 `rows` 里有没有当日都无影响。
+
+**必须遵守的两条**：
+1. **禁止用 `index_hist[code]["rows"][-1]` 当作「当日」** —— 它在 16:30 后会静默回退到前一交易日，
+   算出来的「今日成交额」会等于昨日值，且不报错。
+2. **幂等复跑比对时，这四个键必须排除**：`generated_at`、`dates`（含 trade_status 等易变元数据）、
+   `indexes`（`float_mv` / `total_mv` 尾数抖动）、`index_hist`（本条窗口滑动）。
+   只比 **`D0` / `D1` / `today_zt_quotes` / `yesterday_zt_today`** —— 这四个一致即可判定「数据未变、报告可复用」。
+   本次若把 `index_hist` 也纳入比对，会看到 8 行「差异」而误判为数据变化、白跑一遍完整流程。
+
+```python
+CORE_KEYS = ("D0", "D1", "today_zt_quotes", "yesterday_zt_today")   # 幂等判定只看这四个
+same = all(json.dumps(canon(a[k]), ensure_ascii=False, sort_keys=True)
+           == json.dumps(canon(b[k]), ensure_ascii=False, sort_keys=True) for k in CORE_KEYS)
+```
+
 ---
 
 ## 工程类

@@ -23,6 +23,10 @@
 - **两段式**：先抓取落盘 `out/*.json`，再分析/出报告。长时抓取用域名轮换+指数退避+**逐品种增量打印**（不要 `| tail -N`，会缓冲到结束）。
 - 网络脚本统一绕过代理（`ProxyHandler({})` / `Session.trust_env=False`）。
 - **抓取脚本必须「全部成功才覆盖落盘」**（写 `.tmp` 再 `os.replace`）；否则重跑会把好数据覆盖成空。
+- **盘后复跑的幂等比对只比四个核心键**：`D0` / `D1` / `today_zt_quotes` / `yesterday_zt_today`。
+  `generated_at`、`dates`、`indexes`（市值尾数抖动）、`index_hist`（**指数日线盘后会把「当日行」移出返回窗口**，
+  09-21 实测 16:11 含当日、16:34 起不含）都会产生假差异，纳入比对会误判成数据变化而白跑全流程。
+  当日成交额一律取实时快照 `indexes[sym].amount_wan`，**禁止用 `index_hist[code].rows[-1]` 当当日**。
 - **排序 tie-break 必须完整**：`sorted(set(...))` 同分项受 str 哈希随机化影响 → 同一数据两次跑出不同榜单。补 `(计数, -今值, -昨值, 名称)`。
 - **同一文件的多个 Edit 不要并行提交**（实测 4 个只生效 1 个）；批量改脚本用「一次性补丁 + `assert a in s`」。
 - Git Bash 下 grep/sed 处理 UTF-8 中文常失效 → 用 Read 工具或 python。

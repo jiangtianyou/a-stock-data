@@ -78,9 +78,16 @@ PYTHONIOENCODING=utf-8 C:/Users/Administrator/AppData/Local/Programs/Python/Pyth
 - [ ] 同花顺跌停池明细接口 `dataapi/limit_up/limit_down_pool` **会 404**（09-21 实测，`ths_dt` 为 None）：
       此时跌停家数只能用汇总字段 `limit_down_count`，报告须声明「明细池不可用、未列名单」，不要写成 0 家。
 - [ ] **同一交易日重复触发（自动化重跑）先做幂等比对**：重新抓取后按 `code` 排序归一化再比 JSON，
-      若仅「生成时间」一行不同 → 数据已稳定，直接复用已有报告（不必产生新提交）；
-      若封单等字段有变 → 重跑 `zt_analyze` + `zt_report_{D0}.py`。
-      注意同花顺封单 `order_amount` 在**收盘后 30 分钟内仍会刷新**（09-21 实测 4 只差 18~54 倍），
+      **只比 `D0` / `D1` / `today_zt_quotes` / `yesterday_zt_today` 四个核心键** —— 一致即判定「数据已稳定」，
+      直接复用已有报告（不必产生新提交）；若封单等字段有变 → 重跑 `zt_analyze` + `zt_report_{D0}.py`。
+      **比对时必须排除** `generated_at`、`dates`、`indexes`、`index_hist`：后两者存在接口侧抖动
+      （`indexes` 的 `float_mv/total_mv` 尾数、`index_hist` 的当日行窗口滑动，见下条），
+      纳入比对会产生假差异而误判、白跑一遍完整流程。
+- [ ] **指数日线的最后一行不等于「当日」**：`index_hist[code].rows` 在盘后会把当日行移出返回窗口
+      （09-21 实测 16:11 含 `20260921`、16:34 起不含）。本流程的当日成交额取自**实时快照** `indexes[sym].amount_wan`，
+      历史行按**显式日期**查 D1/D2，故不受影响；但**禁止**用 `rows[-1]` 当当日，否则会静默回退到前一交易日且不报错。
+      详见 `references/pitfalls.md` 第 11 条。
+      另：同花顺封单 `order_amount` 在**收盘后 30 分钟内仍会刷新**（09-21 实测 4 只差 18~54 倍），
       而报告统一取东财 `fund`，故不受影响——但不要据此认为「收盘即稳定」。详见 `references/pitfalls.md` 第 10 条。
 - [ ] `_check_js.py` 输出 `OK`；`_shot.py` 报告的图表容器 `canvas` 数 >0 且无控制台错误
 
