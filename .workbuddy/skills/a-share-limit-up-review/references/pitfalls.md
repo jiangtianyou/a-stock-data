@@ -185,6 +185,50 @@ same = all(json.dumps(canon(a[k]), ensure_ascii=False, sort_keys=True)
 
 ---
 
+### 12. 东财炸板池 `em_ZB` 里含有「盘中打开后回封」的票，不等于「炸板未回封」⚠️
+
+`em_ZB.pool` 记录的是**当日曾经打开过涨停**的标的，其中一部分**收盘仍封回涨停**。
+2026-09-22 实测：`em_ZB` 共 18 只，其中 **瑞芯微（603893，流通市值 922 亿）收盘 +10.00%**，
+即盘中打开后回封——把它算进「炸板未回封」会凭空多出一个「大票炸板」的利空证据。
+
+**判据**（收盘涨幅是否达到涨停，注意创业板/科创板阈值 20%）：
+
+```python
+def is_limit(z):
+    thr = 19.8 if (z["c"].startswith("30") or z["c"].startswith("688")) else 9.8
+    return (z.get("zdp") or 0) >= thr
+
+zb_open   = [z for z in em_ZB_pool if not is_limit(z)]   # 真·未回封
+zb_sealed = [z for z in em_ZB_pool if is_limit(z)]       # 打开后回封
+```
+
+**处理规范**：讲「炸板池构成」时须显式区分两类，报告写「N 只炸板股中 M 只回封（××，收盘仍涨停），
+其余未回封；未回封阵营里流通市值最大的是……」。**不要**直接按流通市值排序取前几名当「炸板代表」。
+
+---
+
+### 13. `idx_cmp` 只覆盖 4 个指数，其余指数的「昨日涨跌幅」要另行补全
+
+`zt_analyze.py` 输出的 `S["idx_cmp"]` 只含 **上证指数 / 深证成指 / 创业板指 / 科创50** 四个。
+报告要展示「上证50 / 中证1000 / 国证2000 等指数今日 vs 昨日」时，这些键缺失 →
+表格会渲染成 `—`（虽不报错，但读者会以为数据缺失）。
+
+**补全方式**：读上一交易日的 `out/zt_review_{D1}.json`，其 `indexes[name].pct`
+就是那一天的涨跌幅；`amount_wan` 同理可用于算各指数的成交额环比。
+
+```python
+B1 = json.load(open(f"out/zt_review_{D1}.json", encoding="utf-8")) if os.path.exists(...) else None
+if B1:
+    for v in B1["indexes"].values():
+        prev_amt[v["name"]] = (v.get("amount_wan") or 0) / 10000.0
+        PREV_IDX_PCT.setdefault(v["name"], v["pct"])   # 不要覆盖 idx_cmp 的权威值
+```
+
+这条同时解决了「上证50 成交额环比」这类风格对比指标——分析「增量资金去了权重还是小微盘」
+必须用到它，而它并不在 `idx_cmp` 里。
+
+---
+
 ## 工程类
 
 ### 落盘：全部成功才覆盖
