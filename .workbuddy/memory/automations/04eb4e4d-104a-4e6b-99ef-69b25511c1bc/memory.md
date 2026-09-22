@@ -119,7 +119,10 @@
 - **新增报告脚本占位符**（下次可直接复用）：`HUA_*` / `XH_*`（名称族群统计）、
   `ZB_POOL_N` / `ZB_SEALED_N` / `ZB_TOP*`（炸板池回封拆分）、`*_GAP` / `KC_DRAW`（高开低走量化）、
   `*_AMT_PCT`（各指数成交额环比）、`AMT_MED(_Y)`（单只中位成交额三角校验）。
-- git：1 个 commit 已 push 到 origin/main，内容为报告 + 报告脚本 + skill 文档 + 当日日志 + MEMORY.md。
+- git：1 个 commit `f1b7512` 已 push 到 origin/main（537500f..f1b7512），内容为报告 + 报告脚本 + skill 文档 + 当日日志 + MEMORY.md。
+  在线链接已 curl 验证：HTTP 200，title = 「涨停复盘 · 2026-09-22（对比 9-21）」，7 个图表容器。
+- 注：`git pull --rebase` 要求工作区干净，故本次顺序为 **先 commit → 再 pull --rebase → 再 push**（直接先 pull 会报
+  "cannot pull with rebase: Your index contains uncommitted changes"）。
 
 ## 后续注意（累积，最新）
 - **幂等比对只比 `D0` / `D1` / `today_zt_quotes` / `yesterday_zt_today` 四个核心键**，
