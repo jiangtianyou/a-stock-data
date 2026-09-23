@@ -142,8 +142,9 @@
   `em_DT.tc`=13 > 同花顺汇总 12 且 `em_DT.pool` 为空 → 差额不可归因，须取同花顺口径并声明差异；
   ③ 各指数成交额环比表（`tbl_sty` + `amt_yoy`）可直接孵化当日主论点，已写成可复用件。
   已进 `pitfalls.md` 第 14/15 条 + SKILL.md 必做自检，并新增**回归基线 6**。
-- git：1 个 commit 已 push 到 origin/main，内容为报告 + 报告脚本 + skill 文档 + 当日日志 + MEMORY.md。
-  在线链接已 curl 验证。
+- git：1 个 commit `0017194` 已 push 到 origin/main（1fa4d7c..0017194），内容为报告 + 报告脚本 + skill 文档 + 当日日志 + MEMORY.md。
+  在线链接已 curl 验证：HTTP 200，title = 「涨停复盘 · 2026-09-23（对比 9-22）」，7 个图表容器齐全（44454 字节）。
+  注：首次 curl 因 `--max-time 25` 截断在 6855 字节（页面内容本身正确），**校验在线页要用 ≥90s 超时**，否则会误判为"页面不完整"。
 
 ## 后续注意（累积，最新）- **幂等比对只比 `D0` / `D1` / `today_zt_quotes` / `yesterday_zt_today` 四个核心键**，
   其余键（`generated_at` / `dates` / `indexes` / `index_hist`）有接口侧抖动，纳入比对必然误判（见 pitfalls 第 11 条）。
