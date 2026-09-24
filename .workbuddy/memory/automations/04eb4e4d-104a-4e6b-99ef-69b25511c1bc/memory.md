@@ -167,7 +167,9 @@
   `TH_STR_N`/`TH_ROBOT_N`/`TH_GZ_N`（主题聚类家数）、`TOUCH_PCT_D`（触及涨停家数环比）、`FUND_TOP_Y_*`（昨日封单第一）。
 - 报告脚本 `scripts/zt_report_20260924.py` 首次运行报 `NameError: name 'r' is not defined`
   （`sorted(key=lambda x: ...)` 里误写 `r`）——**复制模板改写后先跑一次再改文案**，比先改文案再跑省时间。
-- git：（待本次提交后补记 commit hash）报告 + 报告脚本 + skill 文档 + 当日日志 + MEMORY.md。
+- git：1 个 commit `e6be36e` 已 push 到 origin/main（bd3d873..e6be36e），内容为报告 + 报告脚本 + skill 文档 + 当日日志 + MEMORY.md。
+  在线链接已 curl 验证：HTTP 200（1.6s，58840 字节），title = 「涨停复盘 · 2026-09-24（对比 9-23）」，7 个图表容器齐全。
+  注：**校验在线页不要用短超时**（09-23 曾因 `--max-time 25` 截断误判"页面不完整"），本次用 120s。
 
 ## 后续注意（累积，最新）
 
