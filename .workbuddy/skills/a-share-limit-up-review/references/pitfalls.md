@@ -349,6 +349,59 @@ ths_codes = {x["code"] for x in (B["dates"][D0]["ths_zt"] or {}).get("total", {}
 反例对照：09-23 是参与度 80→77（几乎不动）而承接力 77.5%→66.2%（掉 11.3pct）→ **"承接力退潮"**。
 **同样是"封板率变化"，方向相反，结论完全相反——所以这两个量必须一起看。**
 
+### 19. 东财跌停池默认排序会返回空 `pool`，必须显式 `sort=fund%3Aasc` ⚠️
+
+2026-09-28 实测：`getTopicDTPool.php?...&dpt=wz.ztzt&Pageindex=0&pagesize=300&date=20260928`
+（**不带 `sort`**）返回 `data.pool` 为空数组，但 `data.tc` 正常（当日 56）。这与第 15 条描述的
+「`em_DT.tc > 0` 但 `pool` 为空」是**同一现象的两个成因**，但第 15 条归因为「盘后字段未刷新」，
+本次证实**主因是缺 `sort` 参数**：
+
+```python
+# 正确：显式 sort（URL 内 %3A 就是 ":"）
+DT_URL = ("https://push2ex.eastmoney.com/getTopicDTPool"
+          "?ut=7eea3edcaed734bea9cbfc24409ed989&dpt=wz.ztzt"
+          "&Pageindex=0&pagesize=300&sort=fund%3Aasc&date=" + D0)
+```
+
+加 `sort=fund%3Aasc` 后立刻返回 56 只明细。**注意**：`sort=fund:asc` 与 `sort=fund:desc` 只影响返回顺序，
+不影响条数；若一次仍拿不全，翻 `Pageindex`。
+**不要用 `%` 格式化拼 URL**——`"...&sort=fund%3Aasc&date=%s" % D0` 会因 `%3A` 里的 `%` 触发
+`ValueError: unsupported format character 'A'`，改用 `+ D0` 字符串拼接。
+
+### 20. 跌停潮的结构归因：必须做「跌停池 → 产业链关键词」归并，不能只报家数
+
+2026-09-28 的跌停 56 只是本流程首个「跌停潮」样本。只报「跌停 56 家」无法说明资金撤出方向，
+正确做法是**三口径交叉验证同一批标的是否集中在同一条产业链**：
+
+| 口径 | 数据源 | 本次实测 |
+|---|---|---|
+| 跌停池行业标签聚类 | 东财 `em_DT.pool` 的 `hybk` 字段 | 通信设备 12 + 元件 7 = 19 只（34%） |
+| 申万二级行业涨跌幅榜 | westock CLI（见下） | 通信设备 -8.21% / 元件 -6.80%（124 个行业仅 12 个上涨） |
+| 概念涨跌幅榜 | westock CLI | 光芯片 -7.34% / 光通信 -6.65% / CPO -6.63% / MLCC -6.72% |
+
+三条独立口径都指向**光通信 / PCB / 被动元件算力硬件链**。归并关键词表（可复用）：
+```python
+DT_CHAIN_HY = {"通信设备","元件","其他电子","电子化学","消费电子","自动化设","塑料","金属新材"}
+```
+另两个必算的强度指标：
+- **跌停股合计成交额 ÷ 涨停股合计成交额**（本次 756 亿 ÷ 227 亿 = **3.3 倍**）——远大于 1 说明杀跌盘体量压制做多盘。
+- **跌停池流通市值 >100 亿的只数与占比**（本次 28 只，含亨通光电 1488 亿、中天科技 1069 亿）——大盘股跌停 = 机构在撤，非个别游资出货。
+
+### 21. westock CLI 可作行业/概念涨跌幅榜与全市场涨跌分布的补充源
+
+`C:/Users/Administrator/.local/bin/westock.exe`（**不是** python 包，直接 exe 调用）：
+
+```bash
+westock sector ranking --kind industry          # 申万二级行业涨跌幅榜（含 turnover，单位=万元）
+westock sector ranking --kind concept           # 概念涨跌幅榜
+westock market-overview                          # 全市场涨跌家数分布（可用于"跌幅>5%家数"）
+westock changedist                               # 涨跌幅分布直方图
+```
+
+**坑**：`turnover` 单位是**万元**，`"turnover": 6740000` 是 67.4 亿不是 674 亿——
+本次曾把「商用车 674 亿」写错，实为 67 亿。报告里引用行业成交额时一律先 /10000 换亿并复核量级。
+**建议把榜单结果固化成脚本常量**（如 `SECTOR_IND` / `CONCEPT_BOT`），避免每次出报告都依赖 westock 在线。
+
 ---
 
 ## 工程类
@@ -396,7 +449,13 @@ os.replace(tmp, fp)      # 原子替换
   `{json.dumps(x)}}}`（3 个右花括号）且极易漏。统一用 `__占位符__` + `str.replace`。
 - 收尾必查占位符残留：`re.findall(r"__[A-Z_0-9]+__", html)` 必须为空。
 - ECharts 横向条形图**类目 >25 时**容器高 ≈ 类目数 × 21px 且 `axisLabel.interval: 0`，
-  否则标签跳显、与柱子视觉错位。
+  否则标签跳显、与柱子视觉错位。**`interval: 0` 必须写在 `axisLabel` 对象里**：把 `yAxis` 传成
+  纯数组（`yAxis: [{type:'category', data:[...]}]` 里 `axisLabel` 写成标量）时会被 ECharts 按默认抽稀，
+  2026-09-28 的 `c_perf`（51 只昨日涨停股）就只显示了约一半标签。正解：
+  ```js
+  yAxis: { type:'category', data: names, axisLabel:{ fontSize:9, interval:0 }, splitLine:{ show:false } }
+  ```
+  并把容器高从 700px 提到 900px（51 × 21 ≈ 1071，可留白）。
 - 双 Y 轴图图例用 `top:3, left:'center'`，**不要 `right:8`**（会与右侧轴名重叠，渲染成「胜率%率」）。
 - 瀑布图不能用 `data:[[起, 止]]`，须「透明占位 stack + 数值 stack」。
 - **ECharts 用本地托管而非纯 CDN**（2026-09-20 踩坑）：jsdelivr 在 Playwright 侧会间歇性
