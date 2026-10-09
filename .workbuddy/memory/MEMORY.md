@@ -28,6 +28,7 @@
 - **同一文件的多个 Edit 不要并行提交**（实测 4 个只生效 1 个）；批量改脚本用「一次性补丁 + `assert a in s`」。Git Bash 下 grep/sed 处理 UTF-8 中文常失效 → 用 Read 工具或 python。
 - **涨停链的权威脚本只在 skill 内**（`.workbuddy/skills/a-share-limit-up-review/scripts/`）。项目根 `scripts/zt_fetch.py` / `zt_analyze.py` 曾是日期硬编码的过期副本，误用会**静默写错日期且不报错**（09-30 实测）→ 已改写为 `runpy` 转发到 skill 副本。**项目根 `scripts/` 只放 `zt_report_{D0}.py` / `zt_week_*.py`。** 自检：抓取首行必须打印 `== 复盘 {D0} 对比 {D1} ==`。
 - **依赖归属**：`pandas/numpy` 在 managed venv（`~/.workbuddy/binaries/python/envs/default/Scripts/python.exe`）；**`playwright` 只在系统 python 3.11**（`.../Python311/python.exe`），venv 跑 `_shot.py` 会 ModuleNotFoundError。
+- **校验 GitHub Pages 在线页：curl 必须加 `--ssl-no-revoke`**（本机 schannel 报 `(35) 0x80092013` = CRL 服务器不可达，表现为 `http_code=000`、`-o` 文件不落盘 → 极易误判为"页面 404/未部署"）。超时用 ≥120s（首字节可能要 50s+）。
 - **`senti[D0]["yest"]` 是「前一交易日」统计（= D1 值），不是当日**：当日/前日「触及涨停、触及跌停、封死率」一律取 `B["dates"][D0]["ths_zt"]["total"]["today"]["history_num"]`；`limit_down_count` 与 `total` 是 `ths_zt` 下**平级键**。自检：`触及涨停 ≥ 涨停家数`。
 - **`zt_fetch.resolve_dates` 只取前 2 个参数** → `zt_review_{D0}.json` 只含 D0/D1；`zt_analyze.py` 三日序列仍正确（`days[0]` 用 `senti[D1]["zt_prev"]`），**不必补抓 D2**。
 - 同花顺板块指数 `bk_885xxx` 日期为 **`YYYYMMDD`**（计算前须归一化）。早期 `out/ths_concept_all.json` 的 `name` 是**双重转义字面量**，中文 `in` 全失败 → 用 `chr()` 码点或 `unicode_escape` 还原。
