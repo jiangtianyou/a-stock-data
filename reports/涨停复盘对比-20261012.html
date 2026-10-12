@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>涨停复盘 · 2026-10-12（对比 10-09）</title>
+<script src="../assets/echarts.min.js"></script>
+<script>if(typeof echarts==='undefined'){document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"><\/script>');}</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:#1b1f24;font:14px/1.65 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.3px}
+.sub{color:#6b7280;font-size:13px;margin-bottom:22px}
+.card{background:#fff;border:1px solid #e6e8eb;border-radius:12px;padding:20px 22px;margin-bottom:18px}
+h2{font-size:17px;margin:0 0 14px;padding-left:10px;border-left:4px solid #2563eb}
+h3{font-size:14px;margin:18px 0 8px;color:#374151}
+.lead{background:#fff;border:1px solid #e6e8eb;border-left:5px solid #2563eb;border-radius:10px;padding:18px 22px;margin-bottom:18px}
+.lead p{margin:0 0 8px}.lead p:last-child{margin-bottom:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0 4px}
+.kpi{background:#fff;border:1px solid #e6e8eb;border-radius:10px;padding:14px 16px}
+.kpi .lbl{font-size:12px;color:#6b7280;margin-bottom:6px}
+.kpi .val{font-size:23px;font-weight:650;letter-spacing:-.5px}
+.kpi .dt{font-size:12px;margin-top:4px}
+.up{color:#d93025}.down{color:#12805c}.mut{color:#9ca3af}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:7px 9px;border-bottom:1px solid #eef0f2;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{background:#fafbfc;color:#4b5563;font-weight:600;font-size:12px}
+tr:hover td{background:#fafbfc}
+.chart{width:100%;height:330px}.chart-sm{width:100%;height:290px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+.tag{display:inline-block;background:#eef2ff;color:#3730a3;border-radius:5px;padding:1px 7px;font-size:11px;margin:1px 3px 1px 0}
+.note{font-size:12px;color:#6b7280;line-height:1.75}
+.warn{background:#fff8f1;border:1px solid #f5d9be;border-radius:10px;padding:14px 18px;font-size:13px;color:#7c4a12}
+ul{margin:6px 0 0;padding-left:20px}li{margin:6px 0}
+.hl{font-weight:600;color:#111827}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>涨停复盘 · 2026-10-12（周一）</h1>
+<div class="sub">对比基准：2026-10-09（周五）｜口径：沪深两市（不含北交所）｜数据源：同花顺涨停池 / 概念板块 + 东方财富涨停/炸板/跌停池 + 腾讯行情快照</div>
+
+<div class="lead">
+<p class="hl">一句话结论：<b>主线接棒成功，但市场在缩量失血 —— 今日是一场典型的「缩圈」。</b>10-09 报告提出的第一观察点（AI 应用/传媒能否出现 2–3 板梯队）今日给出了肯定答案：2 板梯队 14 只里有 11 只是传媒/AI 内容系；但代价是<b>市场广度全面塌陷</b> —— 涨停 69 → 46 家、封板率 84.1% → 64.8%（-19.4pct）、跌停 8 → 20 家（封死率 25.8% → 83.3%）。</p>
+<p><b>量能是唯一裁判：</b>两市成交额 15,378 亿（昨日 19,006 亿，<span class="down">-3,627 亿 / -19.1%</span>），11 个指数成交额<b>无一例外全部收缩</b>、其中 10 个收绿（仅上证50 +0.43% 红盘）。<span class="hl">家数收缩 + 量能萎缩 + 广度收窄三者同向 —— 这不是"回调"，而是资金在收缩战线、只守一条线。</span></p>
+<p>情绪三项指标全面转弱：<b>参与度小降</b>（触及涨停 82 → 71 家）、<b>承接力明显下降</b>（封板率 -19.4pct、炸板 13 → 25 只）、<b>破坏力大幅回升</b>（跌停 8 → 20 家、封死率 +57.5pct）。</p>
+<p>资金行为的切换同样干净：封板节奏从昨日的「午后接力」（午后 36 只 / 占 52%）急转为今日的「<b>早盘集中冲板</b>」（早盘 30 只 / 占 65%、午后仅 7 只）。<span class="hl">午后接力 = 增量主动进场；早盘集中 + 高炸板 = 存量抢跑。</span></p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="lbl">涨停家数</div><div class="val down">46</div>
+    <div class="dt mut">昨日 69 <span class="down">-23</span></div></div>
+  <div class="kpi"><div class="lbl">触及涨停家数</div><div class="val down">71</div>
+    <div class="dt mut">昨日 82 <span class="down">-11</span></div></div>
+  <div class="kpi"><div class="lbl">封板率</div><div class="val down">64.8%</div>
+    <div class="dt mut">昨日 84.1% <span class="down">-19.4pct</span></div></div>
+  <div class="kpi"><div class="lbl">炸板家数</div><div class="val down">25</div>
+    <div class="dt mut">昨日 13 <span class="down">+12</span></div></div>
+  <div class="kpi"><div class="lbl">跌停家数</div><div class="val down">20</div>
+    <div class="dt mut">昨日 8 <span class="down">+12</span></div></div>
+  <div class="kpi"><div class="lbl">两市成交额</div><div class="val down">15,378亿</div>
+    <div class="dt mut">昨日 19,006亿 <span class="down">-3,627亿</span></div></div>
+  <div class="kpi"><div class="lbl">昨涨停今日晋级率</div><div class="val">26.1%</div>
+    <div class="dt mut">18/69 只再涨停</div></div>
+  <div class="kpi"><div class="lbl">最高连板</div><div class="val up">10 板</div>
+    <div class="dt mut">昨日 9 板（新华传媒）</div></div>
+</div>
+
+<div class="card">
+<h2>一、情绪温度计：三项指标同时转弱，封板率回落 19pct</h2>
+<table>
+<tr><th>指标</th><th>10/8（周四）</th><th>10/9（周五）</th><th>10/12（周一）</th><th>10/12 环比</th></tr>
+<tr><td>涨停家数</td><td>42</td><td>69</td><td class='hl'>46</td><td class='down'>-23</td></tr><tr><td>炸板家数</td><td>32</td><td>13</td><td class='hl'>25</td><td class='up'>+12</td></tr><tr><td>封板率(%)</td><td>56.8</td><td>84.1</td><td class='hl'>64.8</td><td class='down'>-19.4</td></tr><tr><td>跌停家数</td><td>13</td><td>8</td><td class='hl'>20</td><td class='up'>+12</td></tr>
+<tr><td>涨停/跌停比</td><td>3.2</td><td>8.6</td><td class="hl">2.3</td><td class="down">破坏力回升</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+按三个独立口径拆（顺序不能颠倒）：<br>
+<b>① 参与度（触及涨停家数）82 → 71 家（-11）</b> —— 愿意冲板的资金小幅回落，但对比 10-08 的 74 家仍处偏高位置；<br>
+<b>② 承接力（封板率）84.1% → 64.8%（-19.4pct），炸板 13 → 25 只</b> —— 从本轮最高的 84.1% 直接回落到 10-08 崩盘日附近的水平；<br>
+<b>③ 破坏力（跌停）8 → 20 家、封死率 25.8% → 83.3%</b> —— 家数 2.5 倍、封死率由 25.8% 跳到 83.3%，说明今日的跌停"很实"，不是盘中砸板被买回。<br>
+<span class="hl">「参与度小降 + 承接力降 + 破坏力升」构成第五种形态：<b>广度退潮型的缩圈</b>。与 09-23（承接力退潮）、09-24（收缩式锁仓）、09-30（分歧）、10-08（参与度升/承接力崩）、10-09（三项同向修复）均不同型 —— 它的特征是：<u>整体在退，但退出来的钱没有离场，而是全部挤进了一条线（传媒/AI）。</u></span><br>
+注意口径：今日沪深涨停 46 家，但盘中触及涨停 71 家，意味着 <b>25 只被打开、封板失败率约 19.4pct</b>，失败数量为 10-09 的近两倍。
+</div>
+<div id="c_senti" class="chart" style="margin-top:16px"></div>
+</div>
+
+<div class="card">
+<h2>二、指数与量能：11 个指数全部缩量、10 个收绿 —— 昨日结论被反向验证</h2>
+<div class="two">
+<div>
+<table>
+<tr><th>指数</th><th>今日</th><th>昨日</th><th>成交额</th><th>成交额环比</th></tr>
+<tr><td>上证指数</td><td class='down'>-0.43%</td><td class='up'>+0.05%</td><td>7,149亿</td><td class='down'>-19.5%</td></tr><tr><td>深证成指</td><td class='down'>-2.03%</td><td class='up'>+0.17%</td><td>8,229亿</td><td class='down'>-18.7%</td></tr><tr><td>创业板指</td><td class='down'>-2.61%</td><td class='up'>+0.22%</td><td>3,923亿</td><td class='down'>-20.3%</td></tr><tr><td>科创50</td><td class='down'>-2.10%</td><td class='up'>+0.07%</td><td>646亿</td><td class='down'>-29.7%</td></tr><tr><td>沪深300</td><td class='down'>-0.68%</td><td class='up'>+0.16%</td><td>4,056亿</td><td class='down'>-18.3%</td></tr><tr><td>中证500</td><td class='down'>-2.18%</td><td class='up'>+0.04%</td><td>2,572亿</td><td class='down'>-22.4%</td></tr><tr><td>中证1000</td><td class='down'>-1.88%</td><td class='up'>+0.24%</td><td>3,101亿</td><td class='down'>-19.7%</td></tr><tr><td>国证2000</td><td class='down'>-1.90%</td><td class='up'>+0.22%</td><td>4,647亿</td><td class='down'>-19.4%</td></tr><tr><td>上证50</td><td class='up'>+0.43%</td><td class='up'>+0.08%</td><td>1,086亿</td><td class='down'>-21.7%</td></tr><tr><td>中小100</td><td class='down'>-1.62%</td><td class='down'>-0.12%</td><td>1,070亿</td><td class='down'>-17.6%</td></tr><tr><td>北证50</td><td class='down'>-2.46%</td><td class='up'>+2.49%</td><td>131亿</td><td class='down'>-19.5%</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+两市成交额 15,378 亿（-3,627 亿 / -19.1%），<b>11 个指数成交额环比全部为负</b>、10 个收绿。<br>
+缩幅最大：科创50（-29.7%）、创业板（-20.3%）；缩幅最小：北证50（-19.5%）、国证2000（-19.4%）。<br>
+<span class="hl">把三日并排看：10-08「全线放量 + 全线下跌」= 抛压；10-09「全线放量 + 10/11 收红」= 增量入场；10-12「<b>全线缩量 + 全线下跌</b>」= 增量资金撤退、只剩存量博弈。</span>
+前一日报告把「量能能否维持在 1.8 万亿以上」列为观察点 —— 今日直接跌破 1.6 万亿（15,378 亿），答案是否定的。
+</div>
+</div>
+<div><div id="c_amt" class="chart-sm"></div></div>
+</div>
+<div class="two" style="margin-top:18px">
+<div><div id="c_idx" class="chart-sm"></div></div>
+<div>
+<table>
+<tr><th>风格指数</th><th>今日涨跌</th><th>成交额环比</th><th>成交额</th></tr>
+<tr><td>沪深300</td><td class='down'>-0.68%</td><td class='down'>-18.3%</td><td>4,056亿</td></tr><tr><td>国证2000</td><td class='down'>-1.90%</td><td class='down'>-19.4%</td><td>4,647亿</td></tr><tr><td>北证50</td><td class='down'>-2.46%</td><td class='down'>-19.5%</td><td>131亿</td></tr><tr><td>中证1000</td><td class='down'>-1.88%</td><td class='down'>-19.7%</td><td>3,101亿</td></tr><tr><td>创业板指</td><td class='down'>-2.61%</td><td class='down'>-20.3%</td><td>3,923亿</td></tr><tr><td>上证50</td><td class='up'>+0.43%</td><td class='down'>-21.7%</td><td>1,086亿</td></tr><tr><td>中证500</td><td class='down'>-2.18%</td><td class='down'>-22.4%</td><td>2,572亿</td></tr><tr><td>科创50</td><td class='down'>-2.10%</td><td class='down'>-29.7%</td><td>646亿</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+涨跌幅上今日<b>只有上证50红盘（+0.43%），其余全部下跌，且成长/小盘跌得最重</b>：创业板 -2.61%、中证500 -2.18%、科创50 -2.10%、国证2000 -1.90%。<br>
+<span class="hl">昨日的「小盘强于大盘」完全镜像反转 —— 今日资金从主题与小盘撤出、退守大盘权重（上证50 缩幅也最小，-21.7%）。</span>
+这与 09-24、09-30 的「防御性再平衡」同型，但这次的背景是<b>昨日刚完成修复、今日就掉头</b>，节奏更快、更像获利了结而非避险。
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>三、连板梯队：宽度腰斩，但 2 板梯队由 8 只增厚到 14 只</h2>
+<div class="two">
+<div><div id="c_lad" class="chart-sm"></div></div>
+<div>
+<table>
+<tr><th>梯队</th><th>10/9</th><th>10/12</th><th>变化</th></tr>
+<tr><td>10 板</td><td>0</td><td class='hl'>1</td><td class='up'>+1</td></tr><tr><td>9 板</td><td>1</td><td class='hl'>0</td><td class='down'>-1</td></tr><tr><td>8 板</td><td>0</td><td class='hl'>0</td><td class='mut'>+0</td></tr><tr><td>7 板</td><td>0</td><td class='hl'>0</td><td class='mut'>+0</td></tr><tr><td>6 板</td><td>0</td><td class='hl'>2</td><td class='up'>+2</td></tr><tr><td>5 板</td><td>2</td><td class='hl'>0</td><td class='down'>-2</td></tr><tr><td>4 板</td><td>1</td><td class='hl'>0</td><td class='down'>-1</td></tr><tr><td>3 板</td><td>0</td><td class='hl'>1</td><td class='up'>+1</td></tr><tr><td>2 板</td><td>8</td><td class='hl'>14</td><td class='up'>+6</td></tr><tr><td>1 板</td><td>57</td><td class='hl'>28</td><td class='down'>-29</td></tr>
+<tr><td>合计</td><td>69</td><td class="hl">46</td><td class="down">-23</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+首板 28 家（昨日 57，<b>腰斩</b>），连板股 18 家（昨日 12），最高 10 板（新华传媒）。<br>
+<span class="hl">本日结构最有信息量的一条：<u>首板 57 → 28（-29）而 2 板 8 → 14（+6）、3 板 0 → 1 只</u>。</span>
+首板腰斩说明"新增打板意愿"退潮，但 2 板增厚说明"昨日首板里的强者被资金接力了" —— 这是典型的<b>缩圈特征：不做扩散，只做接力</b>。<br>
+短板仍在腰部：4 板 1 → 0、5 板 2 → 0（两只均升至 6 板），<b>4–5 板整层出现空档</b>，高度端只剩 6 板 2 只 + 10 板 1 只，梯队呈"哑铃型"。
+</div>
+</div>
+</div>
+<h3>今日连板股全名单（18 只）</h3>
+<table>
+<tr><th>高度</th><th>代码</th><th>名称</th><th>首封</th><th>封单</th><th>成交额</th><th>换手</th><th>行业</th><th>涨停原因</th></tr>
+<tr><td>10板</td><td>600825</td><td class='hl'>新华传媒</td><td>09:25</td><td>10.17亿</td><td>4.87亿</td><td>3.4%</td><td>出版</td><td style='text-align:left;color:#4b5563'>财联社重组+财经新媒体+图书发行</td></tr><tr><td>6板</td><td>002242</td><td class='hl'>九阳股份</td><td>09:25</td><td>0.59亿</td><td>19.97亿</td><td>16.1%</td><td>小家电</td><td style='text-align:left;color:#4b5563'>机器人投资+厨房小家电+产品创新</td></tr><tr><td>6板</td><td>600241</td><td class='hl'>时代万恒</td><td>09:30</td><td>0.31亿</td><td>11.99亿</td><td>32.0%</td><td>电池</td><td style='text-align:left;color:#4b5563'>新能源电池+圆柱锂电+辽宁国资</td></tr><tr><td>3板</td><td>600812</td><td class='hl'>华北制药</td><td>09:25</td><td>1.44亿</td><td>10.02亿</td><td>8.8%</td><td>化学制药</td><td style='text-align:left;color:#4b5563'>鼠疫+抗感染药物+创新药研发</td></tr><tr><td>2板</td><td>000892</td><td class='hl'>欢瑞世纪</td><td>09:31</td><td>0.51亿</td><td>12.58亿</td><td>33.8%</td><td>影视院线</td><td style='text-align:left;color:#4b5563'>AI漫剧+互动影游+影视制作</td></tr><tr><td>2板</td><td>001330</td><td class='hl'>博纳影业</td><td>09:30</td><td>0.85亿</td><td>15.72亿</td><td>17.8%</td><td>影视院线</td><td style='text-align:left;color:#4b5563'>AI电影+AI短剧+影视院线</td></tr><tr><td>2板</td><td>002343</td><td class='hl'>慈文传媒</td><td>09:30</td><td>1.42亿</td><td>1.89亿</td><td>6.0%</td><td>影视院线</td><td style='text-align:left;color:#4b5563'>微短剧+影视IP+江西国资</td></tr><tr><td>2板</td><td>002692</td><td class='hl'>远程股份</td><td>09:40</td><td>0.77亿</td><td>2.66亿</td><td>7.4%</td><td>电网设备</td><td style='text-align:left;color:#4b5563'>电线电缆+数据中心电缆+电网应用+参股半导体</td></tr><tr><td>2板</td><td>002696</td><td class='hl'>百洋股份</td><td>09:30</td><td>0.43亿</td><td>1.04亿</td><td>3.9%</td><td>饲料</td><td style='text-align:left;color:#4b5563'>水产饲料+鱼粉涨价+青岛国资</td></tr><tr><td>2板</td><td>601595</td><td class='hl'>上海电影</td><td>10:21</td><td>0.31亿</td><td>7.54亿</td><td>6.3%</td><td>影视院线</td><td style='text-align:left;color:#4b5563'>AIGC+知识产权运营+院线经营</td></tr><tr><td>2板</td><td>601811</td><td class='hl'>新华文轩</td><td>09:54</td><td>0.47亿</td><td>12.65亿</td><td>7.3%</td><td>出版</td><td style='text-align:left;color:#4b5563'>出版传媒+数字教育+收购整合</td></tr><tr><td>2板</td><td>601929</td><td class='hl'>吉视传媒</td><td>09:34</td><td>0.99亿</td><td>13.96亿</td><td>14.8%</td><td>电视广播</td><td style='text-align:left;color:#4b5563'>智慧广电+AI微短剧+AI应用+算力租赁</td></tr><tr><td>2板</td><td>603096</td><td class='hl'>新经典</td><td>09:25</td><td>1.32亿</td><td>0.71亿</td><td>2.4%</td><td>出版</td><td style='text-align:left;color:#4b5563'>图书出版+AI应用+内容IP</td></tr><tr><td>2板</td><td>603232</td><td class='hl'>格尔软件</td><td>11:10</td><td>0.58亿</td><td>7.44亿</td><td>18.1%</td><td>软件开发</td><td style='text-align:left;color:#4b5563'>AI安全+抗量子密码+PKI安全</td></tr><tr><td>2板</td><td>603533</td><td class='hl'>掌阅科技</td><td>10:10</td><td>0.88亿</td><td>20.97亿</td><td>17.8%</td><td>数字媒体</td><td style='text-align:left;color:#4b5563'>AI短剧+短剧出海+数字阅读</td></tr><tr><td>2板</td><td>605136</td><td class='hl'>丽人丽妆</td><td>09:25</td><td>1.84亿</td><td>0.43亿</td><td>1.0%</td><td>互联网电</td><td style='text-align:left;color:#4b5563'>化妆品电商+海外总代+业绩扭亏</td></tr><tr><td>2板</td><td>605287</td><td class='hl'>德才股份</td><td>09:25</td><td>2.39亿</td><td>1.04亿</td><td>1.7%</td><td>装修装饰</td><td style='text-align:left;color:#4b5563'>AI漫剧+火山引擎合作+建筑装饰</td></tr><tr><td>2板</td><td>605577</td><td class='hl'>龙版传媒</td><td>09:30</td><td>1.39亿</td><td>2.53亿</td><td>3.2%</td><td>出版</td><td style='text-align:left;color:#4b5563'>AI漫剧+数字出版+出版发行</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+<span class="hl">高标锚 新华传媒（10 板）：封单 10.17 亿，占全场封单合计 47.1 亿的 21.6%，全天成交仅 4.87 亿、换手 3.4%（封单/成交 = 2.09 倍）。</span>
+对比昨日该票成交已放大到 4.87 亿、换手明显抬升 —— <b>锁仓结构确实在松动，但今日封单重新增厚、成交反而缩小，说明游资选择了"再锁一次"而非出货</b>。
+在整体广度塌陷的背景下，它是全场唯一被持续加固的高标。
+</div>
+</div>
+
+<div class="card">
+<h2>四、主线归因：传媒 / AI 内容接棒成功，10-09 的观察点被正面回答</h2>
+<div id="c_conc" class="chart" style="height:380px"></div>
+<div class="note" style="margin-top:12px">
+<b>概念板块榜（同花顺口径）给出的答案最直接：今日涨停家数前七的概念板块<b>仍是 AI / 传媒系，且连板数全面抬升</b></b> ——
+文化传媒概念（16 家 / 连板 11）、AI应用（15 家 / 连板 9）、人工智能（14 家 / 连板 6）、AIGC概念（11 家 / 连板 7）、IP经济(谷子经济)（11 家 / 连板 9）、西部大开发（11 家 / 连板 4）、文化传媒（10 家 / 连板 6）。<br>
+<span class="hl">关键在"其中连板数"这一列：10-09 时「AI应用 20 家」里面只有 6 家连板，今日 文化传媒概念 16 家里已有 11 家连板 —— <u>连板占比从 10-09 的 30% 提升到 69%</u>。这意味着昨日的"集体建仓第一天"确实长出了第二天的高度，而不是一日游。</span>
+</div>
+<table style="margin-top:14px">
+<tr><th>关键词聚类</th><th>涨停家数</th><th>其中连板</th><th>代表个股</th></tr>
+<tr><td class='hl'>传媒 / AI 内容（短剧·漫剧·影视·出版）</td><td>14</td><td>11</td><td style='text-align:left'><span class=tag>新华传媒(10板)</span><span class=tag>德才股份(2板)</span><span class=tag>慈文传媒(2板)</span><span class=tag>龙版传媒(2板)</span><span class=tag>新经典(2板)</span><span class=tag>吉视传媒(2板)</span><span class=tag>掌阅科技(2板)</span><span class=tag>博纳影业(2板)</span></td></tr><tr><td class='hl'>地产 / 国资重组 / 跨界资产</td><td>7</td><td>3</td><td style='text-align:left'><span class=tag>时代万恒(6板)</span><span class=tag>慈文传媒(2板)</span><span class=tag>百洋股份(2板)</span><span class=tag>广电网络(1板)</span><span class=tag>莱美药业(1板)</span><span class=tag>长城电工(1板)</span><span class=tag>宏辉果蔬(1板)</span></td></tr><tr><td class='hl'>机器人 / 智能制造</td><td>7</td><td>1</td><td style='text-align:left'><span class=tag>九阳股份(6板)</span><span class=tag>盛视科技(1板)</span><span class=tag>多伦科技(1板)</span><span class=tag>松霖科技(1板)</span><span class=tag>通达动力(1板)</span><span class=tag>金自天正(1板)</span><span class=tag>德新科技(1板)</span></td></tr><tr><td class='hl'>电网 / 电力 / 光伏</td><td>4</td><td>1</td><td style='text-align:left'><span class=tag>远程股份(2板)</span><span class=tag>金冠电气(1板)</span><span class=tag>众业达(1板)</span><span class=tag>首航新能(1板)</span></td></tr><tr><td class='hl'>农业 / 种业 / 食品</td><td>3</td><td>1</td><td style='text-align:left'><span class=tag>百洋股份(2板)</span><span class=tag>宏辉果蔬(1板)</span><span class=tag>醋化股份(1板)</span></td></tr><tr><td class='hl'>零售 / 消费</td><td>3</td><td>1</td><td style='text-align:left'><span class=tag>丽人丽妆(2板)</span><span class=tag>东百集团(1板)</span><span class=tag>内蒙新华(1板)</span></td></tr><tr><td class='hl'>AI 安全 / 信创 / 智算</td><td>2</td><td>1</td><td style='text-align:left'><span class=tag>格尔软件(2板)</span><span class=tag>盛视科技(1板)</span></td></tr><tr><td class='hl'>化工 / 材料涨价</td><td>2</td><td>0</td><td style='text-align:left'><span class=tag>金丹科技(1板)</span><span class=tag>醋化股份(1板)</span></td></tr><tr><td class='hl'>医药 / 创新药</td><td>2</td><td>1</td><td style='text-align:left'><span class=tag>华北制药(3板)</span><span class=tag>宏辉果蔬(1板)</span></td></tr><tr><td class='hl'>固态电池 / 锂电链</td><td>2</td><td>1</td><td style='text-align:left'><span class=tag>时代万恒(6板)</span><span class=tag>德新科技(1板)</span></td></tr>
+</table>
+<div class="note" style="margin-top:12px">
+今日涨停 46 只散落在 27 个东财行业里，<b>行业标签高度分散、最大行业"出版"也只有 6 只</b>，解释力弱，必须回到叙事本身看：<br>
+<b>① 传媒 / AI 内容（短剧·漫剧·影视·出版）—— 今日唯一主线，也是唯一"宽度与高度同时增长"的方向。</b>
+严格口径（涨停原因含 AI短剧/AI漫剧/AI视频/影视/出版/AIGC 等）14 家，<b>其中连板 11 家</b>；拉上 AI 安全/信创同类叙事共 16 家。<br>
+<b><span class="hl">今日 2 板梯队共 14 只，其中 11 只（79%）属于传媒/AI 内容系：新华传媒、德才股份、慈文传媒、龙版传媒、新经典、吉视传媒、掌阅科技、博纳影业、欢瑞世纪、新华文轩、上海电影。</span></b>
+细分看：影视院线 → 欢瑞世纪、博纳影业、慈文传媒、上海电影；出版/数字阅读 → 新经典、龙版传媒、新华文轩、掌阅科技；广电/传媒 → 吉视传媒；跨界 AI 漫剧 → 德才股份。
+<b>这是 10-09 报告要求的"2–3 板梯队"答卷 —— 主线接棒成功，且高度从"只有 1 只 9 板"变成"10 只有 2 板 + 高标"。</b><br>
+<b>② AI 安全 / 信创 / 智算 —— 昨日 7 家全首板，今日只剩 2 家</b>（绿盟科技、天融信、格尔软件、麒麟信安、中新赛克、大智慧中仅格尔软件晋级 2 板），
+<span class="hl">这正是"主题日爆发、次日不接力就熄火"的样本 —— 与传媒系的差别就在"次日有没有 2 板"。</span><br>
+<b>③ 固态电池 / 锂电链 —— 连续第五个交易日存活，但今日明显退潮。</b>
+严格口径"固态电池"1 家、连板 0 家；放宽到锂电/储能全链 2 家、连板 1 家（10-09 为 6 家 / 5 家连板）。
+昨日 5 板的时代万恒续至 6 板（圆柱锂电），但天赐材料（锂电材料，538 亿）在 10-09 炸板后今日继续走弱 —— <b>该链已由"进攻"转为"只剩个别高标硬撑"。</b><br>
+<b>④ 其余为分散轮动：</b>机器人/智能制造 7 家（九阳股份 6 板为唯一高标）、医药/创新药 2 家（华北制药 3 板）、
+化工/材料 2 家、零售/消费 3 家（昨日 4 家 → 今日 1 家）、农业/种业 3 家（昨日 3 家 → 今日 1 家）、电网/电力 4 家（1 → 4，唯一逆势流入的行业）。<br>
+<span class="hl">聚类口径说明：</span>上表按 `reason_type` 关键词聚类，家数大 ≠ 是主线。「地产/国资重组」7 家仍是"重大重组/国资/资产出售"通用词捞起的互不相关个股（丽人丽妆化妆品电商、新华文轩出版、百洋股份水产饲料），<b>不构成主线</b>。
+另：reason_type 为多标签，同一只股票可归入多条聚类，故各聚类家数之和大于涨停总数。
+</div>
+</div>
+
+<div class="card">
+<h2>五、行业迁移：只有电网设备在逆势流入，其余全线流出</h2>
+<div id="c_hy" class="chart" style="height:410px"></div>
+<table style="margin-top:14px">
+<tr><th>行业</th><th>10/9</th><th>10/12</th><th>增减</th><th>读数</th></tr>
+<tr><td>电池</td><td>6</td><td class='hl'>2</td><td class='down'>-4</td><td style='text-align:left;color:#6b7280'>流出</td></tr><tr><td>出版</td><td>5</td><td class='hl'>6</td><td class='up'>+1</td><td style='text-align:left;color:#6b7280'>流入</td></tr><tr><td>软件开发</td><td>5</td><td class='hl'>2</td><td class='down'>-3</td><td style='text-align:left;color:#6b7280'>流出</td></tr><tr><td>一般零售</td><td>4</td><td class='hl'>1</td><td class='down'>-3</td><td style='text-align:left;color:#6b7280'>流出</td></tr><tr><td>电网设备</td><td>1</td><td class='hl'>4</td><td class='up'>+3</td><td style='text-align:left;color:#6b7280'>流入</td></tr><tr><td>影视院线</td><td>4</td><td class='hl'>4</td><td class='mut'>+0</td><td style='text-align:left;color:#6b7280'>持平</td></tr><tr><td>数字媒体</td><td>3</td><td class='hl'>1</td><td class='down'>-2</td><td style='text-align:left;color:#6b7280'>流出</td></tr><tr><td>种植业</td><td>3</td><td class='hl'>1</td><td class='down'>-2</td><td style='text-align:left;color:#6b7280'>流出</td></tr><tr><td>化学制品</td><td>3</td><td class='hl'>3</td><td class='mut'>+0</td><td style='text-align:left;color:#6b7280'>持平</td></tr><tr><td>化学制药</td><td>3</td><td class='hl'>3</td><td class='mut'>+0</td><td style='text-align:left;color:#6b7280'>持平</td></tr><tr><td>IT服务Ⅱ</td><td>0</td><td class='hl'>2</td><td class='up'>+2</td><td style='text-align:left;color:#6b7280'>流入</td></tr><tr><td>服装家纺</td><td>2</td><td class='hl'>0</td><td class='down'>-2</td><td style='text-align:left;color:#6b7280'>流出</td></tr><tr><td>电视广播</td><td>1</td><td class='hl'>2</td><td class='up'>+1</td><td style='text-align:left;color:#6b7280'>流入</td></tr><tr><td>装修装饰</td><td>2</td><td class='hl'>1</td><td class='down'>-1</td><td style='text-align:left;color:#6b7280'>流出</td></tr><tr><td>中药Ⅱ</td><td>1</td><td class='hl'>0</td><td class='down'>-1</td><td style='text-align:left;color:#6b7280'>流出</td></tr><tr><td>乘用车</td><td>0</td><td class='hl'>1</td><td class='up'>+1</td><td style='text-align:left;color:#6b7280'>流入</td></tr><tr><td>元件</td><td>1</td><td class='hl'>0</td><td class='down'>-1</td><td style='text-align:left;color:#6b7280'>流出</td></tr><tr><td>农产品加</td><td>1</td><td class='hl'>0</td><td class='down'>-1</td><td style='text-align:left;color:#6b7280'>流出</td></tr>
+</table>
+<div class="note" style="margin-top:12px">
+<b>唯一的流入端：</b>电网设备 1 → 4（1→4）、IT服务 0 → 2（0→2）。<br>
+<b>流出端：</b>电池 6 → 2（6→2，固态电池链退潮的直接体现）、软件开发 5 → 2（5→2，AI 安全熄火）、
+一般零售 4 → 1（4→1）、数字媒体 3 → 1（3→1）、种植业 3 → 1（3→1）。<br>
+<span class="hl">持平但需警惕的三条：出版 5→6、影视院线 4→4、化学制药 3→3。</span>
+其中出版与影视院线虽然<b>家数基本持平</b>，但成分已从"首板铺开"变为"2 板接力"（昨日首板的新经典、龙版传媒、新华文轩今日全部晋级 2 板），
+<b>家数持平 ≠ 同一条线的同样状态 —— 这一层必须回到第三节的梯队表看，不能只看行业计数。</b>
+</div>
+</div>
+
+<div class="card">
+<h2>六、昨日涨停股今日表现：赚钱效应尚可，但最弱端已出现天地板</h2>
+<div class="kpis" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+  <div class="kpi"><div class="lbl">晋级率</div><div class="val up">26.1%</div><div class="dt mut">18/69</div></div>
+  <div class="kpi"><div class="lbl">平均涨幅</div><div class="val up">+1.81%</div><div class="dt mut">中位 +1.45%</div></div>
+  <div class="kpi"><div class="lbl">翻绿比例</div><div class="val down">39%</div><div class="dt mut">27 只（其中跌超5% 10 只）</div></div>
+  <div class="kpi"><div class="lbl">最强</div><div class="val up">+10.10%</div><div class="dt mut">欢瑞世纪</div></div>
+  <div class="kpi"><div class="lbl">最弱</div><div class="val down">-10.00%</div><div class="dt mut">东亚药业（昨 1 板）</div></div>
+</div>
+<div class="note" style="margin-top:14px">
+分组看：昨日首板 57 只，晋级率 24.6%、中位 +1.22%、翻绿 22 只；
+昨日连板 12 只，晋级率 33.3%、中位 +2.20%、翻绿 5 只。<br>
+<b>连板组中位 +2.20% vs 首板组中位 +1.22%，差 0.98pct —— 仍"连板强于首板"，但差距从昨日的 4.20pct 进一步收窄到 1pct 以内。</b>
+<span class="hl">这是一个两面性的读数：好的一面是首板组中位仍为正（+1.22%）、隔夜期望没崩；坏的一面是首板组的相对优势已经消失，而 39.1% 的翻绿比例说明"随便买个昨日涨停股"胜率不足六成。</span><br>
+最强三只为 欢瑞世纪+10.1%、远程股份+10.1%、博纳影业+10.0%（全部是传媒/AI 系 2 板）；最弱三只为 国芳集团-10.0%、楚环科技-10.0%、东亚药业-10.0%，其中 <b>三柏硕（001300，昨 2 板）今日 -9.89% 属"天地板"</b>（早盘 09:30:00 一度封板、收盘逼近跌停），
+<b>东亚药业（605177）、国芳集团（601086）直接由昨涨停转为今跌停</b> —— 高位与低位同时出现"涨停→跌停"的极端反转，是情绪脆弱的直接证据。
+</div>
+<div id="c_perf" class="chart" style="height:1200px;margin-top:8px"></div>
+</div>
+
+<div class="card">
+<h2>七、跌停池：破坏力回升 2.5 倍，PCB / 覆铜板链出现连续第二日跌停</h2>
+<div class="two">
+<div>
+<table>
+<tr><th>项目</th><th>10/9（周五）</th><th>10/12（周一）</th></tr>
+<tr><td>跌停家数（沪深）</td><td>8</td><td class="hl">20</td></tr>
+<tr><td>触及跌停家数</td><td>31</td><td class="hl">24</td></tr>
+<tr><td>跌停封死率</td><td>25.8%</td><td class="hl">83.3%</td></tr>
+<tr><td>跌停股合计成交</td><td>108亿</td><td class="hl">197.1亿</td></tr>
+<tr><td>跌停股 ÷ 涨停股成交</td><td>0.22 倍</td><td class="hl">0.67 倍</td></tr>
+<tr><td>跌停池流通市值 &gt;100亿</td><td>3 只</td><td class="hl">9 只</td></tr>
+<tr><td>其中来自昨日涨停池</td><td>—</td><td class="hl">2 只</td></tr>
+<tr><td>其中连续第二日跌停</td><td>—</td><td class="hl">2 只</td></tr>
+<tr><td>昨日跌停池今日表现</td><td>—</td><td class="hl">均值 -6.34%</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+今日跌停 20 家（东财池 19 只）。<b>三个维度的破坏力同时上升</b>：
+家数 8→20、封死率 25.8%→83.3%、跌停股合计成交 197.1 亿。<br>
+<span class="hl">跌停股合计成交 ÷ 涨停股成交 = 0.67 倍，而昨日是 0.22 倍、10-08 是 1.62 倍、09-28 跌停潮时 3.3 倍。</span>
+今日处于"温和回升"区间 —— 破坏力回来了，但还没有到跌停潮的程度，需与"承接力掉 19pct"合起来读。
+</div>
+</div>
+<div><div id="c_rel" class="chart" style="height:300px"></div></div>
+</div>
+<h3>今日跌停池明细（东财池原样 19 只，按成交额排序）</h3>
+<table>
+<tr><th>代码</th><th>名称</th><th>东财行业</th><th>成交额</th><th>流通市值</th><th>标签</th></tr>
+<tr><td>603186</td><td>华正新材</td><td>元件</td><td>36.13亿</td><td>291亿</td><td>大市值</td></tr><tr><td>002636</td><td>金安国纪</td><td>元件</td><td>25.19亿</td><td>468亿</td><td><b class='hl'>连续跌停</b>／大市值</td></tr><tr><td>002396</td><td>星网锐捷</td><td>通信设备</td><td>21.38亿</td><td>213亿</td><td>大市值</td></tr><tr><td>601086</td><td>国芳集团</td><td>一般零售</td><td>15.39亿</td><td>90亿</td><td><b class='hl'>昨涨停→今跌停</b></td></tr><tr><td>603002</td><td>宏昌电子</td><td>电子化学</td><td>14.44亿</td><td>180亿</td><td>大市值</td></tr><tr><td>600722</td><td>金牛化工</td><td>化学原料</td><td>13.13亿</td><td>103亿</td><td>大市值</td></tr><tr><td>002413</td><td>雷科防务</td><td>军工电子</td><td>12.26亿</td><td>102亿</td><td>大市值</td></tr><tr><td>603588</td><td>高能环境</td><td>环境治理</td><td>9.41亿</td><td>227亿</td><td>大市值</td></tr><tr><td>601579</td><td>会稽山</td><td>非白酒</td><td>9.05亿</td><td>174亿</td><td>大市值</td></tr><tr><td>605366</td><td>宏柏新材</td><td>化学制品</td><td>8.67亿</td><td>69亿</td><td><b class='hl'>连续跌停</b></td></tr><tr><td>000678</td><td>襄阳轴承</td><td>汽车零部</td><td>7.57亿</td><td>52亿</td><td>—</td></tr><tr><td>002285</td><td>世联行</td><td>房地产服</td><td>7.55亿</td><td>58亿</td><td>—</td></tr><tr><td>600664</td><td>哈药股份</td><td>化学制药</td><td>3.96亿</td><td>167亿</td><td>大市值</td></tr><tr><td>603395</td><td>红四方</td><td>农化制品</td><td>3.06亿</td><td>16亿</td><td>—</td></tr><tr><td>605177</td><td>东亚药业</td><td>化学制药</td><td>3.06亿</td><td>29亿</td><td><b class='hl'>昨涨停→今跌停</b></td></tr><tr><td>603657</td><td>春光科技</td><td>家电零部</td><td>2.23亿</td><td>45亿</td><td>—</td></tr><tr><td>605303</td><td>园林股份</td><td>基础建设</td><td>2.12亿</td><td>47亿</td><td>—</td></tr><tr><td>603668</td><td>天马科技</td><td>饲料</td><td>2.00亿</td><td>48亿</td><td>—</td></tr><tr><td>688670</td><td>金迪克</td><td>生物制品</td><td>0.53亿</td><td>19亿</td><td>—</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+跌停结构仍是<b>去板块化</b>的：19 只散落在 17 个行业，流通市值 &gt;100 亿的有 9 只（金安国纪 468亿、华正新材 291亿、高能环境 227亿、星网锐捷 213亿、宏昌电子 180亿、会稽山 174亿、哈药股份 167亿、金牛化工 103亿、雷科防务 102亿），
+单只最大 华正新材（元件，成交 36.1 亿、流通 291 亿）。<br>
+<span class="hl">但有一条链必须单独点出：PCB / 覆铜板 / 电子材料链在跌停池里有 4 只（金安国纪 468亿、华正新材 291亿、星网锐捷 213亿、宏昌电子 180亿），合计成交 97.1 亿、占跌停池三成以上。</span>
+其中 <b>金安国纪为连续第二日跌停</b>（10-09 已跌停、今日再度 -10.00%）、华正新材新进跌停 —— 该链 9/28 第一轮杀跌（27 家）、10/08 第二轮（5 家大市值），
+今日属<b>第三轮局部出清</b>，与 10-09「算力硬件链只剩金安国纪 1 只」的判断相比明显恶化。<br>
+另需注意：昨日涨停的 国芳集团、东亚药业 2 只今日直接跌停 —— 反抽链条上的个股一日游风险再现。
+</div>
+<h3>昨日（10/9）跌停池 8 只，今日表现</h3>
+<table>
+<tr><th>代码</th><th>名称</th><th>东财行业</th><th>今日涨跌</th></tr>
+<tr><td>002487</td><td>大金重工</td><td>风电设备</td><td class='up'>+7.66%</td></tr><tr><td>603400</td><td>华之杰</td><td>通用设备</td><td class='down'>-4.29%</td></tr><tr><td>603823</td><td>百合花</td><td>化学制品</td><td class='down'>-5.72%</td></tr><tr><td>603073</td><td>彩蝶实业</td><td>化学纤维</td><td class='down'>-8.61%</td></tr><tr><td>002927</td><td>泰永长征</td><td>电网设备</td><td class='down'>-9.92%</td></tr><tr><td>002962</td><td>五方光电</td><td>光学光电</td><td class='down'>-9.92%</td></tr><tr><td>605366</td><td>宏柏新材</td><td>化学制品</td><td class='down'>-9.96%</td></tr><tr><td>002636</td><td>金安国纪</td><td>元件</td><td class='down'>-10.00%</td></tr>
+</table>
+<div class="note" style="margin-top:12px">
+昨日跌停的 8 只今日均值 -6.34%、中位 -9.27%，翻红仅 1 只、涨停 0 只。<br>
+<b>表现最好的是 大金重工（+7.66%），但它今日出现在炸板池而不是涨停池 —— 冲板失败。</b>
+<span class="hl">这与 09-29、09-30、10-09 的结论完全一致并再次强化：<u>跌停池里的股票不会因为"大盘反弹"或"主线切换"而自动修复</u>。
+唯一的例外是新华文轩（10-08 跌停 → 10-09 涨停），那是被新主线"选中"的个案，而今日它已晋级 2 板，进一步证明"反转靠的是叙事而非超跌"。</span>
+</div>
+<h3>炸板池明细（东财池 25 只，未回封 25 只）</h3>
+<table>
+<tr><th>名称</th><th>代码</th><th>首次触板</th><th>行业</th><th>收盘涨跌</th><th>成交额</th><th>流通市值</th></tr>
+<tr><td class='hl'>三柏硕</td><td>001300</td><td>09:30</td><td>文娱用品</td><td class='down'>-9.89%</td><td>4.84亿</td><td>33亿</td></tr><tr><td class='hl'>吉林化纤</td><td>000420</td><td>09:30</td><td>化学纤维</td><td class='up'>+0.00%</td><td>12.29亿</td><td>94亿</td></tr><tr><td class='hl'>汇嘉时代</td><td>603101</td><td>09:30</td><td>一般零售</td><td class='down'>-3.25%</td><td>4.45亿</td><td>36亿</td></tr><tr><td class='hl'>艾比森</td><td>300389</td><td>09:30</td><td>光学光电</td><td class='up'>+7.84%</td><td>3.74亿</td><td>37亿</td></tr><tr><td class='hl'>金健米业</td><td>600127</td><td>09:30</td><td>农产品加</td><td class='down'>-8.43%</td><td>58.81亿</td><td>89亿</td></tr><tr><td class='hl'>富岭股份</td><td>001356</td><td>09:31</td><td>家居用品</td><td class='up'>+6.89%</td><td>2.19亿</td><td>21亿</td></tr><tr><td class='hl'>冠农股份</td><td>600251</td><td>09:33</td><td>农产品加</td><td class='up'>+0.58%</td><td>4.58亿</td><td>81亿</td></tr><tr><td class='hl'>共达电声</td><td>002655</td><td>09:38</td><td>消费电子</td><td class='up'>+4.18%</td><td>11.64亿</td><td>116亿</td></tr><tr><td class='hl'>丰山集团</td><td>603810</td><td>09:40</td><td>农化制品</td><td class='up'>+7.18%</td><td>1.90亿</td><td>23亿</td></tr><tr><td class='hl'>大金重工</td><td>002487</td><td>09:42</td><td>风电设备</td><td class='up'>+7.66%</td><td>45.67亿</td><td>297亿</td></tr><tr><td class='hl'>双一科技</td><td>300690</td><td>09:43</td><td>风电设备</td><td class='up'>+9.79%</td><td>6.82亿</td><td>30亿</td></tr><tr><td class='hl'>韶能股份</td><td>000601</td><td>09:49</td><td>电力</td><td class='up'>+4.93%</td><td>10.69亿</td><td>67亿</td></tr><tr><td class='hl'>保变电气</td><td>600550</td><td>09:49</td><td>电网设备</td><td class='up'>+5.91%</td><td>10.78亿</td><td>201亿</td></tr><tr><td class='hl'>博菲电气</td><td>001255</td><td>10:09</td><td>塑料</td><td class='down'>-1.72%</td><td>1.52亿</td><td>21亿</td></tr><tr><td class='hl'>凯美特气</td><td>002549</td><td>10:21</td><td>化学制品</td><td class='up'>+5.11%</td><td>8.23亿</td><td>90亿</td></tr><tr><td class='hl'>鹏鼎控股</td><td>002938</td><td>10:22</td><td>元件</td><td class='up'>+2.45%</td><td>47.41亿</td><td>1767亿</td></tr><tr><td class='hl'>威派格</td><td>603956</td><td>10:24</td><td>专用设备</td><td class='up'>+6.31%</td><td>5.19亿</td><td>42亿</td></tr><tr><td class='hl'>岱美股份</td><td>603730</td><td>10:25</td><td>汽车零部</td><td class='up'>+7.87%</td><td>5.30亿</td><td>224亿</td></tr><tr><td class='hl'>新亚强</td><td>603155</td><td>10:26</td><td>化学制品</td><td class='up'>+6.22%</td><td>9.52亿</td><td>75亿</td></tr><tr><td class='hl'>至纯科技</td><td>603690</td><td>10:26</td><td>半导体</td><td class='up'>+5.69%</td><td>7.70亿</td><td>84亿</td></tr><tr><td class='hl'>宿迁联盛</td><td>603065</td><td>11:25</td><td>化学制品</td><td class='up'>+5.92%</td><td>5.05亿</td><td>61亿</td></tr><tr><td class='hl'>元利科技</td><td>603217</td><td>11:28</td><td>化学制品</td><td class='up'>+1.09%</td><td>2.08亿</td><td>54亿</td></tr><tr><td class='hl'>安彩高科</td><td>600207</td><td>13:17</td><td>光伏设备</td><td class='up'>+5.54%</td><td>7.40亿</td><td>64亿</td></tr><tr><td class='hl'>海南橡胶</td><td>601118</td><td>13:31</td><td>种植业</td><td class='up'>+4.19%</td><td>25.68亿</td><td>319亿</td></tr><tr><td class='hl'>名臣健康</td><td>002919</td><td>14:35</td><td>游戏Ⅱ</td><td class='up'>+6.86%</td><td>2.47亿</td><td>46亿</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+炸板 25 只（同花顺 `open_num` 沪深口径；东财池 25 只），其中 <b>25 只未回封、0 只回封（无）</b>，总成交 306 亿。<br>
+<span class="hl">回封率 0% —— 与 10-08 的 3% 同级，是本轮最差的承接质量之一。</span>
+今日 46 只涨停股中仅 25 只出现过开板，其余 21 只全天未开板，说明<b>"封住的很实、没封住的真没封住"，两极分化加剧</b>。<br>
+池内最值得注意的是 <b>鹏鼎控股（元件，流通 1767 亿、成交 47.41 亿、收 +2.45%）</b> ——
+苹果产业链/PCB 权重股冲板失败，与跌停池里的 PCB 链形成同一方向的印证。
+另外 <b>大金重工（002487，昨跌停 → 今冲板失败收 +7.66%、成交 45.67 亿）</b>是"跌停股反抽一日游"的又一个样本。
+</div>
+</div>
+
+<div class="card">
+<h2>八、封板节奏与成交结构：从"午后接力"急转为"早盘集中冲板"</h2>
+<div class="two">
+<div><div id="c_ts" class="chart-sm"></div></div>
+<div>
+<table>
+<tr><th>封板时段</th><th>10/9</th><th>10/12</th></tr>
+<tr><td>竞价/秒板</td><td>3</td><td class='hl'>8</td></tr><tr><td>开盘半小时</td><td>17</td><td class='hl'>22</td></tr><tr><td>上午盘中</td><td>9</td><td class='hl'>8</td></tr><tr><td>午后盘中</td><td>36</td><td class='hl'>7</td></tr><tr><td>尾盘</td><td>4</td><td class='hl'>1</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+昨日早盘封板 20/69 = 29%，今日 30/46 = <b>65%</b>；
+其中竞价/秒板 8 只（昨日 3 只）、开盘半小时 22 只（昨日 17 只）、上午盘中 8 只、午后 7 只、尾盘 1 只。<br>
+<span class="hl">这是两日之间最本质的行为差异：10-09 是"早盘不冲、午后主动接力"（午后 36 只、占 52%），今日完全反过来 —— 早盘半小时内就封掉 22 只（占 48%），午后只剩 7 只。</span>
+<b>早盘集中冲板的资金性质是"抢跑"，午后接力才是"增量择时进场"</b>。节奏前移 + 炸板翻倍（13 → 25），合起来指向同一件事：<u>存量的钱在开盘就抢位置，抢不到就砸。</u>
+</div>
+</div>
+</div>
+<div class="kpis" style="grid-template-columns:repeat(auto-fit,minmax(155px,1fr));margin-top:16px">
+  <div class="kpi"><div class="lbl">涨停股合计成交额</div><div class="val">293亿</div><div class="dt mut">占两市 1.9%（昨日 2.6%）</div></div>
+  <div class="kpi"><div class="lbl">单只中位成交额</div><div class="val">4.46亿</div><div class="dt mut">昨日 5.90亿 <span class="down">-24.5%</span></div></div>
+  <div class="kpi"><div class="lbl">封单合计</div><div class="val">47.1亿</div><div class="dt mut">昨日 61.6亿 <span class="down">-23.5%</span></div></div>
+  <div class="kpi"><div class="lbl">封单中位数</div><div class="val">0.55亿</div><div class="dt mut">昨日 0.54亿 <span class="up">+2.8%</span></div></div>
+  <div class="kpi"><div class="lbl">一字板</div><div class="val">5</div><div class="dt mut">昨日 3 只，占比 10.9%</div></div>
+  <div class="kpi"><div class="lbl">换手板</div><div class="val">36</div><div class="dt mut">占 78%（昨日 66 只）</div></div>
+</div>
+<div class="two" style="margin-top:18px">
+<div>
+<h3>封单前五</h3>
+<table>
+<tr><th>名称</th><th>代码</th><th>高度</th><th>封单</th><th>成交额</th><th>封单/成交</th></tr>
+<tr><td class='hl'>新华传媒</td><td>600825</td><td>10板</td><td>10.17亿</td><td>4.87亿</td><td>2.09x</td></tr><tr><td class='hl'>东百集团</td><td>600693</td><td>1板</td><td>3.21亿</td><td>3.03亿</td><td>1.06x</td></tr><tr><td class='hl'>赛力斯</td><td>601127</td><td>1板</td><td>3.10亿</td><td>26.42亿</td><td>0.12x</td></tr><tr><td class='hl'>德才股份</td><td>605287</td><td>2板</td><td>2.39亿</td><td>1.04亿</td><td>2.31x</td></tr><tr><td class='hl'>天顺风能</td><td>002531</td><td>1板</td><td>2.15亿</td><td>8.40亿</td><td>0.26x</td></tr>
+</table>
+</div>
+<div>
+<h3>成交额前五</h3>
+<table>
+<tr><th>名称</th><th>代码</th><th>高度</th><th>成交额</th><th>封单</th><th>行业</th></tr>
+<tr><td class='hl'>赛力斯</td><td>601127</td><td>1板</td><td>26.42亿</td><td>3.10亿</td><td>乘用车</td></tr><tr><td class='hl'>掌阅科技</td><td>603533</td><td>2板</td><td>20.97亿</td><td>0.88亿</td><td>数字媒体</td></tr><tr><td class='hl'>九阳股份</td><td>002242</td><td>6板</td><td>19.97亿</td><td>0.59亿</td><td>小家电</td></tr><tr><td class='hl'>博纳影业</td><td>001330</td><td>2板</td><td>15.72亿</td><td>0.85亿</td><td>影视院线</td></tr><tr><td class='hl'>吉视传媒</td><td>601929</td><td>2板</td><td>13.96亿</td><td>0.99亿</td><td>电视广播</td></tr>
+</table>
+</div>
+</div>
+<div class="note" style="margin-top:12px">
+封单整体<b>同步变薄</b>：合计 47.1 亿（昨日 61.6 亿，-23.5%），但<b>中位数基本持平</b>（0.55 亿 vs 0.54 亿，+2.8%）——
+<span class="hl">总量缩水的全部来源是"家数从 69 掉到 46"，而不是单只封单变薄（中位几乎不变、单只中位成交额 4.46 亿 vs 昨日 5.90 亿，-24.5%）。</span>
+这是"缩圈"在成交结构上的直接体现：<b>留下来被封住的票，封单厚度与昨日相当；只是能被封住的票少了一大半。</b><br>
+封单集中度进一步上升：新华传媒 一只占 21.6%，是全场唯一 "封单/成交" 超过 2 倍的标的，其余均为个位数。
+</div>
+</div>
+
+<div class="card">
+<h2>九、资金运动的三个结论</h2>
+<ul>
+<li><b>① 总量与方向：全线缩量 + 全线下跌 = 增量资金离场，只剩存量博弈。</b>两市成交 15,378 亿（-3,627 亿 / -19.1%），
+11 个指数成交额环比<b>全部为负</b>、10 个收绿。<span class="hl">把 10-08、10-09、10-12 三日并排：放量下跌（抛压）→ 放量上涨（增量入场）→ 缩量下跌（增量撤退）。第三天的量能是三日里最小的，方向却是向下的 —— 昨日的"新钱进场"至少有一部分今日已撤。</span>
+（口径提示：本报告"增量"仅指成交额环比，不区分买卖方向，需与价格方向合并判断。）</li>
+<li><b>② 风格与主线：资金从"小微盘 + 主题"全面撤退，退守大盘权重；但退出来的钱集中挤进了一条线。</b>
+今日只有上证50 红盘（+0.43%），创业板 -2.61%、中证500 -2.18%、科创50 -2.10% 领跌，与昨日"小盘强于大盘"完全镜像。
+<span class="hl">主线层面，传媒/AI 内容（涨停 14 家 / 连板 11 家）是唯一"宽度+高度双增"的方向 —— 2 板梯队里 79% 属于它；与此同时 AI 安全/信创从 7 家缩到 2 家、固态电池链从 6 家缩到 2 家。</span>
+<b>一句话：市场不是在选新方向，而是在"最后一条还在的线"上缩圈抱团。</b></li>
+<li><b>③ 结构：接力层增厚、扩散层塌陷，赚钱效应尚在但风险已偏向高位。</b>
+昨日涨停股今日晋级率 26.1%、均涨 +1.81%、翻绿 27 只（39%）；
+首板组中位 +1.22% vs 连板组中位 +2.20%（差 0.98pct，较昨日 4.20pct 继续收窄）。
+<span class="hl">最要留意的是两端同时出现极端反转：昨日 2 板的三柏硕今日 -9.89%（天地板）、昨日首板的东亚药业/国芳集团今日直接跌停 —— 而与此同时昨日首板里的传媒股（欢瑞世纪、博纳影业、慈文传媒、上海电影）集体晋级 2 板。<u>"同样买昨日首板"，买传媒的赚 10%，买医药/零售的亏 10%。</u></span>
+真正的风险不是"普跌"，而是<b>方向选错即被反向极端定价</b>。</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>十、次日观察要点与风险</h2>
+<ul>
+<li><b>传媒 / AI 内容的 3 板接力（第一观察点）：</b>今日该方向交出 2 板梯队答卷（11 只占 2 板的 79%）。
+需要观察明日这批 2 板能否出现 3 板 —— <span class="hl">按本报告经验，一个方向只有出现"3 板"才算真正打开天花板（参考 09-29 反抽 → 09-30 证伪、10-09 AI安全 7 家全首板 → 10-12 仅剩 2 家）。</span>
+若明日 2 板大面积断板，则今日的"接棒成功"退化为一次高位分歧；若出现 3 板且伴随成交额回升，则确认为新主升段。</li>
+<li><b>量能能否止跌（最硬的裁判）：</b>今日 15,378 亿，已从 10-09 的 19006 亿回落 19.1%。<b>若明日继续缩到 1.5 万亿以下，任何结构性行情的持续性都要打折</b>；
+只有量能重新回到 1.7 万亿以上，"缩圈"才可能重新演化为"扩散"。</li>
+<li><b>承接力是否继续恶化：</b>封板率 64.8%（一日掉 19.4pct）、炸板 25 只、回封率仅 0%。
+观察明日封板率能否守住 60% —— <span class="hl">今日的两极分化（封住的极实、没封住的真炸）说明"承接"只存在于最强的那批票上，一旦这批票出现分歧，封板率会二次塌陷。</span></li>
+<li><b>高标锚（新华传媒 10 板）：</b>今日封单 10.17 亿、占全场 21.6%，成交 4.87 亿、换手 3.4%（封单/成交 2.09 倍）。
+昨日已出现放量换手，今日又缩量加固 —— <b>它的走向是全场高位情绪的锚</b>：若继续缩量一字，负面意义是"筹码高度集中、一旦开板冲击巨大"；若放量炸板，连板组正收益会同步承压。</li>
+<li><b>PCB / 覆铜板链的第三轮出清：</b>该链 9/28 第一轮（27 家跌停）、10/08 第二轮（5 家大市值），今日跌停池中仍有 4 只（金安国纪 468亿、华正新材 291亿、星网锐捷 213亿、宏昌电子 180亿），
+且金安国纪为<b>连续第二日跌停</b>；同时苹果链权重股 鹏鼎控股 冲板失败。<span class="hl">不宜将其视为"已见底"，该链是目前最有持续杀伤力的空头方向。</span></li>
+<li><b>昨日跌停池仍无修复：</b>8 只今日均值 -6.34%、翻红 1 只，表现最好的 大金重工 也只是冲板失败。
+<b>再次强调：跌停股不因大盘或主线变化而自动修复，不构成"抄底"理由。</b></li>
+<li><b>缩量的两面性：</b>今日缩量下跌与 09-23、09-24 的"缩量退潮"同型，历史上未必是暴跌前兆（09-29 即在缩量中完成反抽）。
+<span class="hl">但区别在于： 09-23/09-24 缩量时主线尚未明确，今日缩量时主线已明确且极度集中 —— "单一主线 + 缩量"组合的脆弱性高于"无主线 + 缩量"。</span>这也是本报告把风险等级给到"中高"的原因。</li>
+<li><b>数据口径：</b>统计为沪深两市（不含北交所）。东财涨停池 东财涨停池与同花顺家数一致（46 只），差额 0；
+跌停家数取同花顺汇总字段（沪深口径 20 家），<b>东财跌停池当日返回 19 只，差额 1 只无法归因，故家数以同花顺汇总为准，明细表按东财池原样列出</b>；
+今日同花顺跌停池明细接口不可用（`ths_dt` 为 None）；炸板家数取同花顺 `open_num`（沪深口径 25 只），东财炸板池 25 只；
+成交额、封单、换手率取东财字段；两市成交额为沪市 + 深市全市场口径；跌停股合计成交按东财池逐只汇总（故比值口径与家数口径略有差异）；
+封板时间双源（东财 `fbt` vs 同花顺时间戳）分钟级一致率 100%（46 只全部可比一致）。</li>
+</ul>
+<div class="warn" style="margin-top:14px">
+<b>风险提示：</b>本报告为盘后数据复盘与资金行为分析，所有结论基于公开行情数据的统计推断，不构成任何投资建议。
+涨停板交易具有高波动、高换手、隔夜风险大的特征；单日样本的可外推性弱，历史统计规律不保证未来重复。
+当前市场处于"单一主线 + 缩量 + 广度收窄"的组合下，主题内个股的分化与反向极端定价概率显著上升，请自行判断风险承受能力。
+</div>
+</div>
+
+<div class="note" style="text-align:center;color:#9ca3af;margin-top:24px">
+生成时间：2026-10-12 15:31:55｜数据源：同花顺 / 东方财富 / 腾讯财经｜本报告由脚本自动生成
+</div>
+</div>
+
+<script>
+var C_RED='#d93025', C_GRN='#12805c', C_BLU='#2563eb';
+var AX={axisLine:{lineStyle:{color:'#d1d5db'}},axisLabel:{color:'#6b7280'},splitLine:{lineStyle:{color:'#f1f3f5'}}};
+function mk(id,opt){var e=echarts.init(document.getElementById(id));e.setOption(opt);window.addEventListener('resize',function(){e.resize()});}
+
+mk('c_senti',{
+  tooltip:{trigger:'axis'},legend:{top:3,left:'center',textStyle:{color:'#6b7280'}},
+  grid:{left:56,right:66,top:52,bottom:32},
+  xAxis:Object.assign({type:'category',data:["10/8", "10/9", "10/12"]},AX),
+  yAxis:[Object.assign({type:'value',name:'家数'},AX),
+         Object.assign({type:'value',name:'封板率%',min:0,max:100},AX)],
+  series:[
+    {name:'涨停家数',type:'bar',data:[42, 69, 46],itemStyle:{color:C_RED},barWidth:26,
+     label:{show:true,position:'top',color:C_RED,fontWeight:600}},
+    {name:'炸板家数',type:'bar',data:[32, 13, 25],itemStyle:{color:'#f0a04b'},barWidth:26,
+     label:{show:true,position:'top',color:'#b26a1e'}},
+    {name:'跌停家数',type:'bar',data:[13, 8, 20],itemStyle:{color:C_GRN},barWidth:26,
+     label:{show:true,position:'top',color:C_GRN}},
+    {name:'封板率',type:'line',yAxisIndex:1,smooth:true,symbolSize:8,data:[56.8, 84.1, 64.8],
+     itemStyle:{color:C_BLU},lineStyle:{width:3},label:{show:true,position:'bottom',color:C_BLU,formatter:'{c}%'}}
+  ]
+});
+
+mk('c_idx',{
+  tooltip:{trigger:'axis',valueFormatter:function(v){return v+'%'}},
+  grid:{left:76,right:56,top:16,bottom:24},
+  xAxis:Object.assign({type:'value',axisLabel:{formatter:'{value}%'}},AX),
+  yAxis:Object.assign({type:'category',data:["创业板指", "北证50", "中证500", "科创50", "深证成指", "国证2000", "中证1000", "中小100", "沪深300", "上证指数", "上证50"],axisLabel:{color:'#6b7280',interval:0}},AX),
+  series:[{type:'bar',data:[-2.61, -2.46, -2.18, -2.1, -2.03, -1.9, -1.88, -1.62, -0.68, -0.43, 0.43],barWidth:14,
+    itemStyle:{color:function(p){return p.value>=0?C_RED:C_GRN}},
+    label:{show:true,position:'right',color:'#6b7280',fontSize:11,formatter:'{c}%'}}]
+});
+
+mk('c_amt',{
+  tooltip:{trigger:'axis',valueFormatter:function(v){return v+'%'}},
+  grid:{left:76,right:56,top:16,bottom:24},
+  xAxis:Object.assign({type:'value',axisLabel:{formatter:'{value}%'}},AX),
+  yAxis:Object.assign({type:'category',data:["科创50", "中证500", "上证50", "创业板指", "中证1000", "北证50", "国证2000", "沪深300"],axisLabel:{color:'#6b7280',interval:0}},AX),
+  series:[{type:'bar',data:[-29.7, -22.4, -21.7, -20.3, -19.7, -19.5, -19.4, -18.3],barWidth:14,
+    itemStyle:{color:function(p){return p.value>=0?C_RED:C_GRN}},
+    label:{show:true,position:'right',color:'#6b7280',fontSize:11,formatter:'{c}%'}}]
+});
+
+mk('c_lad',{
+  tooltip:{trigger:'axis'},legend:{top:3,left:'center',textStyle:{color:'#6b7280'}},
+  grid:{left:46,right:20,top:52,bottom:28},
+  xAxis:Object.assign({type:'category',data:["1板", "2板", "3板", "4板", "5板", "6板", "7板", "8板", "9板", "10板"]},AX),
+  yAxis:Object.assign({type:'value'},AX),
+  series:[
+    {name:'10/9',type:'bar',data:[57, 8, 0, 1, 2, 0, 0, 0, 1, 0],itemStyle:{color:'#cbd5e1'},barWidth:18},
+    {name:'10/12',type:'bar',data:[28, 14, 1, 0, 0, 2, 0, 0, 0, 1],itemStyle:{color:C_RED},barWidth:18,
+     label:{show:true,position:'top',color:'#9ca3af',fontSize:11}}
+  ]
+});
+
+mk('c_conc',{
+  tooltip:{trigger:'axis'},
+  grid:{left:118,right:70,top:16,bottom:24},
+  xAxis:Object.assign({type:'value'},AX),
+  yAxis:Object.assign({type:'category',data:["短剧游戏", "DeepSeek概念", "华为概念", "机器人概念", "文化传媒", "乡村振兴", "AIGC概念", "IP经济(谷子经济)", "西部大开发", "人工智能", "AI应用", "文化传媒概念"],axisLabel:{color:'#6b7280',interval:0}},AX),
+  series:[{type:'bar',data:[8, 9, 9, 9, 10, 10, 11, 11, 11, 14, 15, 16],itemStyle:{color:C_BLU},barWidth:14,
+    label:{show:true,position:'right',color:'#374151',fontWeight:600,formatter:'{c} 家'}}]
+});
+
+mk('c_hy',{
+  tooltip:{trigger:'axis'},legend:{top:3,left:'center',textStyle:{color:'#6b7280'}},
+  grid:{left:100,right:56,top:52,bottom:24},
+  xAxis:Object.assign({type:'value'},AX),
+  yAxis:Object.assign({type:'category',data:["农产品加", "元件", "乘用车", "中药Ⅱ", "装修装饰", "电视广播", "服装家纺", "IT服务Ⅱ", "化学制药", "化学制品", "种植业", "数字媒体", "影视院线", "电网设备", "一般零售", "软件开发", "出版", "电池"],axisLabel:{color:'#6b7280',interval:0}},AX),
+  series:[
+    {name:'10/9',type:'bar',data:[1, 1, 0, 1, 2, 1, 2, 0, 3, 3, 3, 3, 4, 1, 4, 5, 5, 6],itemStyle:{color:'#cbd5e1'},barWidth:11},
+    {name:'10/12',type:'bar',data:[0, 0, 1, 0, 1, 2, 0, 2, 3, 3, 1, 1, 4, 4, 1, 2, 6, 2],itemStyle:{color:C_RED},barWidth:11}
+  ]
+});
+
+mk('c_perf',{
+  tooltip:{trigger:'axis',valueFormatter:function(v){return v+'%'}},
+  grid:{left:100,right:56,top:16,bottom:28},
+  xAxis:Object.assign({type:'value',axisLabel:{formatter:'{value}%'}},AX),
+  yAxis:Object.assign({type:'category',data:["东亚药业", "楚环科技", "国芳集团", "三柏硕", "金健米业", "敦煌种业", "安泰集团", "中交发展", "万向德农", "三人行", "雷赛智能", "中红医疗", "晨光新材", "西部黄金", "金圆股份", "九牧王", "妙可蓝多", "汇嘉时代", "丰元股份", "麒麟信安", "振华股份", "国光连锁", "华建集团", "东诚药业", "百大集团", "科力远", "红豆股份", "吉林化纤", "郑中设计", "新筑股份", "上工申贝", "大智慧", "天融信", "众生药业", "梦天家居", "华鑫股份", "雄韬股份", "领湃科技", "澳弘电子", "紫竹高科", "贝瑞基因", "中文在线", "海南橡胶", "中新赛克", "文投控股", "东岳硅材", "芒果超媒", "安彩高科", "新亚强", "粤传媒", "绿盟科技", "华北制药", "丽人丽妆", "百洋股份", "新华传媒", "九阳股份", "上海电影", "新经典", "掌阅科技", "德才股份", "龙版传媒", "吉视传媒", "新华文轩", "格尔软件", "时代万恒", "慈文传媒", "博纳影业", "远程股份", "欢瑞世纪"],axisLabel:{color:'#6b7280',fontSize:10,interval:0}},AX),
+  series:[{type:'bar',data:[-10.0, -9.99, -9.97, -9.89, -8.43, -6.81, -6.61, -6.33, -6.28, -5.55, -4.88, -4.58, -4.21, -4.03, -3.98, -3.94, -3.55, -3.25, -2.98, -2.49, -2.48, -2.02, -1.89, -1.66, -1.48, -1.37, -1.26, 0.0, 0.16, 0.67, 0.73, 0.87, 0.93, 1.22, 1.45, 1.93, 2.12, 2.28, 2.91, 3.52, 3.54, 3.84, 4.19, 4.48, 4.55, 4.9, 5.04, 5.54, 6.22, 6.6, 6.71, 9.95, 9.96, 9.97, 9.98, 9.98, 9.98, 9.98, 9.98, 10.0, 10.0, 10.0, 10.0, 10.01, 10.03, 10.03, 10.04, 10.08, 10.1],barWidth:9,
+    itemStyle:{color:function(p){return p.value>=0?C_RED:C_GRN}},
+    label:{show:true,position:'right',fontSize:10,color:'#9ca3af',
+      formatter:function(p){return p.value.toFixed(1)}}}]
+});
+
+mk('c_rel',{
+  tooltip:{trigger:'axis',valueFormatter:function(v){return v+'%'}},
+  grid:{left:96,right:56,top:16,bottom:28},
+  xAxis:Object.assign({type:'value',axisLabel:{formatter:'{value}%'}},AX),
+  yAxis:Object.assign({type:'category',data:["金安国纪", "宏柏新材", "泰永长征", "五方光电", "彩蝶实业", "百合花", "华之杰", "大金重工"],axisLabel:{color:'#6b7280',fontSize:10,interval:0}},AX),
+  series:[{type:'bar',data:[-10.0, -9.96, -9.92, -9.92, -8.61, -5.72, -4.29, 7.66],barWidth:14,
+    itemStyle:{color:function(p){return p.value>=0?C_RED:C_GRN}},
+    label:{show:true,position:'right',fontSize:10,color:'#9ca3af',
+      formatter:function(p){return p.value.toFixed(1)+'%'}}}]
+});
+
+mk('c_ts',{
+  tooltip:{trigger:'axis'},legend:{top:3,left:'center',textStyle:{color:'#6b7280'}},
+  grid:{left:50,right:20,top:52,bottom:28},
+  xAxis:Object.assign({type:'category',data:["竞价/秒板", "开盘半小时", "上午盘中", "午后盘中", "尾盘"]},AX),
+  yAxis:Object.assign({type:'value'},AX),
+  series:[
+    {name:'10/9',type:'bar',data:[3, 17, 9, 36, 4],itemStyle:{color:'#cbd5e1'},barWidth:24},
+    {name:'10/12',type:'bar',data:[8, 22, 8, 7, 1],itemStyle:{color:C_RED},barWidth:24}
+  ]
+});
+</script>
+</body>
+</html>

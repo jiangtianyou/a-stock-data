@@ -647,6 +647,16 @@ os.replace(tmp, fp)      # 原子替换
   写法：`rows = sorted(items, key=lambda x: x["n"])`（升序）→ 直接 `json.dumps`，**不要 `[::-1]`**；
   若来源已是降序，再 `[::-1]` 反而会把最大项压到底部（10-09 `c_conc` 首版即如此）。
   自检：截图确认第一名在第一行。
+- **模板里 `__HY_XX__` 是「昨日」、`__HY_XX0__` 才是「今日」** ⚠️（2026-10-12 踩到）：
+  报告脚本里 `hy0` = 今日、`hy1` = 昨日，但占位符命名沿用了旧版习惯 ——
+  `P("HY_CB", hy1.get("出版",0))`（=昨日）、`P("HY_CB0", hy0.get("出版",0))`（=今日）。
+  于是**凡是写「A→B」的行业对比句都极易写反**：10-12 首版把流入端写成 `__HY_DW0__ → __HY_DW__`，
+  渲染出来是「电网设备 4 → 1」（今日→昨日），方向完全颠倒。
+  处置：改完这类文案后**必须 grep 渲染结果逐条核对**（`grep -o '电网设备 [0-9]* → [0-9]*' 报告.html`），
+  或直接把占位符改名成 `_Y / _T` 后缀以免混淆。
+- **`node --check` 不支持 bash 进程替换** ⚠️（2026-10-12 踩到）：`node --check <(python -c ...)` 会报
+  `Error: Cannot find module 'D:\proc\<pid>\fd\<n>'`（Windows 上 `/dev/fd` 不存在）。
+  必须先 `open('out/_tmp_check.js','w',encoding='utf-8').write(js)` 落盘，再 `node --check out/_tmp_check.js`。
 
 ---
 
