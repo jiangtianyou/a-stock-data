@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>涨停复盘 · 2026-10-21（对比 10-20）</title>
+<script src="../assets/echarts.min.js"></script>
+<script>if(typeof echarts==='undefined'){document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"><\/script>');}</script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f6f8;color:#1b1f24;font:14px/1.65 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.3px}
+.sub{color:#6b7280;font-size:13px;margin-bottom:22px}
+.card{background:#fff;border:1px solid #e6e8eb;border-radius:12px;padding:20px 22px;margin-bottom:18px}
+h2{font-size:17px;margin:0 0 14px;padding-left:10px;border-left:4px solid #2563eb}
+h3{font-size:14px;margin:18px 0 8px;color:#374151}
+.lead{background:#fff;border:1px solid #e6e8eb;border-left:5px solid #2563eb;border-radius:10px;padding:18px 22px;margin-bottom:18px}
+.lead p{margin:0 0 9px}.lead p:last-child{margin-bottom:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0 4px}
+.kpi{background:#fff;border:1px solid #e6e8eb;border-radius:10px;padding:14px 16px}
+.kpi .lbl{font-size:12px;color:#6b7280;margin-bottom:6px}
+.kpi .val{font-size:23px;font-weight:650;letter-spacing:-.5px}
+.kpi .dt{font-size:12px;margin-top:4px}
+.up{color:#d93025}.down{color:#12805c}.mut{color:#9ca3af}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:7px 9px;border-bottom:1px solid #eef0f2;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{background:#fafbfc;color:#4b5563;font-weight:600;font-size:12px}
+tr:hover td{background:#fafbfc}
+.chart{width:100%;height:330px}.chart-sm{width:100%;height:290px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+.tag{display:inline-block;background:#eef2ff;color:#3730a3;border-radius:5px;padding:1px 7px;font-size:11px;margin:1px 3px 1px 0}
+.note{font-size:12px;color:#6b7280;line-height:1.8}
+.warn{background:#fff8f1;border:1px solid #f5d9be;border-radius:10px;padding:14px 18px;font-size:13px;color:#7c4a12}
+.ok{background:#f0f9f4;border:1px solid #cbe8d6;border-radius:10px;padding:14px 18px;font-size:13px;color:#14503a}
+ul{margin:6px 0 0;padding-left:20px}li{margin:7px 0}
+.hl{font-weight:600;color:#111827}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>涨停复盘 · 2026-10-21（周三）</h1>
+<div class="sub">对比基准：2026-10-20（周二）｜口径：沪深两市（不含北交所）｜数据源：同花顺涨停池 / 概念板块 + 东方财富涨停·炸板·跌停池 + 腾讯行情快照｜配色规则：<b class="up">红＝上涨 / 情绪正面</b>（家数增、封板率升、晋级率升），<b class="down">绿＝下跌 / 情绪负面</b>（炸板/跌停增、封板率降）</div>
+
+<div class="lead">
+<p class="hl">一句话结论：<b>「面缩、钱厚、线散」—— 参与度收缩了 __TOUCH_PCT_ABS__%，换来的封板率 +__SEAL_D_ABS__pct 并不是承接力变好；钱其实没走，反而更集中（封单中位 +__FUND_MED_PCT_ABS__%）。真正的问题在结构：最高 4 板的三只票分属三个互不相关的方向，2 板 12 只散落 __LAD2_HY_N__ 个行业 —— 当日有一条清晰的政策叙事（国家数据集团），却<u>没有一条能接力的产业链主线</u>。</b></p>
+<p><b>① 先看上一交易日（10-20）是什么日子。</b>10-20 是「跌停潮退去 + 机器人链接棒」：涨停 __ZT_Y__ 家、跌停 __DT_Y__ 家、<b>触及涨停高达 __TOUCH_Y__ 家</b>、两市成交 __AMT_Y__ 亿。今天要回答的只有两个问题：<u>那 __TOUCH_Y__ 家的冲板意愿能不能留住；昨天长出来的 2 板梯队（8 只）能不能长出 3 板。</u></p>
+<p><b>② 两个问题的答案都是"没有"：参与度塌了 __TOUCH_D_ABS__ 家，3 板从 __LAD3_Y__ 只塌到 __LAD3__ 只。</b>
+涨停 __ZT_Y__ → __ZT__ 家（__ZT_D__）几乎不动，但
+<span class="hl">触及涨停 __TOUCH_Y__ → <b>__TOUCH__ 家（__TOUCH_D__ / __TOUCH_PCT__%）</b>、炸板 __ZB_Y__ → __ZB__ 只、封板率 __SEAL_Y__% → <b>__SEAL__%（__SEAL_D__pct）</b></span>。
+<u>封板率的改善来自分母（愿意冲板的人）收缩了 __TOUCH_PCT_ABS__%，分子（封到收盘的家数）一只都没增加 —— 这是与 10-15「分子不动、分母塌陷」同型的机械改善，只是幅度温和得多。</u>
+唯一可信的承接力读数在炸板池：<b>__ZB_POOL_N__ 只炸板、回封 __ZB_SEALED_N__ 只</b>，与 10-20 的 __ZB_POOL_N_Y__ 只 / __ZB_SEALED_N_Y__ 只一样是零回封。</p>
+<p><b>③ 但钱没有变少，反而变"厚"了 —— 这是今天最容易被误读的一层。</b>
+两市成交 __AMT__ 亿（__AMT_D__ 亿 / <b>__AMT_PCT__%</b>）确实缩量；可
+<span class="hl">涨停股合计成交 __AMT_SUM_Y__ → <b>__AMT_SUM__ 亿（__AMT_SUM_PCT__%）</b>、单只中位 __AMT_MED_Y__ → <b>__AMT_MED__ 亿（__AMT_MED_PCT__%）</b>、封单合计 __FUND_SUM_Y__ → __FUND_SUM__ 亿（__FUND_SUM_PCT__%）、<b>封单中位 __FUND_MED_Y__ → __FUND_MED__ 亿（+__FUND_MED_PCT_ABS__%）</b></span>，
+吸金密度 __SHARE_Y__% → <b>__SHARE__%</b>。
+<u>对照 09-24 的「收缩式锁仓」——那次是涨停股成交 -15%、单只中位 -15%、封单中位 +13%（钱变少了所以封得住）；今天是三项全升，含义完全不同：<b>不是钱少了，是钱集中了。</b></u></p>
+<p><b>④ 结构的要害：高度还在，但高度散成了三瓣。</b>最高板仍是 __MAXB__ 板（昨日 __MAXB_Y__ 板），
+但 <span class="hl">__MAXB__ 板 3 只分别是 __TOP_HIGH_TYPE__ —— 汽车零部（飞行汽车增程器）、通用设备（人形机器人骨架材料）、照明设备（AI 照明 + 军工 + 「羊」字辈），<b>三个互不相关的方向</b>，且全部在 09:25 以一字 / T 字封板（成交极低、封单厚），属锁仓型而非换手型高度。</span>
+腰部更分散：<span class="hl"><b>2 板 __LAD2__ 只散落 __LAD2_HY_N__ 个行业</b>（通信设备 2 只，其余 10 个行业各 1 只），连板股 __LB__ 只散落 __LB_HY_N__ 个行业</span>。
+对照 10-12「2 板 14 只中 11 只属传媒 / AI（79%）」那种聚集度，今日的 2 板梯队是<b>没有任何一条线在腰部占位</b>。</p>
+<p><b>⑤ 叙事确实换了：国家数据集团点火，数据要素从榜外直接进到第 3 位。</b>
+国务院国资委 <b>2026-10-20 公告</b>（一手来源：sasac.gov.cn，2026 年第 1 号）经国务院批准组建<b>国家数据集团有限公司</b>，总部雄安、央企名录第 28 位，国资委监管央企由 99 家增至 100 家。
+今日同花顺「数据要素」<b>__SYSJ_N__ 家涨停 / 连板 __SYSJ_LB__ 只（东财 `lbc` 口径）</b>、同花顺口径连板 __SYSJ_LB_DF__ 只（__SYSJ_R_DF__%）、
+<span class="hl">但 <b>行业离散度 __SYSJ_HY_N__</b>、成交 __SYSJ_AMT__ 亿仅占涨停股 __SYSJ_AMT_SHARE__% —— 这是<u>横向主题扩散</u>，不是产业链聚集。</span>
+配合行业迁移：<b>IT服务 昨 __HY_IT__ → 今 __HY_IT0__、出版 昨 __HY_CB__ → 今 __HY_CB0__ 流入；通用设备 昨 __HY_TY__ → 今 __HY_TY0__、汽车零部 昨 __HY_QC__ → 今 __HY_QC0__、半导体 昨 __HY_BDT__ → 今 __HY_BDT0__、消费电子 昨 __HY_XF__ → 今 __HY_XF0__ 流出</b> —— 自定义分组下「软」类 __SOFT1__ → __SOFT0__ 家（__SOFT_D__）、「硬」类 __HARD1__ → __HARD0__ 家（__HARD_D__），一句话：<b>软进硬出</b>。</p>
+<p><b>⑥ 指数给出了同一方向的确认：11 个指数全部高开低走。</b>
+全部 __N_OPEN_UP__ 个高开（__GAP_OPEN_MIN_V__% ~ __GAP_OPEN_MAX_V__%）、<b>全部 __N_BELOW_OPEN__ 个收在开盘价下方</b>、距当日最高 __DRAW_WORST_V__%（__DRAW_WORST_NAME__）~ __DRAW_BEST_V__%（__DRAW_BEST_NAME__）。
+涨跌 <b>__N_UP__ 涨 / __N_DN__ 跌</b>；成交额环比 <b>__AMT_UP_N__ 正 / __N_SHRINK__ 负</b>。
+<span class="hl">关键在错配：跌得最多的创业板（__CY_PCT__%）成交<b>放量 __CY_YOY__%</b>，而跌得最少的上证50（__SH50_PCT__%）成交<b>缩量 __SH50_YOY__%</b>、科创50（__KC_PCT__%）缩量 __KC_YOY__% —— <u>成长端是放量下跌（有抛压），权重端是缩量下行（无人接也无人抛）</u>，与 10-15「权重放量承接」正好相反。</span></p>
+<p><b>⑦ 溢价结构一夜归零，这是今天最干净的领先信号。</b>昨日涨停股今日晋级率 <b>__ADV_RATE__%（__ADV_N__/__ADV_TOT__）</b>，
+中位 <b>__PERF_MED__%</b>；分层看首板组中位 __GRP_S_M__% vs 连板组 __GRP_L_M__%，差 <b>__GAP__pct</b>，
+而昨日同口径是 <b>__GAP_Y__pct</b>（首板 __GRP_S_M_Y__% / 连板 __GRP_L_M_Y__%）。
+<span class="hl"><u>从 −__GAP_Y_ABS__pct 到 __GAP__pct，一天抹平：市场不再为"高度"付溢价。</u>
+最弱的 4 只里有 __BOT_HIGH_N__ 只是 2 板以上（__PERF_BOT5__）—— 高位清算与溢价归零是同一件事的两面。</span></p>
+<p><b>⑧ 破坏力几乎消失，但"跌停股反包"出现了本轮第一次非零。</b>跌停 __DT_Y__ → <b>__DT__ 家</b>（东财池 __DT_TC__ 只）、触及跌停 __DTOUCH_Y__ → __DTOUCH__ 家，
+跌停股合计成交 __DT_AMT_TD__ 亿 = 涨停股 __AMT_SUM__ 亿 的 <b>__DT_RATIO_TD__ 倍</b>（昨日 __DT_RATIO_Y__ 倍），为本轮最低；
+昨涨停→今跌停 <b>__DT_FROM_ZT_N__ 只</b>。但 <span class="hl">今日涨停池 ∩ 昨日跌停池 = <b>__INTER_N__ 只（__INTER_NAMES__）</b> —— 09-29 以来连续七次为 0 之后第一次破零</span>，需在第六节单列。</p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="lbl">涨停家数</div><div class="val up">__ZT__</div>
+    <div class="dt mut">昨日 __ZT_Y__ <span class="down">__ZT_D__</span></div></div>
+  <div class="kpi"><div class="lbl">触及涨停家数</div><div class="val down">__TOUCH__</div>
+    <div class="dt mut">昨日 __TOUCH_Y__ <span class="down">__TOUCH_D__（__TOUCH_PCT__%）</span></div></div>
+  <div class="kpi"><div class="lbl">封板率</div><div class="val up">__SEAL__%</div>
+    <div class="dt mut">昨日 __SEAL_Y__% <span class="up">__SEAL_D__pct</span>｜炸板回封 __ZB_SEALED_N__ 只</div></div>
+  <div class="kpi"><div class="lbl">炸板家数</div><div class="val up">__ZB__</div>
+    <div class="dt mut">昨日 __ZB_Y__ <span class="up">__ZB_D__</span></div></div>
+  <div class="kpi"><div class="lbl">跌停家数</div><div class="val up">__DT__</div>
+    <div class="dt mut">昨日 __DT_Y__ <span class="up">__DT_D__</span>｜封死率 __DSEAL__%</div></div>
+  <div class="kpi"><div class="lbl">两市成交额</div><div class="val mut">__AMT__亿</div>
+    <div class="dt mut">昨日 __AMT_Y__亿 <span class="down">__AMT_D__亿（__AMT_PCT__%）</span></div></div>
+  <div class="kpi"><div class="lbl">昨涨停今日晋级率</div><div class="val up">__ADV_RATE__%</div>
+    <div class="dt mut">__ADV_N__/__ADV_TOT__ 只再涨停｜中位 __PERF_MED__%</div></div>
+  <div class="kpi"><div class="lbl">最高连板</div><div class="val mut">__MAXB__ 板</div>
+    <div class="dt mut">昨日 __MAXB_Y__ 板｜连板股 __LB__ 只 / __LB_HY_N__ 个行业</div></div>
+</div>
+
+<div class="card">
+<h2>一、情绪温度计：封板率 +__SEAL_D_ABS__pct 是"分母收缩"给的，不是承接力给的</h2>
+<table>
+<tr><th>指标</th><th>__D2__（一）</th><th>__D1__（二）</th><th>__D0__（三）</th><th>__D0__ 环比</th></tr>
+__TBL_SENTI__
+<tr><td>涨停/跌停比</td><td>__ZTDT_0__</td><td>__ZTDT_Y__</td><td class="hl">__ZTDT__</td><td class="up">破坏力继续消退</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+按固定顺序拆三层（顺序不能颠倒）：<br>
+<b>① 参与度（触及涨停）__TOUCH_Y__ → __TOUCH__ 家（__TOUCH_D__ / __TOUCH_PCT__%）</b> ——
+<span class="hl">这是今日唯一明确转差的情绪指标。10-20 的 __TOUCH_Y__ 家是「跌停潮退去后的第一次全面试探」，今日回吐 __TOUCH_D_ABS__ 家，
+说明<u>昨天的冲板热情只维持了一天</u>。回吐落在哪些行业，在涨停家数口径上很清楚：汽车零部 昨 __HY_QC__ → 今 __HY_QC0__、半导体 昨 __HY_BDT__ → 今 __HY_BDT0__、消费电子 昨 __HY_XF__ → 今 __HY_XF0__。</span><br>
+<b>② 承接力（封板率）__SEAL_Y__% → __SEAL__%（__SEAL_D__pct），炸板 __ZB_Y__ → __ZB__ 只</b> ——
+<span class="hl">这一项"看起来"是改善，但必须与分子并排读：封到收盘的仍是 __ZT__ 家（__ZT_D__），改善全部来自分母收缩。
+唯一可信的承接力读数：<b>炸板 __ZB_POOL_N__ 只、回封 <b>__ZB_SEALED_N__ 只</b></b> ——
+10-15 起「零回封」的状态延续（10-20 为 __ZB_POOL_N_Y__ 只 / 回封 __ZB_SEALED_N_Y__ 只）。
+<u>炸板变少不是因为封得住，而是因为去冲板的票本身变少了。</u></span><br>
+<b>③ 破坏力（跌停）__DT_Y__ → __DT__ 家、触及跌停 __DTOUCH_Y__ → __DTOUCH__ 家、封死率 __DSEAL_Y__% → __DSEAL__%</b> ——
+<span class="hl">家数创本轮新低，但封死率反升到 __DSEAL__%（触及 __DTOUCH__ 家里 __DTOUCH__ − __DT__ = 1 只被买回）——
+含义是<u>"被打到的就封死"，不是"打不下去"</u>。绝对量太小（__DT__ 家、成交 __DT_AMT_TD__ 亿），对情绪的指示意义有限。</span><br>
+<span class="hl">⚠ 本日形态：<b>「参与度↓ + 封板率↑（分母型）+ 破坏力↓↓」</b> —— 与 09-24「收缩式锁仓」同族，但<b>内核不同</b>：
+09-24 是钱变少（涨停股成交 -15%、单只中位 -15%）所以封得住；今天是钱变厚（涨停股成交 __AMT_SUM_PCT__%、单只中位 __AMT_MED_PCT__%、封单中位 +__FUND_MED_PCT_ABS__%）所以封得住。
+准确的说法是<b>「广度收缩型锁仓 / 资金集中」</b>，而不是退潮，也不是修复。</span><br>
+口径：今日沪深涨停 __ZT__ 家、盘中触及 __TOUCH__ 家、被打开 __ZB__ 只（失败率 __SEAL_FAIL__%）；昨日炸板 __ZB_Y__ 只（失败率 __SEAL_FAIL_Y__%）。三日序列见下图。
+</div>
+<div id="c_senti" class="chart" style="margin-top:16px"></div>
+</div>
+
+<div class="card">
+<h2>二、指数与量能：11 个指数全部高开低走 —— 成长端放量下跌，权重端缩量下行</h2>
+<div class="two">
+  <div><div id="c_ix" class="chart-sm"></div></div>
+  <div><div id="c_amt" class="chart-sm"></div></div>
+</div>
+<table style="margin-top:14px">
+<tr><th>指数</th><th>今日涨跌</th><th>昨日涨跌</th><th>今日成交额</th><th>成交额环比</th></tr>
+__TBL_IDX__
+</table>
+<div class="note" style="margin-top:10px">
+两市合计成交 <b>__AMT__ 亿</b>（昨日 __AMT_Y__ 亿，<b>__AMT_D__ 亿 / __AMT_PCT__%</b>），<b>__AMT_UP_N__/__IX_N__ 个可比指数成交额环比为正</b>；
+涨跌分布 <b>__N_UP__ 涨 / __N_DN__ 跌</b>。<br>
+<b>三条不能混读的线：</b><br>
+① <b>「全部高开低走」是本日最干净的一条同步信号</b>：__N_OPEN_UP__ 个指数全部高开（__GAP_OPEN_MIN_V__% ~ __GAP_OPEN_MAX_V__%）、
+__N_BELOW_OPEN__ 个全部收在开盘价下方，距当日最高 __DRAW_WORST_V__%（__DRAW_WORST_NAME__）~ __DRAW_BEST_V__%（__DRAW_BEST_NAME__）。
+<span class="hl">开盘给的是"延续昨日"的定价，收盘给的是"不认账"的定价 —— 全天单边回落，没有一次反抽收复开盘价。</span><br>
+② <b>风格是"成长放量跌、权重缩量跌"，与 10-15 完全反向：</b>
+创业板 __CY_PCT__% 且成交 <b>放量 __CY_YOY__%</b>、深成 __SZ_PCT__% 放量 __SZ_YOY__%、中小100 __ZS100_PCT__% 放量 __ZS100_YOY__%；
+上证50 __SH50_PCT__% 缩量 __SH50_YOY__%、科创50 __KC_PCT__% 缩量 __KC_YOY__%、北证50 __BZ50_PCT__% 缩量 __BZ50_YOY__%。
+<span class="hl"><u>放量 + 下跌 = 主动性卖出（成长端有抛压）；缩量 + 小跌 = 无人接也无人抛（权重端只是被拖着走）。</u>
+10-15 是"权重放量承接、小微盘失血"，今天正好倒过来。</span><br>
+③ <b>昨日领涨的北证50 一日游：</b>10-20 北证50 <b>+3.88% 且放量</b>（__AMT_Y__ 亿的日子里最猛的一档），
+今日 <b>__BZ50_PCT__% 且缩量 __BZ50_YOY__%</b>。<u>单日脉冲型资金，不成趋势。</u><br>
+口径说明：成交额环比只反映"换手放大/收缩"，<b>不区分买卖方向</b>；本节的定性依据是"量价同向/反向"配对，而不是总量本身。
+</div>
+</div>
+
+<div class="card">
+<h2>三、连板梯队：4 板三只分属三个方向，3 板由 __LAD3_Y__ 只塌到 __LAD3__ 只</h2>
+<div class="two">
+  <div><div id="c_lad" class="chart-sm"></div></div>
+  <div>
+    <table>
+    <tr><th>板数</th><th>昨日（__D1__）</th><th>今日（__D0__）</th><th>变化</th></tr>
+    __TBL_LAD__
+    </table>
+    <div class="note" style="margin-top:10px">
+    首板 __SB__ 只（占 __SB_PCT__%，昨日 __SB_Y__ 只 / __SB_PCT_Y__%）；连板股 __LB__ 只（昨日 __LB_Y__ 只），连续两日抬升。
+    </div>
+  </div>
+</div>
+<div class="note" style="margin-top:12px">
+<b>① 最高板停在 __MAXB__ 板（昨 __MAXB_Y__ 板），但含金量更低。</b>昨日 __MAXB__ 板的 __PREV_MAXB_NAMES__ 今日收 <b>__PREV_MAXB_PCT__</b>，断板；
+今日顶上来的 __MAXB_NAMES__ 三只，<b>全部 09:25 以「一字 / T 字」封板</b>（__TOP_HIGH_TYPE__），
+成交分别极低、封单却很厚 —— <span class="hl">这是<b>锁仓型高度</b>，不是换手型高度，无法为市场提供"接力样本"。</span><br>
+<b>② 腰部是"哑铃 + 空档"：</b>2 板 __LAD2_Y__ → <b>__LAD2__ 只（__LAD2_D__）</b>、3 板 __LAD3_Y__ → <b>__LAD3__ 只（__LAD3_D__）</b>、4 板 __LAD4_Y__ → __LAD4__ 只。
+<span class="hl">要看清"3 板塌陷"的机制：昨日 3 板 __LAD3_Y__ 只中 <b>__LAD3_ADV_N__ 只直接晋级 4 板（__LAD3_ADV_NAMES__）、__LAD3_BRK_N__ 只断板（__LAD3_BRK_TXT__）</b>；
+而今日的 __LAD3__ 只是昨 2 板的润建股份升上来的 —— <u>也就是说 3 板这一层被"整体抽空后重新种了一棵苗"，不是自然递减。</u>
+同时今日 2 板 __LAD2__ 只<b>全部来自昨首板晋级</b>，昨日 2 板 8 只除 1 只升 3 板外全部断板（无一只留在 2 板）。
+<u>梯队是"首板 → 2 板"的单向输送在放量，"2 板 → 3 板"的通道几乎关闭。</u></span><br>
+<b>③ 最硬的一条：2 板 __LAD2__ 只散落 __LAD2_HY_N__ 个行业。</b>
+<span class="hl">名单是 __LAD2_NAMES__ —— 通信设备 2 只（移远通信、日海智能），其余 10 个行业各 1 只（小家电、IT服务、工程机械、调味发酵、饲料、计算机设、出版、照明设备、玻璃玻纤、通用设备）。
+<u>对照 10-12「2 板 14 只中 11 只属传媒 / AI（79%）」，今天的 2 板梯队没有任何一条线占位 —— 这是"没有主线"最硬的证据，比概念榜家数可靠得多。</u></span><br>
+明日 2→3 的通过率是核心观察点：若 __LAD2__ 只 2 板仍只有 1–2 只晋级，则"高度散、腰部空"会固化为本阶段的结构特征。
+</div>
+<h3>今日全部连板股（__LB__ 只 / __LB_HY_N__ 个行业）</h3>
+<table>
+<tr><th>板数</th><th>代码</th><th>名称</th><th>首封</th><th>封单</th><th>成交额</th><th>换手</th><th>行业</th><th style="text-align:left">涨停原因</th></tr>
+__TBL_LIANBAN__
+</table>
+</div>
+
+<div class="card">
+<h2>四、主线：国家数据集团点火、数据要素 0→__SYSJ_N__ 家 —— 有叙事，无产业链</h2>
+<h3>4.1 概念板块榜：前七名全部是 AI / 算力 / 数据系，但离散度 7~11</h3>
+<table>
+<tr><th>概念板块</th><th>涨停家数</th><th>其中连板</th><th>连板占比</th><th>板块内最强标（同花顺口径）</th></tr>
+__TBL_CONC__
+</table>
+<div class="note" style="margin-top:10px">
+<span class="hl">一个比值回答"主线是否长高"：</span>前七名最高连板占比 <b>__CONC_TOP7_MAXR__%</b>（__CONC_TOP7_MAXNAME__），
+上一交易日为 __CONC_TOP7_MAXR_Y__% —— <u>过了 40% 的"主线真空"阈值，但不能据此认定主线成立</u>，理由有两条：<br>
+① <b>前七名全是同一族泛标签的重复命中</b>（__CONC_TOP5_TXT__ …），成分股高度重叠：「智慧城市」13 只里有 8 只同时命中「人工智能」或「数据要素」，
+它的 62% 连板占比是"成员恰好都是有板票"的算术结果，不是独立聚类；<br>
+② <b>行业离散度 7~11</b>（每行业 1–2 只），属横向主题扩散而非产业链聚集 —— 与 10-12「文化传媒 16 家 / 连板 11 家、成分集中在出版 + 影视 + 数字媒体」的性质不同。<br>
+<b>结论：今日"最强叙事"是数据要素，"最强产业线索"不存在。</b>下一节用行业离散度与腰部结构双重验证。
+</div>
+<div id="c_conc" class="chart" style="margin-top:8px"></div>
+
+<h3>4.2 数据要素链：__SYSJ_N__ 家涨停，行业离散度 __SYSJ_HY_N__</h3>
+<div class="ok" style="margin-bottom:12px">
+<b>催化（一手来源，事实层）：</b>国务院国资委 <b>2026-10-20</b> 发布《关于组建国家数据集团有限公司的公告》（2026 年第 1 号，sasac.gov.cn）——
+经国务院批准组建国家数据集团有限公司，由国资委代表国务院履行出资人职责，<b>列入央企名录第 28 位，国资委监管央企由 99 家增至 100 家</b>。
+新华社 / 中证网 / 经济参考报同日转述：集团总部位于河北雄安新区，以数据资源开发利用为主责主业，出资方含国务院、雄安管委会、中国电信、中国联通、中国移动、国家电网、南方电网。
+<b>这是 10-20 盘后发布的消息，今日（10-21）是首个完整交易日反应。</b>本报告只陈述该事实，不对政策效果与相关个股基本面作判断。
+</div>
+<table>
+<tr><th>代码</th><th>名称</th><th>板数</th><th>首封</th><th>成交额</th><th>封单</th><th>换手</th><th>行业</th><th style="text-align:left">涨停原因</th></tr>
+__TBL_SYSJ__
+</table>
+<div class="note" style="margin-top:10px">
+<b>三个数字定性：</b><br>
+① <b>连板口径要给两套</b>：东财 `lbc` 口径连板 <b>__SYSJ_LB__ 只（__SYSJ_R__%）</b>；同花顺 `continuous_plate_num` 口径 <b>__SYSJ_LB_DF__ 只（__SYSJ_R_DF__%）</b>。
+<span class="hl">差额来自"断板后重新封回"的标的（同花顺计入、东财不计入）—— 判"主线是否长高"用后者（跨日可比），判"今日封板梯队"用前者。</span><br>
+② <b>行业离散度 __SYSJ_HY_N__（__SYSJ_HY_TXT__）</b>：14 只散在 __SYSJ_HY_N__ 个东财行业，最多 2 只同行业。
+<span class="hl">这是"政策词横向扩散"的典型形态 —— 凡名字里带"数据 / 数字 / 政务 / 数据库"的都被买了一遍，而不是某条产业链的上下游同时开工。</span><br>
+③ <b>钱没跟上</b>：__SYSJ_N__ 家合计成交 __SYSJ_AMT__ 亿（占涨停股 __SYSJ_AMT_SHARE__%）、封单 __SYSJ_FUND__ 亿（占全场 __SYSJ_FUND_SHARE__%）。
+<span class="hl">对照 10-20 机器人链"家数不足全场四分之一、却拿下涨停股过半成交额"的集中度，数据要素是<b>宽而不深</b>：__SYSJ_N__ 家里 __SYSJ_SB__ 只是首板。</span><br>
+<b>同型参照（必须写出来）：</b>10-09 的「AI应用」20 家 / 严格口径仅 1 只连板 —— 当日被定性为"主题日爆发、高度未打开"，次日（10-12）才由 2 板梯队 79% 集中度确认为接力。
+今日数据要素 __SYSJ_N__ 家 / 连板 __SYSJ_LB__ 只，<u>与 10-09 同型，明日才是验证窗口</u>。
+</div>
+
+<h3>4.3 主题聚类对照（一只票可命中多条线，家数之和大于 __ZT__）</h3>
+<table>
+<tr><th>主题</th><th>命中家数</th><th>其中连板</th><th style="text-align:left">代表个股（括号内为板数）</th></tr>
+__TBL_THEME__
+</table>
+<div class="note" style="margin-top:8px">
+最大的一簇是「AI / 算力 / 数据要素」<b>__AI_N__ 家</b>，正好占涨停 __ZT__ 家的 __AI_R__%，但<b>连板只有 __AI_LB__ 只</b> ——
+<span class="hl">家数过半而连板不足三成，正是"叙事覆盖广、高度没归拢"的量化表述。</span>
+「机器人 / 具身」__ROBOT_N__ 家 / 连板 __ROBOT_LB__ 只（__ROBOT_R__%）、「端侧 AI / 芯片」__EDGE_N__ 家 / 连板 __EDGE_LB__ 只（__EDGE_R__%）——
+昨日主线（机器人）家数未塌但结构下沉；「传媒 / 内容」__MEDIA_N__ 家 / 连板 __MEDIA_LB__ 只、「医药」__MED_N__ 家 / 连板 __MED_LB__ 只（无高度）。<br>
+<b>另需单列一条非产业线索：</b>「羊」字辈（同音字）<b>__YANG_N__ 家 / 连板 __YANG_LB__ 只（__YANG_R__%）</b>，
+其中海洋王是今日 4 板之一、百洋股份与九阳股份是 2 板。
+<span class="hl"><u>名称族群的连板占比高于任何一条产业线索，是"主线真空"的伴生现象</u> —— 正确读法不是"新主线",而是"资金在无处可去时买名字"。</span>
+</div>
+<table style="margin-top:8px">
+<tr><th>代码</th><th>名称</th><th>板数</th><th>行业</th><th>封单</th><th style="text-align:left">涨停原因</th></tr>
+__TBL_YANG__
+</table>
+
+<h3>4.4 行业迁移：软进硬出（昨日 __D1__ → 今日 __D0__）</h3>
+<div id="c_hymove" class="chart-sm"></div>
+<table style="margin-top:12px">
+<tr><th>东财行业</th><th>昨日（__D1__）</th><th>今日（__D0__）</th><th>变化</th></tr>
+__TBL_HY__
+</table>
+<div class="note" style="margin-top:10px">
+<span class="hl">流入端：IT服务Ⅱ 昨 __HY_IT__ → 今 <b>__HY_IT0__</b>、出版 昨 __HY_CB__ → 今 __HY_CB0__；
+流出端：通用设备 昨 __HY_TY__ → 今 __HY_TY0__、汽车零部 昨 __HY_QC__ → 今 __HY_QC0__、半导体 昨 __HY_BDT__ → 今 __HY_BDT0__、消费电子 昨 __HY_XF__ → 今 __HY_XF0__。</span>
+按本报告自定义分组（"软"＝IT服务/软件/出版/广告营销/电视广播/影视院线/游戏/计算机设/通信服务/装修装饰；"硬"＝半导体/消费电子/元件/光学光电/汽车零部/通用设备/专用设备/电池/电网设备/化学制品/塑料/化学原料/玻璃玻纤）：
+<b>「软」__SOFT1__ → __SOFT0__ 家（__SOFT_D__）、「硬」__HARD1__ → __HARD0__ 家（__HARD_D__）</b>。
+<span class="hl"><u>这是今日资金运动的主干：从"有订单、有产能的硬件制造"切向"有政策、有叙事的数据与软件"</u> —— 与数据要素点火完全同源。</span><br>
+<b>零清与下降要分开报：</b>今日有涨停的行业 __HY_ALL_N__ 个；<b>__HY_ZERO_N__ 个行业直接清零</b>（__HY_ZERO_NAMES__），另有 <b>__HY_DOWN_N__ 个行业下降</b>（含通用设备、汽车零部、半导体、消费电子等）。
+<span class="hl">清零 : 下降 = __HY_ZERO_N__ : __HY_DOWN_N__ —— 零清数量少于下降数量，说明这是"整体减配硬件"而不是"个别方向熄火"。</span>
+</div>
+</div>
+
+<div class="card">
+<h2>五、昨日涨停股今日表现：高度溢价一夜归零（__GAP_Y__pct → __GAP__pct）</h2>
+<div class="kpis" style="margin-top:0">
+  <div class="kpi"><div class="lbl">整体均值 / 中位</div><div class="val up">__PERF_MEAN__%</div><div class="dt mut">中位 __PERF_MED__%｜最高 __PERF_MAX__% / 最低 __PERF_MIN__%</div></div>
+  <div class="kpi"><div class="lbl">翻绿只数</div><div class="val down">__NEG__</div><div class="dt mut">占 __NEG_PCT__%｜跌超 5% 的 __NEG_LOW__ 只</div></div>
+  <div class="kpi"><div class="lbl">首板组（__GRP_S_N__ 只）</div><div class="val up">__GRP_S_M__%</div><div class="dt mut">晋级 __GRP_S_R__%｜翻绿 __GRP_S_NG__ 只</div></div>
+  <div class="kpi"><div class="lbl">连板组（__GRP_L_N__ 只）</div><div class="val mut">__GRP_L_M__%</div><div class="dt mut">晋级 __GRP_L_R__%｜翻绿 __GRP_L_NG__ 只</div></div>
+</div>
+<div class="note" style="margin-top:12px">
+<b>① 晋级率 __ADV_RATE__%（__ADV_N__/__ADV_TOT__），比 10-20 的 30.8% 基本持平，属近一周的中位水平。</b>
+中位 <b>__PERF_MED__%</b>、翻绿 __NEG__ 只（__NEG_PCT__%）、跌超 5% 的 __NEG_LOW__ 只 —— <b>"买到昨日涨停股今天大概率赚钱"仍成立，但赚钱幅度是大面积的"半个板"而非"一个板"。</b><br>
+<b>② 最关键的一组：首板组中位 __GRP_S_M__% vs 连板组 __GRP_L_M__%，差 <b>__GAP__pct（首板略强）</b>。</b>
+<span class="hl">昨日同口径是 <b>__GAP_Y__pct</b>（首板 __GRP_S_M_Y__% / 连板 __GRP_L_M_Y__%，连板极强），今天直接抹平到 __GAP__pct。
+<u>含义：昨日"只给高度付费"的定价被撤销了，市场回到"给位置付费"的状态。</u>
+这个指标是情绪拐点最灵敏的探针 —— 10-13 首次翻正后，10-15 又恶化到 5 倍级差距，10-20 拉到 −10pct，今天回到 ±1pct 以内，<b>四天里走了三个来回</b>，说明资金对"高度"没有稳定偏好。</span><br>
+<b>③ 两极分化：</b>最强 __PERF_TOP5__；最弱 __PERF_BOT5__。
+<span class="hl">最弱的 5 只里有 __BOT_HIGH_N__ 只属 2 板以上（慕思股份 2 板、京城股份 3 板、长春一东 3 板）。
+昨日的 3 板 __LAD3_Y__ 只里，__LAD3_ADV_N__ 只升 4 板、__LAD3_BRK_N__ 只断板且分别为 __LAD3_BRK_TXT__ ——
+<u>这是"腰部被抽空"在个股层面的投影：晋级的那几只以一字锁仓板上去了，没晋级的直接被砸成负值。</u></span>
+</div>
+<div id="c_pf" class="chart" style="height:__JS_PF_H__px;margin-top:14px"></div>
+</div>
+
+<div class="card">
+<h2>六、跌停池：__DT__ 家、__DT_HY_N__ 个行业各 1 只，全部小市值，破坏力降到 __DT_RATIO_TD__ 倍</h2>
+<div class="two">
+  <div>
+    <table>
+    <tr><th>代码</th><th>名称</th><th>行业</th><th>成交额</th><th>流通</th><th>标记</th></tr>
+    __TBL_DT_TD__
+    </table>
+    <div class="note" style="margin-top:8px">
+    跌停股合计成交 <b>__DT_AMT_TD__ 亿</b> ÷ 涨停股 __AMT_SUM__ 亿 = <b>__DT_RATIO_TD__ 倍</b>（昨日 __DT_RATIO_Y__ 倍）。
+    </div>
+  </div>
+  <div>
+    <h3 style="margin-top:0">昨日跌停池（__D1__ 的 __REL_N__ 只）今日表现</h3>
+    <div id="c_rel" class="chart-sm"></div>
+    <div class="note" style="margin-top:8px">
+    均值 <b>__REL_MEAN__%</b>、中位 <b>__REL_MED__%</b>、翻红 __REL_UP__ 只、涨停 <b>__REL_LIM__ 只</b>；
+    最好的是 __REL_TOP_NAME__（__REL_TOP_PCT__%）。
+    <b>今日涨停池 ∩ 昨日跌停池 = __INTER_N__ 只（__INTER_NAMES__）</b> ——
+    这是 <b>09-29 以来第一次不为 0</b>（此前 09-29/09-30/10-09/10-12/10-13/10-14/10-15 共七次全为 0）。
+    </div>
+  </div>
+</div>
+<div class="note" style="margin-top:12px">
+<b>① 跌停池彻底"碎片化"：</b>__DT_TC__ 只散落 <b>__DT_HY_N__ 个行业、每行业 1 只</b>（__DT_HY_TOP__），
+<span class="hl">流通市值区间 <b>__DT_MV_MIN__ 亿 ~ __DT_MV_MAX__ 亿</b>，<b>流通 ≥100 亿的 __DT_BIG_N__ 只</b> ——
+这是本轮第一次"跌停池里没有一只中大盘"。对照 10-14（3 只中大盘占跌停池成交 79%）、10-15（航运链 4 只集体跌停），
+<u>机构型杀跌已经完全退场，剩下的是零散的小票个体风险</u>。</span><br>
+<b>② 破坏力量级降到本轮最低：</b>跌停股合计成交 __DT_AMT_TD__ 亿（昨日 __DT_AMT_YD__ 亿），相对涨停股的比值 <b>__DT_RATIO_TD__ 倍</b>
+（10-15 为 0.58 倍、10-14 为 0.54 倍、09-28 为 3.3 倍）。单只均值由 __DT_PER_YD__ 亿降到 __DT_PER_TD__ 亿 —— <b>家数和单只重量同时下降</b>，与 10-20"家数降、单只重量升"的方向相反。<br>
+<b>③ 昨涨停→今跌停 __DT_FROM_ZT_N__ 只（__DT_FROM_ZT_NAMES__）、连续跌停 __DT_CONT_N__ 只（__DT_CONT_NAMES__）。</b>
+<span class="hl">打板资金的隔夜亏损面为 0，是本轮最好的一天 —— 这也解释了为什么涨停家数能守住 __ZT__ 家：<u>昨天打板的人今天没有一只被埋。</u></span><br>
+<b>④ 首例反包：</b>__INTER_NAMES__（昨跌停 → 今涨停）的涨停原因是"出版发行 + 数字出版 + 人工智能"，
+<span class="hl">它昨日跌停时属"出版链清算"，今日被"数据要素 / 数字出版"叙事捞回 —— <u>是标签重定价，不是基本面反转</u>。
+一只反包不足以推翻"跌停股不自动修复"，但要注意它出现的环境：<b>跌停池已碎到只剩 5 只小票</b>，此时"反包"的统计意义远弱于跌停潮时期。</span>
+</div>
+<div class="warn" style="margin-top:12px">
+<b>读法提示（不要把"跌停只剩 4 家"当抄底依据）：</b>跌停家数 __DT__ 家是低点，但<b>封死率反升到 __DSEAL__%</b>（触及 __DTOUCH__ 家、仅 1 只被买回）——
+"家数少"来自"没人再被打到跌停"，不是"被打到的被救回来"。昨日 __REL_N__ 只跌停今日均值 <b>__REL_MEAN__%</b>、中位 __REL_MED__%，
+翻红 __REL_UP__ 只、涨停 __REL_LIM__ 只 —— <b>修复面依然很窄</b>。
+</div>
+</div>
+
+<div class="card">
+<h2>七、封板节奏与成交结构：节奏前移 __TS_EARLY_0_PCT__%、涨停股"面缩钱厚"、炸板零回封</h2>
+<div class="two">
+  <div><div id="c_ts" class="chart-sm"></div></div>
+  <div>
+    <table>
+    <tr><th>封板时段</th><th>昨日（__D1__）</th><th>今日（__D0__）</th></tr>
+    __TBL_TS__
+    </table>
+    <div class="note" style="margin-top:10px">
+    早盘（竞价 + 开盘半小时）合计 __TS_EARLY_Y__/__ZT_Y__ = __TS_EARLY_Y_PCT__% → __TS_EARLY_0__/__ZT__ = <b>__TS_EARLY_0_PCT__%</b>；
+    午后 + 尾盘 __TS_PM1__ 只（__TS_PM1_PCT__%）→ <b>__TS_PM0__ 只（__TS_PM0_PCT__%）</b>。
+    <span class="hl">节奏继续前移（竞价/秒板 __TS_JJ1__ → __TS_JJ0__ 只、开盘半小时 __TS_KJ1__ → __TS_KJ0__ 只），
+    而午后从 __TS_PM1__ 降到 __TS_PM0__ 只。<u>「早盘集中冲板 + 午后无人接力」= 存量抢跑，不是增量进场；
+    但这次抢跑的人是"抢得住的少数"——因为参与面本身缩了 __TOUCH_PCT_ABS__%。</u></span>
+    </div>
+  </div>
+</div>
+<h3>成交与封单结构（本日第二重要的一组数据）</h3>
+<table>
+<tr><th>指标</th><th>今日</th><th>昨日</th><th>变化</th></tr>
+<tr><td>涨停股合计成交</td><td class="hl">__AMT_SUM__ 亿</td><td>__AMT_SUM_Y__ 亿</td><td class="up">__AMT_SUM_PCT__%</td></tr>
+<tr><td>单只中位成交</td><td class="hl">__AMT_MED__ 亿</td><td>__AMT_MED_Y__ 亿</td><td class="up">__AMT_MED_PCT__%</td></tr>
+<tr><td>吸金密度（÷两市成交）</td><td class="hl">__SHARE__%</td><td>__SHARE_Y__%</td><td class="up">__SHARE_D__pct</td></tr>
+<tr><td>封单合计</td><td>__FUND_SUM__ 亿</td><td>__FUND_SUM_Y__ 亿</td><td class="up">__FUND_SUM_PCT__%</td></tr>
+<tr><td>封单中位</td><td>__FUND_MED__ 亿</td><td>__FUND_MED_Y__ 亿</td><td class="up">__FUND_MED_PCT__%</td></tr>
+<tr><td>一字板 / 换手板</td><td>__ONEWORD__ / __HUANSHOU__ 只</td><td>__ONEWORD_Y__ / __HUANSHOU_Y__ 只</td><td class="mut">换手占 __HUANSHOU_PCT__%</td></tr>
+</table>
+<div class="note" style="margin-top:10px">
+<span class="hl">四项指标<b>全部向上</b>，而两市成交是 <b>__AMT_PCT__%</b> —— 这是"面缩钱厚"的完整证据链：
+家数 __ZT__（__ZT_D__）、参与面 __TOUCH__（__TOUCH_PCT__%），但涨停股成交 __AMT_SUM_PCT__%、单只中位 __AMT_MED_PCT__%、封单合计 __FUND_SUM_PCT__%、<b>封单中位 +__FUND_MED_PCT_ABS__%</b>。
+<u>钱没有撤，而是从"很多只小票"缩到"少数几只大票"。</u></span><br>
+<b>口径自检：</b>吸金密度 __SHARE__% 仍低于 3%~8% 的常规区间（连续两日低于下限）。二次校验：绝对额 __AMT_SUM__ 亿（昨 __AMT_SUM_Y__ 亿，同量级）、单只中位 __AMT_MED__ 亿（昨 __AMT_MED_Y__ 亿，上升）——
+<span class="hl">字段无误，成因是<b>家数偏少（__ZT__ 家）+ 分母高达 __AMT__ 亿</b>，不是数据错位。</span><br>
+封单第一是 <b>__FT0__（__FT0_HY__）__FT0_V__ 亿 = 全场封单 __FT0_PCT__%</b>，成交仅 __FT0_AMT__ 亿、换手 __FT0_TURN__%、
+<b>封单/成交 __FT0_RATIO__ 倍</b> —— <span class="hl">这是典型的"一字板 + 重组预期锁仓"，不是主动买盘；它把封单总额抬高了，读总额时须剔除。</span>
+成交前 5 只占涨停股总成交 <b>__TOP5_SHARE__%</b>，钱确实集中在少数标的。
+</div>
+<h3>封单前五</h3>
+<table>
+<tr><th>名称</th><th>代码</th><th>板数</th><th>封单</th><th>成交额</th><th>封单/成交</th></tr>
+__TBL_FUND_TOP__
+</table>
+<h3>成交额前五</h3>
+<table>
+<tr><th>名称</th><th>代码</th><th>板数</th><th>成交额</th><th>封单</th><th>行业</th></tr>
+__TBL_AMT_TOP__
+</table>
+<div class="note" style="margin-top:8px">
+成交额第一是 <b>移远通信 44.48 亿（2 板，通信设备）</b>，但封单只有 0.08 亿、换手 13.3% ——
+<span class="hl">巨量换手板、封单极薄，是"多空在此换手"的形态，与封单第一的三峡新材（一字锁仓）是完全相反的两种"强"。</span>
+<b>这两类不能用同一个词描述：前者是分歧中的多头略胜，后者是没人卖。</b>
+</div>
+<h3>炸板池：__ZB_POOL_N__ 只，回封 __ZB_SEALED_N__ 只（__ZB_SEALED_PCT__%）</h3>
+<div class="note" style="margin-top:0">
+回封判定按「收盘价 ≥ 涨停价」，<b>不用涨幅阈值</b>（20cm 标的按涨幅会误判）。
+炸板由 __ZB_POOL_N_Y__ 只降到 __ZB_POOL_N__ 只，<b>回封仍是 __ZB_SEALED_N__ 只</b> ——
+<span class="hl"><u>冲板数减半而回封数没变（都是 0），说明"炸板减少"与承接力无关，只是尝试的人少了。</u></span>
+池内仍有重仓品种：__ZB_BIG_TXT__。
+</div>
+<table style="margin-top:8px">
+<tr><th>名称</th><th>代码</th><th>首触</th><th>行业</th><th>收盘涨跌</th><th>成交额</th><th>流通</th></tr>
+__TBL_ZB__
+</table>
+<div class="note" style="margin-top:8px">
+池内成交最大的是 <b>__ZB_MAX_NAME__（__ZB_MAX_HY__，流通 __ZB_MAX_MV__ 亿、成交 __ZB_MAX_AMT__ 亿，收 __ZB_MAX_PCT__%）</b> ——
+<span class="hl">中大盘冲板被打开，是"资金想做大票但承接不住"的直接证据，与指数"成长端放量下跌"同源。</span>
+</div>
+</div>
+
+<div class="card">
+<h2>八、明日（10-22）观察点</h2>
+<ol>
+<li><b>数据要素链能否长出 2→3 板（第一观察点）。</b>今日 __SYSJ_N__ 家 / 连板 __SYSJ_LB__ 只（东财口径），其中最高是润建股份 3 板（通信服务）、南威软件与星光股份 2 板。
+<span class="hl">若明日出现 2 只以上 2→3 晋级，则数据要素从"政策日爆发"升级为"可接力主线"（对照 10-09 AI应用 → 10-12 接力成立的路径）；
+若 __SYSJ_N__ 家里高位票集体断板且无新面孔顶上，则与 10-13 PCB 链 9 家全首板 → 次日 2 家 同型，一日游确认。</span></li>
+<li><b>4 板三只的"一字/T字"能否换成换手板。</b>__MAXB_NAMES__ 三只全部 09:25 一字或 T 字封板、成交极低。
+<span class="hl">一字板最大的风险不是跌，是"开板那一刻没有对手盘"。若明日出现开板后大幅回落的样本，则"锁仓型高度"会被证伪，
+市场高度会从 __MAXB__ 直接塌回 1–2 板（同型：10-13 十板高标全断 → 最高板塌到 3）。</span></li>
+<li><b>参与度能否止跌（最硬的裁判）。</b>触及涨停 __TOUCH_Y__ → __TOUCH__ 家（__TOUCH_PCT__%）。
+<span class="hl">封板率已被证明会因分母收缩而"假改善"，所以正确观察方式是「触及涨停能否回到 __TOUCH_Y__ 家以上 + 炸板池出现 3 只以上回封」。
+若触及涨停继续掉而封板率继续升，那只是"更多的人不玩了"，不是"玩的人更强"。</span></li>
+<li><b>首板组与连板组的溢价差能否稳定在正区间。</b>今日 __GAP__pct（首板略强），昨日 __GAP_Y__pct。
+<span class="hl">四天三个来回说明这个指标目前没有稳定偏好。若明日再度回到 −5pct 以下，说明"高度溢价"并未真正消失，只是被高位清算暂时压制。</span></li>
+<li><b>成长端放量下跌是否延续。</b>今日创业板 <b>放量 __CY_YOY__% 收 __CY_PCT__%</b>、深成放量 __SZ_YOY__% 收 __SZ_PCT__%；
+上证50 缩量 __SH50_YOY__% 收 __SH50_PCT__%。
+<span class="hl">若明日创业板继续"放量 + 下跌"，则今日的软件 / 数据行情要重新定性为"硬件杀跌后的资金避险"，指数风险上升；
+若转为缩量止跌，则今日只是高位硬件的获利了结。</span></li>
+<li><b>昨日的「羊」字辈（__YANG_N__ 家 / 连板 __YANG_LB__ 只）会不会扩散。</b>
+<span class="hl">名称族群的连板占比（__YANG_R__%）高于任何一条产业线索，是主线真空的伴生现象。若明日该族群继续扩容，说明市场确实没有产业主线可做；
+若迅速熄火，说明今日只是个别资金的短打。</span></li>
+<li><b>量能：__AMT__ 亿的缩量是不是"钱在场内换手"的极限。</b>
+<span class="hl">今日总量 __AMT_PCT__% 而涨停股成交 __AMT_SUM_PCT__%，钱在缩小的池子里反而更集中。
+明日若总量放大且涨停股成交同向走高，是增量入场；若总量继续缩、涨停股成交也回落，则"面缩钱厚"已到尾声，随后是家数与成交双降的缩量阴跌。</span></li>
+</ol>
+</div>
+
+<div class="card">
+<h2>九、数据口径与风险提示</h2>
+<div class="note">
+<b>口径：</b><br>
+① 涨停家数取同花顺沪深口径 <b>__ZT__ 家</b>；__REL_DIFF_NOTE__。<br>
+② 跌停家数取同花顺汇总 <b>__DT__ 家</b>；东财跌停池 `tc` 返回 <b>__DT_TC__ 只</b>，<b>差额 __DT_DIFF__ 只无法归因</b>
+（属 09-23 型"`tc` 与 `pool` 自相矛盾"，差额为沪深代码、非北交所），明细表按东财池原样列出，<b>家数以同花顺汇总为准</b>。<br>
+③ 跌停明细来自东财 `getTopicDTPool`（须带 `sort=fund:asc`，不带则 `pool` 为空）；同花顺跌停明细接口 `ths_dt` 当日为 None，属常态。<br>
+④ 指数涨跌幅与成交额均取<b>当日收盘快照</b>（`indexes`），昨日值取自 <b>10-20 的 review 文件快照</b>（该文件于 10-20 15:31 生成，为当日收盘值，非事后回填）。
+「高开」= 今开 ÷ 昨收 − 1；「距当日最高」= 收盘 ÷ 当日最高 − 1。自检：若环比全部为 0.0%，说明误用了同一快照，须重取。<br>
+⑤ 封板时间双源一致性：本报告采用东财 `fbt`（HHMMSS 整数，已 `zfill(6)` 后切分），与同花顺时间戳逐只核对，<b>可比样本 __ZT__ 只、分钟级一致 100%</b>。<br>
+⑥ 炸板池"回封"判定用「收盘价 ≥ 涨停价」，不用涨幅阈值（20cm 标的按涨幅会误判）。<br>
+⑦ 「概念板块榜」的"其中连板"(`continuous_plate_num`) 与东财 `lbc` 是两套口径：前者含断板后重新封回的标的，后者是当日连续板数。
+<b>判断"主线是否长高"用前者（跨日可比），判断"今日封板梯队"用后者。</b>本节第 4.2 已同时给出两套数值（__SYSJ_LB__ 只 / __SYSJ_LB_DF__ 只）。
+另：`ths_block[*].high` 是"累计涨停记录"（如 `21天12板`），<b>不是最高连板</b>，列名已写为"板块内最强标（同花顺口径）"。<br>
+⑧ 主题聚类按涨停原因关键词匹配，<b>一只票可命中多条线，家数之和大于 __ZT__</b>。行业离散度是判断"伪聚类"的关键指标：
+家数大但离散度高、且成分与其它标签高度重叠的（如「智慧城市」），不作主线认定。<br>
+⑨ 4.4 节的"软 / 硬"分组是本报告自定义的行业归类（清单已在正文列出），仅用于表达资金迁移方向，不是标准行业分类。<br>
+⑩ 数据要素链成分取自同花顺「数据要素」板块（14 只全覆盖），不是关键词捞取，故与 4.3 的关键词聚类口径不同。<br>
+<br>
+<b>风险提示：</b><br>
+· 本报告为盘后数据复盘，用于观察资金结构与情绪状态，<b>不构成任何买卖建议</b>。<br>
+· 单日数据的信噪比有限：涨停/跌停家数受涨跌停制度、指数成分调整、个股停复牌影响，跨日比较须同口径。<br>
+· 成交额环比只反映"换手放大/收缩"，<b>不区分买卖方向</b>；任何"放量=入场/离场"的判断都必须与当日价格方向并排读。<br>
+· 国家数据集团的组建信息引自<b>国务院国资委公告（2026-10-20，sasac.gov.cn）</b>，属一手来源；相关个股的涨停原因来自公开资讯的机器汇总，
+可能存在错配，<b>不代表公司与该集团存在业务关系</b>，请以公司公告为准。<br>
+· 生成时间：__GEN_AT__。
+</div>
+</div>
+
+</div>
+<script>
+var UP='#d93025', DOWN='#12805c', GREY='#9ca3af';
+
+var c1=echarts.init(document.getElementById('c_senti'));
+c1.setOption({
+  tooltip:{trigger:'axis'},
+  legend:{data:['涨停','炸板','跌停','封板率'],top:3,left:'center'},
+  grid:{left:8,right:20,top:52,bottom:8,containLabel:true},
+  xAxis:{type:'category',data:__JS_DAYS__},
+  yAxis:[{type:'value',name:'家数'},{type:'value',name:'封板率%',min:0,max:100,axisLabel:{formatter:'{value}%'}}],
+  series:[
+    {name:'涨停',type:'bar',data:__JS_ZT__,itemStyle:{color:UP},barMaxWidth:34,
+     label:{show:true,position:'top',fontSize:11}},
+    {name:'炸板',type:'bar',data:__JS_ZB__,itemStyle:{color:'#f0a58f'},barMaxWidth:34,
+     label:{show:true,position:'top',fontSize:11}},
+    {name:'跌停',type:'bar',data:__JS_DT__,itemStyle:{color:DOWN},barMaxWidth:34,
+     label:{show:true,position:'top',fontSize:11}},
+    {name:'封板率',type:'line',yAxisIndex:1,data:__JS_SEAL__,smooth:true,
+     itemStyle:{color:'#2563eb'},lineStyle:{width:2},symbolSize:7,
+     label:{show:true,position:'bottom',formatter:'{c}%',fontSize:11,color:'#2563eb'}}
+  ]
+});
+
+var c2=echarts.init(document.getElementById('c_ix'));
+c2.setOption({
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'},valueFormatter:function(v){return v+'%';}},
+  grid:{left:8,right:58,top:16,bottom:8,containLabel:true},
+  xAxis:{type:'value',axisLabel:{formatter:'{value}%'}},
+  yAxis:{type:'category',data:__JS_IX_NAME__,axisLabel:{interval:0,fontSize:11}},
+  series:[{type:'bar',data:__JS_IX_PCT__.map(function(v){return {value:v,itemStyle:{color:v>=0?UP:DOWN}};}),
+    barMaxWidth:16,label:{show:true,position:'right',formatter:function(p){return (p.value>0?'+':'')+p.value+'%';},fontSize:10}}]
+});
+
+var c3=echarts.init(document.getElementById('c_amt'));
+c3.setOption({
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'},valueFormatter:function(v){return v+'%';}},
+  grid:{left:8,right:58,top:16,bottom:8,containLabel:true},
+  xAxis:{type:'value',axisLabel:{formatter:'{value}%'}},
+  yAxis:{type:'category',data:__JS_AMT_NAME__,axisLabel:{interval:0,fontSize:11}},
+  series:[{type:'bar',data:__JS_AMT_YOY__.map(function(v){return {value:v,itemStyle:{color:v>=0?UP:DOWN}};}),
+    barMaxWidth:16,label:{show:true,position:'right',formatter:'{c}%',fontSize:10}}]
+});
+
+var c4=echarts.init(document.getElementById('c_lad'));
+c4.setOption({
+  tooltip:{trigger:'axis'},
+  legend:{data:['__D1__','__D0__'],top:3,left:'center'},
+  grid:{left:8,right:20,top:52,bottom:8,containLabel:true},
+  xAxis:{type:'category',data:__JS_LAD_NAME__},
+  yAxis:{type:'value',name:'只'},
+  series:[
+    {name:'__D1__',type:'bar',data:__JS_LAD1__,itemStyle:{color:'#c7d2fe'},barMaxWidth:30,label:{show:true,position:'top',fontSize:10}},
+    {name:'__D0__',type:'bar',data:__JS_LAD0__,itemStyle:{color:'#2563eb'},barMaxWidth:30,
+     label:{show:true,position:'top',fontSize:11}}
+  ]
+});
+
+var c5=echarts.init(document.getElementById('c_conc'));
+c5.setOption({
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+  legend:{data:['涨停家数','其中连板'],top:3,left:'center'},
+  grid:{left:8,right:24,top:52,bottom:8,containLabel:true},
+  xAxis:{type:'category',data:__JS_CONC_NAME__,axisLabel:{interval:0,rotate:32,fontSize:10}},
+  yAxis:{type:'value',name:'家'},
+  series:[
+    {name:'涨停家数',type:'bar',data:__JS_CONC_N__,itemStyle:{color:'#f3b3a5'},barMaxWidth:26,
+     label:{show:true,position:'top',fontSize:10}},
+    {name:'其中连板',type:'bar',data:__JS_CONC_LB__,itemStyle:{color:'#d93025'},barMaxWidth:26,
+     label:{show:true,position:'top',fontSize:10}}
+  ]
+});
+
+var c7=echarts.init(document.getElementById('c_pf'));
+var pfName=__JS_PF_NAME__, pfPct=__JS_PF_PCT__;
+c7.setOption({
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'},valueFormatter:function(v){return v+'%';}},
+  grid:{left:8,right:40,top:20,bottom:8,containLabel:true},
+  xAxis:{type:'value',axisLabel:{formatter:'{value}%'}},
+  yAxis:{type:'category',data:pfName,axisLabel:{interval:0,fontSize:9}},
+  series:[{type:'bar',data:pfPct.map(function(v){return {value:v,itemStyle:{color:v>=0?UP:DOWN}};}),
+    barMaxWidth:12,label:{show:true,position:'right',formatter:'{c}%',fontSize:8}}]
+});
+
+var c8=echarts.init(document.getElementById('c_rel'));
+c8.setOption({
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'},valueFormatter:function(v){return v+'%';}},
+  grid:{left:8,right:36,top:20,bottom:8,containLabel:true},
+  xAxis:{type:'value',axisLabel:{formatter:'{value}%'}},
+  yAxis:{type:'category',data:__JS_REL_NAME__,axisLabel:{interval:0,fontSize:9}},
+  series:[{type:'bar',data:__JS_REL_PCT__.map(function(v){return {value:v,itemStyle:{color:v>=0?UP:DOWN}};}),
+    barMaxWidth:14,label:{show:true,position:'right',formatter:'{c}%',fontSize:9}}]
+});
+
+var c9=echarts.init(document.getElementById('c_ts'));
+c9.setOption({
+  tooltip:{trigger:'axis'},
+  legend:{data:['__D1__','__D0__'],top:3,left:'center'},
+  grid:{left:8,right:20,top:52,bottom:8,containLabel:true},
+  xAxis:{type:'category',data:__JS_TS_NAME__,axisLabel:{interval:0,fontSize:10}},
+  yAxis:{type:'value',name:'只'},
+  series:[
+    {name:'__D1__',type:'bar',data:__JS_TS_Y__,itemStyle:{color:'#c7d2fe'},barMaxWidth:34},
+    {name:'__D0__',type:'bar',data:__JS_TS_T__,itemStyle:{color:'#2563eb'},barMaxWidth:34,
+     label:{show:true,position:'top',fontSize:10}}
+  ]
+});
+
+var c10=echarts.init(document.getElementById('c_hymove'));
+c10.setOption({
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'},valueFormatter:function(v){return (v>0?'+':'')+v+' 家';}},
+  grid:{left:8,right:58,top:16,bottom:8,containLabel:true},
+  xAxis:{type:'value',name:'今日 − 昨日（家）'},
+  yAxis:{type:'category',data:__JS_HM_NAME__,axisLabel:{interval:0,fontSize:11}},
+  series:[{type:'bar',data:__JS_HM_D__.map(function(v){return {value:v,itemStyle:{color:v>=0?UP:DOWN}};}),
+    barMaxWidth:16,label:{show:true,position:'right',formatter:function(p){return (p.value>0?'+':'')+p.value;},fontSize:10}}]
+});
+
+window.addEventListener('resize',function(){
+  [c1,c2,c3,c4,c5,c7,c8,c9,c10].forEach(function(c){c.resize();});
+});
+</script>
+</body>
+</html>
