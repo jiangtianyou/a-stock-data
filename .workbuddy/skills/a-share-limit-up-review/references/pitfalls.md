@@ -851,3 +851,14 @@ os.replace(tmp, fp)      # 原子替换
 - **`push2ex`（涨停池）不在限流范围内**，实测稳定。
 - 通达信 MCP 有**调用配额**，耗尽返回 `MCP error -32603: Your usage quota has been reached`；
   本流程不依赖它，批量拉指数前也建议先确认配额。
+- **`_check_js.py` 在 managed python 环境报 `FileNotFoundError: [WinError 2]`** ⚠️（2026-10-22）：
+  脚本内部按相对路径调 `node`，managed 解释器 PATH 里没有 node。**不是报告的问题**。
+  处置：用绝对路径自检 —— `C:/Users/Administrator/.workbuddy/binaries/node/versions/22.22.2-6/node.exe --check out/_inline.js`。
+- **ECharts 横向条形图的类目数必须先截断再排序**（2026-10-22 行业迁移图）：
+  原样把所有行业（20+ 条）塞进 380px 容器，`axisLabel:{interval:0}` 会让 y 轴文字互相重叠、完全不可读。
+  处置：`sorted(HYMOVE, key=lambda x:-abs(x["d"]))[:14]` 取变化最猛的 N 条，**再按 `x["d"]` 升序**（类目轴首项在底部），
+  容器高 ≈ 条数×21+60。图与表可以不一致：**表给全量、图给 top-N，但正文别写"全部行业"**。
+- **`xAxis.name` 默认贴在轴右端**，`grid.right` 较小时会被裁掉半截（表现为坐标轴最右侧出现半句灰字）。
+  横向条形图的轴名一律 `nameLocation:'middle'` + `nameGap:26` + `grid.bottom:34`。
+- **按元素定位截图比"猜 scrollY"可靠**：`scripts/_shot_el.py <html相对路径> <css选择器> [pad]`
+  先 `getBoundingClientRect().top + window.scrollY` 再滚动截图，用于逐个图表目视核对（正文截图常错过目标图）。
