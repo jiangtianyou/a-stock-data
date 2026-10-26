@@ -812,8 +812,16 @@ scripts/_shot.py             Playwright 渲染自检（须用系统 Python 3.11�
 - **通达信 MCP 有调用配额**，耗尽返回 `unauthorized / quota is below 10`；本流程不依赖它。
 - 东财 `push2his` / `push2` 批量接口有 IP 级限流（被限后全域名同时 RST）；`push2ex`（涨停池）实测稳定。
 
-## 非交易日 / 数据缺失
+## 非交易日 / 盘中 / 数据缺失
 
+- ★**先分清三态，别把「是交易日」当成「可以复盘」**（2026-10-26 首次盘中触发时踩到）：
+  同花顺涨停池 `data.trade_status.id` 有 `non_trading_day` / `morning_trade` / `afternoon_trade` / `closed` 四种。
+  - `non_trading_day` → 非交易日，终止（可改走周报）。
+  - `morning_trade` / `afternoon_trade` → **是交易日但尚未收盘，同样不能复盘**：涨停家数是瞬时值（10:00 前与收盘可差 3 倍），
+    且涨停池明细 `data.data` **返回空数组**（只有 `page.total` 有值）→ 名单/封板时间/封单/板块归因/溢价对比全部算不出。
+  - `closed` → 可复盘。
+  等价判据：腾讯分时 `minute/query` **点数 ≥240 且末点 `1500`**；点数只有几十说明刚开盘。
+  自检：`_check_tradingday.py` 只回答「是否交易日」，**必须再读 `trade_status.id`**（或分时点数）确认已收盘。
 - 当日非交易日：`ths_zt.info` 为空且 `limit_up_count` 为 0 → **不要生成逐日报告**。
 - **周末 / 长假（无新交易时段）不要只回一句「今日休市」**，改用**周度复盘**兜底（2026-09-20 起）：
   ```bash
