@@ -916,3 +916,27 @@ os.replace(tmp, fp)      # 原子替换
   横向条形图的轴名一律 `nameLocation:'middle'` + `nameGap:26` + `grid.bottom:34`。
 - **按元素定位截图比"猜 scrollY"可靠**：`scripts/_shot_el.py <html相对路径> <css选择器> [pad]`
   先 `getBoundingClientRect().top + window.scrollY` 再滚动截图，用于逐个图表目视核对（正文截图常错过目标图）。
+- **跌停池读取层级错了不会报错，只会静默返回 `[]`** ⚠️（2026-10-28 踩到）：
+  报告脚本的 `load_dt()` 写成 `json.load(f).get("pool")`，而东财 `getTopicDTPool` 的明细在 **`data.pool`**，
+  于是「昨日跌停池今日表现」「跌停池去板块化」全部退化成 0 只，页面照样渲染、零报错。
+  正确写法：
+  ```python
+  def load_dt(d):
+      p = os.path.join(OUT, f"_dt{d[4:]}.json")
+      if os.path.exists(p):
+          return json.load(open(p, encoding="utf-8")).get("data", {}).get("pool") or []
+      return []
+  ```
+  自检：抓取后必须先断言 `tc == len(pool)`（本次今日 tc=5/pool=5、昨日 tc=22/pool=22）。
+- **「建报以来最低 / 最高」必须全量排序再落笔，不能凭印象** ⚠️（2026-10-28 踩到）：
+  曾写「封板率 50.0% 跌破此前最低 10-08 的 56.8%」，实际把 25 个可得交易日全量排序后，
+  10-16 才是 54.6%（10-08 56.8%、10-27 59.4%）。这是全文最容易"看起来像真的"的硬伤。
+  处置：先用 `sorted(stats, key=lambda x:x["seal"])` 打印全表，再取 `[-1]`/`[0]` 写文案。
+- **占位符自带符号时，前缀不能再补 `+`，也不能再接「掉了/升了」** ⚠️（2026-10-28 踩到）：
+  `SEAL_D` 生成时带 `f"{SEAL - SEAL_Y:+.1f}"`，文案写「封板率仍然**掉了** `__SEAL_D__` pct」→ 渲染成「掉了 -9.4pct」双符号。
+  处置：另设 `"SEAL_D_ABS": f"{abs(SEAL - SEAL_Y):.1f}"`，符号交给中文前缀。
+- **`zt_analyze.py` 的第三个参数必须是真实交易日** ⚠️（2026-10-28 踩到）：
+  `zt_analyze.py 20261028 20261027 20261024`（周六）会把 `D2` 标成 20261024 并据此出「前日」列。
+  处置：先 `_check_tradingday.py` 确认 D2，再跑；重跑后 `D2`/`senti`/`idx_cmp` 三键会变，其余键应完全一致。
+- **三列对比表「前日 D2」的跌停/触及跌停取 `A1(yesterday)`，不是 `A0(yesterday)`**（后者是 D1 值）。
+  自检：`days[0]["dtouch"] != days[1]["dtouch"]`，相同即取错文件。
