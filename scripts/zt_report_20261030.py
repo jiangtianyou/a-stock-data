@@ -446,6 +446,20 @@ V.update({"YIZI": YIZI, "YIZI_Y": YIZI_Y, "YZ_DT_N": len(YZ_DT), "YZ_DT_NAMES": 
           "YIZI_NAMES": "、".join(f"{x['n']}（{x['hybk']}，{x['lbc']}板）" for x in zt0
                                 if (ths0.get(x["c"]) or {}).get("limit_up_type") == "一字板") or "无"})
 
+# 商业航天：概念榜唯一越过 40% 阈值的板块（缩圈高度化）
+_bk0 = {x["name"]: x for x in A0["ths_block"]}
+_bk1 = {x["name"]: x for x in A1["ths_block"]}
+_a0, _a1 = _bk0.get("商业航天", {}), _bk1.get("商业航天", {})
+_n0, _l0 = _a0.get("limit_up_num", 0), _a0.get("continuous_plate_num", 0)
+_n1, _l1 = _a1.get("limit_up_num", 0), _a1.get("continuous_plate_num", 0)
+_gt40 = [x["name"] for x in sorted(A0["ths_block"], key=lambda z: -(z["continuous_plate_num"] / z["limit_up_num"]))
+         if x["limit_up_num"] and x["continuous_plate_num"] / x["limit_up_num"] > 0.4]
+V.update({"SPACE_BK_N": _n0, "SPACE_BK_LB": _l0, "SPACE_BK_R": f"{_l0 / _n0 * 100:.0f}" if _n0 else "—",
+          "SPACE_BK_N_Y": _n1, "SPACE_BK_LB_Y": _l1,
+          "SPACE_BK_R_Y": f"{_l1 / _n1 * 100:.0f}" if _n1 else "—",
+          "SPACE_BK_GT40": len(_gt40), "SPACE_BK_GT40_NAMES": "、".join(_gt40),
+          "SPACE_BK_RANK": [i for i, x in enumerate(A0["ths_block"], 1) if x["name"] == "商业航天"][0]})
+
 # ================= 簇：消费 / 医药 / PCB =================
 HY_CONS = ("白酒Ⅱ", "休闲食品", "饮料乳品", "食品加工", "一般零售", "酒店餐饮", "农产品加",
            "服装家纺", "小家电", "调味发酵", "白色家电", "非白酒")
